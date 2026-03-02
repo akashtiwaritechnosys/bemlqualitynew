@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2026-02-27 09:43:16
+<?php /* Smarty version Smarty-3.1.7, created on 2026-03-02 09:43:43
          compiled from "C:\wamp64\www\bemlqualitynew\includes\runtime/../../layouts/v7\modules\Vtiger\dashboards\WidgetHeader.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:122870115569a16734e73df3-36239256%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5c5fad83d364449ba4a8a9cb94fb690fb86e9e5f' => 
     array (
       0 => 'C:\\wamp64\\www\\bemlqualitynew\\includes\\runtime/../../layouts/v7\\modules\\Vtiger\\dashboards\\WidgetHeader.tpl',
-      1 => 1733391379,
+      1 => 1764246736,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_69a1673513f84',
   'variables' => 
   array (
     'STYLES' => 0,
@@ -25,8 +27,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'MODULE_NAME' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_69a1673513f84',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_69a1673513f84')) {function content_69a1673513f84($_smarty_tpl) {?>
 <?php  $_smarty_tpl->tpl_vars['cssModel'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['cssModel']->_loop = false;

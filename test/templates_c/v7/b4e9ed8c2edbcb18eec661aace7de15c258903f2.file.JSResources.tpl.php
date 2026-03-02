@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2026-02-27 09:40:32
+<?php /* Smarty version Smarty-3.1.7, created on 2026-03-02 09:43:42
          compiled from "C:\wamp64\www\bemlqualitynew\includes\runtime/../../layouts/v7\modules\Vtiger\JSResources.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:128729286969a16690d56886-14537330%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b4e9ed8c2edbcb18eec661aace7de15c258903f2' => 
     array (
       0 => 'C:\\wamp64\\www\\bemlqualitynew\\includes\\runtime/../../layouts/v7\\modules\\Vtiger\\JSResources.tpl',
-      1 => 1751954619,
+      1 => 1772444533,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_69a1669102617',
   'variables' => 
   array (
     'MODULE' => 0,
@@ -30,8 +32,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'jsModel' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_69a1669102617',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_69a1669102617')) {function content_69a1669102617($_smarty_tpl) {?>
 <script type="text/javascript">var __pageCreationTime = (new Date()).getTime();</script><script src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery.min.js');?>

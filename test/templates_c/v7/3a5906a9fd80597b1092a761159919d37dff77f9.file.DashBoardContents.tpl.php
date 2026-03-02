@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2026-02-27 09:43:11
+<?php /* Smarty version Smarty-3.1.7, created on 2026-03-02 09:43:41
          compiled from "C:\wamp64\www\bemlqualitynew\includes\runtime/../../layouts/v7\modules\Vtiger\dashboards\DashBoardContents.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:109773637969a1672f7be178-64717875%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3a5906a9fd80597b1092a761159919d37dff77f9' => 
     array (
       0 => 'C:\\wamp64\\www\\bemlqualitynew\\includes\\runtime/../../layouts/v7\\modules\\Vtiger\\dashboards\\DashBoardContents.tpl',
-      1 => 1733391379,
+      1 => 1772444533,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_69a1672f86581',
   'variables' => 
   array (
     'DASHBOARD_TABS' => 0,
@@ -25,8 +27,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'TABID' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_69a1672f86581',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_69a1672f86581')) {function content_69a1672f86581($_smarty_tpl) {?>
 

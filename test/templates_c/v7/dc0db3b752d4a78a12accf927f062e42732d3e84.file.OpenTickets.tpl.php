@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2026-02-27 09:45:41
+<?php /* Smarty version Smarty-3.1.7, created on 2026-03-02 09:44:53
          compiled from "C:\wamp64\www\bemlqualitynew\includes\runtime/../../layouts/v7\modules\HelpDesk\dashboards\OpenTickets.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:131269991069a167c533e000-88409499%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'dc0db3b752d4a78a12accf927f062e42732d3e84' => 
     array (
       0 => 'C:\\wamp64\\www\\bemlqualitynew\\includes\\runtime/../../layouts/v7\\modules\\HelpDesk\\dashboards\\OpenTickets.tpl',
-      1 => 1733391376,
+      1 => 1772444532,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_69a167c542e4b',
   'variables' => 
   array (
     'MODULE_NAME' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_69a167c542e4b',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_69a167c542e4b')) {function content_69a167c542e4b($_smarty_tpl) {?>
 <div class="dashboardWidgetHeader">
