@@ -1,0 +1,225 @@
+/* Custom Quick Create Icons */
+
+/* Hide existing icons (images or vicons) */
+.quick-create .quickCreateModule img,
+.quick-create .quickCreateModule i,
+.quick-create .quickCreateModuleSubmenu img,
+.quick-create .quickCreateModuleSubmenu i {
+    display: none !important;
+}
+
+/* Base style for new icons */
+.quick-create .quickCreateModule::before,
+.quick-create .quickCreateModuleSubmenu::before {
+    font-family: "FontAwesome";
+    font-size: 24px;
+    margin-right: 8px;
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+/* Hover effect */
+.quick-create .quickCreateModule:hover::before,
+.quick-create .quickCreateModuleSubmenu:hover::before {
+    transform: scale(1.2);
+}
+
+/* --- Module Specific Icons & Colors --- */
+
+/* Accounts - Building - Blue */
+#menubar_quickCreate_Accounts::before {
+    content: "\f0f7";
+    color: #3498db;
+}
+
+/* Contacts - User - Yellow */
+#menubar_quickCreate_Contacts::before {
+    content: "\f007";
+    color: #f1c40f;
+}
+
+/* Leads - Users - Purple */
+#menubar_quickCreate_Leads::before {
+    content: "\f0c0";
+    color: #9b59b6;
+}
+
+/* Potentials (Deals) - Briefcase - Orange */
+#menubar_quickCreate_Potentials::before {
+    content: "\f0b1";
+    color: #e67e22;
+}
+
+/* Products - Box - Red */
+#menubar_quickCreate_Products::before {
+    content: "\f1b2";
+    color: #e74c3c;
+}
+
+/* Services - Cog - Dark Blue */
+#menubar_quickCreate_Services::before {
+    content: "\f085";
+    color: #34495e;
+}
+
+/* HelpDesk (Tickets) - Life Ring - Red-Orange */
+#menubar_quickCreate_HelpDesk::before {
+    content: "\f1cd";
+    color: #e55039;
+}
+
+/* Events - Calendar - Teal */
+#menubar_quickCreate_Events::before {
+    content: "\f073";
+    color: #1abc9c;
+}
+
+/* Tasks (Calendar) - Check Square - Green */
+#menubar_quickCreate_Calendar::before {
+    content: "\f14a";
+    color: #2ecc71;
+}
+
+/* Documents - File - Gray */
+#menubar_quickCreate_Documents::before {
+    content: "\f15b";
+    color: #7f8c8d;
+}
+
+/* Emails - Envelope - Pink */
+#menubar_quickCreate_Emails::before {
+    content: "\f0e0";
+    color: #ff9ff3;
+}
+
+/* Auto-generated for other modules based on common types */
+
+/* Vendors - Truck - Midnight Blue */
+#menubar_quickCreate_Vendors::before {
+    content: "\f0d1";
+    color: #2c3e50;
+}
+
+/* Invoice - File Invoice - Green */
+#menubar_quickCreate_Invoice::before {
+    content: "\f15c";
+    color: #27ae60;
+}
+
+/* Quotes - File Alt - Orange */
+#menubar_quickCreate_Quotes::before {
+    content: "\f15c";
+    color: #f39c12;
+}
+
+/* SalesOrder - Shopping Cart - Burnt Orange */
+#menubar_quickCreate_SalesOrder::before {
+    content: "\f07a";
+    color: #d35400;
+}
+
+/* PurchaseOrder - Shopping Bag - Purple */
+#menubar_quickCreate_PurchaseOrder::before {
+    content: "\f290";
+    color: #8e44ad;
+}
+
+/* Project - Diagram - Blue */
+#menubar_quickCreate_Project::before {
+    content: "\f0e8";
+    color: #2980b9;
+}
+
+/* ProjectTask - Tasks - Blue */
+#menubar_quickCreate_ProjectTask::before {
+    content: "\f0ae";
+    color: #3498db;
+}
+
+/* ProjectMilestone - Flag - Red */
+#menubar_quickCreate_ProjectMilestone::before {
+    content: "\f024";
+    color: #c0392b;
+}
+
+/* Campaigns - Bullhorn - Orange */
+#menubar_quickCreate_Campaigns::before {
+    content: "\f0a1";
+    color: #d35400;
+}
+
+/* Assets - Cube - Green */
+#menubar_quickCreate_Assets::before {
+    content: "\f1b3";
+    color: #16a085;
+}
+
+/* ServiceContracts - File Contract - Blue */
+#menubar_quickCreate_ServiceContracts::before {
+    content: "\f15c";
+    color: #2980b9;
+}
+
+/* SMSNotifier - Comment - Green */
+#menubar_quickCreate_SMSNotifier::before {
+    content: "\f075";
+    color: #2ecc71;
+}
+
+/* PBXManager - Phone - Red */
+#menubar_quickCreate_PBXManager::before {
+    content: "\f095";
+    color: #e74c3c;
+}
+
+/* RSS - RSS - Orange */
+#menubar_quickCreate_Rss::before {
+    content: "\f09e";
+    color: #e67e22;
+}
+
+/* Sites - Globe - Blue */
+#menubar_quickCreate_ModComments::before {
+    content: "\f086";
+    color: #3498db;
+}
+
+#menubar_quickCreate_RecycleBin::before {
+    content: "\f1f8";
+    color: #95a5a6;
+}
+
+/* Custom Modules fallback */
+
+/* Equipment - Wrench - Gray */
+#menubar_quickCreate_Equipment::before {
+    content: "\f0ad";
+    color: #7f8c8d;
+}
+
+/* DeliveryNote - Truck - Blue */
+#menubar_quickCreate_DeliveryNote::before {
+    content: "\f0d1";
+    color: #3498db;
+}
+
+/* BankGuarantee - Certificate - Yellow */
+#menubar_quickCreate_BankGuarantee::before {
+    content: "\f0a3";
+    color: #f1c40f;
+}
+
+/* FAQ - Question - Blue */
+#menubar_quickCreate_Faq::before {
+    content: "\f059";
+    color: #3498db;
+}
+
+/* PriceBooks - Book - Brown */
+#menubar_quickCreate_PriceBooks::before {
+    content: "\f02d";
+    color: #a0522d;
+}
