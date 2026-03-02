@@ -1,4 +1,11 @@
-
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 
 jQuery.Class("Vtiger_Helper_Js",{
 	checkServerConfigResponseCache : '',
@@ -160,7 +167,7 @@ jQuery.Class("Vtiger_Helper_Js",{
 		app.request.post({data:actionParams}).then(
 			function(err,data) {
 				var state = false;
-				if(err === null){
+				if(err === null && data==true){
 					state = true;
 				} else {
 					state = false;
@@ -489,7 +496,7 @@ jQuery.Class("Vtiger_Helper_Js",{
         if(message !== undefined) {
             messageHTML = '<div class="message"><span>'+message+'</span></div>';
         }
-        messageBar.html('<div style="text-align:center;position:fixed;top:50%;left:40%;"><img src="'+app.vimage_path('loading.gif')+'">'+ messageHTML +'</div>');
+        messageBar.html('<div class="loading-inner"><img src="'+app.vimage_path('loading.gif')+'" width="185" height="70">'+ messageHTML +'</div>');
     },
 
     hideProgress : function() {
@@ -564,21 +571,6 @@ jQuery.Class("Vtiger_Helper_Js",{
 
         var defaultSettings = {
             'delay' : this.ERROR_DELAY
-        }
-        options = jQuery.extend(defaultOptions, options);
-        settings = jQuery.extend(defaultSettings, settings);
-        jQuery.notify(options,settings);
-    },
-
-    showErrorNotificationInSignUP : function (options, settings) {
-        var defaultOptions = {
-            'icon' : 'fa fa-exclamation-circle',
-            'title' : '',
-        }
-
-        var defaultSettings = {
-            'delay' : this.ERROR_DELAY,
-            'type' : "danger",
         }
         options = jQuery.extend(defaultOptions, options);
         settings = jQuery.extend(defaultSettings, settings);
@@ -807,7 +799,7 @@ jQuery.Class("Vtiger_Helper_Js",{
 
         var cb = params.cb;
         if(jQuery('#popupModal').length) return;
-        var container = jQuery('<div id="popupModal" class="modal"></div>');
+        var container = jQuery('<div id="popupModal" class="modal" style="display:block;"></div>');
 		
 	container.on('hidden.bs.modal',function() {
 			container.html('').remove();
@@ -1048,6 +1040,10 @@ jQuery.Class("Vtiger_Helper_Js",{
         var $parent = selector && $(selector);
 
         return $parent && $parent.length ? $parent : $this.parent();
+    },
+
+    purifyContent: function(content) {
+        return DOMPurify.sanitize(content);
     }
 });
 
