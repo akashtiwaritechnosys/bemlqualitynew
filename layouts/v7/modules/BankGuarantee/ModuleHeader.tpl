@@ -42,7 +42,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-7 col-xs-1 padding0 pull-right">
 				<div id="appnav" class="navbar-right">
 					<nav class="navbar navbar-inverse border0 margin0">
-						{* {if $MODULE_BASIC_ACTIONS|@count gt 0} *}
+						{* {if $MODULE_BASIC_ACTIONS|php7_count gt 0} *}
 						<div class="container-fluid">
 							<div class="navbar-header marginTop5px">
 								<button type="button" class="navbar-toggle collapsed margin0" data-toggle="collapse" data-target="#appnavcontent" aria-expanded="false">
@@ -51,7 +51,7 @@
 							</div>
 							<div class="navbar-collapse collapse" id="appnavcontent" aria-expanded="false" style="height: 1px;">
 								<ul class="nav navbar-nav">
-									{if $MODULE_BASIC_ACTIONS|@count gt 0}
+									{if $MODULE_BASIC_ACTIONS|php7_count gt 0}
 										{foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}
 											{if $BASIC_ACTION->getLabel() == 'LBL_IMPORT'}
 												<li>
@@ -97,7 +97,7 @@
 											</button>
 										</li>
 									{/if}
-									{if $MODULE_SETTING_ACTIONS|@count gt 0}
+									{if $MODULE_SETTING_ACTIONS|php7_count gt 0}
 										<li>
 											<div class="settingsIcon">
 												<button type="button" class="btn btn-soft-dark dropdown-toggle module-btn" data-toggle="dropdown" aria-expanded="false" title="{vtranslate('LBL_SETTINGS', $MODULE)}">

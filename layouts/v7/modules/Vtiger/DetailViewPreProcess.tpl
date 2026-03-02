@@ -26,16 +26,16 @@
     </div>
 <div class="container-fluid main-container">
     <div class="row">
-        <div id="modnavigator" class="module-nav detailViewModNavigator clearfix">
+        {* <div id="modnavigator" class="module-nav detailViewModNavigator clearfix">
             <div class="hidden-xs hidden-sm mod-switcher-container">
                 {include file="partials/Menubar.tpl"|vtemplate_path:$MODULE}
             </div>
-        </div>
+        </div> *}
         <div class="detailViewContainer viewContent clearfix">
-            <div style="margin-top: 30px" class="col-sm-12 col-xs-12 content-area">
+            <div class="col-sm-12 col-xs-12 content-area">
                 {include file="DetailViewHeader.tpl"|vtemplate_path:$MODULE}
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
                         {include file="DetailViewTagList.tpl"|vtemplate_path:$MODULE}
                     </div>
                 </div>   
@@ -43,4 +43,4 @@
                 <div class="detailview-content container-fluid">
                     <input id="recordId" type="hidden" value="{$RECORD->getId()}" />
                     {include file="ModuleRelatedTabs.tpl"|vtemplate_path:$MODULE}
-                    <div class="details row" style="margin-top:10px;">
+                    <div class="details row">

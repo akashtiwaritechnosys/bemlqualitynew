@@ -19,7 +19,7 @@
     {if $show_report_scheduled eq true}
         <div id="scheduleBox" class='row well contentsBackground {if $SCHEDULEDREPORTS->get('scheduleid') eq ''} hide {/if}'>
             <div class='col-lg-12' style="padding:5px 0px;">
-                <div class='col-lg-3' style='position:relative;top:5px;'>{vtranslate('LBL_RUN_REPORT', $MODULE)}</div>
+                <div class='col-lg-3' style='position:relative;top:5px;'><label>{vtranslate('LBL_RUN_REPORT', $MODULE)}</label></div>
                 <div class='col-lg-4'>
                     {assign var=scheduleid value=$SCHEDULEDREPORTS->get('scheduleid')}
                     <select class='select2 inputElement col-lg-3' id='schtypeid' name='schtypeid' style="width: 280px;">
@@ -34,7 +34,7 @@
 
             {* show weekdays for weekly option *}
             <div class='col-lg-12 {if $scheduleid neq 2} hide {/if}' id='scheduledWeekDay' style='padding:5px 0px;'>
-                <div class='col-lg-3' style='position:relative;top:5px;'>{vtranslate('LBL_ON_THESE_DAYS', $MODULE)}</div>
+                <div class='col-lg-3' style='position:relative;top:5px;'><label>{vtranslate('LBL_ON_THESE_DAYS', $MODULE)}</label></div>
                 <div class='col-lg-4'>
                     {assign var=dayOfWeek value=Zend_Json::decode($SCHEDULEDREPORTS->get('schdayoftheweek'))}
                     <select style='width:280px;' multiple class='select2'  name='schdayoftheweek' data-rule-required="true" id='schdayoftheweek'>
@@ -51,7 +51,7 @@
 
             {* show month view by dates *}
             <div class='col-lg-12 {if $scheduleid neq 3} hide {/if}' id='scheduleMonthByDates' style="padding:5px 0px;">
-                <div class='col-lg-3' style='position:relative;top:5px;'>{vtranslate('LBL_ON_THESE_DAYS', $MODULE)}</div>
+                <div class='col-lg-3' style='position:relative;top:5px;'><label>{vtranslate('LBL_ON_THESE_DAYS', $MODULE)}</label></div>
                 <div class='col-lg-4'>
                     {assign var=dayOfMonth value=Zend_Json::decode($SCHEDULEDREPORTS->get('schdayofthemonth'))}
                     <select style="width: 280px !important;" multiple class="select2 col-lg-6" data-rule-required="true"  name='schdayofthemonth' id='schdayofthemonth' >
@@ -63,12 +63,12 @@
             </div>
             {* show specific date *}
             <div class='col-lg-12 {if $scheduleid neq 5} hide {/if}' id='scheduleByDate' style="padding:5px 0px;">
-                <div class='col-lg-3' style='position:relative;top:5px;'>{vtranslate('LBL_CHOOSE_DATE', $MODULE)}</div>
+                <div class='col-lg-3' style='position:relative;top:5px;'><label>{vtranslate('LBL_CHOOSE_DATE', $MODULE)}</label></div>
                 <div class='col-lg-2'>
                     <div class="input-group inputElement date" style="margin-bottom: 3px">
                         {assign var=specificDate value=Zend_Json::decode($SCHEDULEDREPORTS->get('schdate'))}
-                        {if $specificDate[0] neq ''} {assign var=specificDate1 value=DateTimeField::convertToUserFormat($specificDate[0])} {/if}
-                        <input style='width: 185px;' type="text" class="dateField form-control" id="schdate" name="schdate" value="{$specificDate1}" data-date-format="{$CURRENT_USER->date_format}" data-rule-required="true" />
+                        {if isset($specificDate[0]) && $specificDate[0] neq ''} {assign var=specificDate1 value=DateTimeField::convertToUserFormat($specificDate[0])} {/if}
+                        <input style='width: 185px;' type="text" class="dateField form-control" id="schdate" name="schdate" value="{if isset($specificDate1)}{$specificDate1}{else}''{/if}" data-date-format="{$CURRENT_USER->date_format}" data-rule-required="true" />
                         <span class="input-group-addon"><i class="fa fa-calendar "></i></span>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
             {* show month view by anually *}
             <div class='col-lg-12 {if $scheduleid neq 4} hide {/if}' id='scheduleAnually' style='padding:5px 0px;'>
                 <div class='col-lg-3' style='position:relative;top:5px;'>
-                    {vtranslate('LBL_SELECT_MONTH_AND_DAY', $MODULE)}
+                    <label>{vtranslate('LBL_SELECT_MONTH_AND_DAY', $MODULE)}</label>
                 </div>
                 <div class='col-lg-5'>
                     <div id='annualDatePicker'></div>
@@ -100,9 +100,9 @@
 
             <div class='col-lg-12' id='scheduledTime' style='padding:5px 0px 10px 0px;'>
                 <div class='col-lg-3' style='position:relative;top:5px;'>
-                    {vtranslate('LBL_AT_TIME', $MODULE)}<span class="redColor">*</span>
+                   <label> {vtranslate('LBL_AT_TIME', $MODULE)}</label><span class="redColor">*</span>
                 </div>
-                <div class='col-lg-2' id='schtime'>
+                <div class='col-lg-4' id='schtime'>
                     <div class='input-group inputElement time'>
 						<input type='text' class='timepicker-default form-control ui-timepicker-input' data-format='{$CURRENT_USER->get('hour_format')}' name='schtime' value="{$SCHEDULEDREPORTS->get('schtime')}" data-rule-required="true" data-rule-time="true" />
 							<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
@@ -112,7 +112,7 @@
             {* show all the users,groups,roles and subordinat roles*}
             <div class='col-lg-12' id='recipientsList' style='padding:5px 0px 10px 0px;'>
                 <div class='col-lg-3' style='position:relative;top:5px;'>
-                    {vtranslate('LBL_SELECT_RECIEPIENTS', $MODULE)}<span class="redColor">*</span>
+                    <label>{vtranslate('LBL_SELECT_RECIEPIENTS', $MODULE)}</label><span class="redColor">*</span>
                 </div>
                 <div class='col-lg-4'>
                     {assign var=ALL_ACTIVEUSER_LIST value=$CURRENT_USER->getAccessibleUsers()}
@@ -142,7 +142,7 @@
             </div>
             <div class='col-lg-12' id='specificemailsids' style='padding:5px 0px 10px 0px;'>
                 <div class='col-lg-3' style='position:relative;top:5px;'>
-                    {vtranslate('LBL_SPECIFIC_EMAIL_ADDRESS', $MODULE)}
+                    <label>{vtranslate('LBL_SPECIFIC_EMAIL_ADDRESS', $MODULE)}</label>
                 </div>
                 <div class='col-lg-4'>
                     {assign var=specificemailids value=Zend_Json::decode($SCHEDULEDREPORTS->get('specificemails'))}
@@ -152,9 +152,9 @@
             {if $TYPE neq 'Chart'}
                 <div class='col-lg-12' id='fileformat' style='padding:5px 0px 10px 0px;'>
                     <div class='col-lg-3' style='position:relative;top:5px;'>
-                        {vtranslate('LBL_FILE_FORMAT', $MODULE)}
+                        <label>{vtranslate('LBL_FILE_FORMAT', $MODULE)}</label>
                     </div>
-                    <div class='col-lg-2'>
+                    <div class='col-lg-4'>
                         <select class="select2 inputElement" id='fileformat' name='fileformat' data-validation-engine="validate[required,funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" >
                             <option value="CSV" {if $SCHEDULEDREPORTS->get('fileformat') eq 'CSV'} selected {/if} data-picklistvalue= 'CSV'>CSV</option>
                             <option value="XLS" {if $SCHEDULEDREPORTS->get('fileformat') eq 'XLS'} selected {/if} data-picklistvalue= 'XLS'>Excel</option>

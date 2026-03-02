@@ -19,7 +19,7 @@
                         <div class="sidebar-header clearfix">
                             {*<i class="fa fa-chevron-right widget-state-indicator"></i>*}
                             <h5 class="pull-left">{vtranslate($SIDEBARWIDGET->get('linklabel'),$MODULE)}</h5>
-                            <button class="btn btn-soft-primary pull-right sidebar-btn add-calendar-feed">
+                            <button class="btn btn-default pull-right sidebar-btn add-calendar-feed">
                                 <div class="fa fa-plus" aria-hidden="true"></div>
                             </button> 
                         </div>
@@ -27,7 +27,7 @@
                     <hr style="margin: 5px 0;">
                     <div class="list-menu-content">
                         <div id="{$SIDEBARWIDGET->get('linklabel')}" class="sidebar-widget-body activitytypes">
-                            <div style="text-align:center;"><img src="layouts/v7/skins/images/loading.gif"></div>
+                            <div class="loader" style="text-align:center;"><img src="layouts/v7/skins/images/loading.gif"></div>
                         </div>
                     </div>
                 </div>

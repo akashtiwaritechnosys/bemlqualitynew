@@ -26,7 +26,7 @@
 		<div class="col-lg-1">
 			{if $LISTVIEW_ENTRIES_COUNT > 0}
 				{foreach item=LISTVIEW_BASICACTION from=$LISTVIEW_LINKS}
-					<button id="{$MODULE}_listView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($LISTVIEW_BASICACTION->getLabel())}" class="btn btn-soft-danger pull-left" 
+					<button id="{$MODULE}_listView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($LISTVIEW_BASICACTION->getLabel())}" class="btn btn-danger pull-left" 
 						{if stripos($LISTVIEW_BASICACTION->getUrl(), 'javascript:')===0} onclick='{$LISTVIEW_BASICACTION->getUrl()|substr:strlen("javascript:")};'{else} onclick='window.location.href="{$LISTVIEW_BASICACTION->getUrl()}"'{/if}>
 							<strong>{vtranslate($LISTVIEW_BASICACTION->getLabel(), $MODULE)}</strong>
 					</button>
@@ -38,10 +38,10 @@
 				&nbsp;
 			</div>
 			<div class="col-lg-9 select-deselect-container" >
-				<div class="hide messageContainer" style = "height:30px;">
+				<div class="hide messageContainer">
 					<center><a id="selectAllMsgDiv" href="#">{vtranslate('LBL_SELECT_ALL',$MODULE)}&nbsp;{vtranslate($MODULE ,$MODULE)}&nbsp;(<span id="totalRecordsCount" value=""></span>)</a></center>
 				</div>
-				<div class="hide messageContainer" style = "height:30px;">
+				<div class="hide messageContainer">
 					<center><a id="deSelectAllMsgDiv" href="#">{vtranslate('LBL_DESELECT_ALL_RECORDS',$MODULE)}</a></center>
 				</div>
 			</div>

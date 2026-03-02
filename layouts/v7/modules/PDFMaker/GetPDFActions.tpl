@@ -24,7 +24,7 @@
         <a href="javascript:;" class="showProductImages">{vtranslate('LBL_PRODUCT_IMAGE', 'PDFMaker')}</a>
     </li>
 
-    {if $TEMPLATE_LANGUAGES|@sizeof > 1}
+    {if $TEMPLATE_LANGUAGES|@php7_count > 1}
         <li class="dropdown-header">
             <i class="fa fa-settings"></i> {vtranslate('LBL_PDF_LANGUAGE', 'PDFMaker')}
         </li>

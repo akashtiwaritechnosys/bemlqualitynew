@@ -11,11 +11,6 @@
         <input type="hidden" name="module" value="{$MODULE}" >
         <input type="hidden" name="view" value="ChartEdit" >
         <input type="hidden" name="record" value="{$RECORD_ID}" >
-
-        <!--Pivot Report-->
-        <input type="hidden" name="type" value="{$type}" />
-        <!--Pivot Report-->
-        
         <input type="hidden" name="reportname" value="{$REPORT_MODEL->get('reportname')}" >
         {if $REPORT_MODEL->get('members')}
             <input type="hidden" name="members" value={ZEND_JSON::encode($REPORT_MODEL->get('members'))} />
@@ -44,7 +39,7 @@
         {foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$PRIMARY_MODULE_RECORD_STRUCTURE}
             {assign var=PRIMARY_MODULE_BLOCK_LABEL value=vtranslate($BLOCK_LABEL, $PRIMARY_MODULE)}
             {assign var=key value="$PRIMARY_MODULE_LABEL $PRIMARY_MODULE_BLOCK_LABEL"}
-            {if $LINEITEM_FIELD_IN_CALCULATION eq false && $BLOCK_LABEL eq 'LBL_ITEM_DETAILS'}
+            {if isset($LINEITEM_FIELD_IN_CALCULATION) && $LINEITEM_FIELD_IN_CALCULATION eq false && $BLOCK_LABEL eq 'LBL_ITEM_DETAILS'}
                 {* dont show the line item fields block when Inventory fields are selected for calculations *}
             {else}
                 {$RECORD_STRUCTURE[$key] = $BLOCK_FIELDS}
@@ -58,23 +53,27 @@
                 {$RECORD_STRUCTURE[$key] = $BLOCK_FIELDS}
             {/foreach}
         {/foreach}
-        <div class="report_step" padding:2%;">
+        <div class="" style="border:1px solid #ccc;padding:2%;">
             <div class="row">
-                <div class="col-lg-12">
-                    <h4 class="report_step_h4"><strong>{vtranslate('LBL_CHOOSE_FILTER_CONDITIONS',$MODULE)}</strong></h4>
-                </div>
-                <div class="col-lg-12">
+                <h4><strong>{vtranslate('LBL_CHOOSE_FILTER_CONDITIONS',$MODULE)}</strong></h4>
+                <br>
+                <span class="col-lg-12">
+                {if !isset($SELECTED_ADVANCED_FILTER_FIELDS)}
+                    {assign var="SELECTED_ADVANCED_FILTER_FIELDS" value=array()}
+                {/if}
                     {include file='AdvanceFilter.tpl'|@vtemplate_path RECORD_STRUCTURE=$RECORD_STRUCTURE ADVANCE_CRITERIA=$SELECTED_ADVANCED_FILTER_FIELDS COLUMNNAME_API=getReportFilterColumnName}
-                </div>
+                </span>
             </div>
         </div>
         <br>
         <div class="modal-overlay-footer border1px clearfix">
             <div class="row clearfix">
                 <div class="textAlignCenter col-lg-12 col-md-12 col-sm-12 ">
-                    <button type="button" class="btn btn-soft-secondary backStep"><strong>{vtranslate('LBL_BACK',$MODULE)}</strong></button>&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-soft-secondary nextStep"><strong>{vtranslate('LBL_NEXT',$MODULE)}</strong></button>&nbsp;&nbsp;
-                    <a class="cancelLink btn btn-soft-danger" onclick="window.history.back()">{vtranslate('LBL_CANCEL',$MODULE)}</a>
+                    <div class="footer-btns">
+                        <button type="button" class="btn btn-danger backStep">{vtranslate('LBL_BACK',$MODULE)}</button>
+                        <button type="submit" class="btn btn-submit nextStep">{vtranslate('LBL_NEXT',$MODULE)}</button>
+                        <a class="cancelLink" onclick="window.history.back()">{vtranslate('LBL_CANCEL',$MODULE)}</a>
+                    </div>
                 </div>
             </div>
         </div>

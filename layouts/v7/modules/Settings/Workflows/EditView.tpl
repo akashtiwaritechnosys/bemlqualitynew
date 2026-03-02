@@ -8,7 +8,7 @@
 *************************************************************************************}
 {strip}
    <div class="editViewPageDiv">
-      <div class="col-sm-12 col-xs-12" id="EditView">
+      <div class="col-sm-12 col-xs-12 edit-view" id="EditView">
          <form name="EditWorkflow" action="index.php" method="post" id="workflow_edit" class="form-horizontal">
             {assign var=WORKFLOW_MODEL_OBJ value=$WORKFLOW_MODEL->getWorkflowObject()}
             <input type="hidden" name="record" value="{$RECORDID}" id="record" />
@@ -18,45 +18,45 @@
             <input type="hidden" name="returnsourcemodule" value="{$RETURN_SOURCE_MODULE}" />
             <input type="hidden" name="returnpage" value="{$RETURN_PAGE}" />
             <input type="hidden" name="returnsearch_value" value="{$RETURN_SEARCH_VALUE}" />
-            <div class="editViewHeader">
+            <div class="editViewHeader create-workflows">
                <div class='row'>
                   <div class="col-lg-12 col-md-12 col-lg-pull-0">
                      <h4>{vtranslate('LBL_BASIC_INFORMATION', $QUALIFIED_MODULE)}</h4>
                   </div>
                </div>
             </div>
-            <hr style="margin-top: 0px !important;">
+
             <div class="editViewBody">
                 <div class="editViewContents" style="text-align: center; ">
                   <div class="form-group">
-                     <label for="name" class="col-sm-3 control-label">
+                     <label for="name" class="col-lg-3 col-sm-4 control-label">
                         {vtranslate('LBL_WORKFLOW_NAME', $QUALIFIED_MODULE)}
                         <span class="redColor">*</span>
                      </label>
-                     <div class="col-sm-5 controls">
+                     <div class="col-lg-6 col-sm-7 controls">
                         <input class="form-control" id="name"  name="workflowname" value="{$WORKFLOW_MODEL_OBJ->workflowname}" data-rule-required="true">
                      </div>
                   </div>
                   <div class="form-group">
-                     <label for="name" class="col-sm-3 control-label">
+                     <label for="name" class="col-lg-3 col-sm-4 control-label">
                         {vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}
                      </label>
-                     <div class="col-sm-5 controls">
+                     <div class="col-lg-6 col-sm-7 controls">
                         <textarea class="form-control" name="summary" id="summary">{$WORKFLOW_MODEL->get('summary')}</textarea>
                      </div>
                   </div>
                   <div class="form-group">
-                        <label for="module_name" class="col-sm-3 control-label">
+                        <label for="module_name" class="col-lg-3 col-sm-4 control-label">
                            {vtranslate('LBL_TARGET_MODULE', $QUALIFIED_MODULE)}
                         </label>
-                     <div class="col-sm-5 controls">
-                         {if $MODE eq 'edit'}
+                     <div class="col-lg-6 col-sm-7 controls">
+                         {if isset($MODE) && $MODE eq 'edit'}
                              <div class="pull-left">
                                 <input type='text' disabled='disabled' class="inputElement" value="{vtranslate($MODULE_MODEL->getName(), $MODULE_MODEL->getName())}" >
                                 <input type='hidden' id="module_name" name='module_name' value="{$MODULE_MODEL->get('name')}" >
                              </div>
                          {else}
-                             <select class="select2 col-sm-6 pull-left" id="module_name" name="module_name" required="true" data-placeholder="Select Module..." style="text-align: left">
+                             <select class="select2 col-sm-12 pull-left" id="module_name" name="module_name" required="true" data-placeholder="Select Module..." style="text-align: left">
                                  {foreach from=$ALL_MODULES key=TABID item=MODULE_MODEL}
                                      {assign var=TARGET_MODULE_NAME value=$MODULE_MODEL->getName()}
                                      {assign var=SINGLE_MODULE value="SINGLE_$TARGET_MODULE_NAME"}
@@ -101,7 +101,7 @@
                   </div>
                </div>
             </div>
-            <hr style="margin-top: 0px !important;">
+            
             <div class="editViewBody">
                <div class="editViewContents" style="padding-bottom: 0px;">
                     {include file='WorkFlowTrigger.tpl'|@vtemplate_path:$QUALIFIED_MODULE}	
@@ -112,8 +112,10 @@
 			<div class="modal-overlay-footer clearfix">
 				<div class="row clearfix">
 					<div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-						<button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-						<a class='cancelLink' href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                  <div class='footer-btns'>
+                     <button type='submit' class='btn btn-submit saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>
+                     <a class='cancelLink' href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                  </div>
 					</div>
 				</div>
 			</div>

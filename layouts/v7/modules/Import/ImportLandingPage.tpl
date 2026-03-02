@@ -8,23 +8,23 @@
 ************************************************************************************}
 {* modules/Vtiger/views/Import.php *}
 
-<div class='fc-overlay-modal'>
+<div class='fc-overlay-modal import-landing-modal'>
 	<div class = "modal-content">
 		<div class="overlayHeader">
 			{assign var=TITLE value="{'LBL_IMPORT'|@vtranslate:$MODULE} {$FOR_MODULE|@vtranslate:$FOR_MODULE}"}
 			{include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$TITLE}
 		</div>
-		<div class='modal-body' style="margin-bottom:100%" id ="landingPageDiv">
+		<div class='modal-body' id ="landingPageDiv">
 			<hr>
 			<div class="landingPage container-fluid importServiceSelectionContainer">
-				<div class = "col-lg-12" style = "font-size: 16px;">{'LBL_SELECT_IMPORT_FILE_FORMAT'|@vtranslate:$MODULE}</div>
+				<div class="col-lg-12"><h5>{'LBL_SELECT_IMPORT_FILE_FORMAT'|@vtranslate:$MODULE}</h5></div>
 				<br>
 				<br>
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id = "csvImport">
 					<div class="menu-item app-item app-SALES">
 						<span class="fa fa-file-text"></span>
 						<div>
-							<h4>{'LBL_CSV_FILE'|@vtranslate:$MODULE}</h4>
+							<h5>{'LBL_CSV_FILE'|@vtranslate:$MODULE}</h5>
 						</div>
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 						<div class="menu-item app-item app-INVENTORY">
 							<span class="fa fa-user"></span>
 							<div>
-								<h4>{'LBL_VCF_FILE'|@vtranslate:$MODULE}</h4>
+								<h5>{'LBL_VCF_FILE'|@vtranslate:$MODULE}</h5>
 							</div>
 						</div>
 					</div>

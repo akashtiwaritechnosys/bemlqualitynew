@@ -10,12 +10,13 @@
 ********************************************************************************/
 -->*}
 {strip}
-    {if count($DATA) gt 0 }
+    {if php7_count($DATA) gt 0 }
         <input class="widgetData" type=hidden value='{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($DATA))}' />
-        <input class="yAxisFieldType" type="hidden" value="{$YAXIS_FIELD_TYPE}" />
+        <input class="yAxisFieldType" type="hidden" value="{if isset($YAXIS_FIELD_TYPE)}$YAXIS_FIELD_TYPE{/if}" />
         <div class="row" style="margin:0px 10px;">
-            <div class="col-lg-11 chartContainer_wrap">
-                <div class="widgetChartContainer" name='chartcontent' style="height:220px;min-width:300px; margin: 0 auto"></div>
+            <div class="col-lg-11">
+            
+                <div class="widgetChartContainer" name='chartcontent' style="height:220px; min-width:300px; margin: 0 auto"></div>
                 <br>
             </div>
 			<div class="col-lg-1"></div>

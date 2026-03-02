@@ -18,18 +18,21 @@
                             <input type="hidden" id="restrictedFieldsList" value={ZEND_JSON::encode($RESTRICTED_FIELD_IDS_LIST)} />
                             <table class="table listview-table-norecords" width="100%" id="convertPotentialMapping">
                                 <tbody>
-                                    <tr>
-										<th width="7%"></th>
-                                        <th width="15%">{vtranslate('LBL_FIELD_LABEL', $QUALIFIED_MODULE)}</th>
-                                        <th width="15%">{vtranslate('LBL_FIELD_TYPE', $QUALIFIED_MODULE)}</th>
-                                        <th width="15%">{vtranslate('LBL_MAPPING_WITH_OTHER_MODULES', $QUALIFIED_MODULE)}</th>
-                                    </tr>
-                                    <tr>
-										<th width="7%">{vtranslate('LBL_ACTIONS', $QUALIFIED_MODULE)}</th>
-                                        {foreach key=key item=LABEL from=$MODULE_MODEL->getHeaders()}
-                                            <th width="15%">{vtranslate($LABEL, $LABEL)}</th>
-                                        {/foreach}
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th width="7%"></th>
+                                            <th width="15%">{vtranslate('LBL_FIELD_LABEL', $QUALIFIED_MODULE)}</th>
+                                            <th width="15%">{vtranslate('LBL_FIELD_TYPE', $QUALIFIED_MODULE)}</th>
+                                            <th width="15%">{vtranslate('LBL_MAPPING_WITH_OTHER_MODULES', $QUALIFIED_MODULE)}</th>
+                                        </tr>
+                                        <tr>
+                                            <th width="7%">{vtranslate('LBL_ACTIONS', $QUALIFIED_MODULE)}</th>
+                                            {foreach key=key item=LABEL from=$MODULE_MODEL->getHeaders()}
+                                                <th width="15%">{vtranslate($LABEL, $LABEL)}</th>
+                                            {/foreach}
+                                        </tr>
+                                    </thead>
+                                 
                                     {foreach key=MAPPING_ID item=MAPPING_ARRAY from=$MODULE_MODEL->getMapping()  name="mappingLoop"}
                                         <tr class="listViewEntries" sequence-number="{$smarty.foreach.mappingLoop.iteration}">
 											<td width="7%">
@@ -116,7 +119,7 @@
                             </table>
                             <div class="row">
                                 <span class="col-sm-4">
-                                    <button id="addMapping" class="btn btn-default addButton" type="button" style="margin-left: 10px;">
+                                    <button id="addMapping" class="btn btn-default addButton" type="button" style="margin: 10px 1px 10px 10px;">
                                         <i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD_MAPPING', $QUALIFIED_MODULE)}
                                     </button>
                                 </span>
@@ -126,8 +129,10 @@
 					<div class='modal-overlay-footer clearfix'>
 						<div class="row clearfix">
 							<div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-								<button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-								<a class="cancelLink" type="reset" href="{$MODULE_MODEL->getDetailViewUrl()}">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                                <div class='footer-btns'>
+                                    <button type='submit' class='btn btn-submit saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>
+                                    <a class="cancelLink" type="reset" href="{$MODULE_MODEL->getDetailViewUrl()}">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                                </div>
 							</div>
 						</div>
 					</div>

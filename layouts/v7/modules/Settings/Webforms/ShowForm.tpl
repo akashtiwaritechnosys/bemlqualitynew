@@ -55,7 +55,7 @@
 											{else}
 												{assign var=PICKLIST_DATA_LABEL value=$FIELD_MODEL->get('name')}
 											{/if}
-										{else if ($DATA_TYPE eq "salutation") or ($DATA_TYPE eq "string") or ($DATA_TYPE eq "time") or ($DATA_TYPE eq "currency") or ($DATA_TYPE eq "url") or ($DATA_TYPE eq "phone")}
+										{else if ($DATA_TYPE eq "salutation") or ($DATA_TYPE eq "string") or ($DATA_TYPE eq "currency") or ($DATA_TYPE eq "url") or ($DATA_TYPE eq "phone")}
 											{assign var=TYPE value="text"}
 										{else if ($DATA_TYPE eq "text")}
 											{assign var=TYPE value="text"}
@@ -71,6 +71,8 @@
 											{assign var=TYPE value="checkbox"}
 										{else if ($DATA_TYPE eq "date")}
 											{assign var=TYPE value="date"}
+										{else if ($DATA_TYPE eq "time")}
+											{assign var=TYPE value="time"}
 										{/if}
 										{if $HIDDEN_STATUS eq 1}
 											{assign var=TYPE value=hidden}
@@ -105,7 +107,7 @@
 											{/if}
 										{elseif ($DATA_TYPE neq "text") and ($DATA_TYPE neq "boolean")}
 											<input type="{$TYPE}" name="{urlencode($FIELD_MODEL->getFieldName())}" data-label="{$FIELD_MODEL->get('neutralizedFieldName')}" value="{$FIELD_MODEL->get('fieldvalue')}" {if ($FIELD_MODEL->get('required') eq 1) || ($FIELD_MODEL->isMandatory(true))} required{/if} {if ($DATA_TYPE eq "double")} datatype="{$DATA_TYPE}" step="any" {/if}/>
-											{if ($DATA_TYPE eq "date") and ($FIELD_MODEL->get('hidden') neq 1)}(yyyy-mm-dd){/if}
+											{if ($DATA_TYPE eq "date") and ($FIELD_MODEL->get('hidden') neq 1)}{/if}
 										{/if}
 									</td>
 								</tr>
@@ -118,20 +120,19 @@
 						{/foreach}
 					</table>
 					{if $IS_CAPTCHA_ENABLED}
-						<div id="captchaField"></div>
-						<input type="hidden" id="captchaUrl" value="{$CAPTCHA_PATH}">
-						<input type="hidden" id="recaptcha_validation_value" >
+						{* vscript - custom script tag to avoid loading when form popup is displayed *}
+						<vscript src="https://www.google.com/recaptcha/api.js" async defer></vscript>
+						<div class="g-recaptcha" data-sitekey="{$CAPTCHA_CONFIG['VTIGER_RECAPTCHA_PUBLIC_KEY']}" data-callback="enableSubmitBtn"></div>
 					{/if}
 					<input type="submit" value="Submit" ></input>
 				</form>
 				</pre>
 			</code>
-			<input type="hidden" name="isCaptchaEnabled" value="{$IS_CAPTCHA_ENABLED}">
 		</div>
 		<div class="modal-footer">
-			<center>
+			<div class='footer-btns'>
 				<a href="#" class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-			</center>
+			</div>
 		</div>
 	</div>
 {/strip}

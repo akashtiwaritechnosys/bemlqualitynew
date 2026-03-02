@@ -10,9 +10,9 @@
 {strip}
 	{assign var=SELECTED_FIELDS value=$CUSTOMVIEW_MODEL->getSelectedFields()}
 	{assign var=MODULE_FIELDS value=$MODULE_MODEL->getFields()}
-	<div id="filterContainer" style="height:100%">
+	<div id="filterContainer" class="create-new-list" style="height:100%">
 		<form id="CustomView" style="height:100%">
-			<div class="modal-content" style="height:100%">
+			<div class="modal-content add-activity">
 				<div class="overlayHeader">
 					{if $RECORD_ID}
 						{assign var="TITLE" value={vtranslate('LBL_EDIT_CUSTOM',$MODULE)}}
@@ -35,23 +35,23 @@
 						{/if}
 						<input type="hidden" name="date_filters" data-value='{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($DATE_FILTERS))}' />
 						<div class="form-group">
-							<label>{vtranslate('LBL_VIEW_NAME',$MODULE)}&nbsp;<span class="redColor">*</span> </label>
-							<div class="row">
+							<label class="lable-name">{vtranslate('LBL_VIEW_NAME',$MODULE)}&nbsp;<span class="redColor">*</span> </label>
+							<div class="row list-name-container">
 								<div class="col-lg-5 col-md-5 col-sm-5">
-									<input class="form-control" type="text" data-record-id="{$RECORD_ID}" id="viewname" name="viewname" value="{$CUSTOMVIEW_MODEL->get('viewname')}" data-rule-required="true" data-rule-maxsize="100" data-rule-check-filter-duplicate='{Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($CUSTOM_VIEWS_LIST))}'>
+									<input class="form-control list-input" type="text" data-record-id="{$RECORD_ID}" id="viewname" name="viewname" value="{$CUSTOMVIEW_MODEL->get('viewname')}" data-rule-required="true" data-rule-maxsize="100" data-rule-check-filter-duplicate='{Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($CUSTOM_VIEWS_LIST))}'>
 								</div>
 								<div class="col-lg-5 col-md-5 col-sm-5">
-									<label class="checkbox-inline">
+									<label class="checkbox-inline inter-medium">
 										<input type="checkbox" name="setdefault" value="1" {if $CUSTOMVIEW_MODEL->isDefault()} checked="checked"{/if}> &nbsp;&nbsp;{vtranslate('LBL_SET_AS_DEFAULT',$MODULE)}
 									</label>
-									<label class="checkbox-inline">
+									<label class="checkbox-inline inter-medium">
 										<input id="setmetrics" name="setmetrics" type="checkbox" value="1" {if $CUSTOMVIEW_MODEL->get('setmetrics') eq '1'} checked="checked"{/if}> &nbsp;&nbsp;{vtranslate('LBL_LIST_IN_METRICS',$MODULE)}</label>
 									</label>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label>
+							<label class="lable-name">
 								{vtranslate('LBL_CHOOSE_COLUMNS',$MODULE)} ({vtranslate('LBL_MAX_NUMBER_FILTER_COLUMNS')})
 							</label>
 							<div class="columnsSelectDiv clearfix">
@@ -84,6 +84,7 @@
 										</optgroup>
 									{/foreach}
 									{*Required to include event fields for columns in calendar module advanced filter*}
+									{if isset($EVENT_RECORD_STRUCTURE) && is_array($EVENT_RECORD_STRUCTURE)}
 									{foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$EVENT_RECORD_STRUCTURE}
 										<optgroup label='{vtranslate($BLOCK_LABEL, 'Events')}'>
 											{foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS}
@@ -104,6 +105,7 @@
 											{/foreach}
 										</optgroup>
 									{/foreach}
+									{/if}
 								</select>
 								<input type="hidden" name="columnslist" value='{Vtiger_Functions::jsonEncode($SELECTED_FIELDS)}' />
 								<input id="mandatoryFieldsList" type="hidden" value='{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($MANDATORY_FIELDS))}' />
@@ -111,15 +113,15 @@
 							<div class="col-lg-2 col-md-2 col-sm-2"></div>
 						</div>
 						<div>
-							<label class="filterHeaders">{vtranslate('LBL_CHOOSE_FILTER_CONDITIONS', $MODULE)} :</label>
-							<div class="filterElements well filterConditionContainer filterConditionsDiv">
+							<label class="filterHeaders lable-name">{vtranslate('LBL_CHOOSE_FILTER_CONDITIONS', $MODULE)} :</label>
+							<div class="filterElements filterConditionContainer filterConditionsDiv">
 								{include file='AdvanceFilter.tpl'|@vtemplate_path}
 							</div>
 						</div>
 						<div class="checkbox">
-							<label>
-								<input type="hidden" name="sharelist" value="0" />
-								<input type="checkbox" data-toogle-members="true" name="sharelist" value="1" {if $LIST_SHARED} checked="checked"{/if}> &nbsp;&nbsp;{vtranslate('LBL_SHARE_THIS_LIST',$MODULE)}
+							<label class="inter-medium">
+								<input class="inter-medium" type="hidden" name="sharelist" value="0" />
+								<input class="inter-medium" type="checkbox" data-toogle-members="true" name="sharelist" value="1" {if $LIST_SHARED} checked="checked"{/if}> &nbsp;&nbsp;{vtranslate('LBL_SHARE_THIS_LIST',$MODULE)}
 							</label>
 						</div>
 						<select id="memberList" class="col-lg-7 col-md-7 col-sm-7 select2 members op0{if $LIST_SHARED} fadeInx{/if}" multiple="true" name="members[]" data-placeholder="{vtranslate('LBL_ADD_USERS_ROLES', $MODULE)}" style="margin-bottom: 10px;" data-rule-required="{if $LIST_SHARED}true{else}false{/if}">
@@ -149,9 +151,11 @@
 				</div>
 				<div class='modal-overlay-footer clearfix border1px'>
 					<div class="row clearfix">
-						<div class=' textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-							<button type='submit' class='btn btn-soft-success saveButton' id="customViewSubmit">{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-							<a class='btn btn-soft-danger cancelLink' href="javascript:void(0);" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+						<div class=' textAlignCenter col-lg-12 col-md-12 col-sm-12'>
+							<div class='footer-btns'>
+								<button type='submit' class='btn btn-submit saveButton' id="customViewSubmit">{vtranslate('LBL_SAVE', $MODULE)}</button>
+								<a class='cancelLink' href="javascript:void(0);" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+							</div>
 						</div>
 					</div>
 				</div>

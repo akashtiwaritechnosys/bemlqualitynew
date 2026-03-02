@@ -1,4 +1,5 @@
 Vtiger.Class("Users_UserSetupAnother_Js", {}, {
+	 
 	time: 600,
 	registerEvents: function () {
 		var self = this;

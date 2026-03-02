@@ -1,3 +1,12 @@
+/*+**********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ ************************************************************************************/
+
 Vtiger.Class('Documents_Index_Js', {
 
 	fileObj : false,
@@ -190,9 +199,9 @@ Vtiger.Class('Documents_Index_Js', {
 			var fileParts = fileName.split('.');
 			var fileType = fileParts[fileParts.length - 1];
 			let notesTitle = container.find('[name="notes_title"]').val();
-                        if (!notesTitle.trim()) {
+                        
                             container.find('[name="notes_title"]').val(fileName.replace('.' + fileType, ''));
-                        }
+                        
 		}
 	},
 
@@ -462,7 +471,16 @@ Vtiger.Class('Documents_Index_Js', {
 		vtigerInstance.referenceModulePopupRegisterEvent(container);
 		vtigerInstance.registerClearReferenceSelectionEvent(container);
 		vtigerInstance.registerAutoCompleteFields(container);
-		app.helper.registerModalDismissWithoutSubmit(container.find('form'));
+
+		// Avoid duplicate registrations
+		// container could remain in DOM where as form in it could get replaced next invoke after cancel
+		// to avoid duplicate registration on form close/cancel within same transaction we are handling state in form DOM element.
+		var containerForm = container.find("form");
+		if (!containerForm.data("isDismissWithoutSubmitRegistered")) {
+			app.helper.registerModalDismissWithoutSubmit(container.find('form'));
+			containerForm.data("isDismissWithoutSubmitRegistered", true);
+		}
+		
 		var moduleInstance = Vtiger_Edit_Js.getInstanceByModuleName('Documents');
 		moduleInstance.registerEventForPicklistDependencySetup(container);
 

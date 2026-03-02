@@ -9,7 +9,8 @@
 {strip}
 <form id="detailView" method="POST">
 	{assign var="COMMENT_TEXTAREA_DEFAULT_ROWS" value="2"}
-	{assign var="PRIVATE_COMMENT_MODULES" value=Vtiger_Functions::getPrivateCommentModules()}
+	{* {assign var="PRIVATE_COMMENT_MODULES" value=Vtiger_Functions::getPrivateCommentModules()} *}
+	{assign var="PRIVATE_COMMENT_MODULES" value=[]}
 	{assign var=IS_CREATABLE value=$COMMENTS_MODULE_MODEL->isPermitted('CreateView')}
 	{assign var=IS_EDITABLE value=$COMMENTS_MODULE_MODEL->isPermitted('EditView')}
 
@@ -24,10 +25,10 @@
 						<div class="col-xs-4 pull-right">
 							<div class="pull-right">
 								{if in_array($MODULE_NAME, $PRIVATE_COMMENT_MODULES)}
-									<input type="checkbox" id="is_private">&nbsp;&nbsp;{vtranslate('LBL_INTERNAL_COMMENT')}&nbsp;
+									<input type="checkbox" id="is_private" checked>&nbsp;&nbsp;{vtranslate('LBL_INTERNAL_COMMENT')}&nbsp;
 									<i class="fa fa-question-circle cursorPointer" data-toggle="tooltip" data-placement="top" data-original-title="{vtranslate('LBL_INTERNAL_COMMENT_INFO')}"></i>&nbsp;&nbsp;
 								{/if}
-								<button class="btn btn-soft-success btn-sm saveComment" type="button" data-mode="add"><strong>{vtranslate('LBL_POST', $MODULE_NAME)}</strong></button>
+								<button class="btn btn-submit btn-sm saveComment" type="button" data-mode="add">{vtranslate('LBL_POST', $MODULE_NAME)}</button>
 							</div>
 						</div>
                                                 {if $FIELD_MODEL->getProfileReadWritePermission()}
@@ -66,9 +67,9 @@
 				</div>
 				<div class="pull-right row">
 					{if in_array($MODULE_NAME, $PRIVATE_COMMENT_MODULES)}
-						<input type="checkbox" id="is_private">&nbsp;&nbsp;{vtranslate('LBL_INTERNAL_COMMENT')}&nbsp;&nbsp;
+						<input type="checkbox" id="is_private" checked>&nbsp;&nbsp;{vtranslate('LBL_INTERNAL_COMMENT')}&nbsp;&nbsp;
 					{/if}
-					<button class="btn btn-success btn-sm saveComment" type="button" data-mode="add"><strong>{vtranslate('LBL_POST', $MODULE_NAME)}</strong></button>
+					<button class="btn btn-submit btn-sm saveComment" type="button" data-mode="add">{vtranslate('LBL_POST', $MODULE_NAME)}</button>
 					<a href="javascript:void(0);" class="cursorPointer closeCommentBlock cancelLink" type="reset">{vtranslate('LBL_CANCEL', $MODULE_NAME)}</a>
 				</div>
 			</div>
@@ -84,8 +85,8 @@
 				</div>
 				<input type="hidden" name="is_private">
 				<div class="pull-right row">
-					<button class="btn btn-soft-success btn-sm saveComment" type="button" data-mode="edit"><strong>{vtranslate('LBL_POST', $MODULE_NAME)}</strong></button>
-					<a href="javascript:void(0);" class="cursorPointer closeCommentBlock cancelLink btn btn-soft-danger" type="reset">{vtranslate('LBL_CANCEL', $MODULE_NAME)}</a>
+					<button class="btn btn-submit btn-sm saveComment" type="button" data-mode="edit">{vtranslate('LBL_POST', $MODULE_NAME)}</button>
+					<a href="javascript:void(0);" class="cursorPointer closeCommentBlock cancelLink" type="reset">{vtranslate('LBL_CANCEL', $MODULE_NAME)}</a>
 				</div>
 			</div>
 		</div>

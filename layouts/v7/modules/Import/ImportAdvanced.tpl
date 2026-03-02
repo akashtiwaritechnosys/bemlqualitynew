@@ -10,7 +10,7 @@
 
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
 
-<div class='fc-overlay-modal modal-content'>
+<div class='fc-overlay-modal modal-content import-third-modal'>
     <div class="overlayHeader">
         {assign var=TITLE value="{'LBL_IMPORT'|@vtranslate:$MODULE} {$FOR_MODULE|@vtranslate:$FOR_MODULE}"}
         {include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$TITLE}
@@ -27,15 +27,15 @@
 
             <div class='modal-body'>
 				{assign var=LABELS value=[]}
-                {if $FORMAT eq 'vcf'}
+                {if isset($FORMAT) && $FORMAT eq 'vcf'}
                     {$LABELS["step1"] = 'LBL_UPLOAD_VCF'}
-                {else if $FORMAT eq 'ics'}
+                {else if isset($FORMAT) && $FORMAT eq 'ics'}
 					{$LABELS["step1"] = 'LBL_UPLOAD_ICS'}
 				{else}
                     {$LABELS["step1"] = 'LBL_UPLOAD_CSV'}
                 {/if}
 
-                {if $DUPLICATE_HANDLING_NOT_SUPPORTED eq 'true'}
+                {if isset($DUPLICATE_HANDLING_NOT_SUPPORTED) eq 'true'}
                     {$LABELS["step3"] = 'LBL_FIELD_MAPPING'}
                 {else}
                     {$LABELS["step2"] = 'LBL_DUPLICATE_HANDLING'}
@@ -44,8 +44,8 @@
                 {include file="BreadCrumbs.tpl"|vtemplate_path:$MODULE BREADCRUMB_ID='navigation_links'
                          ACTIVESTEP=3 BREADCRUMB_LABELS=$LABELS MODULE=$MODULE}
                 <div class = "importBlockContainer">
-                    <table class = "table table-borderless">
-                        {if $ERROR_MESSAGE neq ''}
+                    <table class = "table table-borderless bg-light-color-2">
+                        {if isset($ERROR_MESSAGE) && $ERROR_MESSAGE neq ''}
                             <tr>
                                 <td align="left">
                                     {$ERROR_MESSAGE}
@@ -60,12 +60,15 @@
                     </table>
                 </div>
             </div>
-            <div class='modal-overlay-footer border1px clearfix'>
+            <div class='modal-overlay-footer clearfix'>
                 <div class="row clearfix">
                         <div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                        <button type="submit" name="import" id="importButton" class="btn btn-soft-success btn-lg" onclick="return Vtiger_Import_Js.sanitizeAndSubmit()"
-                                >{'LBL_IMPORT_BUTTON_LABEL'|@vtranslate:$MODULE}</button>
-                        &nbsp;&nbsp;&nbsp;<a class='cancelLink btn btn-soft-danger' data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a></div>
+                            <div class='footer-btns'>
+                                <button type="submit" name="import" id="importButton" class="btn btn-submit btn-lg" onclick="return Vtiger_Import_Js.sanitizeAndSubmit()"
+                                        >{'LBL_IMPORT_BUTTON_LABEL'|@vtranslate:$MODULE}</button>
+                                <a class='cancelLink' data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                            </div>
+                        </div>
                 </div>
             </div>
         </form>

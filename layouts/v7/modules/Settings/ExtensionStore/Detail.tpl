@@ -12,15 +12,15 @@
 {strip}
 	<div class="col-lg-12 col-sm-12 content-area detailViewInfo extensionDetails extensionWidgetContainer" style='margin-top:0px;'>
 		{if !($ERROR)}
-			<input type="hidden" name="mode" value="{$smarty.request.mode}" />
+			<input type="hidden" name="mode" value="{$REQ->get('mode')}" />
 			<input type="hidden" name="extensionId" value="{$EXTENSION_ID}" />
 			<input type="hidden" name="targetModule" value="{$EXTENSION_DETAIL->get('name')}" />
 			<input type="hidden" name="moduleAction" value="{$MODULE_ACTION}" />
 			<div class="row contentHeader extension_header" style="margin-bottom: 10px;">
 				<div class="col-sm-6 col-xs-6" style="margin-bottom: 5px;">
-					<div style="margin-bottom: 5px;">
-						<span class="font-x-x-large">{$EXTENSION_DETAIL->get('name')}</span>&nbsp;
-						<span class="muted">{vtranslate('LBL_BY', $QUALIFIED_MODULE)}&nbsp;{$AUTHOR_INFO['firstname']}&nbsp;{$AUTHOR_INFO['lastname']}</span>
+					<div style="margin-bottom: 5px; display:flex; ">
+						<p class="font-x-x-large">{$EXTENSION_DETAIL->get('name')}</p>&nbsp;
+						<p class="muted">{vtranslate('LBL_BY', $QUALIFIED_MODULE)}&nbsp;{$AUTHOR_INFO['firstname']}&nbsp;{$AUTHOR_INFO['lastname']}</p>
 					</div>
 					{assign var=ON_RATINGS value=$EXTENSION_DETAIL->get('avgrating')}
 					<div>
@@ -35,16 +35,16 @@
 						</span>
 						<span style="margin: 5px">
 							{if ($MODULE_ACTION eq 'Installed')}
-								<button class="btn btn-danger {if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)}authenticated {else} loginRequired{/if}" type="button" style="margin-right: 6px;" id="uninstallModule"><strong>{vtranslate('LBL_UNINSTALL', $QUALIFIED_MODULE)}</strong></button>
+								<button class="btn btn-danger {if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)}authenticated {else} loginRequired{/if}" type="button" style="margin-right: 6px;" id="uninstallModule">{vtranslate('LBL_UNINSTALL', $QUALIFIED_MODULE)}</button>
 							{else}
 								{if $EXTENSION_DETAIL->get('isprotected') && $IS_PRO && ($EXTENSION_DETAIL->get('price') gt 0)}
-									<button class="btn btn-info {if (!$CUSTOMER_PROFILE['CustomerCardId'])} setUpCard{/if}{if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)} authenticated {else} loginRequired{/if}" type="button" id="installExtension"><strong>{vtranslate('LBL_BUY',$QUALIFIED_MODULE)}${$EXTENSION_DETAIL->get('price')}</strong></button>
+									<button class="btn btn-info {if (!$CUSTOMER_PROFILE['CustomerCardId'])} setUpCard{/if}{if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)} authenticated {else} loginRequired{/if}" type="button" id="installExtension">{vtranslate('LBL_BUY',$QUALIFIED_MODULE)}${$EXTENSION_DETAIL->get('price')}</button>
 								{elseif (!$EXTENSION_DETAIL->get('isprotected')) && ($EXTENSION_DETAIL->get('price') gt 0)}
-									<button class="btn btn-info {if (!$CUSTOMER_PROFILE['CustomerCardId'])} setUpCard{/if}{if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)} authenticated {else} loginRequired{/if}" type="button" id="installExtension"><strong>{vtranslate('LBL_BUY',$QUALIFIED_MODULE)}${$EXTENSION_DETAIL->get('price')}</strong></button>
+									<button class="btn btn-info {if (!$CUSTOMER_PROFILE['CustomerCardId'])} setUpCard{/if}{if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)} authenticated {else} loginRequired{/if}" type="button" id="installExtension">{vtranslate('LBL_BUY',$QUALIFIED_MODULE)}${$EXTENSION_DETAIL->get('price')}</button>
 								{elseif !$EXTENSION_DETAIL->get('isprotected') && (($EXTENSION_DETAIL->get('price') eq 0) || ($EXTENSION_DETAIL->get('price') eq 'Free'))}
-									<button class="btn btn-success {if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)}authenticated {else} loginRequired{/if}" type="button" id="installExtension"><strong>{vtranslate($MODULE_ACTION, $QUALIFIED_MODULE)}</strong></button>
+									<button class="btn btn-submit {if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)}authenticated {else} loginRequired{/if}" type="button" id="installExtension">{vtranslate($MODULE_ACTION, $QUALIFIED_MODULE)}</button>
 								{elseif $EXTENSION_DETAIL->get('isprotected') && $IS_PRO && (($EXTENSION_DETAIL->get('price') eq 0) || ($EXTENSION_DETAIL->get('price') eq 'Free'))}
-									<button class="btn btn-success {if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)}authenticated {else} loginRequired{/if}" type="button" id="installExtension"><strong>{vtranslate($MODULE_ACTION, $QUALIFIED_MODULE)}</strong></button>
+									<button class="btn btn-submit {if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)}authenticated {else} loginRequired{/if}" type="button" id="installExtension">{vtranslate($MODULE_ACTION, $QUALIFIED_MODULE)}</button>
 								{/if}
 							{/if}
 						</span>
@@ -52,7 +52,7 @@
 							{if $MODULE_ACTION eq 'Installed'}
 								{assign var=LAUNCH_URL value=$EXTENSION_MODULE_MODEL->getExtensionLaunchUrl()}
 							{/if}
-							<button class="btn btn-info {if $MODULE_ACTION eq 'Installed'}{if $EXTENSION_MODULE_MODEL->get('extnType') eq 'language'}hide{/if}{else}hide{/if}" type="button" id="launchExtension" onclick="location.href='{$LAUNCH_URL}'"><strong>{vtranslate('LBL_LAUNCH', $QUALIFIED_MODULE)}</strong></button>
+							<button class="btn btn-info {if $MODULE_ACTION eq 'Installed'}{if $EXTENSION_MODULE_MODEL->get('extnType') eq 'language'}hide{/if}{else}hide{/if}" type="button" id="launchExtension" onclick="location.href='{$LAUNCH_URL}'">{vtranslate('LBL_LAUNCH', $QUALIFIED_MODULE)}</button>
 						</span>
 					</div>
 					<div class="clearfix"></div>
@@ -61,18 +61,17 @@
 			<div class="tabbable-panel">
 				<div class="tabbable-line margin0px" style="padding-bottom: 20px;">
 					<ul id="extensionTab" class="nav nav-tabs" style="margin-bottom: 0px; padding-bottom: 0px;text-align: left;">
-						<li class="active"><a href="#description" data-toggle="tab"><strong>{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}</strong></a></li>
+						<li class="active"><a href="#description" data-toggle="tab"><span>{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}</span></a></li>
 						<li class="divider-vertical"></li>
-						<li><a href="#CustomerReviews" data-toggle="tab"><strong>{vtranslate('LBL_CUSTOMER_REVIEWS', $QUALIFIED_MODULE)}</strong></a></li>
+						<li><a href="#CustomerReviews" data-toggle="tab"><span>{vtranslate('LBL_CUSTOMER_REVIEWS', $QUALIFIED_MODULE)}</span></a></li>
 						<li class="divider-vertical"></li>
-						<li><a href="#Author" data-toggle="tab"><strong>{vtranslate('LBL_PUBLISHER', $QUALIFIED_MODULE)}</strong></a></li>
+						<li><a href="#Author" data-toggle="tab"><span>{vtranslate('LBL_PUBLISHER', $QUALIFIED_MODULE)}</span></a></li>
 					</ul>
-					<div class="tab-content boxSizingBorderBox" style="background-color: #fff; padding: 20px; margin-top: 10px;">
+					<div class="tab-content boxSizingBorderBox">
 						<div class="tab-pane active" id="description">
-							<div style="width:90%;padding: 0px 5%;">
+							<div>
 								<div class="row">
-									<div class="col-sm-2 col-xs-2">&nbsp;</div>
-									<div class="col-sm-8 col-xs-8">
+									<div class="col-sm-12 col-xs-12">
 										<div id="imageSlider" class="carousel slide" data-ride="carousel">
 											<!-- Indicators -->
 											<ol class="carousel-indicators">
@@ -101,7 +100,7 @@
 											</a>
 										</div>
 									</div>
-									<div class="col-sm-2 col-xs-2">&nbsp;</div>
+									
 								</div>
 							</div>
 							<br>
@@ -118,8 +117,8 @@
 									</div>
 									<div class="pull-left">
 										<span data-score="{$ON_RATINGS}" class="rating" data-readonly="true"></span>
-										<div>out of 5</div>
-										<div>({count($CUSTOMER_REVIEWS)} Reviews)</div>
+										<div><span>out of 5</span></div>
+										<div><span>({php7_count($CUSTOMER_REVIEWS)} Reviews)</span></div>
 									</div>
 								</div>
 								{if ($REGISTRATION_STATUS) and ($PASSWORD_STATUS)}
@@ -156,15 +155,15 @@
 								<div class="row extension_header">
 									<div class="col-sm-6 col-xs-6">
 										{if !empty($AUTHOR_INFO['company'])}
-											<div class="font-x-x-large authorInfo">{$AUTHOR_INFO['company']}</div>
+											<div class="font-x-x-large authorInfo"><h5>{$AUTHOR_INFO['company']}</h5></div>
 										{else}
-											<div class="font-x-x-large authorInfo">{$AUTHOR_INFO['firstname']}&nbsp;{$AUTHOR_INFO['lastname']}</div>
+											<div class="font-x-x-large authorInfo"><h5>{$AUTHOR_INFO['firstname']}&nbsp;{$AUTHOR_INFO['lastname']}</h5></div>
 										{/if}
-											<div class="authorInfo">{$AUTHOR_INFO['phone']}</div>
-											<div class="authorInfo">{$AUTHOR_INFO['email']}</div>
+											<div class="authorInfo"><span>{$AUTHOR_INFO['phone']}</span></div>
+											<div class="authorInfo"><span>{$AUTHOR_INFO['email']}</span></div>
 											<div class="authorInfo"><a href="{$AUTHOR_INFO['website']}" target="_blank">{$AUTHOR_INFO['website']}</a></div>
 									</div>
-									<div class="col-sm-6 col-xs-6"> &nbsp; </div>
+									
 								 </div>
 							</div>
 						</div>
@@ -204,7 +203,7 @@
 										<div class="pull-right cancelLinkContainer" style="margin-top:0px;">
 											<a class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
 										</div>
-										<button class="btn btn-success" type="submit" name="saveButton"><strong>{vtranslate('LBL_SAVE', $MODULE)}</strong></button>
+										<button class="btn btn-submit" type="submit" name="saveButton">{vtranslate('LBL_SAVE', $MODULE)}</button>
 									</div>
 								</div>
 							</div>

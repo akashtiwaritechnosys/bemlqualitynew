@@ -53,7 +53,7 @@
                                      <div class="widget_contents">
                                              <table border="0" cellpadding="5" cellspacing="0" width="100%">
                                                  <tr valign=top>
-                                                     {if $RELATED_MODULES|@count > 0}
+                                                     {if $RELATED_MODULES|php7_count > 0}
                                                          <td style="padding-right: 5px;" align="right" nowrap width="25%" align="top"><b>{$REP.LBL_NEW_REP0_HDR2}</b></td>
                                                          <td  style="padding-left: 5px; " align="left" width="75%" valign="top">
 
@@ -127,7 +127,7 @@
                                                              </div>
                                                      {/foreach}
                                                      {assign var=SELECTED_SORT_FEILDS_ARRAY value=$SELECTED_SORT_FIELDS}
-                                                     {assign var=SELECTED_SORT_FIELDS_COUNT value=count($SELECTED_SORT_FEILDS_ARRAY)}
+                                                     {assign var=SELECTED_SORT_FIELDS_COUNT value=php7_count($SELECTED_SORT_FEILDS_ARRAY)}
                                                      {while $SELECTED_SORT_FIELDS_COUNT lt 3 }
                                                              <div class="sortFieldRow">
                                                                  <div class="col-lg-12">

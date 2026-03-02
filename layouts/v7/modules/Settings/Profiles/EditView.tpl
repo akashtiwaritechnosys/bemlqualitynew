@@ -12,7 +12,7 @@
 <div class="editViewPageDiv">
 	<div class="col-sm-12 col-xs-12 main-scroll">
 		<form class="form-horizontal" id="EditView" name="EditProfile" method="post" action="index.php" enctype="multipart/form-data">
-			<div class="editViewHeader">
+			{*<div class="editViewHeader create-profile">
 				{if $RECORD_MODEL->getId()}
 					<h4>
 						{vtranslate('LBL_EDIT_PROFILE', $QUALIFIED_MODULE)}
@@ -22,9 +22,9 @@
 						{vtranslate('LBL_CREATE_PROFILE', $QUALIFIED_MODULE)}
 					</h4>
 				{/if}
-			</div>
+			</div> *}
 			<hr>
-			<div class="editViewBody">
+			<div class="editViewBody edit-profile-body">
 				<div class="editViewContents">
 					<div id="submitParams">
 						<input type="hidden" name="module" value="Profiles" />
@@ -37,21 +37,21 @@
 						<input type="hidden" name="editall" value="0" />
 					</div>
 
-					<div name='editContent' >
-						<div class="row form-group"><div class="col-lg-3 col-md-3 col-sm-3 control-label fieldLabel"> 
+					<div name='editContent'>
+						<div class="row form-group"><div class="col-lg-3 col-md-3 col-sm-5 control-label"> 
 								<label>
-									<strong>{vtranslate('LBL_PROFILE_NAME', $QUALIFIED_MODULE)}</strong>&nbsp;<span class="redColor">*</span>:&nbsp;
+								{vtranslate('LBL_PROFILE_NAME', $QUALIFIED_MODULE)}&nbsp;<span class="redColor">*</span>:&nbsp;
 								</label></div>
-							<div class="fieldValue col-lg-6 col-md-6 col-sm-6" > 
+							<div class="col-lg-6 col-md-6 col-sm-7" > 
 								<input type="text" class="inputElement" name="profilename" id="profilename" value="{$RECORD_MODEL->getName()}" data-rule-required="true" />
 							</div>
 						</div>
 
-						<div class="row"><div class="col-lg-3 col-md-3 col-sm-3 control-label fieldLabel"> 
+						<div class="row"><div class="col-lg-3 col-md-3 col-sm-5 control-label"> 
 								<label>
-									<strong>{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}&nbsp;:&nbsp;</strong>
+									{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}&nbsp;:&nbsp;
 								</label></div>
-							<div class="fieldValue col-lg-6 col-md-6 col-sm-6">
+							<div class="col-lg-6 col-md-6 col-sm-7">
 								<textarea name="description" class="inputElement" id="description" style="height:50px; resize: vertical;padding:5px 8px;">{$RECORD_MODEL->getDescription()}</textarea>
 							</div>
 						</div>
@@ -62,8 +62,10 @@
 			<div class='modal-overlay-footer clearfix'>
 				<div class="row clearfix">
 					<div class=' textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-						<button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-						<a class='cancelLink' data-dismiss="modal" href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+						<div class='footer-btns'>
+							<button type='submit' class='btn btn-submit saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>
+							<a class='cancelLink' data-dismiss="modal" href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+						</div>
 					</div>
 				</div>
 			</div>

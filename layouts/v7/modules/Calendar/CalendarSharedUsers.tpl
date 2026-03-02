@@ -14,31 +14,37 @@
 <div class="sidebar-widget-contents" name='calendarViewTypes'>
 	<div id="calendarview-feeds">
 		<ul class="list-group feedslist">
+			<li class="activitytype-indicator calendar-feed-indicator mass-edit-option" style="background-color:#2c3b49; color:#FFFFFF;">
+				<span>{vtranslate('LBL_MASS_SELECT')}</span>
+				<span class="activitytype-actions pull-right">
+					<input class="mass-select" type="checkbox">
+				</span>
+			</li>
 			<li class="activitytype-indicator calendar-feed-indicator" style="background-color: {$SHAREDUSERS_INFO[$CURRENT_USER_ID]['color']};">
-				<p>
+				<span>
 					{vtranslate('LBL_MINE',$MODULE)}
-				</p>
-				<p class="activitytype-actions ">
+				</span>
+				<span class="activitytype-actions pull-right">
 					<input class="toggleCalendarFeed cursorPointer" type="checkbox" data-calendar-sourcekey="Events_{$CURRENT_USER_ID}" data-calendar-feed="Events" 
 						   data-calendar-feed-color="{$SHAREDUSERS_INFO[$CURRENT_USER_ID]['color']}" data-calendar-fieldlabel="{vtranslate('LBL_MINE',$MODULE)}" 
 						   data-calendar-userid="{$CURRENT_USER_ID}" data-calendar-group="false" data-calendar-feed-textcolor="white">&nbsp;&nbsp;
-					<i class="fa fa-pencil editCalendarFeedColor cursorPointer btn btn-soft-blue" title="Edit"></i>&nbsp;&nbsp;
-				</p>
+					<i class="fa fa-pencil editCalendarFeedColor cursorPointer"></i>&nbsp;&nbsp;
+				</span>
 			</li>
 			{assign var=INVISIBLE_CALENDAR_VIEWS_EXISTS value='false'}
 			{foreach key=ID item=USER from=$SHAREDUSERS}
 				{if $SHAREDUSERS_INFO[$ID]['visible'] != '0'}
 					<li class="activitytype-indicator calendar-feed-indicator" style="background-color: {$SHAREDUSERS_INFO[$ID]['color']};">
-						<p class="userName textOverflowEllipsis" title="{$USER}">
+						<span class="userName textOverflowEllipsis" title="{$USER}">
 							{$USER}
-						</p>
-						<p class="activitytype-actions ">
+						</span>
+						<span class="activitytype-actions pull-right">
 							<input class="toggleCalendarFeed cursorPointer" type="checkbox" data-calendar-sourcekey="Events_{$ID}" data-calendar-feed="Events" 
 								   data-calendar-feed-color="{$SHAREDUSERS_INFO[$ID]['color']}" data-calendar-fieldlabel="{$USER}" 
 								   data-calendar-userid="{$ID}" data-calendar-group="false" data-calendar-feed-textcolor="white">&nbsp;&nbsp;
-							<i class="fa fa-pencil editCalendarFeedColor cursorPointer btn btn-soft-blue" title="Edit"></i>&nbsp;&nbsp;
-							<i class="fa fa-trash deleteCalendarFeed cursorPointer  btn btn-soft-danger" title="Delete"></i>
-						</p>
+							<i class="fa fa-pencil editCalendarFeedColor cursorPointer"></i>&nbsp;&nbsp;
+							<i class="fa fa-trash deleteCalendarFeed cursorPointer"></i>
+						</span>
 					</li>
 				{else}
 					{assign var=INVISIBLE_CALENDAR_VIEWS_EXISTS value='true'}
@@ -47,16 +53,16 @@
 			{foreach key=ID item=GROUP from=$SHAREDGROUPS}
 				{if $SHAREDUSERS_INFO[$ID]['visible'] != '0'}
 					<li class="activitytype-indicator calendar-feed-indicator" style="background-color: {$SHAREDUSERS_INFO[$ID]['color']};">
-						<p class="userName textOverflowEllipsis" title="{$GROUP}">
+						<span class="userName textOverflowEllipsis" title="{$GROUP}">
 							{$GROUP}
-						</p>
-						<p class="activitytype-actions ">
+						</span>
+						<span class="activitytype-actions pull-right">
 							<input class="toggleCalendarFeed cursorPointer" type="checkbox" data-calendar-sourcekey="Events_{$ID}" data-calendar-feed="Events" 
 								   data-calendar-feed-color="{$SHAREDUSERS_INFO[$ID]['color']}" data-calendar-fieldlabel="{$GROUP}" 
 								   data-calendar-userid="{$ID}" data-calendar-group="true" data-calendar-feed-textcolor="white">&nbsp;&nbsp;
-							<i class="fa fa-pencil editCalendarFeedColor cursorPointer btn btn-soft-blue" title="Edit"></i>&nbsp;&nbsp;
-							<i class="fa fa-trash deleteCalendarFeed cursorPointer  btn btn-soft-danger" title="Delete" ></i>
-						</p>
+							<i class="fa fa-pencil editCalendarFeedColor cursorPointer"></i>&nbsp;&nbsp;
+							<i class="fa fa-trash deleteCalendarFeed cursorPointer"></i>
+						</span>
 					</li>
 				{else}
 					{assign var=INVISIBLE_CALENDAR_VIEWS_EXISTS value='true'}
@@ -65,14 +71,14 @@
 		</ul>
 		<ul class="hide dummy">
 			<li class="activitytype-indicator calendar-feed-indicator feed-indicator-template">
-				<p></p>
-				<p class="activitytype-actions ">
+				<span></span>
+				<span class="activitytype-actions pull-right">
 					<input class="toggleCalendarFeed cursorPointer" type="checkbox" data-calendar-sourcekey="" data-calendar-feed="Events" 
 					data-calendar-feed-color="" data-calendar-fieldlabel="" 
 					data-calendar-userid="" data-calendar-group="" data-calendar-feed-textcolor="white">&nbsp;&nbsp;
-					<i class="fa fa-pencil editCalendarFeedColor cursorPointer btn btn-soft-blue" title="Edit"></i>&nbsp;&nbsp;
-					<i class="fa fa-trash deleteCalendarFeed cursorPointer  btn btn-soft-danger" title="Delete"></i>
-				</p>
+					<i class="fa fa-pencil editCalendarFeedColor cursorPointer"></i>&nbsp;&nbsp;
+					<i class="fa fa-trash deleteCalendarFeed cursorPointer"></i>
+				</span>
 			</li>
 		</ul>
 		<input type="hidden" class="invisibleCalendarViews" value="{$INVISIBLE_CALENDAR_VIEWS_EXISTS}" />

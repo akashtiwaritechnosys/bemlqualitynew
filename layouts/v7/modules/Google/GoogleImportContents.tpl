@@ -33,9 +33,9 @@
                             <h3 class="module-title pull-left"> {vtranslate('LBL_GOOGLE_CONNECT_MSG', $MODULENAME)} </h3>
                         </div>
                     </div>
-                    <br>
+                    
                     <div class="row">
-                        <div class="col-sm-3 col-xs-3">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
                             <a id="authorizeButton" class="btn btn-block btn-social btn-lg btn-google-plus" data-url='index.php?module={$MODULENAME}&view=List&operation=sync&sourcemodule={$SOURCE_MODULE}'><i class="fa fa-google-plus"></i>{vtranslate('LBL_SIGN_IN_WITH_GOOGLE', $MODULENAME)}</a>
                         </div>
                     </div>
@@ -47,11 +47,13 @@
         <div class="modal-overlay-footer clearfix">
             <div class="row clearfix">
                 <div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                    {if $IS_SYNC_READY neq 'no'}
-                    <button class="btn addButton btn-soft-success syncNow" type="button" id="saveSettingsAndImport"><span aria-hidden="true" class="fa fa-download"></span>&nbsp; {vtranslate('LBL_SAVE_AND_IMPORT', $MODULENAME)}</button>
-                    &nbsp;&nbsp;&nbsp;
-                    {/if}
-                    <a class="cancelLink btn btn-soft-danger" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULENAME)}</a>
+                    <div class='footer-btns'>
+                        {if $IS_SYNC_READY neq 'no'}
+                        <button class="btn addButton btn-submit syncNow" type="button" id="saveSettingsAndImport"><span aria-hidden="true" class="fa fa-download"></span>&nbsp; {vtranslate('LBL_SAVE_AND_IMPORT', $MODULENAME)}</button>
+                        
+                        {/if}
+                        <a class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULENAME)}</a>
+                    </div>
                 </div>
             </div>
         </div> 

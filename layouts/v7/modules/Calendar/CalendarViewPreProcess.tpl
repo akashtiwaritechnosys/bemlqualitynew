@@ -24,13 +24,13 @@
 		<div class="modal-dialog">
 		</div>
 	</div>
-	<div class="main-container" style="padding-top: 30px;">
+	<div class="main-container">
 		{assign var=LEFTPANELHIDE value=$CURRENT_USER_MODEL->get('leftpanelhide')}
-		<div id="modnavigator" style="padding-top: 30px;" class="module-nav calendar-navigator clearfix">
+		{* <div id="modnavigator" class="module-nav calendar-navigator clearfix">
 			<div class="hidden-xs hidden-sm mod-switcher-container">
 				{include file="modules/Calendar/partials/Sidebar.tpl"}
 			</div>
-		</div>
+		</div> *}
 		<div id="sidebar-essentials" class="sidebar-essentials {if $LEFTPANELHIDE eq '1'} hide {/if}">
 			{include file="partials/SidebarEssentials.tpl"|vtemplate_path:$MODULE}
 		</div>

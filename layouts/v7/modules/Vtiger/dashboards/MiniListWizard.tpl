@@ -33,7 +33,7 @@
 							</td>
 							<td class="col-lg-4"></td>
 						</tr>
-						<tr>
+						<tr id="miniListFilterRow" style="display:none;">
 							<td class="col-lg-1"></td>
 							<td class="fieldLabel col-lg-4"><label class="pull-right">{'LBL_FILTER'|vtranslate}</label></td>
 							<td class="fieldValue col-lg-5">
@@ -43,7 +43,7 @@
 							</td>
 							<td class="col-lg-4"></td>
 						</tr>
-						<tr>
+						<tr id="miniListFieldsRow" style="display:none;">
 							<td class="col-lg-1"></td>
 							<td class="fieldLabel col-lg-4"><label class="pull-right">{'LBL_EDIT_FIELDS'|vtranslate}</label></td>
 							<td class="fieldValue col-lg-5">

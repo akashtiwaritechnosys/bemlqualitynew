@@ -65,9 +65,9 @@
         </div>
     </form>
     <div class="modal-footer ">
-        <center>
+        <div class="footer-btns">
             <a href="#" class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-        </center>
+        </div>
     </div>
 </div>
 </div>

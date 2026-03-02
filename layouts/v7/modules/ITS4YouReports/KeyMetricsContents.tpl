@@ -123,7 +123,7 @@
                     {/foreach}
                     {if $LISTVIEW_ENTRIES_COUNT eq '0'}
                         <tr class="emptyRecordsDiv">
-                            {assign var=COLSPAN_WIDTH value={ITS4YouReports_Functions_Helper::count($LISTVIEW_HEADERS)}+1}
+                            {assign var=COLSPAN_WIDTH value={ITS4YouReports_Functions_Helper::php7_count($LISTVIEW_HEADERS)}+1}
                             <td colspan="{$COLSPAN_WIDTH}">
                                 <div class="emptyRecordsDiv">
                                     <div class="emptyRecordsContent">

@@ -11,11 +11,10 @@
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
 {include file="modules/Vtiger/partials/Topbar.tpl"}
 
-{*<div style="border-top: 1px solid black" class="container-fluid app-nav">*}
-<div style="" class="container-fluid app-nav">
+<div class="container-fluid app-nav">
     <div class="row">
         {include file="modules/Vtiger/partials/SidebarHeader.tpl"}
-        {* {include file="ModuleHeader.tpl"|vtemplate_path:$MODULE} *}
+        {include file="ModuleHeader.tpl"|vtemplate_path:$MODULE}
     </div>
 </div>
 </nav>

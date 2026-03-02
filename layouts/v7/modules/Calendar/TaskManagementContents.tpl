@@ -29,7 +29,7 @@
 					<input class='statusCheckbox' type="checkbox" name="taskstatus" {if $STATUS eq "Completed"} checked disabled {/if}/>
 				</div>
 				<div class='task-body clearfix'>
-					<div class="taskSubject pull-left {if $STATUS eq "Completed"} textStrike {/if} textOverflowEllipsis" style='width:70%;'>
+					<div class="taskSubject pull-left {if $STATUS eq "Completed"} textStrike {/if} textOverflowEllipsis" style='width:100%;'>
 						<a class="quickPreview" data-id="{$RECORDID}" title="{$RECORD_MODEL->get('subject')}">{$RECORD_MODEL->get('subject')}</a>
 					</div>
 					{assign var=SELECTED_PICKLISTFIELD_ALL_VALUES value= Vtiger_Util_Helper::getPickListValues('taskstatus')}
@@ -85,7 +85,7 @@
 	{/foreach}
 	{if $PAGING_MODEL->get("nextPageExists") eq true}
 		<div class="row moreButtonBlock">
-			<button class="btn btn-soft-secondary moreRecords" style="width:100%;"> {vtranslate("LBL_MORE",$MODULE)} </button>
+			<button class="btn btn-default moreRecords" style="width:100%;"> {vtranslate("LBL_MORE",$MODULE)} </button>
 		</div>
 	{/if}
 

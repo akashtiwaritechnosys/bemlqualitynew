@@ -20,7 +20,7 @@
 			<div class="modal-overlay-footer clearfix">
 				<div class="row clearfix">
 					<div class="textAlignCenter col-lg-12 col-md-12 col-sm-12">
-						<button class="btn btn-success" onclick="location.href='index.php?module={$MODULE}&view=List'" ><strong>{'LBL_FINISH'|@vtranslate:$MODULE}</strong></button>
+						<button class="btn btn-submit" onclick="location.href='index.php?module={$MODULE}&view=List'" >{'LBL_FINISH'|@vtranslate:$MODULE}</button>
 					</div>
 				</div>
 			</div>

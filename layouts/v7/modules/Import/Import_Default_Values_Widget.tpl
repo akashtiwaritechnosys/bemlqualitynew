@@ -10,7 +10,7 @@
  ********************************************************************************/
 -->*}
 
-<div style="visibility: hidden; height: 0px;" id="defaultValuesElementsContainer">
+{* <div style="visibility: hidden; height: 0px;" id="defaultValuesElementsContainer">
 	{foreach key=_FIELD_NAME item=_FIELD_INFO from=$IMPORTABLE_FIELDS}
 	<span id="{$_FIELD_NAME}_defaultvalue_container" name="{$_FIELD_NAME}_defaultvalue">
 		{assign var="_FIELD_TYPE" value=$_FIELD_INFO->getFieldDataType()}
@@ -44,11 +44,11 @@
 		{elseif $_FIELD_TYPE eq 'boolean'}
 			<input type="checkbox" id="{$_FIELD_NAME}_defaultvalue" name="{$_FIELD_NAME}_defaultvalue" class ="inputElement width75per"/>
 		{elseif $_FIELD_TYPE neq 'reference'}
-			<input type="input" id="{$_FIELD_NAME}_defaultvalue" name="{$_FIELD_NAME}_defaultvalue" class ="inputElement width75per"/>
+			<input type="input" id="{$_FIELD_NAME}_defaultvalue" name="{$_FIELD_NAME}_defaultvalue" class ="inputElement width75per 44" style="height:34px"/>
 		{/if}
 		</span>
 	{/foreach}
-</div>
+</div> *}
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		$('.inputElement .dateField').datepicker();

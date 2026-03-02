@@ -140,58 +140,8 @@ $( document ).ready(function() {
 		app.request.post({'data' : params}).then(
 		function(err, data) {
 			app.helper.hideProgress();
-			var message = 'Label update successfully.';
-			app.helper.showSuccessNotification({"message": message});
-			setTimeout(function() {
-				var url = 'index.php?module=LabelManager&parent=Settings&view=LabelManager&mode=languageSettings';
-				window.location.href = url;
-			}, 3000);
+			var url = 'index.php?module=LabelManager&parent=Settings&view=LabelManager&mode=languageSettings';
+			window.location.href = url;
 		});
 	});
-
-	/*jQuery('.addNewLabel').on('click', function() {
-		var sourceModule = jQuery('#sourceModule').val();
-		var language = jQuery('#language').val();
-		
-		var params = { 
-			'module' : 'LabelManager',
-			'parent' : 'Settings',
-			'view' : 'LabelManager',
-			'mode' : 'addNewLabelPopup',
-			'sourceModule' : sourceModule,
-			'language' : language
-		};
-		app.helper.showProgress();
-
-		app.request.post({'data' : params}).then(
-		function(err, data) {
-			app.helper.hideProgress();
-			app.helper.showPopup(data);
-		});
-	});
-
-	jQuery('#saveNewLabel').live('click', function() {
-		var sourceModule = jQuery('#sourceModule').val();
-		var language = jQuery('#language').val();
-		var labelKey = jQuery('#labelKey').val();
-		var language = jQuery('#language').val();
-		
-		var params = { 
-			'module' : 'LabelManager',
-			'parent' : 'Settings',
-			'action' : 'SaveLanguage',
-			'mode' : 'saveNewLabel',
-			'sourceModule' : sourceModule,
-			'language' : language,
-			'labelKey' : labelKey,
-			'labelValue' : labelValue
-		};
-		var data = {"data":params};
-		//app.helper.showProgress();
-
-		app.request.post(data).then(function(response) {
-			//app.helper.hideProgress();
-		});
-
-	});*/
 });

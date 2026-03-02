@@ -11,7 +11,7 @@
         <div class="sidebar-container lists-menu-container">
             <div class="sidebar-header clearfix">
                 <h5 class="pull-left">Lists </h5>
-                <button id="createFilter" data-url="{CustomView_Record_Model::getCreateViewUrl($MODULE)}" class="btn btn-soft-primary pull-right sidebar-btn">
+                <button id="createFilter" data-url="{CustomView_Record_Model::getCreateViewUrl($MODULE)}" class="btn btn-default pull-right sidebar-btn">
                     <span class="fa fa-plus" aria-hidden="true"></span>
                 </button> 
             </div>
@@ -21,13 +21,13 @@
             </div>
             <div class="menu-scroller scrollContainer" style="position:relative; top:0; left:0;">
                         <div class="list-menu-content">
-                                {if $CUSTOM_VIEWS && count($CUSTOM_VIEWS) > 0}
+                                {if $CUSTOM_VIEWS && php7_count($CUSTOM_VIEWS) > 0}
                                     {foreach key=GROUP_LABEL item=GROUP_CUSTOM_VIEWS from=$CUSTOM_VIEWS}
                                     {if $GROUP_LABEL neq 'Mine' && $GROUP_LABEL neq 'Shared'}
                                         {continue}
                                      {/if}
                                     <div class="list-group">   
-                                        <h6 class="lists-header {if count($GROUP_CUSTOM_VIEWS) <=0} hide {/if}" >
+                                        <h6 class="lists-header {if php7_count($GROUP_CUSTOM_VIEWS) <=0} hide {/if}" >
                                             {if $GROUP_LABEL eq 'Mine'}
                                                 {vtranslate('LBL_MY_LIST',$MODULE)}
                                             {else}
@@ -91,7 +91,7 @@
                         </div>
             </div><div class="sidebar-header clearfix">
                         <h5 class="pull-left">{vtranslate('LBL_FOLDERS',$MODULE)}</h5>
-                        <button id="createFolder" class="btn btn-soft-primary pull-right sidebar-btn">
+                        <button id="createFolder" class="btn btn-default pull-right sidebar-btn">
                             <span class="fa fa-plus" aria-hidden="true"></span>
                         </button>
                     </div>
@@ -152,7 +152,7 @@
             <div class="menu-scroller scrollContainer" style="position:relative; top:0; left:0;">
                         <div class="list-menu-content">
                             <div id="listViewTagContainer" class="multiLevelTagList" 
-                            {if $ALL_CUSTOMVIEW_MODEL} data-view-id="{$ALL_CUSTOMVIEW_MODEL->getId()}" {/if}
+                            {if isset($ALL_CUSTOMVIEW_MODEL) && $ALL_CUSTOMVIEW_MODEL} data-view-id="{$ALL_CUSTOMVIEW_MODEL->getId()}" {/if}
                             data-list-tag-count="{Vtiger_Tag_Model::NUM_OF_TAGS_LIST}">
                                 {foreach item=TAG_MODEL from=$TAGS name=tagCounter}
                                     {assign var=TAG_LABEL value=$TAG_MODEL->getName()}
@@ -163,8 +163,8 @@
                                     {include file="Tag.tpl"|vtemplate_path:$MODULE NO_DELETE=true ACTIVE= $CURRENT_TAG eq $TAG_ID}
                                 {/foreach}
                                 <div> 
-                                    <a class="moreTags {if (count($TAGS) - Vtiger_Tag_Model::NUM_OF_TAGS_LIST) le 0} hide {/if}">
-                                        <span class="moreTagCount">{count($TAGS) - Vtiger_Tag_Model::NUM_OF_TAGS_LIST}</span>
+                                    <a class="moreTags {if (php7_count($TAGS) - Vtiger_Tag_Model::NUM_OF_TAGS_LIST) le 0} hide {/if}">
+                                        <span class="moreTagCount">{php7_count($TAGS) - Vtiger_Tag_Model::NUM_OF_TAGS_LIST}</span>
                                         &nbsp;{vtranslate('LBL_MORE',$MODULE)|strtolower}
                                     </a>
                                     <div class="moreListTags hide">
@@ -183,7 +183,7 @@
                             {assign var=TAG_MODEL value=Vtiger_Tag_Model::getCleanInstance()}
                             {include file="Tag.tpl"|vtemplate_path:$MODULE NO_DELETE=true}
                         </div>
-                        <div id="editTagContainer" class="hide">
+                        <div class="editTagContainer hide">
                             <input type="hidden" name="id" value="" />
                             <div class="editTagContents">
                                 <div>
@@ -199,11 +199,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <button class="btn btn-mini btn-soft-success saveTag" style="width:50%;float:left">
+                            <div style="display:flex; gap: 10px;">
+                                <button class="btn btn-mini btn-submit saveTag" style="width:50%;float:left">
                                     <center> <i class="fa fa-check"></i> </center>
                                 </button>
-                                <button class="btn btn-mini btn-soft-danger cancelSaveTag" style="width:50%">
+                                <button class="btn btn-mini btn-danger cancelSaveTag" style="width:50%">
                                     <center> <i class="fa fa-close"></i> </center>
                                 </button>
                             </div>

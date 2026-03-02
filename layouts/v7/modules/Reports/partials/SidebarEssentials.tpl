@@ -13,7 +13,7 @@
 			<div class="sidebar-container lists-menu-container">
 				<div class="sidebar-header clearfix">
 					<h5 class="pull-left">{vtranslate('LBL_FOLDERS', $MODULE)}</h5>
-					<button id="createFilter" onclick='Reports_List_Js.triggerAddFolder("index.php?module=Reports&view=EditFolder");' class="btn btn-soft-primary pull-right sidebar-btn" title="{vtranslate('LBL_ADD_NEW_FOLDER', $MODULE)}">
+					<button id="createFilter" onclick='Reports_List_Js.triggerAddFolder("index.php?module=Reports&view=EditFolder");' class="btn btn-default pull-right sidebar-btn" title="{vtranslate('LBL_ADD_NEW_FOLDER', $MODULE)}">
 						<div class="fa fa-plus" aria-hidden="true"></div>
 					</button> 
 				</div>

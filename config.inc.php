@@ -191,4 +191,5 @@ $default_layout = 'v7';
 
 include_once 'config.security.php';
 $currentAppVersion = '1.0.0';
+include_once 'config.php7.php';
 ?>

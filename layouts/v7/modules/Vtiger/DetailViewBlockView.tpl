@@ -6,25 +6,27 @@
 * Portions created by vtiger are Copyright (C) vtiger.
 * All Rights Reserved.
 *************************************************************************************}
-<script type="text/javascript">
-function openInNewTab(url) {
- window.open(url, '_blank').focus();
-}
-</script>
+
 {strip}
 	{if !empty($PICKIST_DEPENDENCY_DATASOURCE)}
 		<input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
 	{/if}
 
-	{foreach key=BLOCK_LABEL_KEY item=FIELD_MODEL_LIST from=$RECORD_STRUCTURE}
+	{foreach key=BLOCK_LABEL_KEY item=FIELD_MODEL_LIST from=$RECORD_STRUCTURE name=DetailViewBlockViewLoop}
+	 {if isset($BLOCK_LIST[$BLOCK_LABEL_KEY])}
 		{assign var=BLOCK value=$BLOCK_LIST[$BLOCK_LABEL_KEY]}
-		{if $BLOCK eq null or $FIELD_MODEL_LIST|@count lte 0 or $BLOCK_LABEL_KEY eq 'LBL_PRICING_INFORMATION'}{continue}{/if}
+
+		{else}
+			{assign var=BLOCK value=''}
+	 {/if}
+		
+		{if $BLOCK eq null or $FIELD_MODEL_LIST|php7_count lte 0}{continue}{/if}
 		<div class="block block_{$BLOCK_LABEL_KEY}" data-block="{$BLOCK_LABEL_KEY}" data-blockid="{$BLOCK_LIST[$BLOCK_LABEL_KEY]->get('id')}">
 			{assign var=IS_HIDDEN value=$BLOCK->isHidden()}
 			{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
-			<input type=hidden name="timeFormatOptions" data-value='{$DAY_STARTS}' />
+		<input type=hidden name="timeFormatOptions" data-value='{if isset($DAY_STARTS)}{$DAY_STARTS}{else}""{/if}' />
 			<div>
-				<h4 class="textOverflowEllipsis maxWidth50">
+				<h4 class="textOverflowEllipsis">
 					<img class="cursorPointer alignMiddle blockToggle {if !($IS_HIDDEN)} hide {/if}" src="{vimage_path('arrowRight.png')}" data-mode="hide" data-id={$BLOCK_LIST[$BLOCK_LABEL_KEY]->get('id')}>
 					<img class="cursorPointer alignMiddle blockToggle {if ($IS_HIDDEN)} hide {/if}" src="{vimage_path('arrowdown.png')}" data-mode="show" data-id={$BLOCK_LIST[$BLOCK_LABEL_KEY]->get('id')}>&nbsp;
 					{vtranslate({$BLOCK_LABEL_KEY},{$MODULE_NAME})}
@@ -53,7 +55,7 @@ function openInNewTab(url) {
 											<span class='muted'>{vtranslate($tax.taxlabel, $MODULE)}(%)</span>
 										</td>
 										<td class="fieldValue {$WIDTHTYPE}">
-											<span class="value textOverflowEllipsis" data-field-type="{$FIELD_MODEL->getFieldDataType()}" >
+											<span class="value textOverflowEllipsis" data-field-type="{$fieldDataType}" >
 												{if $tax.check_value eq 1}
 													{$tax.percentage}
 												{else}
@@ -71,42 +73,12 @@ function openInNewTab(url) {
 									{/if}
 									<td class="fieldLabel {$WIDTHTYPE}"><span class="muted">{vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}</span></td>
 									<td class="fieldValue {$WIDTHTYPE}">
-										<ul id="imageContainer" class="imageSlider">
-											{* {if empty($IMAGE_DETAILS)}
-												<div class="name"><span><strong>{$MODULE_MODEL->getModuleIcon()}</strong></span></div>
-											{/if} *}
-											{if $MODULE_NAME eq 'HelpDesk' ||  $MODULE_NAME eq 'ServiceReports' ||  $MODULE_NAME eq 'InternalTickets'}
-												{foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
-													{if $FIELD_MODEL->getName() eq $IMAGE_INFO.fieldNameFromDB}
-														{if ( strpos($IMAGE_INFO.name , '.png') >= 1 || strpos($IMAGE_INFO.name , '.jpeg') >= 1 || strpos($IMAGE_INFO.name , '.jpg') >= 1)  }
-															<li>
-																<span>
-																	<a onclick="Vtiger_Header_Js.fileView({$RECORDID},{$IMAGE_INFO.id});">{$IMAGE_INFO.name}</a>
-																</span>
-															</li>
-														{else}									
-															<li>
-																<img style="display:none" data-image-id="{$IMAGE_INFO.id}"  title="{$IMAGE_INFO.name}"/>
-																<span>
-																	<a onclick="Vtiger_Header_Js.fileView({$RECORDID},{$IMAGE_INFO.id});">
-																		{$IMAGE_INFO.name}
-																	</a>
-																</span>
-															</li>
-														{/if}
-													{/if}
-												{/foreach}
-											{else}
-												{foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
-													{if !empty($IMAGE_INFO.url) && !empty({$IMAGE_INFO.orgname}) }
-														{if ( strpos($IMAGE_INFO.name , '.png') >= 1 || strpos($IMAGE_INFO.name , '.jpeg') >= 1 || strpos($IMAGE_INFO.name , '.jpg') >= 1)  }
-															<li><img src="{$IMAGE_INFO.url}" title="{$IMAGE_INFO.orgname}" width="400" height="300" /><span><a href="{$IMAGE_INFO.url}">{$IMAGE_INFO.name}</a></span></li>
-														{else}
-															<li><img style="display:none" data-image-id="{$IMAGE_INFO.id}" target="_blank" title="{$IMAGE_INFO.name}"/><span><a href="{$IMAGE_INFO.url}">{$IMAGE_INFO.name}</a></span></li>
-														{/if}
-													{/if}
-												{/foreach}
-											{/if}
+										<ul id="imageContainer">
+											{foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
+												{if !empty($IMAGE_INFO.url) && !empty({$IMAGE_INFO.orgname})}
+													<li><img src="{$IMAGE_INFO.url}" title="{$IMAGE_INFO.orgname}" width="400" height="300" /></li>
+												{/if}
+											{/foreach}
 										</ul>
 									</td>
 									{assign var=COUNTER value=$COUNTER+1}
@@ -137,36 +109,34 @@ function openInNewTab(url) {
 									</td>
 									<td class="fieldValue {$WIDTHTYPE}" id="{$MODULE_NAME}_detailView_fieldValue_{$FIELD_MODEL->getName()}" {if $FIELD_MODEL->get('uitype') eq '19' or $fieldDataType eq 'reminder' or $fieldDataType eq 'recurrence'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
 										{assign var=FIELD_VALUE value=$FIELD_MODEL->get('fieldvalue')}
-										{if $fieldDataType eq 'multipicklist' or $fieldDataType eq 'MultiSelectCheckBox'}
+										{if $fieldDataType eq 'multipicklist'}
 											{assign var=FIELD_DISPLAY_VALUE value=$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'))}
 										{else}
 											{assign var=FIELD_DISPLAY_VALUE value=Vtiger_Util_Helper::toSafeHTML($FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue')))}
 										{/if}
 
-										<span class="value" data-field-type="{$FIELD_MODEL->getFieldDataType()}" {if $FIELD_MODEL->get('uitype') eq '19' or $FIELD_MODEL->get('uitype') eq '21'} style="white-space:normal;" {/if}>
+										<span class="value" data-field-type="{$fieldDataType}" {if $FIELD_MODEL->get('uitype') eq '19' or $FIELD_MODEL->get('uitype') eq '21'} style="white-space:normal;" {/if}>
 											{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getDetailViewTemplateName(),$MODULE_NAME) FIELD_MODEL=$FIELD_MODEL USER_MODEL=$USER_MODEL MODULE=$MODULE_NAME RECORD=$RECORD}
 										</span>
-										{if $IS_AJAX_ENABLED && $FIELD_MODEL->isEditable() eq 'true' && $FIELD_MODEL->isAjaxEditable() eq 'true'}
+										{if isset($IS_AJAX_ENABLED) && $IS_AJAX_ENABLED && $FIELD_MODEL->isEditable() eq 'true' && $FIELD_MODEL->isAjaxEditable() eq 'true'}
 											<span class="hide edit pull-left">
-												{if $fieldDataType eq 'multipicklist' or $fieldDataType eq 'MultiSelectCheckBox'}
+												{if $fieldDataType eq 'multipicklist'}
 													<input type="hidden" class="fieldBasicData" data-name='{$FIELD_MODEL->get('name')}[]' data-type="{$fieldDataType}" data-displayvalue='{$FIELD_DISPLAY_VALUE}' data-value="{$FIELD_VALUE}" />
 												{else}
 													<input type="hidden" class="fieldBasicData" data-name='{$FIELD_MODEL->get('name')}' data-type="{$fieldDataType}" data-displayvalue='{$FIELD_DISPLAY_VALUE}' data-value="{$FIELD_VALUE}" />
 												{/if}
 											</span>
-											
 											<span class="action pull-right"><a href="#" onclick="return false;" class="editAction fa fa-pencil"></a></span>
-											
 										{/if}
 									</td>
 								{/if}
 
-								{if $FIELD_MODEL_LIST|@count eq 1 and $FIELD_MODEL->get('uitype') neq "19" and $FIELD_MODEL->get('uitype') neq "20" and $FIELD_MODEL->get('uitype') neq "30" and $FIELD_MODEL->get('name') neq "recurringtype" and $FIELD_MODEL->get('uitype') neq "69" and $FIELD_MODEL->get('uitype') neq "105"}
+								{if $FIELD_MODEL_LIST|php7_count eq 1 and $FIELD_MODEL->get('uitype') neq "19" and $FIELD_MODEL->get('uitype') neq "20" and $FIELD_MODEL->get('uitype') neq "30" and $FIELD_MODEL->get('name') neq "recurringtype" and $FIELD_MODEL->get('uitype') neq "69" and $FIELD_MODEL->get('uitype') neq "105"}
 									<td class="fieldLabel {$WIDTHTYPE}"></td><td class="{$WIDTHTYPE}"></td>
 								{/if}
 							{/foreach}
 							{* adding additional column for odd number of fields in a block *}
-							{if $FIELD_MODEL_LIST|@end eq true and $FIELD_MODEL_LIST|@count neq 1 and $COUNTER eq 1}
+							{if $smarty.foreach.DetailViewBlockViewLoop.last and $FIELD_MODEL_LIST|php7_count neq 1 and $COUNTER eq 1}
 								<td class="fieldLabel {$WIDTHTYPE}"></td><td class="{$WIDTHTYPE}"></td>
 							{/if}
 						</tr>
@@ -174,6 +144,6 @@ function openInNewTab(url) {
 				</table>
 			</div>
 		</div>
-		<br>
+		
 	{/foreach}
 {/strip}

@@ -9,5 +9,7 @@
 -->*}
 
 {strip}
-    
+    {* <br>
+    <div class="small" style="color: rgb(153, 153, 153);text-align: center;">{vtranslate($MODULE,$MODULE)} {ITS4YouInstaller_Version_Helper::$version} {vtranslate("COPYRIGHT",$QUALIFIED_MODULE)}</div> *}
+    {include file="Footer.tpl"|@vtemplate_path:'Vtiger'}
 {/strip}

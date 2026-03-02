@@ -27,7 +27,7 @@
 			</div>
 		{/if}
 		{foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator}
-			{if $BLOCK_FIELDS|@count gt 0}
+			{if $BLOCK_FIELDS|php7_count gt 0}
 				<div class='fieldBlockContainer' data-block="{$BLOCK_LABEL}">
 					<h4 class='fieldBlockHeader'>{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
 					<hr>
@@ -38,7 +38,7 @@
 								{assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
                                                                 {assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
 								{assign var="refrenceList" value=$FIELD_MODEL->getReferenceList()}
-								{assign var="refrenceListCount" value=count($refrenceList)}
+								{assign var="refrenceListCount" value=php7_count($refrenceList)}
 								{if $FIELD_MODEL->isEditable() eq true}
 									{if $FIELD_MODEL->get('uitype') eq "19"}
 										{if $COUNTER eq '1'}
@@ -74,7 +74,7 @@
 										{else if $FIELD_MODEL->get('uitype') eq "83"}
 											{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE) COUNTER=$COUNTER MODULE=$MODULE}
 											{if $TAXCLASS_DETAILS}
-												{assign 'taxCount' count($TAXCLASS_DETAILS)%2}
+												{assign 'taxCount' php7_count($TAXCLASS_DETAILS)%2}
 												{if $taxCount eq 0}
 													{if $COUNTER eq 2}
 														{assign var=COUNTER value=1}

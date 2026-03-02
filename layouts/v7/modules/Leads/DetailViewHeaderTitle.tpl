@@ -10,7 +10,7 @@
 ********************************************************************************/
 -->*}
 {strip}
-    <div class="col-sm-6 col-lg-6 col-md-6">
+    <div class="col-sm-6 col-lg-5 col-md-6">
         <div class="record-header clearfix">
             <div class="hidden-sm hidden-xs recordImage bgleads app-{$SELECTED_MENU_CATEGORY}">
                 {assign var=IMAGE_DETAILS value=$RECORD->getImageDetails()}
@@ -27,8 +27,8 @@
             </div>
             <div class="recordBasicInfo">
                 <div class="info-row">
-                    <h4>
-                        <span class="recordLabel pushDown" title="{$RECORD->getDisplayValue('salutationtype')}&nbsp;{$RECORD->getName()}"> 
+                    <div>
+                        <div class="recordLabel pushDown" title="{$RECORD->getDisplayValue('salutationtype')}&nbsp;{$RECORD->getName()}"> 
                             {if $RECORD->getDisplayValue('salutationtype')}
                                 <span class="salutation">  {$RECORD->getDisplayValue('salutationtype')}</span>&nbsp;
                             {/if}
@@ -36,12 +36,12 @@
                             {foreach item=NAME_FIELD from=$MODULE_MODEL->getNameFields()}
                                 {assign var=FIELD_MODEL value=$MODULE_MODEL->getField($NAME_FIELD)}
                                 {if $FIELD_MODEL->getPermissions()}
-                                    <span class="{$NAME_FIELD}">{trim($RECORD->get($NAME_FIELD))}</span>
+                                    <h4 class="{$NAME_FIELD}">{trim($RECORD->get($NAME_FIELD))}</h4>
                                     {if $COUNTER eq 0 && ($RECORD->get($NAME_FIELD))}&nbsp;{assign var=COUNTER value=$COUNTER+1}{/if}
                                 {/if}
                             {/foreach}
-                        </span>
-                    </h4>
+                        </div>
+                    </div>
                 </div>
                 {include file="DetailViewHeaderFieldsView.tpl"|vtemplate_path:$MODULE}
                 {*

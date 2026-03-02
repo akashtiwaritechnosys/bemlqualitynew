@@ -19,17 +19,17 @@
 {if !empty($PROJECT_TASKS['tasks'])}
     <div class="pull-right" style="margin-right: 5px;">
         <span style="margin: 2px;">
-            <button class="btn textual zoomOut btn-soft-secondary" title="zoom out">
+            <button class="btn textual zoomOut" title="zoom out">
                 <span class="teamworkIcon">)</span>
             </button>
         </span>
         <span style="margin: 2px;">
-            <button class="btn textual zoomIn btn-soft-secondary" title="zoom in">
+            <button class="btn textual zoomIn" title="zoom in">
                 <span class="teamworkIcon">(</span>
             </button>
         </span>
         <span style="margin: 2px;">
-            <a href="index.php?module=Project&view=ExportChart&record={$PARENT_ID}" target="_blank" class="btn reportActions btn-soft-secondary">
+            <a href="index.php?module=Project&view=ExportChart&record={$PARENT_ID}" target="_blank" class="btn reportActions btn-default">
                 {vtranslate('LBL_REPORT_PRINT', 'Reports')}
             </a>
         </span>

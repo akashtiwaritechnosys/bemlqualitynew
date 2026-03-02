@@ -42,8 +42,10 @@
 			<div class="modal-overlay-footer clearfix">
 				<div class="row clearfix">
 					<div class="textAlignCenter col-lg-12 col-md-12 col-sm-12">
-						<button class="btn btn-success saveButton" disabled="disabled" type="submit" name="importFromZip"><strong>{vtranslate('LBL_IMPORT', $MODULE)}</strong></button>&nbsp;&nbsp;
-						<a class="cancelLink" href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+						<div class="footer-btns">
+							<button class="btn btn-submit saveButton" disabled="disabled" type="submit" name="importFromZip">{vtranslate('LBL_IMPORT', $MODULE)}</button>
+							<a class="cancelLink" href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+						</div>
 					</div>
 				</div>
 			</div>

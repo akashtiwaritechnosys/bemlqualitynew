@@ -9,22 +9,22 @@
 
 {strip}
 	<div class="main-container clearfix">
-		<div id="modnavigator" class="module-nav editViewModNavigator">
+		{* <div id="modnavigator" class="module-nav editViewModNavigator">
 			<div class="hidden-xs hidden-sm mod-switcher-container">
 				{include file="partials/Menubar.tpl"|vtemplate_path:$MODULE}
 			</div>
-		</div>
+		</div> *}
 		<div class="editViewPageDiv viewContent">
 			<div class="col-sm-12 col-xs-12 content-area {if $LEFTPANELHIDE eq '1'} full-width {/if}">
 				<form class="form-horizontal recordEditView" id="EditView" name="edit" method="post" action="index.php" enctype="multipart/form-data">
-					{* <div class="editViewHeader">
+					{* <div class="editViewHeader create-campaigns">
 						<div class='row'>
 							<div class="col-lg-12 col-md-12 col-lg-pull-0">
 								{assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
 								{if $RECORD_ID neq ''}
-									<h4 class="editHeader" style="margin-top:5px;" title="{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} {$RECORD_STRUCTURE_MODEL->getRecordName()}">{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} - {$RECORD_STRUCTURE_MODEL->getRecordName()}</h4>
+									<h5 class="editHeader" style="margin-top:5px;" title="{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} {$RECORD_STRUCTURE_MODEL->getRecordName()}">{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} - {$RECORD_STRUCTURE_MODEL->getRecordName()}</h5>
 								{else}
-									<h4 class="editHeader" style="margin-top:5px;">{vtranslate('LBL_CREATING_NEW', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)}</h4>
+									<h5 class="editHeader" style="margin-top:5px;">{vtranslate('LBL_CREATING_NEW', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)}</h5>
 								{/if}
 							</div>
 						</div>
@@ -75,8 +75,11 @@
 					<div class='modal-overlay-footer clearfix'>
 						<div class="row clearfix">
 							<div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-								<button type='submit' class='btn btn-soft-success saveButton'>{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-								<a class='btn btn-soft-danger cancelLink' href="javascript:history.{if $DUPLICATE_RECORDS}go(-2){else}back(){/if}" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+								<div class='footer-btns'>
+									<button type='submit' class='btn btn-success saveAndNewButton' style="margin-right:5px;">{vtranslate('LBL_SAVE_AND_NEW', $MODULE)}</button>
+									<button type='submit' class='btn btn-submit saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>
+									<a class='cancelLink' href="javascript:history.{if $DUPLICATE_RECORDS}go(-2){else}back(){/if}" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+								</div>
 							</div>
 						</div>
 					</div>

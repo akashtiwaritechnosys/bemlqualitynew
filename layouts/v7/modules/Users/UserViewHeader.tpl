@@ -15,7 +15,7 @@
         <div class="detailViewTitle" id="userPageHeader">
             <div class = "row">
                 <div class="col-md-5">
-                    <div class="col-md-5 recordImage" style="height: 50px;width: 50px;">
+                    <div class="col-md-5 recordImage" style="height: 50px;width: 70px;overflow:hidden;background-color: transparent !important;">
                         {assign var=NOIMAGE value=0}
                         {foreach key=ITER item=IMAGE_INFO from=$RECORD->getImageDetails()}
                             {if !empty($IMAGE_INFO.url)}
@@ -38,18 +38,19 @@
                 </div>
                 <div class="pull-right col-md-7 detailViewButtoncontainer">
                     <div class="btn-group pull-right">
-                        {foreach item=DETAIL_VIEW_BASIC_LINK from=$DETAILVIEW_LINKS['DETAILVIEWBASIC']}
-                            <button class="btn btn-soft-secondary {if $DETAIL_VIEW_BASIC_LINK->getLabel() eq 'LBL_EDIT'}{/if}" id="{$MODULE}_detailView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel())}"
+                    {if isset($DETAILVIEW_LINKS)}
+                            {foreach item=DETAIL_VIEW_BASIC_LINK from=$DETAILVIEW_LINKS['DETAILVIEWBASIC']}
+                            <button class="btn btn-default {if $DETAIL_VIEW_BASIC_LINK->getLabel() eq 'LBL_EDIT'}{/if}" id="{$MODULE}_detailView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel())}"
                                     {if $DETAIL_VIEW_BASIC_LINK->isPageLoadLink()}
                                         onclick="window.location.href='{$DETAIL_VIEW_BASIC_LINK->getUrl()}'"
                                     {else}
                                         onclick="{$DETAIL_VIEW_BASIC_LINK->getUrl()}"
                                     {/if}>
-                               {vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE)}
+                            {vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE)}
                             </button>
                         {/foreach}
-                        {if $DETAILVIEW_LINKS['DETAILVIEW']|@count gt 0}
-                            <button class="btn btn-soft-secondary" data-toggle="dropdown" href="javascript:void(0);">
+                        {if $DETAILVIEW_LINKS['DETAILVIEW']|php7_count gt 0}
+                            <button class="btn btn-default" data-toggle="dropdown" href="javascript:void(0);">
                                 {vtranslate('LBL_MORE', $MODULE)}&nbsp;<i class="caret"></i>
                             </button>
                             <ul class="dropdown-menu pull-right">
@@ -67,11 +68,12 @@
                                 {/foreach}
                             </ul>
                         {/if}
+                    {/if}
                     </div>
                 </div>
             </div>
         </div>
-        <hr/>
+ 
         <div class="detailview-content userPreferences container-fluid">
             {assign var="MODULE_NAME" value=$MODULE_MODEL->get('name')}
             <input id="recordId" type="hidden" value="{$RECORD->getId()}" />

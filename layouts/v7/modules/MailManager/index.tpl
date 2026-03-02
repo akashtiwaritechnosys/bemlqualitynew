@@ -12,10 +12,10 @@
     {if !$IS_MAILBOX_EXISTS}
         <div class="mmDescription">
             <center>
-                <br><br>
-                <div>{vtranslate('LBL_MODULE_DESCRIPTION', $MODULE)}</div>
-                <br><br><br>
-                <button class="btn btn-soft-secondary mailbox_setting"><strong>{vtranslate('LBL_CONFIGURE_MAILBOX', $MODULE)}</strong></button>
+               
+                <div><p>{vtranslate('LBL_MODULE_DESCRIPTION', $MODULE)}</p></div>
+                
+                <button class="btn btn-submit mailbox_setting">{vtranslate('LBL_CONFIGURE_MAILBOX', $MODULE)}</button>
             </center>
         </div>
     {else}

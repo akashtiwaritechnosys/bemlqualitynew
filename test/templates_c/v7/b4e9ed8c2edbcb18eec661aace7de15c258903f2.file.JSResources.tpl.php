@@ -1,55 +1,59 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2026-02-27 09:40:32
+<?php /* Smarty version Smarty-3.1.7, created on 2026-03-02 07:48:15
          compiled from "C:\wamp64\www\bemlqualitynew\includes\runtime/../../layouts/v7\modules\Vtiger\JSResources.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:128729286969a16690d56886-14537330%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:75357714069a540bfa4baa9-26062433%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'b4e9ed8c2edbcb18eec661aace7de15c258903f2' => 
     array (
       0 => 'C:\\wamp64\\www\\bemlqualitynew\\includes\\runtime/../../layouts/v7\\modules\\Vtiger\\JSResources.tpl',
-      1 => 1751954619,
+      1 => 1764246736,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '128729286969a16690d56886-14537330',
+  'nocache_hash' => '75357714069a540bfa4baa9-26062433',
   'function' => 
   array (
   ),
   'variables' => 
   array (
-    'MODULE' => 0,
-    'VIEW' => 0,
-    'PARENT_MODULE' => 0,
-    'NOTIFIER_URL' => 0,
-    'SELECTED_MENU_CATEGORY' => 0,
-    'EXTENSION_MODULE' => 0,
-    'EXTENSION_VIEW' => 0,
-    'CURRENT_USER_MODEL' => 0,
-    'USER_CURRENCY_SYMBOL' => 0,
     'SCRIPTS' => 0,
     'jsModel' => 0,
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_69a1669102617',
+  'unifunc' => 'content_69a540bfb7d4c',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_69a1669102617')) {function content_69a1669102617($_smarty_tpl) {?>
-<script type="text/javascript">var __pageCreationTime = (new Date()).getTime();</script><script src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery.min.js');?>
-"></script><script src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery-migrate-1.0.0.js');?>
-"></script><script type="text/javascript">var _META = { 'module': "<?php echo $_smarty_tpl->tpl_vars['MODULE']->value;?>
-", view: "<?php echo $_smarty_tpl->tpl_vars['VIEW']->value;?>
-", 'parent': "<?php echo $_smarty_tpl->tpl_vars['PARENT_MODULE']->value;?>
-", 'notifier':"<?php echo $_smarty_tpl->tpl_vars['NOTIFIER_URL']->value;?>
-", 'app':"<?php echo $_smarty_tpl->tpl_vars['SELECTED_MENU_CATEGORY']->value;?>
-" };<?php if ($_smarty_tpl->tpl_vars['EXTENSION_MODULE']->value){?>var _EXTENSIONMETA = { 'module': "<?php echo $_smarty_tpl->tpl_vars['EXTENSION_MODULE']->value;?>
-", view: "<?php echo $_smarty_tpl->tpl_vars['EXTENSION_VIEW']->value;?>
-"};<?php }?>var _USERMETA;<?php if ($_smarty_tpl->tpl_vars['CURRENT_USER_MODEL']->value){?>_USERMETA =  { 'id' : "<?php echo $_smarty_tpl->tpl_vars['CURRENT_USER_MODEL']->value->get('id');?>
-", 'menustatus' : "<?php echo $_smarty_tpl->tpl_vars['CURRENT_USER_MODEL']->value->get('leftpanelhide');?>
-",'currency' : "<?php echo $_smarty_tpl->tpl_vars['USER_CURRENCY_SYMBOL']->value;?>
-", 'currencySymbolPlacement' : "<?php echo $_smarty_tpl->tpl_vars['CURRENT_USER_MODEL']->value->get('currency_symbol_placement');?>
-",'currencyGroupingPattern' : "<?php echo $_smarty_tpl->tpl_vars['CURRENT_USER_MODEL']->value->get('currency_grouping_pattern');?>
-", 'truncateTrailingZeros' : "<?php echo $_smarty_tpl->tpl_vars['CURRENT_USER_MODEL']->value->get('truncate_trailing_zeros');?>
-"};<?php }?></script><script type="text/javascript" src="layouts/v7/lib/jquery/purl.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/select2/select2.min.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/jquery.class.min.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/jquery-ui-1.11.3.custom/jquery-ui.js"></script><script type="text/javascript" src="layouts/v7/lib/todc/js/popper.min.js"></script><script type="text/javascript" src="layouts/v7/lib/todc/js/bootstrap.min.js"></script><script type="text/javascript" src="libraries/jquery/jstorage.min.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/jquery-validation/jquery.validate.min.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/jquery.slimscroll.min.js"></script><script type="text/javascript" src="libraries/jquery/jquery.ba-outside-events.min.js"></script><script type="text/javascript" src="libraries/jquery/defunkt-jquery-pjax/jquery.pjax.js"></script><script type="text/javascript" src="libraries/jquery/multiplefileupload/jquery_MultiFile.js"></script><script type="text/javascript" src="resources/jquery.additions.js"></script><script type="text/javascript" src="layouts/v7/lib/bootstrap-notify/bootstrap-notify.min.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/websockets/reconnecting-websocket.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/jquery-play-sound/jquery.playSound.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/malihu-custom-scrollbar/jquery.mousewheel.min.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/malihu-custom-scrollbar/jquery.mCustomScrollbar.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/autoComplete/jquery.textcomplete.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/jquery.qtip.custom/jquery.qtip.js"></script><script type="text/javascript" src="libraries/jquery/jquery-visibility.min.js"></script><script type="text/javascript" src="layouts/v7/lib/momentjs/moment.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/daterangepicker/moment.min.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/daterangepicker/jquery.daterangepicker.js"></script><script type="text/javascript" src="layouts/v7/lib/jquery/jquery.timeago.js"></script><script type="text/javascript" src="libraries/jquery/ckeditor/ckeditor.js"></script><script type="text/javascript" src="libraries/jquery/ckeditor/adapters/jquery.js"></script><script type='text/javascript' src='layouts/v7/lib/anchorme_js/anchorme.min.js'></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/modules/Vtiger/resources/Class.js');?>
+<?php if ($_valid && !is_callable('content_69a540bfb7d4c')) {function content_69a540bfb7d4c($_smarty_tpl) {?>
+<script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/purl.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/select2/select2.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery.class.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery-ui-1.12.0.custom/jquery-ui.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/todc/js/popper.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/todc/js/bootstrap.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('libraries/jquery/jstorage.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery-validation/jquery.validate.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery.slimscroll.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('libraries/jquery/jquery.ba-outside-events.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('libraries/jquery/defunkt-jquery-pjax/jquery.pjax.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('libraries/jquery/multiplefileupload/jquery_MultiFile.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('resources/jquery.additions.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/bootstrap-notify/bootstrap-notify.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/websockets/reconnecting-websocket.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery-play-sound/jquery.playSound.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/malihu-custom-scrollbar/jquery.mousewheel.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/malihu-custom-scrollbar/jquery.mCustomScrollbar.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/autoComplete/jquery.textcomplete.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery.qtip.custom/jquery.qtip.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('libraries/jquery/jquery-visibility.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/momentjs/moment.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/daterangepicker/moment.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/daterangepicker/jquery.daterangepicker.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/lib/jquery/jquery.timeago.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('libraries/jquery/ckeditor/ckeditor.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('libraries/jquery/ckeditor/adapters/jquery.js');?>
+"></script><script type='text/javascript' src="<?php echo vresource_url('layouts/v7/lib/anchorme_js/anchorme.min.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/modules/Vtiger/resources/Class.js');?>
 "></script><script type='text/javascript' src="<?php echo vresource_url('layouts/v7/resources/helper.js');?>
 "></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/resources/application.js');?>
 "></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/modules/Vtiger/resources/Utils.js');?>
@@ -64,6 +68,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 "></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/modules/Google/resources/Settings.js');?>
 "></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/modules/Vtiger/resources/CkEditor.js');?>
 "></script><script type="text/javascript" src="<?php echo vresource_url('layouts/v7/modules/Documents/resources/Documents.js');?>
+"></script><script type="text/javascript" src="<?php echo vresource_url('libraries/DOMPurify/dist/purify.min.js');?>
 "></script><?php  $_smarty_tpl->tpl_vars['jsModel'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['jsModel']->_loop = false;
  $_smarty_tpl->tpl_vars['index'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['SCRIPTS']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -76,7 +81,7 @@ $_smarty_tpl->tpl_vars['jsModel']->_loop = true;
 "></script><!-- Added in the end since it should be after less file loaded --><script type="text/javascript" src="<?php echo vresource_url('libraries/bootstrap/js/less.min.js');?>
 "></script><!-- Enable tracking pageload time --><script type="text/javascript">var _REQSTARTTIME = "<?php echo $_SERVER['REQUEST_TIME'];?>
 ";jQuery(document).ready(function() { window._PAGEREADYAT = new Date(); });
-		jQuery(window).on('load', function() {
+		jQuery(window).load(function() {
 			window._PAGELOADAT = new Date();
 			window._PAGELOADREQSENT = false;
 			// Transmit the information to server about page render time now.
@@ -93,4 +98,5 @@ $_smarty_tpl->tpl_vars['jsModel']->_loop = true;
 					window._PAGELOADREQSENT = true;
 				}
 			}
-		});</script><?php }} ?>
+		});</script>
+<?php }} ?>

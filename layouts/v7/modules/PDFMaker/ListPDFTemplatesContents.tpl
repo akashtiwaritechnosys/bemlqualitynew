@@ -47,5 +47,5 @@
         </form>
     </div>
 </div>
-<br>
-<div align="center" class="small" style="color: rgb(153, 153, 153);">{vtranslate("PDF_MAKER",$MODULE)} {$VERSION} {vtranslate("COPYRIGHT",$MODULE)}</div>
+{* <br>
+<div align="center" class="small" style="color: rgb(153, 153, 153);">{vtranslate("PDF_MAKER",$MODULE)} {$VERSION} {vtranslate("COPYRIGHT",$MODULE)}</div> *}

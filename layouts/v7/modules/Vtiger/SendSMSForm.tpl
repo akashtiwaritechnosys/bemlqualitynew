@@ -65,10 +65,10 @@
             </div>
             <div>
                 <div class="modal-footer">
-                    <center>
-                        <button class="btn btn-soft-success" type="submit" name="saveButton"><strong>{vtranslate('LBL_SEND', $MODULE)}</strong></button>
-                        <a class="cancelLink btn btn-soft-danger" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-                    </center>
+                  <div class='footer-btns'>
+                        <button class="btn btn-submit" type="submit" name="saveButton">{vtranslate('LBL_SEND', $MODULE)}</button>
+                        <a class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                    </div>
                 </div>
             </div>
         </form>

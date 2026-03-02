@@ -14,20 +14,20 @@
         <input type="hidden" id="mmMsgUid" value="{$MAIL->uniqueid()}">
         <input type="hidden" id="mmFolder" value="{$FOLDER->name()}">
         <input type="hidden" id="mmTo" value='{implode(',', $MAIL->to())}'>
-        <input type="hidden" id="mmCc" value='{implode(',', $MAIL->cc())}'>
+        <input type="hidden" id="mmCc" value="{if is_array($MAIL->cc())}{implode(',', $MAIL->cc())}{else}{$MAIL->cc()|escape:'html'}{/if}">
         <input type="hidden" id="mmDate" value="{$MAIL->date()}">
         <input type="hidden" id="mmUserName" value="{$USERNAME}">
-        {assign var=ATTACHMENT_COUNT value=(count($ATTACHMENTS) - count($INLINE_ATT))}
+        {assign var=ATTACHMENT_COUNT value=(php7_count($ATTACHMENTS) - php7_count($INLINE_ATT))}
         <input type="hidden" id="mmAttchmentCount" value="{$ATTACHMENT_COUNT}">
         <div class="row" id="mailManagerActions">
         <div class="col-lg-12">
             <div class="col-lg-8 padding0px" id="relationBlock"></div>
             <div class="col-lg-4 padding0px">
                 <span class="pull-right">
-                    <button type="button" class="btn btn-soft-secondary mailPagination marginRight0px" {if $MAIL->msgno() < $FOLDER->count()}data-folder='{$FOLDER->name()}' data-msgno='{$MAIL->msgno(1)}'{else}disabled="disabled"{/if}>
+                    <button type="button" class="btn btn-default mailPagination marginRight0px" {if $MAIL->msgno() < $FOLDER->php7_count()}data-folder='{$FOLDER->name()}' data-msgno='{$MAIL->msgno(1)}'{else}disabled="disabled"{/if}>
                         <i class="fa fa-caret-left"></i>
                     </button>
-                    <button type="button" class="btn btn-soft-secondary mailPagination" {if $MAIL->msgno() > 1}data-folder='{$FOLDER->name()}' data-msgno='{$MAIL->msgno(-1)}'{else}disabled="disabled"{/if}>
+                    <button type="button" class="btn btn-default mailPagination" {if $MAIL->msgno() > 1}data-folder='{$FOLDER->name()}' data-msgno='{$MAIL->msgno(-1)}'{else}disabled="disabled"{/if}>
                         <i class="fa fa-caret-right"></i>
                     </button>
                 </span>
@@ -49,7 +49,11 @@
                     {assign var=FIRST_CHAR value=strtoupper(substr($NAME[0], 0, 1))}
                     {if $FOLDER->isSentFolder()}
                         {assign var=NAME value=$MAIL->to()}
-                        {assign var=FIRST_CHAR value=strtoupper(substr($NAME[0], 0, 1))}
+                        {if $NAME|php7_count > 0}
+                            {assign var=FIRST_CHAR value=strtoupper(substr($NAME[0], 0, 1))}
+                        {else}
+                            {assign var=FIRST_CHAR value=''}
+                        {/if}
                     {/if}
                     <strong>{$FIRST_CHAR}</strong>
                 </center>
@@ -113,7 +117,7 @@
             <br><hr class="mmDetailHr"><br>
             <div class='col-lg-12 padding0px'>
                 <span><strong>{vtranslate('LBL_Attachments',$MODULE)}</strong></span>
-                <span>&nbsp;&nbsp;({count($ATTACHMENTS) - count($INLINE_ATT)}&nbsp;{vtranslate('LBL_FILES', $MODULE)})</span>
+                <span>&nbsp;&nbsp;({php7_count($ATTACHMENTS) - php7_count($INLINE_ATT)}&nbsp;{vtranslate('LBL_FILES', $MODULE)})</span>
                 <br><br>
                 {foreach item=ATTACHVALUE from=$ATTACHMENTS name="attach"}
                     {assign var=ATTACHNAME value=$ATTACHVALUE['filename']}

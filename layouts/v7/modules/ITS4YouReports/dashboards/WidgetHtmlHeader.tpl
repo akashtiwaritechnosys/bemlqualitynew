@@ -22,7 +22,7 @@
             </span>
         </div>
 
-    {if ITS4YouReports_Functions_Helper::count($primary_values) > 0}
+    {if ITS4YouReports_Functions_Helper::php7_count($primary_values) > 0}
         <div class="dashboardWidgetHeader clearfix">
             <div class="userList">
                 <select class="select2 widgetFilter reloadOnChange "  name="primarySearchBy" id="SelectPrimarySearchWidget{$recordid}">

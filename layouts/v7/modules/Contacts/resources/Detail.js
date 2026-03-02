@@ -1,86 +1,13 @@
-Vtiger_Detail_Js("Contacts_Detail_Js", {
-	approveOrReject: function (url, acpStatus) {
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 
-		if (acpStatus == 'Rejected') {
-			let confMsg = "Do You Really Want To Reject this User ? ";
-			app.helper.showConfirmationBox({ 'message': confMsg }).then(function (e) {
-				var data = {
-					'module': 'Contacts',
-					'view': 'RejectionReason',
-					'mode': 'showRejectionReasonForm'
-				};
-				app.request.post({ "data": data }).then(function (err, res) {
-					if (err === null) {
-						var cb = function (data) {
-							var form = jQuery(data).find('#AddRejectionReason');
-							var params = {
-								submitHandler: function (form) {
-									var params = jQuery(form).serializeFormData();
-									url = url + '&RejectionReason=' + params.rejectionReason;
-									url = url + '&apStatus=' + acpStatus;
-									app.request.post({ url: url }).then(
-										function (error, data) {
-											if (!error) {
-												app.helper.hideModal();
-												app.helper.showSuccessNotification({ message: data.message });
-												location.reload();
-											} else {
-												app.helper.showErrorNotification({ message: error.message });
-											}
-										},
-										function (error, err) {
-										}
-									);
-								}
-							}
-							form.vtValidate(params);
-						}
-						app.helper.showModal(res, { "cb": cb });
-					}
-				})
-			});
-		} else {
-			var data = {
-				'module': 'Contacts',
-				'action': 'HasLinkedFnAndMob',
-				'record': this.getRecordId()
-			};
-			app.request.post({ "data": data }).then(
-				function (error, data) {
-					if (!error) {
-						let confMsg = "Do You Really Want To Accept this User ? </br>" +
-							" * Please Make Sure User Has Correct Login PlatForms </br>" +
-							" * Please Make Sure User Has Linked With Correct Functional Loaction ";
-						app.helper.showConfirmationBox({ 'message': confMsg }).then(function (e) {
-							url = url + '&apStatus=' + acpStatus;
-							app.helper.showProgress();
-							app.request.post({ url: url }).then(
-								function (error, data) {
-									if (!error) {
-										app.helper.showSuccessNotification({ message: data.message });
-										location.reload();
-									} else {
-										app.helper.showErrorNotification({ message: error.message });
-									}
-									app.helper.hideProgress();
-								},
-								function (error, err) {
-								}
-							);
-						});
-					} else {
-						app.helper.showErrorNotification({ message: error.message });
-					}
-				},
-				function (error, err) {
-				}
-			);
-		}
-	},
-	getRecordId: function () {
-		return app.getRecordId();
-	},
-}, {
+Vtiger_Detail_Js("Contacts_Detail_Js", {}, {
 	registerAjaxPreSaveEvents: function (container) {
 		var thisInstance = this;
 		app.event.on(Vtiger_Detail_Js.PreAjaxSaveEvent, function (e) {
@@ -104,7 +31,7 @@ Vtiger_Detail_Js("Contacts_Detail_Js", {
 				return false;
 			}
 
-			var primaryEmailValue = primaryEmailField["0"].data("value");
+			var primaryEmailValue = primaryEmailField.data("value");
 			if (primaryEmailValue == "") {
 				app.helper.showErrorNotification({message: app.vtranslate('JS_PLEASE_ENTER_PRIMARY_EMAIL_VALUE_TO_ENABLE_PORTAL_USER')});
 				return false;

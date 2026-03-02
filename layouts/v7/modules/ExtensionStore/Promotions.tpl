@@ -11,7 +11,7 @@
 	{foreach $HEADER_SCRIPTS as $SCRIPT}
 		<script type="{$SCRIPT->getType()}" src="{$SCRIPT->getSrc()}" />
 	{/foreach}
-	<div class="banner-container" style="margin: 0px 10px;display:none">
+	<div class="banner-container" style="margin: 0px 10px;">
 		<div class="row"></div>
 		<div class="banner">
 			<ul class="bxslider">

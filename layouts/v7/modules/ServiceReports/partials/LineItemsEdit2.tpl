@@ -85,7 +85,7 @@
 	{assign var=LINE_ITEM_BLOCK_LABEL value="LBL_ITEM_DETAILS"}
 	{assign var=BLOCK_FIELDS value=$RECORD_STRUCTURE.$LINE_ITEM_BLOCK_LABEL}
 	{assign var=ITEMBLOCKNAMEANOTHER value='Major_Aggregates_Sl_No'}
-	{if $BLOCK_FIELDS|@count gt 0}
+	{if $BLOCK_FIELDS|php7_count gt 0}
 		<div class='fieldBlockContainer' id="ShortagefieldBlockContainer" >
 			<div class="row">
 				<div class="col-sm-6">
@@ -124,7 +124,7 @@
 					<tr id="anorow2" class="hide lineItemCloneCopy" data-row-num="0">
 						{include file="partials/LineItemsContent2.tpl"|@vtemplate_path:'ServiceReports' row_no=0 data=[] IGNORE_UI_REGISTRATION=true}
 					</tr>
-					{if count($RELATED_PRODUCTS_OTHER1) gt 0}
+					{if php7_count($RELATED_PRODUCTS_OTHER1) gt 0}
 						{foreach key=row_no item=data from=$RELATED_PRODUCTS_OTHER1}
 							<tr id="row{$row_no}" data-row-num="{$row_no}" class="lineItemRow" {if $data["entityType$row_no"] eq 'Products'}data-quantity-in-stock={$data["qtyInStock$row_no"]}{/if}>
 								{include file="partials/LineItemsContent2.tpl"|@vtemplate_path:'ServiceReports' row_no=$row_no data=$data}

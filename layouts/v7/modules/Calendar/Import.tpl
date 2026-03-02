@@ -28,10 +28,10 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<center>
-					<button class="btn btn-success" type="submit" name="saveButton" onclick="return Calendar_List_Js.import()" >{vtranslate('LBL_IMPORT', $MODULE)}</button>
-					&nbsp;&nbsp;<a class='cancelLink' data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-				</center>
+				<div class="footer-btns">
+					<button class="btn btn-submit" type="submit" name="saveButton" onclick="return Calendar_List_Js.import()" >{vtranslate('LBL_IMPORT', $MODULE)}</button>
+					<a class='cancelLink' data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+				</div>
 			</div>
 		</form>
 	</div>

@@ -27,8 +27,8 @@
 			<div class="container-fluid">
 				<div class="form-group">
 					<label class="control-label fieldLabel col-sm-3">
-						<span class="redColor">*</span>
 						{vtranslate('LBL_FOLDER_NAME', $MODULE)}
+						<span class="redColor">*</span>
 					</label>
 					<div class="controls col-sm-9">
 						<input class="inputElement" id="documentsFolderName" data-rule-required="true" name="foldername" type="text" value="{if $FOLDER_NAME neq null}{$FOLDER_NAME}{/if}"/>

@@ -18,7 +18,7 @@ function openInNewTab(url) {
 
 	{foreach key=BLOCK_LABEL_KEY item=FIELD_MODEL_LIST from=$RECORD_STRUCTURE}
 		{assign var=BLOCK value=$BLOCK_LIST[$BLOCK_LABEL_KEY]}
-		{if $BLOCK eq null or $FIELD_MODEL_LIST|@count lte 0 or $BLOCK_LABEL_KEY eq 'LBL_PRICING_INFORMATION'}{continue}{/if}
+		{if $BLOCK eq null or $FIELD_MODEL_LIST|php7_count lte 0 or $BLOCK_LABEL_KEY eq 'LBL_PRICING_INFORMATION'}{continue}{/if}
 		<div class="block block_{$BLOCK_LABEL_KEY}" data-block="{$BLOCK_LABEL_KEY}" data-blockid="{$BLOCK_LIST[$BLOCK_LABEL_KEY]->get('id')}">
 			{assign var=IS_HIDDEN value=$BLOCK->isHidden()}
 			{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
@@ -167,12 +167,12 @@ function openInNewTab(url) {
 									</td>
 								{/if}
 
-								{if $FIELD_MODEL_LIST|@count eq 1 and $FIELD_MODEL->get('uitype') neq "19" and $FIELD_MODEL->get('uitype') neq "20" and $FIELD_MODEL->get('uitype') neq "30" and $FIELD_MODEL->get('name') neq "recurringtype" and $FIELD_MODEL->get('uitype') neq "69" and $FIELD_MODEL->get('uitype') neq "105"}
+								{if $FIELD_MODEL_LIST|php7_count eq 1 and $FIELD_MODEL->get('uitype') neq "19" and $FIELD_MODEL->get('uitype') neq "20" and $FIELD_MODEL->get('uitype') neq "30" and $FIELD_MODEL->get('name') neq "recurringtype" and $FIELD_MODEL->get('uitype') neq "69" and $FIELD_MODEL->get('uitype') neq "105"}
 									<td class="fieldLabel {$WIDTHTYPE}"></td><td class="{$WIDTHTYPE}"></td>
 								{/if}
 							{/foreach}
 							{* adding additional column for odd number of fields in a block *}
-							{if $FIELD_MODEL_LIST|@end eq true and $FIELD_MODEL_LIST|@count neq 1 and $COUNTER eq 1}
+							{if $FIELD_MODEL_LIST|@end eq true and $FIELD_MODEL_LIST|php7_count neq 1 and $COUNTER eq 1}
 								<td class="fieldLabel {$WIDTHTYPE}"></td><td class="{$WIDTHTYPE}"></td>
 							{/if}
 						</tr>

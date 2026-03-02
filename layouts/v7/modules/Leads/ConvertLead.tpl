@@ -20,13 +20,13 @@
                     <input type="hidden" name="view" value="SaveConvertLead"/>
                     <input type="hidden" name="record" value="{$RECORD->getId()}"/>
                     <input type="hidden" name="modules" value=''/>
-                    <input type="hidden" name="imageAttachmentId" value="{$IMAGE_ATTACHMENT_ID}">
+                    <input type="hidden" name="imageAttachmentId" value="{if isset($IMAGE_ATTACHMENT_ID)}{$IMAGE_ATTACHMENT_ID}{/if}" />
                     {assign var=LEAD_COMPANY_NAME value=$RECORD->get('company')}
                     <div class="modal-body accordion container-fluid" id="leadAccordion">
                         {foreach item=MODULE_FIELD_MODEL key=MODULE_NAME from=$CONVERT_LEAD_FIELDS}
-                            <div class="row">
-                                <div class="col-lg-1"></div>
-                                <div class="col-lg-10 moduleContent" style="border:1px solid #CCC;">
+                            <div class="roww">
+                                
+                                <div class="col-lg-12 moduleContent">
                                     <div class="accordion-group convertLeadModules">
                                         <div class="header accordion-heading">
                                             <div data-parent="#leadAccordion" data-toggle="collapse" class="accordion-toggle moduleSelection" href="#{$MODULE_NAME}_FieldInfo">
@@ -52,13 +52,13 @@
                                                 <hr>
                                                 {foreach item=FIELD_MODEL from=$MODULE_FIELD_MODEL}
                                                     <div class="row">
-                                                        <div class="fieldLabel col-lg-4">
+                                                        <div class="fieldLabel col-lg-5">
                                                             <label class='muted pull-right'>
                                                                 {vtranslate($FIELD_MODEL->get('label'), $MODULE_NAME)}&nbsp;
                                                                 {if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if} 
                                                             </label>
                                                         </div>
-                                                        <div class="fieldValue col-lg-8">
+                                                        <div class="fieldValue col-lg-7">
                                                             {include file=$FIELD_MODEL->getUITypeModel()->getTemplateName()|@vtemplate_path}
                                                         </div>
                                                     </div>
@@ -67,35 +67,35 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1"></div>
+                                    
                                 </div>
-                                <br>
+                           
                             {/foreach}
                             <div class="defaultFields">
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-10" style="border:1px solid #CCC;">
+                                <div class="roww">
+                                    
+                                    <div class="col-lg-12 moduleContent">
                                         <div style="margin-top:20px;margin-bottom: 20px;">
                                             <div class="row">
                                                 {assign var=FIELD_MODEL value=$ASSIGN_TO}
-                                                <div class="fieldLabel col-lg-4">
+                                                <div class="fieldLabel col-lg-5">
                                                     <label class='muted pull-right'>
                                                         {vtranslate($FIELD_MODEL->get('label'), $MODULE_NAME)}&nbsp;
                                                         <span class="redColor">*</span> 
                                                     </label>
                                                 </div>
-                                                <div class="fieldValue col-lg-8">
+                                                <div class="fieldValue col-lg-7">
                                                     {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="row">
-                                                <div class="fieldLabel col-lg-4">
+                                                <div class="fieldLabel col-lg-5">
                                                     <label class='muted pull-right'>
                                                         {vtranslate('LBL_TRANSFER_RELATED_RECORD', $MODULE)}
                                                     </label>
                                                 </div>
-                                                <div class="fieldValue col-lg-8">
+                                                <div class="fieldValue col-lg-7">
                                                     {foreach item=MODULE_FIELD_MODEL key=MODULE_NAME from=$CONVERT_LEAD_FIELDS}
                                                         {if $MODULE_NAME != 'Potentials'}
                                                             <input type="radio" id="transfer{$MODULE_NAME}" class="transferModule" name="transferModule" value="{$MODULE_NAME}"
@@ -111,9 +111,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1"></div>
+                                    
                                 </div>
-                                <br>
+                               
                             </div>
                         </div>
                         {include file='ModalFooter.tpl'|@vtemplate_path:$MODULE}

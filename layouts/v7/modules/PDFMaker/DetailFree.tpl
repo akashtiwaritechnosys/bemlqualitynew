@@ -19,8 +19,8 @@
             <input type="hidden" name="parenttab" value="{$PARENTTAB}">
             <input type="hidden" name="subjectChanged" value="">
             <input type="hidden" name="record" id="recordId" value="{$TEMPLATEID}" >
-            <div class="col-lg-12">
-                <div class="left-block col-lg-4">
+            <div class="col-sm-12">
+                <div class="left-block col-lg-5 col-md-12 col-sm-12">
 
                     <div class="summaryView">
                         <div class="summaryViewHeader">
@@ -47,7 +47,7 @@
                     <br>
                     <br>
                 </div>
-                <div class="middle-block col-lg-8">
+                <div class="middle-block col-lg-7 col-md-12 col-sm-12">
 
                     <div id="ContentEditorTabs">
                         <ul class="nav nav-pills">
@@ -66,21 +66,22 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="body_div2">
                             <div id="previewcontent_body" class="hide">{$BODY}</div>
-                            <iframe id="preview_body" class="col-lg-12" style="height:1200px;"></iframe>
+                            <iframe id="preview_body" class="col-sm-12" style="height:1200px;"></iframe>
                         </div>
                         {*********************************************Header DIV*************************************************}
                         <div class="tab-pane" id="header_div2">
                             <div id="previewcontent_header" class="hide">{$HEADER}</div>
-                            <iframe id="preview_header" class="col-lg-12" style="height:500px;"></iframe>
+                            <iframe id="preview_header" class="col-sm-12" style="height:500px;"></iframe>
                         </div>
                         {*********************************************Footer DIV*************************************************}
                         <div class="tab-pane" id="footer_div2">
                             <div id="previewcontent_footer" class="hide">{$FOOTER}</div>
-                            <iframe id="preview_footer" class="col-lg-12" style="height:500px;"></iframe>
+                            <iframe id="preview_footer" class="col-sm-12" style="height:500px;"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
+            {* <center style="color: rgb(153, 153, 153);">{vtranslate('PDF_MAKER','PDFMaker')} {$VERSION} {vtranslate('COPYRIGHT','PDFMaker')}</center> *}
         </form>
     </div>
 </div>

@@ -9,20 +9,20 @@
 
 {strip}
 	<input type="hidden" name="merge_type" value='{$USER_INPUT->get('merge_type')}' />
-	<input type="hidden" name="merge_fields" value='{$MERGE_FIELDS}' />
-	<input type="hidden" name="lineitem_currency" value='{$LINEITEM_CURRENCY}'>
+	<input type="hidden" name="merge_fields" value='{if isset($MERGE_FIELDS)}{$MERGE_FIELDS}{else}""{/if}' />
+	<input type="hidden" name="lineitem_currency" value='{if isset($LINEITEM_CURRENCY)}{$LINEITEM_CURRENCY}{else}''{/if}'>
 	<input type="hidden" id="mandatory_fields" name="mandatory_fields" value='{$ENCODED_MANDATORY_FIELDS}' />
 	<input type="hidden" name="field_mapping" id="field_mapping" value="" />
 	<input type="hidden" name="default_values" id="default_values" value="" />
-	<table width="100%" class="table table-bordered">
+	<table width="100%" class="table">
 		<thead>
 			<tr>
 				{if $HAS_HEADER eq true}
-					<th width="25%">{'LBL_FILE_COLUMN_HEADER'|@vtranslate:$MODULE}</th>
+					<th width="25%"><p>{'LBL_FILE_COLUMN_HEADER'|@vtranslate:$MODULE}</p></th>
 					{/if}
-				<th width="25%">{'LBL_ROW_1'|@vtranslate:$MODULE}</th>
-				<th width="23%">{'LBL_CRM_FIELDS'|@vtranslate:$MODULE}</th>
-				<th width="27%">{'LBL_DEFAULT_VALUE'|@vtranslate:$MODULE}</th>
+				<th width="25%"><p>{'LBL_ROW_1'|@vtranslate:$MODULE}</p></th>
+				<th width="23%"><p>{'LBL_CRM_FIELDS'|@vtranslate:$MODULE}</p></th>
+				<th width="27%"><p>{'LBL_DEFAULT_VALUE'|@vtranslate:$MODULE}</p></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,7 +39,7 @@
 					</td>
 					<td>
 						<input type="hidden" name="row_counter" value="{$_COUNTER}" />
-						<select name="mapped_fields" class="select2" id ="mappedFieldsSelect" style="width:100%" onchange="Vtiger_Import_Js.loadDefaultValueWidget('fieldIdentifier{$_COUNTER}')">
+						<select name="mapped_fields" class="select2 mappedFieldsSelect" style="width:100%" onchange="Vtiger_Import_Js.loadDefaultValueWidget('fieldIdentifier{$_COUNTER}')">
 							<option value="">{'LBL_SELECT_OPTION'|@vtranslate:$FOR_MODULE}</option>
 							{foreach key=_FIELD_NAME item=_FIELD_INFO from=$AVAILABLE_FIELDS}
 								{assign var="_TRANSLATED_FIELD_LABEL" value=$_FIELD_INFO->getFieldLabelKey()|@vtranslate:$FOR_MODULE}

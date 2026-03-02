@@ -13,16 +13,16 @@
     <div class="editViewPageDiv">
         <div class="col-sm-12 col-xs-12">
             <div class="editViewContainer container-fluid">
-                <br>
+                
                 <form id="pickListDependencyForm" class="form-horizontal" method="POST">
                     {if !empty($MAPPED_VALUES)}
                         <input type="hidden" class="editDependency" value="true"/>
                     {/if}
                     <div class="editViewBody">
-                        <div class="editViewContents">
+                        <div class="editViewContents editdependency">
                             <div class="form-group">
-                                <label class="muted control-label col-sm-2 col-xs-2">{vtranslate('LBL_SELECT_MODULE', $QUALIFIED_MODULE)}</label>
-                                <div class="controls col-sm-3 col-xs-3">
+                                <label class="muted control-label col-lg-3 col-md-4 col-sm-4 col-xs-4">{vtranslate('LBL_SELECT_MODULE', $QUALIFIED_MODULE)}</label>
+                                <div class="controls col-lg-5 col-md-6 col-sm-6 col-xs-6">
                                     <select name="sourceModule" class="select2 form-control marginLeftZero">
                                         {foreach item=MODULE_MODEL from=$PICKLIST_MODULES_LIST}
                                             {assign var=MODULE_NAME value=$MODULE_MODEL->get('name')}
@@ -38,8 +38,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="muted control-label col-sm-2 col-xs-2">{vtranslate('LBL_SOURCE_FIELD', $QUALIFIED_MODULE)}</label>
-                                <div class="controls col-sm-3 col-xs-3">
+                                <label class="muted control-label col-lg-3 col-md-4 col-sm-4 col-xs-4">{vtranslate('LBL_SOURCE_FIELD', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
+                                <div class="controls col-lg-5 col-md-6 col-sm-6 col-xs-6">
                                 <select id="sourceField" name="sourceField" class="select2 form-control" data-placeholder="{vtranslate('LBL_SELECT_FIELD', $QUALIFIED_MODULE)}" data-rule-required="true">
                                     <option value=''></option>
                                     {foreach key=FIELD_NAME item=FIELD_LABEL from=$PICKLIST_FIELDS}
@@ -49,8 +49,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="muted control-label col-sm-2 col-xs-2">{vtranslate('LBL_TARGET_FIELD', $QUALIFIED_MODULE)}</label>
-                                <div class="controls col-sm-3 col-xs-3">
+                                <label class="muted control-label col-lg-3 col-md-4 col-sm-4 col-xs-4">{vtranslate('LBL_TARGET_FIELD', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
+                                <div class="controls col-lg-5 col-md-6 col-sm-6 col-xs-6">
                                     <select id="targetField" name="targetField" class="select2 form-control" data-placeholder="{vtranslate('LBL_SELECT_FIELD', $QUALIFIED_MODULE)}" data-rule-required="true">
                                         <option value=''></option>
                                         {foreach key=FIELD_NAME item=FIELD_LABEL from=$PICKLIST_FIELDS}
@@ -79,8 +79,10 @@
             <div class='modal-overlay-footer clearfix'>
                 <div class="row clearfix">
                     <div class=' textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                        <button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-                        <a class='cancelLink'  href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                        <div class='footer-btns'>
+                            <button type='submit' class='btn btn-submit saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>
+                            <a class='cancelLink'  href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                        </div>
                     </div>
                 </div>
             </div>

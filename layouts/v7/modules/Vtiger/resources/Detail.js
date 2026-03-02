@@ -1,3 +1,11 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 
 Vtiger.Class("Vtiger_Detail_Js",{
 
@@ -102,9 +110,9 @@ Vtiger.Class("Vtiger_Detail_Js",{
 
 
 	showUpdates : function(element){
-		jQuery(".historyButtons").find("button").removeAttr("disabled").removeClass("btn-success");
+		jQuery(".historyButtons").find("button").removeAttr("disabled").removeClass("btn-submit");
 		var currentElement = jQuery(element);
-		currentElement.attr("disabled","disabled").addClass("btn-success");
+		currentElement.attr("disabled","disabled").addClass("btn-submit");
 
 		var params = [];
 		var recordId = jQuery('#recordId').val();
@@ -767,7 +775,6 @@ Vtiger.Class("Vtiger_Detail_Js",{
 						relatedController.deleteRelation([relatedRecordid]).then(function(response){
 							relatedController.loadRelatedList().then(function() {
 								relatedController.triggerRelationAdditionalActions();
-								self.updateRelatedRecordsCount();
 							});
 						});
 					},
@@ -1085,7 +1092,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 	registerSaveOnEnterEvent: function(editElement) {
 		editElement.find('.inputElement:not(textarea)').on('keyup', function(e) {
 			var textArea = editElement.find('textarea');
-			var ignoreList = ['reference','picklist','multipicklist','owner','MultiSelectCheckBox'];
+			var ignoreList = ['reference','picklist','multipicklist','owner'];
 			var fieldType = jQuery(e.target).closest('.ajaxEdited').find('.fieldBasicData').data('type');
 			if(ignoreList.indexOf(fieldType) !== -1) return;
 			if(!textArea.length){
@@ -1124,12 +1131,12 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			return;
 		}
 
-		if(fieldType === 'multipicklist' || fieldType === 'MultiSelectCheckBox') {
+		if(fieldType === 'multipicklist') {
 			var multiPicklistFieldName = fieldName.split('[]');
 			fieldName = multiPicklistFieldName[0];
 		}
 
-		var customHandlingFields = ['owner','ownergroup','picklist','multipicklist','reference','currencyList','text', 'documentsFolder','Radio','MultiSelectCheckBox'];
+		var customHandlingFields = ['owner','ownergroup','picklist','multipicklist','reference','currencyList','text', 'documentsFolder'];
 		if(jQuery.inArray(fieldType, customHandlingFields) !== -1){
 			value = rawValue;
 		}
@@ -1164,7 +1171,8 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			inlineSaveWrap.append(actionButtons);
 			// we should have atleast one submit button for the form to submit which is required for validation
 			ele.append(fieldModel.getUi()).append(inlineSaveWrap);
-			ele.find('.inputElement').addClass('form-control');
+			//ele.find('.inputElement').addClass('form-control');
+			ele.find('.inputElement').attr('data-original-value', value);
 			editElement.append(ele);
 		}
 
@@ -1257,9 +1265,6 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			var previousValue = jQuery.trim(fieldBasicData.data('displayvalue'));
 
 			var fieldElement = jQuery('[name="'+ fieldName +'"]', editElement);
-			if (fieldType == 'radio') {
-				fieldElement = $('input[name="'+ fieldName +'"]:checked', editElement);
-			}
 			var ajaxEditNewValue = fieldElement.val();
 
 			 // ajaxEditNewValue should be taken based on field Type
@@ -1275,13 +1280,13 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			}
 
 			// prev Value should be taken based on field Type
-			var customHandlingFields = ['owner','ownergroup','picklist','multipicklist','reference','boolean','radio','MultiSelectCheckBox']; 
+			var customHandlingFields = ['owner','ownergroup','picklist','multipicklist','reference','boolean']; 
 			if(jQuery.inArray(fieldType, customHandlingFields) !== -1){
 				previousValue = fieldBasicData.data('value');
 			}
 
 			// Field Specific custom Handling
-			if(fieldType === 'multipicklist' || fieldType === 'MultiSelectCheckBox'){
+			if(fieldType === 'multipicklist'){
 				var multiPicklistFieldName = fieldName.split('[]');
 				fieldName = multiPicklistFieldName[0];
 			} 
@@ -1295,8 +1300,6 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				editElement.removeClass('ajaxEdited');
 				jQuery('.editAction').removeClass('hide');
 				actionElement.show();
-				console.log(previousValue);
-				console.log(ajaxEditNewValue);
 			}else{
 				var fieldNameValueMap = {};
 				fieldNameValueMap['value'] = fieldValue;
@@ -1336,7 +1339,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 														'</span>';
 								}
 								detailViewValue.html(picklistHtml);
-							} else if((fieldBasicData.data('type') == 'multipicklist' || fieldBasicData.data('type') == 'MultiSelectCheckBox') && app.getModuleName() != 'Users') {
+							} else if(fieldBasicData.data('type') == 'multipicklist' && app.getModuleName() != 'Users') {
 								var picklistHtml = '';
 								var rawPicklistValues = postSaveRecordDetails[fieldName].value;
 								rawPicklistValues = rawPicklistValues.split('|##|');
@@ -1394,9 +1397,6 @@ Vtiger.Class("Vtiger_Detail_Js",{
 								thisInstance.targetPicklist = false;
 								thisInstance.handlePickListDependencyMap(sourcePicklistname);
 								thisInstance.sourcePicklistname = false;
-							}
-							if (thisInstance.getModuleName() == 'ServiceEngineer' && fieldName == 'cust_role') {
-								location.reload();
 							}
 						});
 					}
@@ -1477,6 +1477,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		if(typeof contentHolder === 'undefined') {
 			contentHolder = this.getContentHolder();
 		}
+	
 		contentHolder.on('click','.inlineAjaxCancel',function(e){
 			e.preventDefault();
 			e.stopPropagation();
@@ -2401,16 +2402,18 @@ Vtiger.Class("Vtiger_Detail_Js",{
 
 	},
 
-	registerTagSearch : function() {
-		jQuery('#tag-search').instaFilta({
-		  targets : '#addTagContainer .existingTag .tag-item',
-		  sections : '#addTagContainer .existingTag',
-		  hideEmptySections : true,
-		  beginsWith : false, 
-		  caseSensitive : false, 
-		  typeDelay : 0
-		});
-	},
+registerTagSearch : function() {
+    if (jQuery('#tag-search').length) {
+        jQuery('#tag-search').instaFilta({
+            targets : '#addTagContainer .existingTag .tag-item',
+            sections : '#addTagContainer .existingTag',
+            hideEmptySections : true,
+            beginsWith : false, 
+            caseSensitive : false, 
+            typeDelay : 0
+        });
+    }
+},
 
 	postTagDeleteActions : function(deletedTagClone) {
 		var summaryTagContainer = jQuery('.detailTagList');
@@ -2534,8 +2537,8 @@ Vtiger.Class("Vtiger_Detail_Js",{
 	registerRelatedRowClickEvent: function() {
 		var detailContentsHolder = this.getContentHolder();
 		detailContentsHolder.on('click','.relatedListEntryValues a',function(e){
-			e.preventDefault();
-		});
+			e.stopPropagation();
+        });
 		detailContentsHolder.on('click','.listViewEntries',function(e){
 				var selection = window.getSelection().toString();
 			if(selection.length == 0) { 
@@ -2824,7 +2827,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 					var commentTextAreaElement = closestAddCommentBlock.find('.commentcontent');
 					var commentInfoBlock = currentTarget.closest('.singleComment');
 					commentTextAreaElement.val('');
-					closestAddCommentBlock.find('#is_private').removeAttr('checked');
+
 					if(mode == "add"){
 						var commentId = data['id'];
 						var commentHtml = self.getCommentUI(commentId);
@@ -3097,6 +3100,217 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		});
 	},
 
+	registerDetailPhoneValidation: function () {
+
+		var fields = [
+			'phone',
+			'mobile',
+			'cf_1185',
+			'homephone',
+			'otherphone',
+			'assistantphone',
+			'fax'
+		];
+
+		var regex = /^[5-9][0-9]{6,14}$/;
+
+		function validatePhoneField(element) {
+
+			var fieldName = jQuery(element).attr('name');
+
+			if (fields.indexOf(fieldName) === -1) {
+				return true;
+			}
+
+			var value = jQuery(element).val().trim();
+
+			if (value !== '' && !regex.test(value)) {
+
+				app.helper.showErrorNotification({
+					message: fieldName.toUpperCase() +
+						' must start with 5-9 and contain 7 to 15 digits only'
+				});
+
+				jQuery(element).val('');
+				jQuery(element).focus();
+				return false;
+			}
+
+			return true;
+		}
+
+		// Blur validation
+		jQuery(document).on('blur', '.inputElement', function () {
+			validatePhoneField(this);
+		});
+
+		// Enter key validation
+		jQuery(document).on('keypress', '.inputElement', function (e) {
+			if (e.which === 13) { // Enter key
+				var isValid = validatePhoneField(this);
+
+				if (!isValid) {
+					e.preventDefault();   // stop form submit
+					e.stopPropagation();
+					return false;
+				}
+			}
+		});
+	},
+
+
+    // registerProjectTaskNumberValidation_Detail: function () {
+
+    //     jQuery(document).on('change blur keyup', '.inputElement', function () {
+
+    //         let fieldName = jQuery(this).attr('name');
+
+    //         if (fieldName !== 'projecttasknumber') {
+    //             return;
+    //         }
+
+    //         let value = jQuery(this).val();
+
+    //         // Allow only positive integers
+    //         if (value !== '' && !/^[1-9]\d*$/.test(value)) {
+
+    //             jQuery(this).val('');
+
+    //             app.helper.showErrorNotification({
+    //                 message: 'Project Task Number must be a positive whole number'
+    //             });
+
+    //             jQuery(this).focus();
+    //         }
+    //     });
+    // },
+
+	// registerPositiveFloatValidation_Detail: function () {
+
+    //     let fields = ['cf_1215', 'cf_1217'];
+
+    //     jQuery(document).on('blur', '.inputElement', function () {
+
+    //         let fieldName = jQuery(this).attr('name');
+
+    //         if (fields.indexOf(fieldName) === -1) {
+    //             return;
+    //         }
+
+    //         let value = jQuery(this).val().trim();
+
+    //         // Positive float or integer (3, 3.5, 0.5)
+    //         let regex = /^(?:0|[1-9]\d*)(?:\.\d+)?$/;
+
+    //         if (value !== '' && !regex.test(value)) {
+
+    //             app.helper.showErrorNotification({
+    //                 message: 'Only positive numbers are allowed (example: 3 or 3.5)'
+    //             });
+
+    //             jQuery(this).val('');
+    //             jQuery(this).focus();
+    //         }
+    //     });
+    // },
+
+	registerPositiveFloatValidation_Detail: function () {
+		let fields = ['cf_1215', 'cf_1217'];
+
+		function validateField(element) {
+			let fieldName = jQuery(element).attr('name');
+
+			if (fields.indexOf(fieldName) === -1) {
+				return true;
+			}
+
+			let value = jQuery(element).val().trim();
+
+			// Positive float or integer only (3, 3.5, 0.5)
+			let regex = /^(?:0|[1-9]\d*)(?:\.\d+)?$/;
+
+			if (value !== '' && !regex.test(value)) {
+				app.helper.showErrorNotification({
+					message: 'Only positive numbers are allowed (example: 3 or 3.5)'
+				});
+
+				jQuery(element).val('');
+				jQuery(element).focus();
+				return false;
+			}
+
+			return true;
+		}
+
+		// Blur event
+		jQuery(document).on('blur', '.inputElement', function () {
+			validateField(this);
+		});
+
+		// Enter key event
+		jQuery(document).on('keypress', '.inputElement', function (e) {
+			if (e.which === 13) { // Enter key
+				let isValid = validateField(this);
+
+				if (!isValid) {
+					e.preventDefault();   // stop form submit
+					e.stopPropagation();  // stop further event
+					return false;
+				}
+			}
+		});
+	},
+
+
+	registerProjectTaskNumberValidation_Detail: function () {
+
+		function validateProjectTaskNumber(element) {
+
+			let fieldName = jQuery(element).attr('name');
+
+			if (fieldName !== 'projecttasknumber') {
+				return true;
+			}
+
+			let value = jQuery(element).val().trim();
+
+			// Allow only positive integers (1,2,3...)
+			let regex = /^[1-9]\d*$/;
+
+			if (value !== '' && !regex.test(value)) {
+
+				app.helper.showErrorNotification({
+					message: 'Project Task Number must be a positive whole number'
+				});
+
+				jQuery(element).val('');
+				jQuery(element).focus();
+				return false;
+			}
+
+			return true;
+		}
+
+		// Blur / Change / Keyup validation
+		jQuery(document).on('change blur keyup', '.inputElement', function () {
+			validateProjectTaskNumber(this);
+		});
+
+		// Enter key validation
+		jQuery(document).on('keypress', '.inputElement', function (e) {
+			if (e.which === 13) { // Enter key
+				let isValid = validateProjectTaskNumber(this);
+
+				if (!isValid) {
+					e.preventDefault();   // stop form submit
+					e.stopPropagation();
+					return false;
+				}
+			}
+		});
+	},
+
+
 	registerHeaderAjaxEditEvents : function(contentHolder) {
 		var self = this;
 
@@ -3140,20 +3354,14 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				});
 			}
 		});
-		app.event.on("post.RecordListSelectionAll.click", function(event, data, searchParams, excludedIds) {
-			app.helper.hideModal();
-			var relatedController = self.getRelatedController();
-			if (relatedController) {
-				relatedController.addRelationsAnother(data,searchParams, excludedIds).then(function() {
-					relatedController.loadRelatedList();
-				});
-			}
-		});
 		this.registerBlockAnimationEvent();
 		this.registerBlockStatusCheckOnLoad();
 		this.registerClearReferenceSelectionEvent();
 		//register event for picklist dependency setup
 		this.registerEventForPicklistDependencySetup(this.getForm());
 		vtUtils.enableTooltips();
+		this.registerDetailPhoneValidation();
+		this.registerProjectTaskNumberValidation_Detail();
+		this.registerPositiveFloatValidation_Detail();
 	},
 });

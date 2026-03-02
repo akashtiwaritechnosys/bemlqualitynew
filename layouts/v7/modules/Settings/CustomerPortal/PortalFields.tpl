@@ -12,47 +12,47 @@
 	<input type="hidden" name="selectedFields_{$MODULE}" value='{Vtiger_Functions::jsonEncode($SELECTED_FIELDS)}' />
 	<input type="hidden" name="relatedModules_{$MODULE}" value='{Vtiger_Functions::jsonEncode($RELATED_MODULES[$MODULE])}' />
 	<input type="hidden" name="recordPermissions_{$MODULE}" value='{Vtiger_Functions::jsonEncode($RECORD_PERMISSIONS)}'/>
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row" id="moduleData_{$MODULE}">
-		<h4 style="margin-top: 15px;">{vtranslate('LBL_PORTAL_FIELDS_PRIVILEGES',$QUALIFIED_MODULE)}</h4>
+	<div class="row" id="moduleData_{$MODULE}">
+		<h5 style="margin-left: 30px;">{vtranslate('LBL_PORTAL_FIELDS_PRIVILEGES',$QUALIFIED_MODULE)}</h5>
 		<hr style="margin-top: 0px;">
-		<div class="col-sm-6 col-xs-6 portal-fields-container-wrapper">
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 portal-fields-container-wrapper">
 			<div class="col-sm-12 col-xs-12">
-				<div class="col-sm-6 col-xs-6" style="padding-right:50px;">
+				<div class="col-sm-6 col-xs-6" style="padding:0px;">
 					<label>{vtranslate('LBL_READ_ONLY',$QUALIFIED_MODULE)}</label>
 					{* <div class="col-sm-1 portal-slider-legend" id="readonlySlider" ></div> *}
-					<div class="portal-fields-switch" id="readOnlySwitch" disabled></div>
+					<div class="portal-fields-switch portal-switch-disabled" id="readOnlySwitch" disabled></div>
 				</div>
-				<div class="col-sm-6 col-xs-6">
+				<div class="col-sm-6 col-xs-6" style="padding:0px;">
 					<label>{vtranslate('LBL_READ_AND_WRITE',$QUALIFIED_MODULE)}</label>
 					{* <div class="col-sm-1 portal-slider-legend"  id="readwriteSlider" ></div> *}
-					<div class="portal-fields-switch portal-fields-switchOn" id="readWriteSwitch" disabled></div>
+					<div class="portal-fields-switch portal-fields-switchOn portal-switch-disabled" id="readWriteSwitch" disabled></div>
 				</div>
-				<div class="col-sm-10 col-xs-10" style="padding:10px;">
-					<span class="redColor">*</span>Mandatory Fields
+				<div class="col-sm-10 col-xs-10" style="padding:15px 0px;">
+					<span class="redColor">*</span><span>Mandatory Fields</span>
 				</div>
 			</div>
-			<div class="row">
-				<div id="fieldRows_{$MODULE}" class="col-sm-12">
+			<div class="roww">
+				<div id="fieldRows_{$MODULE}" class="col-sm-12" style="padding:0px 6px;">
 
 				</div>
 			</div>
-			<br>
-			<div class="row">
-				<div class="col-sm-12 addFieldsBlock">
-					<div class="col-sm-8">
+			
+			<div class="roww">
+				<div class="col-sm-12 addFieldsBlock" style="padding:0px 6px;">
+					<div class="">
 						<select class="inputElement select2 addFields" name="addField_{$MODULE}" id="addField_{$MODULE}" multiple>
 							<option></option>
 						</select>
 					</div>
-					<div class="col-sm-4">
+					<div class="">
 						<button title="{vtranslate('LBL_ADD_FIELDS',$QUALIFIED_MODULE)}" class="btn btn-default" id="addFieldButton_{$MODULE}">{vtranslate('LBL_ADD_FIELDS',$QUALIFIED_MODULE)}</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 col-xs-6 portal-related-information">
-			<h4 style="margin-top: 0px;">{vtranslate('LBL_RECORD_VISIBILITY',$QUALIFIED_MODULE)}</h4>
-			<div class="portal-record-privilege  radio-group">
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 portal-related-information">
+			<h5 style="margin-top: 0px; padding:0px 6px; margin-bottom: 0px;">{vtranslate('LBL_RECORD_VISIBILITY',$QUALIFIED_MODULE)}</h5>
+			<div class="portal-record-privilege  radio-group" style="padding:0px 6px;">
 				<div class="radio label-radio">
 					<label>
 						<input type="radio"  id="all" name="recordvisible_{$MODULE}" value="all" {if $RECORD_VISIBLE['all'] eq 1 or $MODULE eq 'Faq'}checked{/if}/>&nbsp;
@@ -76,8 +76,8 @@
 			</div>
 			<br>
 			{if $MODULE neq 'Faq'}
-				<h4>{vtranslate('LBL_RELATED_INFORMATION',$QUALIFIED_MODULE)}</h4>
-				<div class="portal-record-privilege">
+				<h5 style="padding:0px 6px; margin-bottom: 0px;">{vtranslate('LBL_RELATED_INFORMATION',$QUALIFIED_MODULE)}</h5>
+				<div class="portal-record-privilege" style="padding:0px 6px;">
 					{if $RELATED_MODULES[$MODULE]}
 						{foreach from=$RELATED_MODULES[$MODULE] key=KEY item=VALUE}
 							<div class="checkbox label-checkbox"{if !vtlib_isModuleActive($VALUE['name']) AND $VALUE['name'] neq 'History'} hidden {/if}>
@@ -89,8 +89,8 @@
 			{/if}
 			<br> 
 			{if $MODULE eq 'HelpDesk' OR $MODULE eq 'Assets'}
-				<h4>{vtranslate('LBL_RECORD_PERMISSIONS',$QUALIFIED_MODULE)}</h4>
-				<div class="portal-record-privilege" id="recordPrivilege_{$MODULE}">
+				<h5 style="padding:0px 6px; margin-bottom: 0px;">{vtranslate('LBL_RECORD_PERMISSIONS',$QUALIFIED_MODULE)}</h5>
+				<div class="portal-record-privilege" id="recordPrivilege_{$MODULE}" style="padding:0px 6px;">
 					{if $MODULE eq 'HelpDesk'}
 						<div class="checkbox label-checkbox">
 							<label>

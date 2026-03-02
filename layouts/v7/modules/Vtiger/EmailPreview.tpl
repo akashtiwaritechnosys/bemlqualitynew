@@ -40,7 +40,7 @@
 										{assign var=TO_EMAILS value=","|implode:$TO}
 										<span class="row-fluid">
 											<span class="col-sm-10 paddingLeft0"><p class="textOverflowEllipsis">{$TO_EMAILS}</p></span>
-											{if $TO|@count > 1}
+											{if $TO|php7_count > 1}
 												<span class="col-sm-2">
 													<a href="#" data-toggle="dropdown" style="text-transform: lowercase;">{vtranslate('LBL_MORE',$MODULE)}</a>
 													<ul class="dropdown-menu" style="padding:3px 6px; max-height:200px;" id="toAddressesDropdown">
@@ -58,24 +58,24 @@
 						<div class="col-lg-6">
 							<div class="email-preview-toolbar pull-right">
 								{if $RECORD->getEmailFlag() neq 'SAVED'}
-									<button type="button" name="previewReply" class="btn btn-sm btn-soft-primary" data-mode="emailReply">
+									<button type="button" name="previewReply" class="btn btn-sm btn-default" data-mode="emailReply">
 										{vtranslate('LBL_REPLY',$MODULE)}
 									</button>
-									{if count($TO) > 1 || !empty($CC) || !empty($BCC)}
-										<button type="button" name="previewReplyAll" class="btn btn-sm btn-soft-primary" data-mode="emailReplyAll">
+									{if php7_count($TO) > 1 || !empty($CC) || !empty($BCC)}
+										<button type="button" name="previewReplyAll" class="btn btn-sm btn-default" data-mode="emailReplyAll">
 											{vtranslate('LBL_REPLY_ALL',$MODULE)}
 										</button>
 									{/if}
 								{/if}
-								<button type="button" name="previewForward" class="btn btn-sm btn-soft-primary" data-mode="emailForward">
+								<button type="button" name="previewForward" class="btn btn-sm btn-default" data-mode="emailForward">
 									{vtranslate('LBL_FORWARD',$MODULE)}
 								</button>
 								{if $RECORD->getEmailFlag() eq 'SAVED'}
-									<button type="button" name="previewEdit" class="btn btn-sm btn-soft-primary" data-mode="emailEdit">
+									<button type="button" name="previewEdit" class="btn btn-sm btn-default" data-mode="emailEdit">
 										{vtranslate('LBL_EDIT',$MODULE)}
 									</button>
 								{/if}
-								<button type="button" name="previewPrint" class="btn btn-sm btn-soft-primary" data-mode="previewPrint">
+								<button type="button" name="previewPrint" class="btn btn-sm btn-default" data-mode="previewPrint">
 									{vtranslate('LBL_PRINT',$MODULE)}
 								</button>
 							</div>
@@ -129,7 +129,7 @@
 										<span class="pull-right">{vtranslate('LBL_ATTACHMENT',$MODULE)}</span>
 									</span>
 									<span class="col-lg-9">
-										{if count($RECORD->getAttachmentDetails()) le 0}
+										{if php7_count($RECORD->getAttachmentDetails()) le 0}
 											{vtranslate('LBL_NO_ATTACHMENTS',$MODULE)}
 										{else}
 											{foreach item=ATTACHMENT_DETAILS from=$RECORD->getAttachmentDetails()}
@@ -146,7 +146,7 @@
 							</div>
 						</div>
 					</div>
-					<textarea style="display:none;" id="iframeDescription">{$RECORD->get('description')}</textarea>
+					<textarea style="display:none;" id="iframeDescription">{decode_html($RECORD->get('description'))}</textarea>
 					<div class="row email-info-row">
 						<div class="col-lg-2" style="padding-right:10px;">
 							<div class="pull-right">{vtranslate('LBL_DESCRIPTION',$MODULE)}</div>

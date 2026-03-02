@@ -55,12 +55,6 @@ Reports_Detail_Js("Reports_ChartDetail_Js", {
 			var recordId = thisInstance.getRecordId();
 			var currentMode = jQuery(e.currentTarget).data('mode');
 			var groupByField = jQuery('#groupbyfield').val();
-
-			//Pivot Report
-			var groupbyfield1 = jQuery('#groupbyfield1').val();
-			var type = jQuery('#type').val();
-			//Pivot Report
-
 			var dataField = jQuery('#datafields').val();
 			if(dataField == null || dataField == '') {
 				vtUtils.showValidationMessage(jQuery('#datafields').parent().find('.select2-choices'), app.vtranslate('JS_REQUIRED_FIELD'));
@@ -69,20 +63,11 @@ Reports_Detail_Js("Reports_ChartDetail_Js", {
 				vtUtils.hideValidationMessage(jQuery('#datafields').parent().find('.select2-choices'));
 			}
 			
-			//Pivot Report
 			if(groupByField == null || groupByField == "") {
 				vtUtils.showValidationMessage(jQuery('#groupbyfield').parent().find('.select2-container'), app.vtranslate('JS_REQUIRED_FIELD'));
 				return false;
 			} else {
 				vtUtils.hideValidationMessage(jQuery('#groupbyfield').parent().find('.select2-container'));
-			}
-			//Pivot Report
-
-			if(groupbyfield1 == null || groupbyfield1 == "") {
-				vtUtils.showValidationMessage(jQuery('#groupbyfield1').parent().find('.select2-container'), app.vtranslate('JS_REQUIRED_FIELD'));
-				return false;
-			} else {
-				vtUtils.hideValidationMessage(jQuery('#groupbyfield1').parent().find('.select2-container'));
 			}
 			
 			var postData = {
@@ -93,12 +78,7 @@ Reports_Detail_Js("Reports_ChartDetail_Js", {
 				'mode': currentMode,
 				'charttype': jQuery('input[name=charttype]').val(),
 				'groupbyfield': groupByField,
-				'datafields': dataField,
-
-				//Pivot Report
-				'type': type,
-				'groupbyfield1': groupbyfield1
-				//Pivot Report
+				'datafields': dataField
 			};
 
 			var reportChartContents = thisInstance.getContentHolder().find('#reportContentsDiv');
@@ -209,7 +189,7 @@ Reports_Detail_Js("Reports_ChartDetail_Js", {
 
 
 Vtiger_Pie_Widget_Js('Report_Piechart_Js', {}, {
-	
+
 	postInitializeCalls: function () {
 		var thisInstance = this;
 		var clickThrough = jQuery('input[name=clickthrough]', this.getContainer()).val();
@@ -220,7 +200,7 @@ Vtiger_Pie_Widget_Js('Report_Piechart_Js', {}, {
 			});
 		}
 	},
-	
+
 	postLoadWidget: function () {
 		if (!Reports_ChartDetail_Js.isEmptyData()) {
 			this.loadChart();
@@ -233,16 +213,16 @@ Vtiger_Pie_Widget_Js('Report_Piechart_Js', {}, {
 		if (widgetContent.length) {
 			if (!jQuery('input[name=clickthrough]', this.getContainer()).val()) {
 				var adjustedHeight = this.getContainer().height() - 50;
-				app.helper.showVerticalScroll(widgetContent, {'height': adjustedHeight});
+				app.helper.showVerticalScroll(widgetContent, { 'height': adjustedHeight });
 			}
-			widgetContent.css({height: widgetContent.height() - 100});
+			widgetContent.css({ overflowY: 'auto' });
 		}
 	},
-	
+
 	positionNoDataMsg: function () {
 		Reports_ChartDetail_Js.displayNoDataMessage();
 	},
-	
+
 	getPlotContainer: function (useCache) {
 		if (typeof useCache == 'undefined') {
 			useCache = false;
@@ -253,7 +233,7 @@ Vtiger_Pie_Widget_Js('Report_Piechart_Js', {}, {
 		}
 		return this.plotContainer;
 	},
-	
+
 	init: function (parent) {
 		if (parent) {
 			this._super(parent);
@@ -261,7 +241,7 @@ Vtiger_Pie_Widget_Js('Report_Piechart_Js', {}, {
 			this._super(jQuery('#reportContentsDiv'));
 		}
 	},
-	
+
 	generateData: function () {
 		if (Reports_ChartDetail_Js.isEmptyData()) {
 			Reports_ChartDetail_Js.displayNoDataMessage();
@@ -278,19 +258,80 @@ Vtiger_Pie_Widget_Js('Report_Piechart_Js', {}, {
 			chartData[i].push(data['labels'][i]);
 			chartData[i].push(values[i]);
 		}
-		return {'chartData': chartData,
+		return {
+			'chartData': chartData,
 			'labels': data['labels'],
 			'data_labels': data['data_labels'],
-			'data_type'	: data['data_type'],
-			'title': data['graph_label']};
+			'data_type': data['data_type'],
+			'title': data['graph_label']
+		};
 	},
-	
+
 	generateLinks: function () {
 		var jData = jQuery('input[name=data]', this.getContainer()).val();
 		var statData = JSON.parse(jData);
 		var links = statData['links'];
 		return links;
-	}
+	},
+
+	isValidJSONString: function (str) {
+		try {
+			JSON.parse(str);
+			return true;
+		} catch (e) {
+			return false;
+		}
+	},
+
+	generateDataNew: function () {
+		var container = this.getContainer();
+		var jData = container.find(".widgetData").val();
+		var data = [];
+		if (this.isValidJSONString(jData)) {
+			data = JSON.parse(jData);
+		} else {
+			data = [];
+		}
+		return data;
+	},
+
+	getIdOfWidget: function () {
+		var container = this.getContainer();
+		let jData = container.find(".widgetId").val();
+		return jData;
+	},
+
+	loadChart: function () {
+		var data = this.generateDataNew();
+		let linksAre = this.generateLinks();
+		let idOfWidget = "#" + this.getIdOfWidget();
+		if(idOfWidget == '' ||  idOfWidget == null || idOfWidget == undefined){
+			idOfWidget = 'widget';
+		}
+
+		var cleanedDataValues = data["values"].map(v => v ?? 0);
+		var cleanedDataLabels = data["labels"].map(v => v ?? 0);
+
+		var options = {
+			chart: {
+				type: "pie",
+				height: "80%",
+				width: "100%",
+				events: {
+					dataPointSelection: function (event, chartContext, config) {
+						window.open(linksAre[config.dataPointIndex], "_blank");
+					},
+				},
+			},
+			series: cleanedDataValues,
+			labels: cleanedDataLabels,
+		};
+		var chart = new ApexCharts(
+			document.querySelector(idOfWidget),
+			options
+		);
+		chart.render();
+	},
 
 });
 
@@ -403,6 +444,79 @@ Vtiger_Barchat_Widget_Js('Report_Verticalbarchart_Js', {}, {
 		var statData = JSON.parse(jData);
 		var links = statData['links'];
 		return links;
+	},
+
+	getIdOfWidget: function () {
+		var container = this.getContainer();
+		let jData = container.find(".widgetId").val();
+		return jData;
+	},
+
+	loadChart: function () {
+		let idOfWidget = "#" + this.getIdOfWidget();
+		if (idOfWidget == '' || idOfWidget == null || idOfWidget == undefined) {
+			idOfWidget = 'widget';
+		}
+		var data = this.generateChartData();
+		let linksAre = this.generateLinks();
+		var options = {
+			chart: {
+				type: "bar",
+				events: {
+					dataPointSelection: function (event, chartContext, config) {
+						window.open(linksAre[config.dataPointIndex], "_blank");
+					},
+				},
+				height: "100%",
+				width: "100%",
+				offsetY: -50,
+			},
+			legend: {
+				position: "top",
+				offsetY: -22,
+			},
+
+			series: [
+				{
+					name: "Sales",
+					data: data["chartData"]["0"],
+				},
+			],
+			plotOptions: {
+				bar: {
+					distributed: true,
+					borderRadius: 4,
+					horizontal: false,
+					horizontal: true,
+				},
+			},
+			dataLabels: {
+				enabled: true,
+				style: {
+					colors: ["#000000"],
+					fontSize: "16px",
+					fontWeight: "600",
+				},
+			},
+			colors: [
+				"var(--primary-color)",
+				"#00E396",
+				"#FEB019",
+				"#FF4560",
+				"#775DD0",
+				"#3F51B5",
+				"#546E7A",
+				"#546E7A",
+			],
+			xaxis: {
+				categories: data["labels"],
+			},
+		};
+		var chart = new ApexCharts(
+			document.querySelector(idOfWidget),
+			options
+		);
+		chart.render();
 	}
 });
 

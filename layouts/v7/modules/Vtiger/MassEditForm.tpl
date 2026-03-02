@@ -19,22 +19,22 @@
             <input type="hidden" name="selected_ids" value={ZEND_JSON::encode($SELECTED_IDS)}>
             <input type="hidden" name="excluded_ids" value={ZEND_JSON::encode($EXCLUDED_IDS)}>
             <input type="hidden" name="tag_params" value={ZEND_JSON::encode($TAG_PARAMS)}>
-            <input type="hidden" name="search_params" value='{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($SEARCH_PARAMS))}' />
+            <input type="hidden" name="search_params" value='{(isset($SEARCH_PARAMS)) ? Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($SEARCH_PARAMS)) : ""}' />
             <div>
                 <header class="overlayHeader" style='flex:0 0 auto;'>
                     {assign var=TITLE value="{vtranslate('LBL_MASS_EDITING',$MODULE)}"}
                     {include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$TITLE}
                 </header>
-                <div class='modal-body' style="margin-bottom:60px">
+                <div class='modal-body'>
                     <div class='datacontent editViewContents'>
                         {include file="partials/EditViewContents.tpl"|@vtemplate_path:$MODULE}
                     </div>
                 </div>
                 <footer class='modal-footer overlayFooter'>
-                   <center>
-                       <button type='submit' class='btn btn-soft-success saveButton'>{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-                       <a class='cancelLink btn-soft-danger' data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-                   </center>
+                   <div class='footer-btns'>
+                       <button type='submit' class='btn btn-submit saveButton'>{vtranslate('LBL_SAVE', $MODULE)}</button>
+                       <a class='cancelLink' data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                   </div>
                </footer>
             </div>
     </form>

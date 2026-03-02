@@ -71,7 +71,7 @@
 	{assign var=LINE_ITEM_BLOCK_LABEL value="LBL_ITEM_DETAILS"}
 	{assign var=BLOCK_FIELDS value=$RECORD_STRUCTURE.$LINE_ITEM_BLOCK_LABEL}
 	{assign var=BLOCK_LABEL value=$LINE_ITEM_BLOCK_LABEL}
-	{if $BLOCK_FIELDS|@count gt 0}
+	{if $BLOCK_FIELDS|php7_count gt 0}
 		<div class='fieldBlockContainer'>
 			<div class="row">
 				<div class="col-sm-3">
@@ -178,7 +178,7 @@
 							{include file="partials/LineItemsContent.tpl"|@vtemplate_path:'FailedParts' row_no=$row_no data=$data}
 						</tr>
 					{/foreach}
-					{* {if count($RELATED_PRODUCTS) eq 0 and ($PRODUCT_ACTIVE eq 'true' || $SERVICE_ACTIVE eq 'true')}
+					{* {if php7_count($RELATED_PRODUCTS) eq 0 and ($PRODUCT_ACTIVE eq 'true' || $SERVICE_ACTIVE eq 'true')}
 						<tr id="row1" class="lineItemRow" data-row-num="1">
 							{include file="partials/LineItemsContent.tpl"|@vtemplate_path:'FailedParts' row_no=1 data=[] IGNORE_UI_REGISTRATION=false}
 						</tr>

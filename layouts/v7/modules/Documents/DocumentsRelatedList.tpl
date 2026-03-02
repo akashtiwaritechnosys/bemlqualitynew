@@ -29,7 +29,7 @@
                     {foreach item=RELATED_LINK from=$RELATED_LIST_LINKS['LISTVIEWBASIC']}
 
 						{if $RELATED_LINK->get('linkmodule') eq 'Documents'}
-                            <div class="col-sm-3" style="width:22%;">
+                            <div class="col-sm-4">
                                 {assign var=IS_SELECT_BUTTON value={$RELATED_LINK->get('_selectRelation')}}
                                 {* setting button module attribute to Events or Calendar based on link label *}
                                 {assign var=LINK_LABEL value={$RELATED_LINK->get('linklabel')}}
@@ -38,7 +38,7 @@
                                 {elseif $RELATED_LINK->get('_linklabel') === '_add_task'}
                                     {assign var=RELATED_MODULE_NAME value='Calendar'}
                                 {/if}
-                                <button type="button" module="{$RELATED_MODULE_NAME}"  class="btn addButton btn-soft-blue
+                                <button type="button" module="{$RELATED_MODULE_NAME}"  class="btn addButton btn-default
                                     {if $IS_SELECT_BUTTON eq true} selectRelation {/if} "
                                     {if $IS_SELECT_BUTTON eq true} data-moduleName={$RELATED_LINK->get('_module')->get('name')} {/if}
                                     {if ($RELATED_LINK->isPageLoadLink())}
@@ -51,16 +51,17 @@
                             
                             {if $RELATED_LINK->getLabel() eq 'Vtiger'}
 								{if $IS_CREATE_PERMITTED}
-									<div class="col-sm-3">
+									<div class="col-sm-5">
 										<div class="dropdown">
-											<button type="button" class="btn btn-soft-primary dropdown-toggle" data-toggle="dropdown">
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 												<span class="fa fa-plus" title="{vtranslate('LBL_NEW_DOCUMENT', $MODULE)}"></span>&nbsp;&nbsp;{vtranslate('LBL_NEW_DOCUMENT', $RELATED_MODULE_NAME)}&nbsp; <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu">
 												<li class="dropdown-header"><i class="fa fa-upload"></i> {vtranslate('LBL_FILE_UPLOAD', $RELATED_MODULE_NAME)}</li>
 												<li id="VtigerAction">
 													<a href="javascript:Documents_Index_Js.uploadTo('Vtiger',{$PARENT_ID},'{$MODULE}')">
-													     Upload New Document
+														<img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
+														{vtranslate('LBL_TO_SERVICE', $RELATED_MODULE_NAME, {vtranslate('LBL_VTIGER', $RELATED_MODULE_NAME)})}
 													</a>
 												</li>
 												<li role="separator" class="divider"></li>
@@ -82,7 +83,7 @@
             {assign var=CLASS_VIEW_PAGING_INPUT_SUBMIT value='relatedViewPagingInputSubmit'}
             {assign var=CLASS_VIEW_BASIC_ACTION value='relatedViewBasicAction'}
             {assign var=PAGING_MODEL value=$PAGING}
-            {assign var=RECORD_COUNT value=$RELATED_RECORDS|@count}
+            {assign var=RECORD_COUNT value=$RELATED_RECORDS|php7_count}
             {assign var=PAGE_NUMBER value=$PAGING->get('page')}
             {include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true}
         </div>
@@ -133,16 +134,20 @@
                 </tr>
                 <tr class="searchRow">
                         <th class="inline-search-btn">
-                            <button class="btn btn-soft-primary btn-sm" data-trigger="relatedListSearch">{vtranslate("LBL_SEARCH",$MODULE)}</button>
+                            <button class="btn btn-submit btn-sm" data-trigger="relatedListSearch">{vtranslate("LBL_SEARCH",$MODULE)}</button>
                         </th>
                             {foreach item=HEADER_FIELD from=$RELATED_HEADERS}
                                 <th>
                                     {if $HEADER_FIELD->get('column') eq 'time_start' or $HEADER_FIELD->get('column') eq 'time_end' or $HEADER_FIELD->get('column') eq 'folderid' or $HEADER_FIELD->getFieldDataType() eq 'reference'}
                                     {else}    
                                         {assign var=FIELD_UI_TYPE_MODEL value=$HEADER_FIELD->getUITypeModel()}
+                                        {assign var=SEARCH_DETAILS_FIELD_INFO value=array('searchValue' => '', 'comparator' => '')}
+                                        {if isset($SEARCH_DETAILS[$HEADER_FIELD->getName()])}
+                                            {assign var=SEARCH_DETAILS_FIELD_INFO value=$SEARCH_DETAILS[$HEADER_FIELD->getName()]}
+                                        {/if}
                                         {include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$RELATED_MODULE_NAME)
-                                        FIELD_MODEL= $HEADER_FIELD SEARCH_INFO=$SEARCH_DETAILS[$HEADER_FIELD->getName()] USER_MODEL=$USER_MODEL}
-                                        <input type="hidden" class="operatorValue" value="{$SEARCH_DETAILS[$HEADER_FIELD->getName()]['comparator']}">
+                                        FIELD_MODEL= $HEADER_FIELD SEARCH_INFO=$SEARCH_DETAILS_FIELD_INFO USER_MODEL=$USER_MODEL}
+                                        <input type="hidden" class="operatorValue" value="{$SEARCH_DETAILS_FIELD_INFO['comparator']}">
                                     {/if}
                                 </th>
                             {/foreach}

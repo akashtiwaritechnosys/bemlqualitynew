@@ -67,7 +67,7 @@
 																{if $FIELD_MODEL->getDisplayType() eq '6'}
 																	{continue}
 																{/if}
-																<div class="instafilta-target item {if array_key_exists($FIELD_MODEL->getCustomViewColumnName(), $SELECTED_FIELDS)}hide{/if}" data-cv-columnname="{$FIELD_MODEL->getCustomViewColumnName()}" data-columnname='{$FIELD_MODEL->get('column')}' data-field-id='{$FIELD_MODEL->getId()}'>
+																<div class="instafilta-target item {if array_key_exists(decode_html($FIELD_MODEL->getCustomViewColumnName()), $SELECTED_FIELDS)}hide{/if}" data-cv-columnname="{$FIELD_MODEL->getCustomViewColumnName()}" data-columnname='{$FIELD_MODEL->get('column')}' data-field-id='{$FIELD_MODEL->getId()}'>
 																	<span class="fieldLabel">{vtranslate($FIELD_MODEL->get('label'),$FIELD_MODULE_NAME)}</span>
 																</div>
 															{/foreach} 
@@ -86,8 +86,8 @@
 					</div>
 				</div>
 				<div class="modal-footer ">
-					<button class="btn btn-soft-success saveButton" type="submit" name="saveButton"><strong>{vtranslate('LBL_UPDATE_LIST')}</strong></button>
-					<a href="#" class="btn btn-soft-danger cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+					<button class="btn btn-submit" type="submit" name="saveButton">{vtranslate('LBL_UPDATE_LIST')}</button>
+					<a href="#" class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
 				</div>
 			</form>
 		</div>

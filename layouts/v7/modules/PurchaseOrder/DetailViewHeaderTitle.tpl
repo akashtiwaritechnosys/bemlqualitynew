@@ -10,9 +10,9 @@
 ********************************************************************************/
 -->*}
 {strip}
-    <div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="col-lg-5 col-md-6 col-sm-6">
         <div class="record-header clearfix">
-            <div class="recordImage bgpurchaseorder app-{$SELECTED_MENU_CATEGORY}">
+            <div class="recordImage bgpurchaseorder app-{(isset($SELECTED_MENU_CATEGORY)) ? $SELECTED_MENU_CATEGORY : ''}">
                 {assign var=IMAGE_DETAILS value=$RECORD->getImageDetails()}
                 {foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
                     {if !empty($IMAGE_INFO.url)}
@@ -27,16 +27,16 @@
             </div>
             <div class="recordBasicInfo">
                 <div class="info-row">
-                    <h4>
-                        <span class="recordLabel pushDown" title="{$RECORD->getName()}">
+                    <div>
+                        <div class="recordLabel pushDown" title="{$RECORD->getName()}">
                             {foreach item=NAME_FIELD from=$MODULE_MODEL->getNameFields()}
                                 {assign var=FIELD_MODEL value=$MODULE_MODEL->getField($NAME_FIELD)}
                                 {if $FIELD_MODEL->getPermissions()}
-                                    <span class="{$NAME_FIELD}">{trim($RECORD->get($NAME_FIELD))}</span>&nbsp;
+                                    <h4 class="{$NAME_FIELD}">{trim($RECORD->get($NAME_FIELD))}</h4>
                                 {/if}
                             {/foreach}
-                        </span>
-                    </h4>
+                        </div>
+                    </div>
                 </div>
                 {include file="DetailViewHeaderFieldsView.tpl"|vtemplate_path:$MODULE}
                 {*

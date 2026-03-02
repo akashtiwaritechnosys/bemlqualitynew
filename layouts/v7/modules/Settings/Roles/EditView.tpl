@@ -11,7 +11,8 @@
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
 <div class="editViewPageDiv viewContent">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="editViewHeader">
+        {*<div class="editViewHeader">
+        
                 {if $RECORD_MODEL->getId()}
                     <h4>
                         {vtranslate('LBL_EDIT_ROLE', $QUALIFIED_MODULE)}
@@ -21,10 +22,10 @@
                         {vtranslate('LBL_CREATE_ROLE', $QUALIFIED_MODULE)}
                     </h4>
                 {/if}
-            </div>
-            <hr>
+            </div>*}
+       
         <form class="form-horizontal" id="EditView" name="EditRole" method="post" action="index.php" enctype="multipart/form-data">
-            <div class="editViewBody">
+            <div class="editViewBody role-editView-body">
                 <div class="editViewContents">
                     <input type="hidden" name="module" value="Roles">
                     <input type="hidden" name="action" value="Save">
@@ -32,17 +33,17 @@
                     {assign var=RECORD_ID value=$RECORD_MODEL->getId()}
                     <input type="hidden" name="record" value="{$RECORD_ID}" />
                     <input type="hidden" name="mode" value="{$MODE}">
-                    <input type="hidden" name="profile_directly_related_to_role_id" value="{$PROFILE_ID}" />
+                    <input type="hidden" name="profile_directly_related_to_role_id" value="{(isset($PROFILE_ID)) ? $PROFILE_ID: ''}" />
                     {assign var=HAS_PARENT value="{if $RECORD_MODEL->getParent()}true{/if}"}
                     {if $HAS_PARENT}
                         <input type="hidden" name="parent_roleid" value="{$RECORD_MODEL->getParent()->getId()}">
                     {/if}
                     <div name='editContent'>
                         <div class="form-group">
-                            <label class="control-label fieldLabel col-lg-3 col-md-3 col-sm-3">
+                            <label class="control-label fieldLabel col-lg-6 col-md-6 col-sm-6">
                                 <strong>{vtranslate('LBL_NAME', $QUALIFIED_MODULE)}&nbsp;<span class="redColor">*</span></strong>
                             </label>
-                            <div class="controls fieldValue col-lg-4 col-md-4 col-sm-4" >
+                            <div class="controls fieldValue col-lg-6 col-md-6 col-sm-6" >
                                 <div class=""> <input type="text" class="inputElement" name="rolename" id="profilename" value="{$RECORD_MODEL->getName()}" data-rule-required='true'  />
                                 </div> </div>
                         </div>
@@ -103,7 +104,7 @@
                             <div class="fieldLabel control-label col-lg-3 col-md-3 col-sm-3"></div>
                             <div class="fieldValue controls col-lg-9 col-md-9 col-sm-9">
                                 {assign var="ROLE_PROFILES" value=$RECORD_MODEL->getProfiles()}
-                                <select class="select2 inputElement col-lg-12 hide" multiple="true" id="profilesList" name="profiles[]" data-placeholder="{vtranslate('LBL_CHOOSE_PROFILES',$QUALIFIED_MODULE)}" style="width: 460px" data-rule-required="true">
+                                <select class="select2 inputElement col-lg-12 hide" multiple="true" id="profilesList" name="profiles[]" data-placeholder="{vtranslate('LBL_CHOOSE_PROFILES',$QUALIFIED_MODULE)}" data-rule-required="true">
                                     {foreach from=$ALL_PROFILES item=PROFILE}
                                         {if $PROFILE->isDirectlyRelated() eq false}
                                             <option value="{$PROFILE->getId()}" {if isset($ROLE_PROFILES[$PROFILE->getId()])}selected="true"{/if}>{$PROFILE->getName()}</option>
@@ -117,8 +118,10 @@
             <div class='modal-overlay-footer  clearfix'>
                 <div class="row clearfix">
                     <div class=' textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                        <button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-                        <a class='cancelLink'  href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                        <div class='footer-btns'>
+                            <button type='submit' class='btn btn-submit saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>
+                            <a class='cancelLink'  href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                        </div>
                     </div>
                 </div>
             </div>

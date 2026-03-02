@@ -23,37 +23,35 @@
 						</div>
 					</div>
 				</div>
-				<hr>
-				<br>
 				<div class="profileDetailView detailViewInfo">
 					<div class="row form-group">
 						<div class="col-lg-2 col-md-2 col-sm-2 control-label fieldLabel">
 							<label>{vtranslate('LBL_PROFILE_NAME', $QUALIFIED_MODULE)}</label>
 						</div>
-						<div class="fieldValue col-lg-6 col-md-6 col-sm-12"  name="profilename" id="profilename" value="{$RECORD_MODEL->getName()}"><strong>{$RECORD_MODEL->getName()}</strong></div>
+						<div class="fieldValue col-lg-6 col-md-6 col-sm-12 control-label fieldLabel"  name="profilename" id="profilename" value="{$RECORD_MODEL->getName()}"><span>{$RECORD_MODEL->getName()}</span></div>
 					</div>
 					<div class="row form-group">
 						<div class="col-lg-2 col-md-2 col-sm-2 control-label fieldLabel">
 							<label>{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}:</label>
 						</div>
-						<div class="fieldValue col-lg-6 col-md-6 col-sm-12" name="description" id="description"><strong>{$RECORD_MODEL->getDescription()}</strong></div>
+						<div class="fieldValue col-lg-6 col-md-6 col-sm-12 control-label fieldLabel" name="description" id="description"><span>{$RECORD_MODEL->getDescription()}</span></div>
 					</div>
 					<br>
 					{assign var="ENABLE_IMAGE_PATH" value="{vimage_path('Enable.png')}"}
 					{assign var="DISABLE_IMAGE_PATH" value="{vimage_path('Disable.png')}"}
 					{if $RECORD_MODEL->hasGlobalReadPermission()}
 						<div class="row">
-							<div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-lg-10 col-md-10 col-sm-10">
+							<div class="col-lg-10 col-md-10 col-sm-10">
 								<div>
 									<img class="alignMiddle" src="{if $RECORD_MODEL->hasGlobalReadPermission()}{$ENABLE_IMAGE_PATH}{else}{$DISABLE_IMAGE_PATH}{/if}" />
-									&nbsp;{vtranslate('LBL_VIEW_ALL',$QUALIFIED_MODULE)}
+									&nbsp;<span>{vtranslate('LBL_VIEW_ALL',$QUALIFIED_MODULE)}</span>
 									<div class="input-info-addon">
 										<i class="fa fa-info-circle"></i>&nbsp;
 										<span >{vtranslate('LBL_VIEW_ALL_DESC',$QUALIFIED_MODULE)}</span>
 									</div>
 									<div>
 										<img class="alignMiddle" src="{if $RECORD_MODEL->hasGlobalWritePermission()}{$ENABLE_IMAGE_PATH}{else}{$DISABLE_IMAGE_PATH}{/if}" />
-										&nbsp;{vtranslate('LBL_EDIT_ALL',$QUALIFIED_MODULE)}
+										&nbsp;<span>{vtranslate('LBL_EDIT_ALL',$QUALIFIED_MODULE)}</span>
 										<div class="input-info-addon">
 											<i class="fa fa-info-circle"></i>&nbsp;
 											<span>{vtranslate('LBL_EDIT_ALL_DESC',$QUALIFIED_MODULE)}</span>
@@ -63,29 +61,29 @@
 							</div>
 						</div>
 					{/if}
-					<br>
+					
 					<div class="row">
-						<div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-lg-10 col-md-10 col-sm-10">
-							<table class="table table-bordered">
+						<div class="col-lg-12 col-md-12 col-sm-12 profile-view-table">
+							<table class="table">
 								<thead>
 									<tr class='blockHeader'>
 										<th width="27%" style="text-align: left !important">
-											{vtranslate('LBL_MODULES', $QUALIFIED_MODULE)}
+											<span>{vtranslate('LBL_MODULES', $QUALIFIED_MODULE)}</span>
 										</th>
 										<th width="11%">
-											{'LBL_VIEW_PRVILIGE'|vtranslate:$QUALIFIED_MODULE}
+											<span>{'LBL_VIEW_PRVILIGE'|vtranslate:$QUALIFIED_MODULE}</span>
 										</th>
 										<th width="11%">
-											{'LBL_CREATE'|vtranslate:$QUALIFIED_MODULE}
+											<span>{'LBL_CREATE'|vtranslate:$QUALIFIED_MODULE}</span>
 										</th>
 										<th width="11%">
-											{'LBL_EDIT'|vtranslate:$QUALIFIED_MODULE}
+											<span>{'LBL_EDIT'|vtranslate:$QUALIFIED_MODULE}</span>
 										</th>
 										<th width="11%">
-											{'LBL_DELETE_PRVILIGE'|vtranslate:$QUALIFIED_MODULE}
+											<span>{'LBL_DELETE_PRVILIGE'|vtranslate:$QUALIFIED_MODULE}</span>
 										</th>
 										<th width="29%" nowrap="nowrap">
-											{'LBL_FIELD_AND_TOOL_PRIVILEGES'|vtranslate:$QUALIFIED_MODULE}
+											<span>{'LBL_FIELD_AND_TOOL_PRIVILEGES'|vtranslate:$QUALIFIED_MODULE}</span>
 										</th>
 									</tr>
 								</thead>
@@ -115,7 +113,7 @@
 											</td>
 										</tr>
 										<tr class="hide">
-											<td colspan="6" class="row" style="padding-left: 5%;padding-right: 5%">
+											<td colspan="6" class="row" style="padding-left: 3%;padding-right: 3%">
 												<div class="row" data-togglecontent="{$TABID}-fields" style="display: none">
 													{if $PROFILE_MODULE->getFields() && $PROFILE_MODULE->isEntityModule()}
 														<div class="col-sm-12">
@@ -136,7 +134,7 @@
 															</div>
 															<div class="clearfix"></div>
 														</div>
-														<table class="table table-bordered">
+														<table class="table table-bordereddd profile-view-subtable profile-sub-view">
 															{assign var=COUNTER value=0}
 															{foreach from=$PROFILE_MODULE->getFields() key=FIELD_NAME item=FIELD_MODEL name="fields"}
 																{if $FIELD_MODEL->isActiveField() && $FIELD_MODEL->get('displaytype') neq '6'}
@@ -178,12 +176,12 @@
 											</td>
 										</tr>
 										<tr class="hide">
-											<td colspan="6" class="row" style="padding-left: 5%;padding-right: 5%">
+											<td colspan="6" class="row" style="padding-left: 3%;padding-right: 3%">
 												<div class="row" data-togglecontent="{$TABID}-fields" style="display: none">
 													<div class="col-sm-12">
-														<label class="themeTextColor font-x-large pull-left"><strong>{vtranslate('LBL_TOOLS',$QUALIFIED_MODULE)}</strong></label>
+														<div><h6 class="themeTextColor font-x-large pull-left">{vtranslate('LBL_TOOLS',$QUALIFIED_MODULE)}</h6></div>
 													</div>
-													<table class="table table-bordered table-striped">
+													<table class="table table-borderedd table-striped">
 														{assign var=UTILITY_ACTION_COUNT value=0}
 														{assign var="ALL_UTILITY_ACTIONS_ARRAY" value=array()}
 														{foreach from=$ALL_UTILITY_ACTIONS item=ACTION_MODEL}

@@ -19,27 +19,27 @@
             <input type="hidden" name="parent" value="Settings" />
             <input type="hidden" class="dependentModules" value='{ZEND_JSON::encode($DEPENDENT_MODULES)}' />
             <br>
-            <div class="contents">
-                <table class="table table-bordered table-condensed sharingAccessDetails marginBottom50px">
+            <div class="contents sharing-rules-table">
+                <table class="table table-borderedd table-condensed sharingAccessDetails marginBottom50px">
                     <colgroup>
+                        <col width="15%">
+                        <col width="15%">
                         <col width="20%">
-                        <col width="15%">
-                        <col width="15%">
                         <col width="20%">
                         <col width="10%">
                         <col width="20%">
                     </colgroup>
                     <thead>
                         <tr class="blockHeader">
-                            <th>
-                                {vtranslate('LBL_MODULE', $QUALIFIED_MODULE)}
+                            <th class="sharing-rules-head">
+                                <span>{vtranslate('LBL_MODULE', $QUALIFIED_MODULE)}</span>
                             </th>
                             {foreach from=$ALL_ACTIONS key=ACTION_ID item=ACTION_MODEL}
-                                <th>
-                                    {$ACTION_MODEL->getName()|vtranslate:$QUALIFIED_MODULE}
+                                <th class="sharing-rules-head">
+                                    <span>{$ACTION_MODEL->getName()|vtranslate:$QUALIFIED_MODULE}</span>
                                 </th>
                             {/foreach}
-                            <th nowrap="nowrap">{'LBL_ADVANCED_SHARING_RULES'|vtranslate:$QUALIFIED_MODULE}</th>
+                            <th class="sharing-rules-head"><span>{'LBL_ADVANCED_SHARING_RULES'|vtranslate:$QUALIFIED_MODULE}</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,7 +61,7 @@
                                 <div class="row">
                                     <span class="col-sm-4">&nbsp;</span>
                                     <span class="col-sm-4">
-                                        <button type="button" class="btn btn-sm btn-soft-default vtButton arrowDown row-fluid" disabled="disabled" style="padding-right: 20px; padding-left: 20px;">
+                                        <button type="button" class="btn btn-sm btn-default vtButton arrowDown" disabled="disabled" style="padding-right: 20px; padding-left: 20px;">
                                             <i class="fa fa-chevron-down"></i>
                                         </button>
                                     </span>
@@ -86,7 +86,7 @@
                                     <div class="row">
                                         <span class="col-sm-4">&nbsp;</span>
                                         <span class="col-sm-4">
-                                            <button type="button" class="btn btn-sm btn-soft-default vtButton" data-handlerfor="fields" data-togglehandler="{$TABID}-rules" style="padding-right: 20px; padding-left: 20px;">
+                                            <button type="button" class="btn btn-sm btn-default vtButton" data-handlerfor="fields" data-togglehandler="{$TABID}-rules" style="padding-right: 20px; padding-left: 20px;">
                                                 <i class="fa fa-chevron-down"></i>
                                             </button>
                                         </span>
@@ -100,7 +100,7 @@
             <div class='modal-overlay-footer clearfix saveSharingAccess hide'>
                 <div class="row clearfix">
                     <div class=' textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                        <button class="btn btn-soft-success saveButton" name="saveButton" type="submit">{vtranslate('LBL_APPLY_NEW_SHARING_RULES', $QUALIFIED_MODULE)}</button>&nbsp;&nbsp;
+                        <button class="btn btn-submit saveButton" name="saveButton" type="submit">{vtranslate('LBL_APPLY_NEW_SHARING_RULES', $QUALIFIED_MODULE)}</button>&nbsp;&nbsp;
                     </div>
                 </div>
             </div>

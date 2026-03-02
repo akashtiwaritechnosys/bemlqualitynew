@@ -413,6 +413,7 @@ var app = {
 
 			// Mimic bootstrap modal action body state change
 			jQuery('body').addClass('modal-open');
+			jQuery('html').addClass('modal-open');
 
 			//container.modal();
 			jQuery.blockUI({
@@ -483,6 +484,7 @@ var app = {
 		// Mimic bootstrap modal action body state change - helps to avoid body scroll
 		// when modal is shown using css: http://stackoverflow.com/a/11013994
 		jQuery('body').removeClass('modal-open');
+		jQuery('html').removeClass('modal-open');
 
 		var id = 'globalmodal';
 		var container = jQuery('#'+id);
@@ -1147,6 +1149,9 @@ jQuery(document).ready(function(){
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if(pageController) pageController.registerEvents();
+
+
+
 });
 
 /* Global function for UI5 embed page to callback */
@@ -1156,3 +1161,6 @@ function resizeUI5IframeReset() {
 function resizeUI5Iframe(newHeight) {
 	jQuery('#ui5frame').height(parseInt(newHeight,10)+15); // +15px - resize on IE without scrollbars
 }
+
+
+

@@ -17,7 +17,7 @@
 				<div class="row-fluid">
 					<div class="form-group">
 						<label class="control-label">
-							{vtranslate('LBL_CREATE_NEW_TAG',$MODULE)}
+							{vtranslate('LBL_CREATE_NEW_TAG',$MODULE)} <span class="redColor">*</span>
 						</label>
 						<div>
 							<input name="createNewTag" value="" data-rule-required = "true" class="form-control" placeholder="{vtranslate('LBL_CREATE_NEW_TAG',$MODULE)}"/>

@@ -56,6 +56,7 @@
 					<div class='modal-overlay-footer clearfix'>
 						<div class="row clearfix">
 							<div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
+								<button class="btn btn-success saveAndNewButton" type="submit" style="margin-right:5px;">{vtranslate('LBL_SAVE_AND_NEW', $MODULE)}</button>
 								<button type='submit' class='btn btn-soft-success saveButton' onclick="document.getElementById('is_submitted').value = 0;RecommissioningReports_Edit_Js.deMandatoryDependency(event)">{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
 								<button type='submit' class='btn btn-soft-success saveButton' onclick="document.getElementById('is_submitted').value = 1;RecommissioningReports_Edit_Js.handleMandatoryDependency(event)">{vtranslate('Submit And Close', $MODULE)}</button>&nbsp;&nbsp;
 								<a class='btn btn-soft-danger cancelLink' href="javascript:history.{if $DUPLICATE_RECORDS}go(-2){else}back(){/if}" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>

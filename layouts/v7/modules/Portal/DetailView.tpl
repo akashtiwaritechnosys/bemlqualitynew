@@ -39,7 +39,7 @@
 				<br>
 				{if substr($URL, 0, 8) neq 'https://'}
 					<div id="portalDetailViewHttpError" class="">
-						<div class="col-lg-12">{vtranslate('HTTP_ERROR', $MODULE)}</div>
+						<div class="col-lg-12"><p>{vtranslate('HTTP_ERROR', $MODULE)}</p></div>
 					</div>
 				{/if}
 				<br>

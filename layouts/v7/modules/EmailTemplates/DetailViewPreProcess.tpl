@@ -25,10 +25,10 @@
 </div>
 <div class="container-fluid main-container">
 	<div class="row">
-		<div id="modnavigator" class="module-nav detailViewModNavigator clearfix">
+		{* <div id="modnavigator" class="module-nav detailViewModNavigator clearfix">
 			<div class="hidden-xs hidden-sm mod-switcher-container">
 				{include file="partials/Menubar.tpl"|vtemplate_path:$MODULE}
 			</div>
-		</div>
-		<div class="detailViewContainer viewContent clearfix">
+		</div> *}
+		<div class="detailViewContainer viewContent clearfix email-template">
 			<div class="content-area container-fluid">

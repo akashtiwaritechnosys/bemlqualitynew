@@ -18,10 +18,10 @@
 		{/if}
 	{/foreach}
 	<div class="row">		
-		<span class="col-lg-8">
+		<span class="col-lg-7">
 			<strong>{$PROJECTMILESTONE_NAME_HEADER}</strong>
 		</span>
-		<span class="col-lg-4">
+		<span class="col-lg-5">
 			<span class="pull-right">
 				<strong>{$PROJECTMILESTONE_DATE_HEADER}</strong>
 			</span>
@@ -31,20 +31,22 @@
 		<div class="recentActivitiesContainer">
 			<ul class="unstyled">
 				<li>
-					<div class="row">
-						<span class="col-lg-8 paddingLeft0 textOverflowEllipsis">
-							<a href="{$RELATED_RECORD->getDetailViewUrl()}" id="{$MODULE}_{$RELATED_MODULE}_Related_Record_{$RELATED_RECORD->get('id')}" title="{$RELATED_RECORD->getDisplayValue('projectmilestonename')}">{$RELATED_RECORD->getDisplayValue('projectmilestonename')}</a>
-						</span>
-						<span class="col-lg-4 horizontalLeftSpacingForSummaryWidgetContents">
-							<span class="pull-right">{$RELATED_RECORD->getDisplayValue('projectmilestonedate')}</span>
-						</span>
-							
+					<div class="widget-contents-listtwo">
+						<div class="row">
+							<span class="col-lg-6 paddingLeft textOverflowEllipsi">
+								<a href="{$RELATED_RECORD->getDetailViewUrl()}" id="{$MODULE}_{$RELATED_MODULE}_Related_Record_{$RELATED_RECORD->get('id')}" title="{$RELATED_RECORD->getDisplayValue('projectmilestonename')}">{$RELATED_RECORD->getDisplayValue('projectmilestonename')}</a>
+							</span>
+							<span class="col-lg-6 horizontalLeftSpacingForSummaryWidgetContents">
+								<span class="pull-right">{$RELATED_RECORD->getDisplayValue('projectmilestonedate')}</span>
+							</span>
+								
+						</div>
 					</div>
 				</li>
 			</ul>
 		</div>
 	{/foreach}
-	{assign var=NUMBER_OF_RECORDS value=count($RELATED_RECORDS)}
+	{assign var=NUMBER_OF_RECORDS value=php7_count($RELATED_RECORDS)}
 	{if $NUMBER_OF_RECORDS eq 5}
 		<div class="row">
 			<div class="pull-right">

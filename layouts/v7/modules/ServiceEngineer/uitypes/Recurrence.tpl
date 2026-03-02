@@ -18,9 +18,9 @@
 			{/if}
 			<input type="checkbox" name="recurringcheck" data-field-id= '{$FIELD_MODEL->get('id')}' value="" {if $RECURRING_INFORMATION['recurringcheck'] eq 'Yes'}checked{/if}/>&nbsp;&nbsp;
 		</div>
-		<div id="repeatUI" style="visibility: {if $RECURRING_INFORMATION['recurringcheck'] eq 'Yes'}visible{else}collapse{/if};" class="col-sm-9">
+		<div id="repeatUI" style="visibility: {if $RECURRING_INFORMATION['recurringcheck'] eq 'Yes'}visible{else}collapse{/if};" class="col-sm-11">
 			<div class="row">
-				<span class="col-sm-2 padding0px">
+				<span class="col-sm-3 padding0px">
                                     <span class="alignMiddle">{vtranslate('LBL_REPEATEVENT', $MODULE)}&nbsp;&nbsp;</span>
                                     <select class="select2 input-mini" name="repeat_frequency">
                                             {for $FREQUENCY = 1 to 14}
@@ -28,7 +28,7 @@
                                             {/for}
                                     </select>
 				</span>
-				<span class="col-sm-2 padding0px">
+				<span class="col-sm-3 padding0px">
 					<select class="select2 input-medium" style="width:85px;margin-left: 10px;" name="recurringtype" id="recurringType">
 						<option value="Daily" {if $RECURRING_INFORMATION['eventrecurringtype'] eq 'Daily'} selected {/if}>{vtranslate('LBL_DAYS_TYPE', $MODULE)}</option>
 						<option value="Weekly" {if $RECURRING_INFORMATION['eventrecurringtype'] eq 'Weekly'} selected {/if}>{vtranslate('LBL_WEEKS_TYPE', $MODULE)}</option>

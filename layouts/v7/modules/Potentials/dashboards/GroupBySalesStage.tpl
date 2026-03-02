@@ -9,9 +9,6 @@
   *
  ********************************************************************************/
 -->*}
-<script type="text/javascript">
-	Vtiger_Funnel_Widget_Js('Vtiger_GroupedBySalesStage_Widget_Js',{},{});
-</script>
 {foreach key=index item=cssModel from=$STYLES}
 	<link rel="{$cssModel->getRel()}" href="{$cssModel->getHref()}" type="{$cssModel->getType()}" media="{$cssModel->getMedia()}" />
 {/foreach}
@@ -29,7 +26,7 @@
                     <option value="{$CURRENTUSER->getId()}" >{vtranslate('LBL_MINE')}</option>
                     <option value="all">{vtranslate('LBL_ALL')}</option>
                     {assign var=ALL_ACTIVEUSER_LIST value=$CURRENTUSER->getAccessibleUsers()}
-                    {if count($ALL_ACTIVEUSER_LIST) gt 1}
+                    {if php7_count($ALL_ACTIVEUSER_LIST) gt 1}
                         <optgroup label="{vtranslate('LBL_USERS')}">
                             {foreach key=OWNER_ID item=OWNER_NAME from=$ALL_ACTIVEUSER_LIST}
                                 {if $OWNER_ID neq {$CURRENTUSER->getId()}}
@@ -52,8 +49,8 @@
 
     </div>
 </div>
-<div class="dashboardWidgetContent">
-	{include file="dashboards/DashBoardWidgetContents.tpl"|@vtemplate_path:$MODULE_NAME}
+<div id="GroupedBySalesStage" class="dashboardWidgetContent">
+	{include file="dashboards/DashBoardWidgetContentsNewDashboard.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 <div class="widgeticons dashBoardWidgetFooter">
     <div class="filterContainer">

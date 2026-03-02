@@ -53,20 +53,7 @@
                 {/foreach}
                 {foreach from=$EXTENSIONS item=EXTENSION}
                     <h4>{vtranslate($EXTENSION->getName(), $EXTENSION->getName())}</h4>
-                    {assign var=MODULE_FILE_NAME value=$EXTENSION->getModuleFile()}
-                    {assign var=TARGET_MODULE_INSTANCE value=$EXTENSION->getModule()}
-
-                    {if $EXTENSION->isAlreadyExists() && $MODULE_ACTION eq 'Upgrade'}
-                        {if !$EXTENSION->isUpgradable()}
-                            {vtranslate('LBL_ALREADY_UPGRADED', $QUALIFIED_MODULE)}
-                        {else}
-                            {$EXTENSION->update($TARGET_MODULE_INSTANCE, $MODULE_FILE_NAME)}
-                        {/if}
-                    {else}
-                        {$EXTENSION->import($MODULE_FILE_NAME, false)}
-                    {/if}
-                    {$EXTENSION->saveVersion()}
-                    {$EXTENSION->deleteModuleFile()}
+                    {$EXTENSION->installExtension()}
                 {/foreach}
             </div>
         </div>

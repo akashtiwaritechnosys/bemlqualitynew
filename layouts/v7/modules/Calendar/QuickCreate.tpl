@@ -39,9 +39,10 @@
 
 					{assign var="RECORD_STRUCTURE_MODEL" value=$QUICK_CREATE_CONTENTS[$MODULE]['recordStructureModel']}
 					{assign var="RECORD_STRUCTURE" value=$QUICK_CREATE_CONTENTS[$MODULE]['recordStructure']}
+					{assign var="BLOCK_FIELDS" value=$QUICK_CREATE_CONTENTS[$MODULE]['recordStructure']} {* Dependency in Time UiType template *}
 					{assign var="MODULE_MODEL" value=$QUICK_CREATE_CONTENTS[$MODULE]['moduleModel']}
 
-					<div class="quickCreateContent calendarQuickCreateContent" style="padding-top:2%;margin-top:5px;">
+					<div class="quickCreateContent calendarQuickCreateContent" style="padding-top:2%;margin-top:25px;">
 						{if $MODULE eq 'Calendar'}
 							{if !empty($PICKIST_DEPENDENCY_DATASOURCE_TODO)}
 								<input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE_TODO)}' />
@@ -87,12 +88,12 @@
 							<table class="massEditTable table no-border">
 								<tr>
 									{foreach key=FIELD_NAME item=FIELD_MODEL from=$RECORD_STRUCTURE name=blockfields}
-									{if $FIELD_NAME eq 'subject' || $FIELD_NAME eq 'date_start' || $FIELD_NAME eq 'due_date'}
+									{if $FIELD_NAME eq 'subject' || $FIELD_NAME eq 'date_start' || $FIELD_NAME eq 'due_date' || $FIELD_NAME eq 'time_start'}
 								</tr>{continue}
 								{/if}
 								{assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
 								{assign var="referenceList" value=$FIELD_MODEL->getReferenceList()}
-								{assign var="referenceListCount" value=count($referenceList)}
+								{assign var="referenceListCount" value=php7_count($referenceList)}
 								{if $FIELD_MODEL->get('uitype') eq "19"}
 								{if $COUNTER eq '1'}
 								<td></td><td></td></tr><tr>
@@ -145,9 +146,9 @@
 						{if $MODULE eq 'Events'}
 							{assign var="EDIT_VIEW_URL" value=$CALENDAR_MODULE_MODEL->getCreateEventRecordUrl()}
 						{/if}
-						<button class="btn btn-soft-secondary" id="goToFullForm" data-edit-view-url="{$EDIT_VIEW_URL}" type="button"><strong>{vtranslate('LBL_GO_TO_FULL_FORM', $MODULE)}</strong></button>
-						<button {if $BUTTON_ID neq null} id="{$BUTTON_ID}" {/if} class="btn btn-soft-success" type="submit" name="saveButton"><strong>{$BUTTON_LABEL}</strong></button>
-						<a href="#" class="cancelLink btn btn-soft-danger" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+						<button class="btn btn-default" id="goToFullForm" data-edit-view-url="{$EDIT_VIEW_URL}" type="button">{vtranslate('LBL_GO_TO_FULL_FORM', $MODULE)}</button>
+						<button {if $BUTTON_ID neq null} id="{$BUTTON_ID}" {/if} class="btn btn-submit" type="submit" name="saveButton">{$BUTTON_LABEL}</button>
+						<a href="#" class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
 					</center>
 				</div>
 			</form>

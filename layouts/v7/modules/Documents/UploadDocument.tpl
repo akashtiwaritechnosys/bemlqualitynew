@@ -9,8 +9,8 @@
 
 {strip}
 	<div class="modal-dialog modelContainer">
+		<div class="modal-content">
 		{assign var=HEADER_TITLE value={vtranslate('LBL_UPLOAD_TO_VTIGER', $MODULE)}}
-		<div class="modal-content" style="width:675px;">
 			<form class="form-horizontal recordEditView" name="upload" method="post" action="index.php">
 				{include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
 				<div class="modal-body">
@@ -23,11 +23,11 @@
 								<input type="hidden" name="module" value="{$MODULE}" />
 								<input type="hidden" name="action" value="SaveAjax" />
 								<input type="hidden" name="document_source" value="Vtiger" />
-								{if $RELATION_OPERATOR eq 'true'}
+								{if isset($RELATION_OPERATOR) && $RELATION_OPERATOR eq 'true'}
 									<input type="hidden" name="relationOperation" value="{$RELATION_OPERATOR}" />
 									<input type="hidden" name="sourceModule" value="{$PARENT_MODULE}" />
 									<input type="hidden" name="sourceRecord" value="{$PARENT_ID}" />
-									{if $RELATION_FIELD_NAME}
+									{if isset($RELATION_FIELD_NAME)}
 										<input type="hidden" name="{$RELATION_FIELD_NAME}" value="{$PARENT_ID}" /> 
 									{/if}
 								{/if}
@@ -44,10 +44,10 @@
 										{vtranslate('LBL_OR', $MODULE)}
 									</div>
 									<div>
-										<div class="fileUploadBtn btn btn-soft-primary">
+										<div class="fileUploadBtn btn btn-primary">
 											<span><i class="fa fa-laptop"></i> {vtranslate('LBL_SELECT_FILE_FROM_COMPUTER', $MODULE)}</span>
 											{assign var=FIELD_MODEL value=$FIELD_MODELS['filename']}
-											<input type="file" name="{$FIELD_MODEL->getFieldName()}" value="{$FIELD_VALUE}" data-rule-required="true" />
+							<input type="file" name="{$FIELD_MODEL->getFieldName()}" value="{if isset($FIELD_VALUE)}{$FIELD_VALUE}{/if}" data-rule-required="true" />
 										</div>
 										&nbsp;&nbsp;&nbsp;<i class="fa fa-info-circle cursorPointer" data-toggle="tooltip" title="{vtranslate('LBL_MAX_UPLOAD_SIZE', $MODULE)} {$MAX_UPLOAD_LIMIT_MB}{vtranslate('MB', $MODULE)}"></i>
 									</div>
@@ -71,29 +71,29 @@
 									</tr>
 									<tr>
 										{assign var="FIELD_MODEL" value=$FIELD_MODELS['assigned_user_id']}
-										<td class="fieldLabel col-lg-2">
+										<td class="fieldLabel col-lg-3">
 											<label class="muted pull-right">
-												{vtranslate($FIELD_MODEL->get('label'), $MODULE)}&nbsp;
+												{vtranslate($FIELD_MODEL->get('label'), $MODULE)}
 												{if $FIELD_MODEL->isMandatory() eq true}
 													<span class="redColor">*</span>
 												{/if}
 											</label>
 										</td>
-										<td class="fieldValue col-lg-4">
+										<td class="fieldValue col-lg-3">
 											{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
 										</td>
 
 										{assign var="FIELD_MODEL" value=$FIELD_MODELS['folderid']}
 										{if $FIELD_MODELS['folderid']}
-											<td class="fieldLabel col-lg-2">
+											<td class="fieldLabel col-lg-3">
 												<label class="muted pull-right">
-													{vtranslate($FIELD_MODEL->get('label'), $MODULE)}&nbsp;
+													{vtranslate($FIELD_MODEL->get('label'), $MODULE)}
 													{if $FIELD_MODEL->isMandatory() eq true}
 														<span class="redColor">*</span>
 													{/if}
 												</label>
 											</td>
-											<td class="fieldValue col-lg-4">
+											<td class="fieldValue col-lg-3">
 												{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
 											</td>
 										{/if}
@@ -101,7 +101,7 @@
 									<tr>
 										{assign var="FIELD_MODEL" value=$FIELD_MODELS['notecontent']}
 										{if $FIELD_MODELS['notecontent']}
-											<td class="fieldLabel col-lg-2" colspan="1">
+											<td class="fieldLabel col-lg-3" colspan="1">
 												<label class="muted pull-right">
 													{vtranslate($FIELD_MODEL->get('label'), $MODULE)}&nbsp;
 													{if $FIELD_MODEL->isMandatory() eq true}
@@ -121,7 +121,7 @@
 											{if !in_array($FIELD_NAME,$HARDCODED_FIELDS) && $FIELD_MODEL->isQuickCreateEnabled()}
 												{assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
 												{assign var="referenceList" value=$FIELD_MODEL->getReferenceList()}
-												{assign var="referenceListCount" value=count($referenceList)}
+												{assign var="referenceListCount" value=php7_count($referenceList)}
 												{if $FIELD_MODEL->get('uitype') eq "19"}
 													{if $COUNTER eq '1'}
 														<td></td><td></td></tr><tr>
@@ -134,7 +134,7 @@
 												{else}
 													{assign var=COUNTER value=$COUNTER+1}
 												{/if}
-												<td class='fieldLabel col-lg-2'>
+												<td class='fieldLabel col-lg-4'>
 													{if $isReferenceField neq "reference"}<label class="muted pull-right">{/if}
 														{if $isReferenceField eq "reference"}
 															{if $referenceListCount > 1}
@@ -156,7 +156,7 @@
 														{else if $FIELD_MODEL->get('uitype') eq '83'}
 															{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE) COUNTER=$COUNTER MODULE=$MODULE}
 															{if $TAXCLASS_DETAILS}
-																{assign 'taxCount' count($TAXCLASS_DETAILS)%2}
+																{assign var='taxCount' value=php7_count($TAXCLASS_DETAILS)%2}
 																{if $taxCount eq 0}
 																	{if $COUNTER eq 2}
 																		{assign var=COUNTER value=1}
@@ -171,7 +171,7 @@
 														{if $isReferenceField neq "reference"}</label>{/if}
 												</td>
 												{if $FIELD_MODEL->get('uitype') neq '83'}
-													<td class="fieldValue col-lg-4" {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
+													<td class="fieldValue col-lg-4  site-select" colspan="3" {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
 														{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
 													</td>
 												{/if}

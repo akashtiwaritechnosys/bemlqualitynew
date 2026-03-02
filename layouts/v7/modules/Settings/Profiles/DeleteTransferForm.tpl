@@ -10,9 +10,9 @@
 
 {strip}
 	<div class="modal-dialog modelContainer">
+		<div class="modal-content">
 		{assign var=HEADER_TITLE value={vtranslate('LBL_DELETE_PROFILE', $QUALIFIED_MODULE)}|cat:" - "|cat:{$RECORD_MODEL->getName()}}
 		{include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
-		<div class="modal-content">
 			<form class="form-horizontal" id="DeleteModal" name="AddComment" method="post" action="index.php">
 				<input type="hidden" name="module" value="{$MODULE}" />
 				<input type="hidden" name="parent" value="Settings" />

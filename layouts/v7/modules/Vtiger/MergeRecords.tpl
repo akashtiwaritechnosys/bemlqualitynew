@@ -36,7 +36,7 @@
                                             <div class="checkbox">
                                                 <label>
                                                 <input {if $smarty.foreach.recordList.index eq 0}checked{/if} type=radio value="{$RECORD->getId()}" name="primaryRecord"/>
-                                                &nbsp; {vtranslate('LBL_RECORD')} <a href="{$RECORD->getDetailViewUrl()}" target="_blank" style="color: #15c;">#{$RECORD->getId()}</a>
+                                                &nbsp; {vtranslate('LBL_RECORD')} <a href="{$RECORD->getDetailViewUrl()}" target="_blank" style="color: #000;">#{$RECORD->getId()}</a>
                                                 </label>
                                             </div>
                                         </th>

@@ -56,13 +56,13 @@
                             </div>
                             <div class="col-lg-2 btn-group pull-right col-lg-push-1">
                                 {if $DETAIL_ENABLED}
-                                    <button class="btn btn-soft-success btn-sm" style ="margin-right:10px">{vtranslate('LBL_DETAILS',$MODULE)}</button>
+                                    <button class="btn btn-submit btn-sm" style ="margin-right:10px">{vtranslate('LBL_DETAILS',$MODULE)}</button>
                                 {/if}
                                 {if $NAVIGATION}
-                                    <button class="btn btn-soft-secondary btn-sm" id="quickPreviewPreviousRecordButton" data-id = '{$PREVIOUS_RECORD_ID}' {if empty($PREVIOUS_RECORD_ID)} disabled="disabled"{else} onclick="return false"{/if} >
+                                    <button class="btn btn-default btn-sm" id="quickPreviewPreviousRecordButton" data-id = '{$PREVIOUS_RECORD_ID}' {if empty($PREVIOUS_RECORD_ID)} disabled="disabled"{else} onclick="return false"{/if} >
                                         <i class="fa fa-chevron-left"></i>
                                     </button>
-                                    <button class="btn btn-soft-secondary btn-sm" id="quickPreviewNextRecordButton" data-id = '{$NEXT_RECORD_ID}' {if empty($NEXT_RECORD_ID)} disabled="disabled"{else} onclick="return false"{/if}>
+                                    <button class="btn btn-default btn-sm" id="quickPreviewNextRecordButton" data-id = '{$NEXT_RECORD_ID}' {if empty($NEXT_RECORD_ID)} disabled="disabled"{else} onclick="return false"{/if}>
                                         <i class="fa fa-chevron-right"></i>
                                     </button>
                                 {/if}
@@ -81,16 +81,16 @@
                         {if $INCLUDE_BROWSER_SUPPORT_MSG}
                             <p class="redColor">{vtranslate('LBL_NOTE_ABOUT_PRINT',$MODULE)}</p>
                         {/if}
-                        <button class="btn btn-soft-info" name="editAndExportBtn" id="editAndExportBtn" type="button">
+                        <button class="btn btn-default" name="editAndExportBtn" id="editAndExportBtn" type="button">
                             <strong>{vtranslate('LBL_CUSTOMIZE',$MODULE)}</strong>
                         </button>
-                        <button class="btn btn-soft-blue" name="exportPDF" id="exportPDF" type="submit">
+                        <button class="btn btn-submit" name="exportPDF" id="exportPDF" type="submit">
                             <strong>{vtranslate('LBL_SAVE_AS_PDF',$MODULE)}</strong>
                         </button>
-                        <button class="btn btn-soft-blue" name="emailWithPDF" id="emailWithPDF" type="button">
+                        <button class="btn btn-submit" name="emailWithPDF" id="emailWithPDF" type="button">
                             <strong>{vtranslate('LBL_EMAIL_WITH_PDF',$MODULE)}</strong>
                         </button>
-                        <button class="btn btn-soft-info" id="listTplsPrintBtn" type="button">
+                        <button class="btn btn-submit" id="listTplsPrintBtn" type="button">
                             <strong>{vtranslate('LBL_PRINT',$MODULE)}</strong>
                         </button>
                         {if $DETAIL_PREVIEW eq 'false'}

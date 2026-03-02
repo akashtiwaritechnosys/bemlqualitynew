@@ -15,7 +15,7 @@
             <form class="form-horizontal" method="POST">
                 <div class="row" style="padding:10px;">
                     <label class="fieldLabel col-lg-4">
-                        <label class="pull-right">{vtranslate('LBL_NOTEPAD_NAME', $MODULE)}<span class="redColor">*</span> </label>
+                        <label class="pull-right">{vtranslate('LBL_NOTEPAD_NAME', $MODULE)} <span class="redColor star-gap"> *</span> </label>
                     </label>
                     <div class="fieldValue col-lg-6">
                         <input type="text" name="notePadName" class="inputElement" data-rule-required="true" />

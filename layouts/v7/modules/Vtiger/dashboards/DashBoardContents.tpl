@@ -9,9 +9,9 @@
 {* modules/Vtiger/views/DashBoard.php *}
     
 {strip}
-<div  style="margin-top: -20px" class="dashBoardContainer clearfix">
+<div class="dashBoardContainer clearfix">
         <div class="tabContainer">
-            <ul class="nav nav-tabs tabs sortable container-fluid">
+            <ul class="nav nav-tabs tabs sortable">
                 {foreach key=index item=TAB_DATA from=$DASHBOARD_TABS}
                     <li class="{if $TAB_DATA["id"] eq $SELECTED_TAB}active{/if} dashboardTab" data-tabid="{$TAB_DATA["id"]}" data-tabname="{$TAB_DATA["tabname"]}">
                         <a data-toggle="tab" href="#tab_{$TAB_DATA["id"]}">
@@ -30,19 +30,18 @@
                         </a>
                     </li>
                 {/foreach}
-                <div class="moreSettings pull-right">
+                <div class="pull-right">
                     <div class="dropdown dashBoardDropDown">
-                        <button class="btn btn-soft-primary reArrangeTabs dropdown-toggle" type="button" data-toggle="dropdown">{vtranslate('LBL_MORE',$MODULE)}
+                        <button class="btnn btn-defaultt bg-blue-btn reArrangeTabs dropdown-toggle" type="button" data-toggle="dropdown">{vtranslate('LBL_MORE',$MODULE)}
                             &nbsp;&nbsp;<span class="caret"></span></button>
                         <ul class="dropdown-menu dropdown-menu-right moreDashBoards">
-                            <li id="newDashBoardLi"{if count($DASHBOARD_TABS) eq $DASHBOARD_TABS_LIMIT}class="disabled"{/if}><a class = "addNewDashBoard" href="#">{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</a></li>
+                            <li id="newDashBoardLi"{if php7_count($DASHBOARD_TABS) eq $DASHBOARD_TABS_LIMIT}class="disabled"{/if}><a class = "addNewDashBoard" href="#">{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</a></li>
                             <li><a class = "reArrangeTabs" href="#">{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</a></li>
                         </ul>
                     </div>
-                    <button class="btn-soft-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
+                    <button class="btn-submit updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
                 </div>
-            </ul>
-            <div class="tab-content">
+                <div class="tab-content">
                 {foreach key=index item=TAB_DATA from=$DASHBOARD_TABS}
                     <div id="tab_{$TAB_DATA["id"]}" data-tabid="{$TAB_DATA["id"]}" data-tabname="{$TAB_DATA["tabname"]}" class="tab-pane fade {if $TAB_DATA["id"] eq $SELECTED_TAB}in active{/if}">
                         {if $TAB_DATA["id"] eq $SELECTED_TAB}
@@ -51,6 +50,10 @@
                     </div>
                 {/foreach}
             </div>
+            </ul>
+            
         </div>
 </div>
 {/strip}
+
+

@@ -3,7 +3,7 @@
 		<input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
 	{/if}
 
-	<div name='editContent' style="padding-top: 30px;">
+	<div class="custom-module-content" name='editContent'>
 		{if $DUPLICATE_RECORDS}
 			<div class="fieldBlockContainer duplicationMessageContainer">
 				<div class="duplicationMessageHeader"><b>{vtranslate('LBL_DUPLICATES_DETECTED', $MODULE)}</b></div>
@@ -17,22 +17,23 @@
 			</div>
 		{/if}
 		{foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator}
-			{if $BLOCK_FIELDS|@count gt 0}
+			{if $BLOCK_FIELDS|php7_count gt 0}
 				<div class='fieldBlockContainer' data-block="{$BLOCK_LABEL}">
 					<h4 class='fieldBlockHeader'>{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
 					<hr>
-					<div  class="container">
+					<div  class="block">
 						<div class="row">
 							{assign var=COUNTER value=0}
 							{foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
 								{assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
                                                                 {assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
 								{assign var="refrenceList" value=$FIELD_MODEL->getReferenceList()}
-								{assign var="refrenceListCount" value=count($refrenceList)}
+								{assign var="refrenceListCount" value=php7_count($refrenceList)}
 								{if $FIELD_MODEL->isEditable() eq true}
 									<div style="padding:10px;" id="{$FIELD_MODEL->getFieldName()}hideOrShowId" class="col-sm-6 col-md-6 col-lg-6 parentTRDiv ">
 									<div class="row">
-									<div class="col-sm-5 col-md-5 col-lg-5" style="color: #2c3b49;opacity: 0.8;font-size: 14px;">
+									<div class="col-sm-8 col-md-7 col-lg-5">
+										<label class="field-label">
 										{if $MASS_EDITION_MODE}
 											<input class="inputElement" id="include_in_mass_edit_{$FIELD_MODEL->getFieldName()}" data-update-field="{$FIELD_MODEL->getFieldName()}" type="checkbox">&nbsp;
 										{/if}
@@ -54,7 +55,7 @@
 										{else if $FIELD_MODEL->get('uitype') eq "83"}
 											{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE) COUNTER=$COUNTER MODULE=$MODULE}
 											{if $TAXCLASS_DETAILS}
-												{assign 'taxCount' count($TAXCLASS_DETAILS)%2}
+												{assign 'taxCount' php7_count($TAXCLASS_DETAILS)%2}
 												{if $taxCount eq 0}
 													{if $COUNTER eq 2}
 														{assign var=COUNTER value=1}
@@ -79,10 +80,10 @@
 												{vtranslate($FIELD_MODEL->get('label'), $MODULE)}
 											{/if}
 										{/if}
-										&nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
+										&nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if} </label>
 									</div>
 									{if $FIELD_MODEL->get('uitype') neq '83'}
-										<div class="col-sm-7 col-md-7 col-lg-7">
+										<div class="col-sm-10 col-md-10 col-lg-7">
 											<div  id="{$FIELD_MODEL->getFieldName()}hideOrShowInputId" {if in_array($FIELD_MODEL->get('uitype'),array('19','69')) || $FIELD_NAME eq 'description' ||  (($FIELD_NAME eq 'recurringtype' or $FIELD_NAME eq 'reminder_time')  && in_array({$MODULE},array('Events','Calendar')))} class="fieldValueWidth80 "  colspan="3" {assign var=COUNTER value=$COUNTER+1} {elseif $FIELD_MODEL->get('uitype') eq '56'} class="checkBoxType " {elseif $isReferenceField eq 'reference' or $isReferenceField eq 'multireference' } class="p-t-8 " {else}class="" {/if}>
 												{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE) READONLYFIELD=$FIELD_MODEL->isReadOnly()}
 											</div>

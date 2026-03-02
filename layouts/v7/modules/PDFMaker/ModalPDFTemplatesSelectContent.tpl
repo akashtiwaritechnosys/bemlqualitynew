@@ -37,7 +37,7 @@
                                     {/foreach}
                                 </select>
                             </div>
-                            {if $TEMPLATE_LANGUAGES|@sizeof > 1}
+                            {if $TEMPLATE_LANGUAGES|@php7_count > 1}
                                 <br>
                                 <div class="row">
                                     <h5>{vtranslate('LBL_PDF_LANGUAGE', $MODULE)}</h5>

@@ -15,7 +15,7 @@
     </div>
     <div class="userList">
         {assign var=CURRENT_USER_ID value=$CURRENT_USER->getId()}
-        {if $ACCESSIBLE_USERS|@count gt 1}
+        {if $ACCESSIBLE_USERS|php7_count gt 1}
             <select class="select2 widgetFilter col-lg-3 reloadOnChange" name="type">
                 <option value="all"  selected>{vtranslate('All', $MODULE_NAME)}</option>
                 {foreach key=USER_ID from=$ACCESSIBLE_USERS item=USER_NAME}

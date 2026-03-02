@@ -19,7 +19,7 @@
                     <textarea class="announcementContent textarea-autosize boxSizingBorderBox" rows="3" placeholder="{vtranslate('LBL_ENTER_ANNOUNCEMENT_HERE', $QUALIFIED_MODULE)}" style="width:100%">{$ANNOUNCEMENT->get('announcement')}</textarea>
                     <div class="textAlignCenter">
                         <br>
-                        <button class="btn btn-success saveAnnouncement hide"><strong>{vtranslate('LBL_SAVE', $QUALIFIED_MODULE)}</strong></button>
+                        <button class="btn btn-submit saveAnnouncement hide">{vtranslate('LBL_SAVE', $QUALIFIED_MODULE)}</button>
                     </div>
                 </div>
             </div>

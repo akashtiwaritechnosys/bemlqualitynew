@@ -11,7 +11,7 @@
 	{assign var="FIELD_INFO" value=$FIELD_MODEL->getFieldInfo()}
 	{assign var=FIELD_NAME value=$FIELD_MODEL->get('name')}
 	{assign var="REFERENCE_LIST" value=$FIELD_MODEL->getReferenceList()}
-	{assign var="REFERENCE_LIST_COUNT" value=count($REFERENCE_LIST)}
+	{assign var="REFERENCE_LIST_COUNT" value=php7_count($REFERENCE_LIST)}
 	{assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
 	<div class="referencefield-wrapper">
 		{if {$REFERENCE_LIST_COUNT} eq 1}
@@ -29,12 +29,12 @@
 				<input name="popupReferenceModule" type="hidden" value="{$REFERENCE_LIST[0]}" />
 			{/if}
 		{/if}
-		<input name="{$FIELD_NAME}" type="hidden" value="{$FIELD_MODEL->get('fieldvalue')}" class="sourceField" data-displayvalue='{$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'))}' data-fieldinfo='{$FIELD_INFO}' data-multiple='true'/>
+		<input name="{$FIELD_NAME}" type="hidden" value="{$FIELD_MODEL->get('fieldvalue')}" class="sourceField" data-displayvalue='{$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'))}' data-fieldinfo={json_encode($FIELD_INFO)} data-multiple='true'/>
 		<div class="input-group">
 			<input id="{$FIELD_NAME}_display" name="{$FIELD_NAME}_display" data-fieldname="{$FIELD_NAME}" data-fieldtype="reference" type="text" 
 				class="marginLeftZero autoComplete inputElement" 
-				value="{$FIELD_MODEL->getEditViewDisplayValue($displayId)}" 
-				data-fieldinfo='{$FIELD_INFO}' data-fieldtype="multireference" placeholder="{vtranslate('LBL_TYPE_SEARCH',$MODULE)}"
+				value="{(isset($displayId))?$FIELD_MODEL->getEditViewDisplayValue($displayId):''}" 
+				data-fieldinfo='{json_encode($FIELD_INFO)}' data-fieldtype="multireference" placeholder="{vtranslate('LBL_TYPE_SEARCH',$MODULE)}"
 				{if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
 				/>
 			<span class="input-group-addon relatedPopup cursorPointer" title="{vtranslate('LBL_SELECT', $MODULE)}" style="height:auto;width: 30px;">
@@ -43,7 +43,7 @@
 
 			<input type="hidden" name="relatedContactInfo" data-value='{json_encode($RELATED_CONTACTS, $smarty.const.JSON_HEX_APOS)}' />
                         <!-- Show the add button only if it is edit view  -->
-                        {if $smarty.request.view eq 'Edit'}
+                        {if $REQ->get('view') eq 'Edit'}
                             <span class="input-group-addon createReferenceRecord cursorPointer clearfix" title="{vtranslate('LBL_CREATE', $MODULE)}">
                                     <i id="{$MODULE}_editView_fieldName_{$FIELD_NAME}_create" class="fa fa-plus"></i>
                             </span>

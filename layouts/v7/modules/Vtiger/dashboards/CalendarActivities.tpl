@@ -11,7 +11,7 @@
 -->*}
 
 <div class="dashboardWidgetHeader clearfix">
-    {if $SHARED_USERS|@count gt 0 || $SHARED_GROUPS|@count gt 0}
+    {if $SHARED_USERS|php7_count gt 0 || $SHARED_GROUPS|php7_count gt 0}
         {assign var="usersList" value="1"}
     {/if}
     <div class="title">

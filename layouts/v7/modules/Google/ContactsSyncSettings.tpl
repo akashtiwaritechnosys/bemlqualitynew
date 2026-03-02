@@ -24,7 +24,7 @@
                     <div class="col-sm-12 col-xs-12">
                         <div class="pull-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                         <div class="btn-group pull-right">
-                            <button id="googlesync_addcustommapping" class="btn btn-soft-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                            <button id="googlesync_addcustommapping" class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
                                 <span class="caret"></span>&nbsp;{vtranslate('LBL_ADD_CUSTOM_FIELD_MAPPING',$MODULENAME)}
                             </button>
                             <ul class="dropdown-menu dropdown-menu-left" role="menu">
@@ -333,15 +333,15 @@
             </div>
         </form>
         <div class="modal-footer ">
-            <center>
+            <div class="footer-btns">
                 {if $BUTTON_NAME neq null}
                     {assign var=BUTTON_LABEL value=$BUTTON_NAME}
                 {else}
                     {assign var=BUTTON_LABEL value={vtranslate('LBL_SAVE', $MODULE)}}
                 {/if}
-                <button id="save_syncsetting" class="btn btn-soft-success" name="saveButton"><strong>{vtranslate('LBL_SAVE', $MODULENAME)}</strong></button>
-                <a href="#" class="cancelLink btn btn-soft-danger" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-            </center>
+                <button id="save_syncsetting" class="btn btn-submit" name="saveButton">{vtranslate('LBL_SAVE', $MODULENAME)}</button>
+                <a href="#" class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+            </div>
 	</div>
     </div>
 </div>

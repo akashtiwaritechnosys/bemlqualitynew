@@ -22,10 +22,7 @@
 		<input type='hidden' value="{$TOTAL_ENTRIES}" id='totalCount'>
 		<input type='hidden' value="{$TAB_LABEL}" id='tab_label' name='tab_label'>
 		<input type='hidden' value="{$IS_RELATION_FIELD_ACTIVE}" id='isRelationFieldActive'>
-                <input type="hidden" id="selectedIds" name="selectedIds" data-selected-ids="" />
-                <input type="hidden" id="excludedIds" name="excludedIds" data-excluded-ids="" />
-                <input type="hidden" id="recordsCount" name="recordsCount" />
-              
+
 		{include file="partials/RelatedListHeader.tpl"|vtemplate_path:$RELATED_MODULE_NAME}
 		{if $MODULE eq 'Products' && $RELATED_MODULE_NAME eq 'Products' && $TAB_LABEL === 'Product Bundles' && $RELATED_LIST_LINKS}
 			<div data-module="{$MODULE}" style = "margin-left:20px">
@@ -34,25 +31,14 @@
 				<label class="showBundlesInInventory checkbox"><input type="checkbox" {if $IS_VIEWABLE}checked{/if} value="{$IS_VIEWABLE}">&nbsp;&nbsp;{vtranslate('LBL_SHOW_BUNDLE_IN_INVENTORY', $MODULE)}</label>
 			</div>
 		{/if}
-                <div class='col-lg-12 col-md-12 col-sm-12'>
-                        {assign var=RELATED_MODULE_NAME value=$RELATED_MODULE->get('name')}
-                        <div class="hide messageContainer" style = "height:30px;">
-                                <center><a id="selectAllMsgDiv" href="#">{vtranslate('LBL_SELECT_ALL',$MODULE)}&nbsp;{vtranslate($RELATED_MODULE_NAME ,$RELATED_MODULE_NAME)}&nbsp;(<span id="totalRecordsCount" value=""></span>)</a></center>
-                        </div>
-                        <div class="hide messageContainer" style = "height:30px;">
-                                <center><a id="deSelectAllMsgDiv" href="#">{vtranslate('LBL_DESELECT_ALL_RECORDS',$MODULE)}</a></center>
-                        </div>
-                </div>
+
 		<div class="relatedContents col-lg-12 col-md-12 col-sm-12 table-container">
 			<div class="bottomscroll-div">
 				<table id="listview-table" class="table listview-table">
 					<thead>
 						<tr class="listViewHeaders">
-							 <th width="4%" style="padding-left: 12px;">
-                                                            <input type="checkbox" id="listViewEntriesMainCheckBox"/>
-                                                        </th>
-                                                        <th style="min-width:100px">
-                                                        </th>
+							<th style="min-width:100px">
+							</th>
 							{foreach item=HEADER_FIELD from=$RELATED_HEADERS}
 								{* hide time_start,time_end columns in the list as they are merged with with Start Date and End Date fields *}
 								{if $HEADER_FIELD->get('column') eq 'time_start' or $HEADER_FIELD->get('column') eq 'time_end'}
@@ -81,17 +67,20 @@
 							{/foreach}
 						</tr>
 						<tr class="searchRow">
-                                                        <th></th>
 							<th class="inline-search-btn">
-								<button class="btn btn-success btn-sm" data-trigger="relatedListSearch">{vtranslate("LBL_SEARCH",$MODULE)}</button>
+								<button class="btn btn-submit btn-sm" data-trigger="relatedListSearch">{vtranslate("LBL_SEARCH",$MODULE)}</button>
 							</th>
 							{foreach item=HEADER_FIELD from=$RELATED_HEADERS}
 								<th>
 									{if $HEADER_FIELD->get('column') eq 'time_start' or $HEADER_FIELD->get('column') eq 'time_end' or $HEADER_FIELD->getFieldDataType() eq 'reference'}
 									{else}
 										{assign var=FIELD_UI_TYPE_MODEL value=$HEADER_FIELD->getUITypeModel()}
-										{include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$RELATED_MODULE_NAME) FIELD_MODEL= $HEADER_FIELD SEARCH_INFO=$SEARCH_DETAILS[$HEADER_FIELD->getName()] USER_MODEL=$USER_MODEL}
-										<input type="hidden" class="operatorValue" value="{$SEARCH_DETAILS[$HEADER_FIELD->getName()]['comparator']}">
+										{assign var=SEARCH_DETAILS_FIELD_INFO value=array('searchValue' => '', 'comparator' => '')}
+										{if isset($SEARCH_DETAILS[$HEADER_FIELD->getName()])}
+										{assign var=SEARCH_DETAILS_FIELD_INFO value=$SEARCH_DETAILS[$HEADER_FIELD->getName()]}
+										{/if}
+										{include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$RELATED_MODULE_NAME) FIELD_MODEL= $HEADER_FIELD SEARCH_INFO=$SEARCH_DETAILS_FIELD_INFO USER_MODEL=$USER_MODEL}
+										<input type="hidden" class="operatorValue" value="{$SEARCH_DETAILS_FIELD_INFO['comparator']}">
 									{/if}
 								</th>
 							{/foreach}
@@ -108,9 +97,6 @@
 							{else}
 								data-recordUrl='{$RELATED_RECORD->getDetailViewUrl()}'
 							{/if}>
-                                                        <td width="4%" class="{$WIDTHTYPE}">
-                                                            <input type="checkbox" value="{$RELATED_RECORD->getId()}" class="listViewEntriesCheckBox"/>
-                                                        </td>
 							<td class="related-list-actions">
 								<span class="actionImages">&nbsp;&nbsp;&nbsp;
 									{if $IS_EDITABLE && $RELATED_RECORD->isEditable()}
@@ -130,7 +116,7 @@
 										{else}
 											<a name="relationEdit" data-url="{$RELATED_RECORD->getEditViewUrl()}"
 										{/if}
-										>
+										><i class="fa fa-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}"></i></a> &nbsp;&nbsp;
 									{/if}
 
 									{if $IS_DELETABLE}
@@ -142,8 +128,8 @@
 							{foreach item=HEADER_FIELD from=$RELATED_HEADERS}
 								{assign var=RELATED_HEADERNAME value=$HEADER_FIELD->get('name')}
 								{assign var=RELATED_LIST_VALUE value=$RELATED_RECORD->get($RELATED_HEADERNAME)}
-								<td class="relatedListEntryValues" title="{strip_tags($RELATED_RECORD->getDisplayValue($RELATED_HEADERNAME))}" data-field-type="{$HEADER_FIELD->getFieldDataType()}" nowrap>
-									<span class="value textOverflowEllipsis">
+								<td class="relatedListEntryValues" title="{strip_tags((isset($RELATED_RECORD->getDisplayValue($RELATED_HEADERNAME)))?$RELATED_RECORD->getDisplayValue($RELATED_HEADERNAME):"")}" data-field-type="{$HEADER_FIELD->getFieldDataType()}" nowrap>
+										<span class="value textOverflowEllipsis">
 										{if $RELATED_MODULE_NAME eq 'Documents' && $RELATED_HEADERNAME eq 'document_source'}
 											<center>{$RELATED_RECORD->get($RELATED_HEADERNAME)}</center>
 											{else}

@@ -22,7 +22,7 @@
         {assign var=UNCHECKED_VALUE value=' '}
     {/if}
     <div class="">
-    <select class="select2 listSearchContributor" name="{$FIELD_MODEL->get('name')}" style="width:90px;" data-fieldinfo='{$FIELD_INFO|escape}'>
+    <select class="select2 listSearchContributor" name="{$FIELD_MODEL->get('name')}" style="width:140px;" data-fieldinfo='{$FIELD_INFO|escape}'>
         <option value="">{vtranslate('LBL_SELECT_OPTION','Vtiger')}</option>
         <option value="{$CHECKED_VALUE}" {if $SEARCH_VALUES eq $CHECKED_VALUE} selected{/if}>{vtranslate('LBL_YES',$MODULE)}</option>
         <option value="{$UNCHECKED_VALUE}" {if $SEARCH_VALUES eq $UNCHECKED_VALUE} selected{/if}>{vtranslate('LBL_NO',$MODULE)}</option>

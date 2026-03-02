@@ -13,10 +13,10 @@
     {assign var=EXECUTION_CONDITION value=$WORKFLOW_MODEL_OBJ->executionCondition}
     <input type="hidden" name="workflow_trigger" value="{$EXECUTION_CONDITION}" />
     <div class="form-group">
-        <label for="name" class="col-sm-3 control-label">
+        <label for="name" class="col-lg-3 col-sm-4 control-label">
             {vtranslate('LBL_TRIGGER_WORKFLOW_ON', $QUALIFIED_MODULE)}
         </label>
-        <div class="col-sm-6 controls">
+        <div class="col-lg-6 col-sm-7 controls">
             {assign var=SINGLE_SELECTED_MODULE value="SINGLE_$SELECTED_MODULE"}
             <span><input type="radio" name="workflow_trigger" value="1" {if $EXECUTION_CONDITION eq '1'} checked="" {/if}> <span id="workflowTriggerCreate">{vtranslate($SINGLE_SELECTED_MODULE, $SELECTED_MODULE)} {vtranslate('LBL_CREATION', $QUALIFIED_MODULE)}</span></span><br>
             <span><input type="radio" name="workflow_trigger" value="3" {if $EXECUTION_CONDITION eq '3' or $EXECUTION_CONDITION eq '2'} checked="" {/if}> <span id="workflowTriggerUpdate">{vtranslate($SINGLE_SELECTED_MODULE, $SELECTED_MODULE)} {vtranslate('LBL_UPDATED', $QUALIFIED_MODULE)}</span> &nbsp;({vtranslate('LBL_INCLUDES_CREATION', $QUALIFIED_MODULE)})</span><br>
@@ -29,10 +29,10 @@
     </div>
 
     <div class="form-group workflowRecurrenceBlock {if !in_array($EXECUTION_CONDITION, array(2,3))} hide {/if}">
-       <label for="name" class="col-sm-3 control-label">
+       <label for="name" class="col-lg-3 col-sm-4 control-label">
           {vtranslate('LBL_RECURRENCE', $QUALIFIED_MODULE)}
        </label>
-       <div class="col-sm-5 controls">
+       <div class="col-lg-6 col-sm-7 controls">
            <span><input type="radio" name="workflow_recurrence" value="2" {if $EXECUTION_CONDITION eq '2'} checked="" {/if}> {vtranslate('LBL_FIRST_TIME_CONDITION_MET', $QUALIFIED_MODULE)}</span><br>
            <span><input type="radio" name="workflow_recurrence" value="3" {if $EXECUTION_CONDITION eq '3'} checked="" {/if}> {vtranslate('LBL_EVERY_TIME_CONDITION_MET', $QUALIFIED_MODULE)}</span>
        </div>
@@ -41,14 +41,14 @@
     {if $SCHEDULED_WORKFLOW_COUNT < $MAX_ALLOWED_SCHEDULED_WORKFLOWS}
         <div id="scheduleBox" class='contentsBackground {if $WORKFLOW_MODEL_OBJ->executionCondition neq 6} hide {/if}'>
             <div class="form-group">
-                <label class="col-sm-3 control-label"> {vtranslate('LBL_FREQUENCY', $QUALIFIED_MODULE)} </label>
-                <div class="col-sm-9 controls">
+                <label class="col-lg-3 col-sm-4 control-label"> {vtranslate('LBL_FREQUENCY', $QUALIFIED_MODULE)} </label>
+                <div class="col-lg-9 col-sm-7 controls">
                     <div class="well">
                         <div class="form-group">
-                            <label for="schtypeid" class="col-sm-2 control-label">
+                            <label for="schtypeid" class="col-lg-3 col-sm-5 col-md-5 control-label">
                                 {vtranslate('LBL_RUN_WORKFLOW', $QUALIFIED_MODULE)}
                             </label>
-                            <div class="col-sm-4 controls">
+                            <div class="col-lg-5 col-md-7 col-sm-7 controls site-select">
                                 <select class='select2' id='schtypeid' name='schtypeid' style="min-width: 150px;">
                                     <option value="1" {if $WORKFLOW_MODEL_OBJ->schtypeid eq 1}selected{/if}>{vtranslate('LBL_HOURLY', $QUALIFIED_MODULE)}</option>
                                     <option value="2" {if $WORKFLOW_MODEL_OBJ->schtypeid eq 2}selected{/if}>{vtranslate('LBL_DAILY', $QUALIFIED_MODULE)}</option>
@@ -98,10 +98,10 @@
                             <div class='col-sm-3 controls'>
                                 <div class="input-group" style="margin-bottom: 3px">
                                     {assign var=specificDate value=Zend_Json::decode($WORKFLOW_MODEL_OBJ->schannualdates)}
-                                    {if $specificDate[0] neq ''} 
+                                    {if isset($specificDate[0]) && $specificDate[0] neq ''} 
                                         {assign var=specificDate1 value=DateTimeField::convertToUserFormat($specificDate[0])} 
                                     {/if}
-                                    <input type="text" class="dateField form-control" name="schdate" value="{$specificDate1}" data-date-format="{$CURRENT_USER->date_format}" data-rule-required="true"/>
+                                    <input type="text" class="dateField form-control" name="schdate" value="{(isset($specificDate1)) ? $specificDate1 : ''}" data-date-format="{$CURRENT_USER->date_format}" data-rule-required="true"/>
                                     <span class="input-group-addon"><i class="fa fa-calendar "></i></span>
                                 </div>
                             </div>
@@ -118,9 +118,12 @@
                                 <div>
                                     <input type=hidden id=hiddenAnnualDates value='{$WORKFLOW_MODEL_OBJ->schannualdates}' />
                                     <select multiple class="select2" id='annualDates' name='schannualdates[]' data-rule-required="true" style="min-width: 100px;">
+                                    {if isset($ANNUAL_DATES)}
                                         {foreach item=DATES from=$ANNUAL_DATES}
                                             <option value="{$DATES}" selected>{$DATES}</option>
                                         {/foreach}
+                                    {/if}
+                                        
                                     </select>
                                 </div>
                             </div>
@@ -133,7 +136,7 @@
                               </label>
                               <div class="col-sm-2 controls" id='schtime'>
                                   <div class="input-group time" >
-                                      <input type='text' data-format='24' name='schtime' value="{$WORKFLOW_MODEL_OBJ->schtime}" data-rule-required="true" class="timepicker-default inputElement"/>
+                                      <input type='text' data-format='{$CURRENT_USER->get('hour_format')}' name='schtime' value="{$WORKFLOW_MODEL_OBJ->schtime}" data-rule-required="true" class="timepicker-default inputElement"/>
                                       <span  class="input-group-addon">
                                           <i  class="fa fa-clock-o"></i>
                                       </span>
@@ -145,7 +148,17 @@
                                 <label class='col-sm-2 control-label'>{vtranslate('LBL_NEXT_TRIGGER_TIME', $QUALIFIED_MODULE)}</label>
                                 <div class='col-sm-4 controls'>
                                     {if $WORKFLOW_MODEL_OBJ->schtypeid neq 4}
-                                        {DateTimeField::convertToUserFormat($WORKFLOW_MODEL_OBJ->nexttrigger_time)}
+			                            {assign var="userModel" value=Users_Privileges_Model::getCurrentUserModel()}
+                                        {if $userModel->get('hour_format') == '12'}
+                                            {assign var="fieldvalue" value=DateTimeField::convertToUserFormat($WORKFLOW_MODEL_OBJ->nexttrigger_time)}
+                                            {assign var="time_parts" value=explode(" ", $fieldvalue)}
+                                            {assign var="time" value=$time_parts[1]}
+                                            {assign var="value" value=Vtiger_Time_UIType::getTimeValueInAMorPM($time)}
+                                            {assign var="fieldvalue" value=$time_parts[0]|cat:' '|cat:$value}
+                                            {$fieldvalue}
+                                        {else}
+                                            {DateTimeField::convertToUserFormat($WORKFLOW_MODEL_OBJ->nexttrigger_time)}
+                                        {/if}
                                         <span>&nbsp;({$ACTIVE_ADMIN->time_zone})</span>
                                     {/if}
                                 </div>

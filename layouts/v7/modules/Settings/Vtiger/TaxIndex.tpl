@@ -10,24 +10,22 @@
 
 {strip}
 	<div class="col-lg-12 col-md-12 col-sm-12" id="TaxCalculationsContainer">
-		<div class="editViewHeader">
+		{*<div class="editViewHeader tax-calculation">
 			<h4>{vtranslate('LBL_TAX_CALCULATIONS', $QUALIFIED_MODULE)}</h4>
-		</div>
-		<hr>
-		<br>
+		</div>*}
+		
 		<div class="contents tabbable clearfix">
 			<ul class="nav nav-tabs layoutTabs massEditTabs">
 				<li class="tab-item taxesTab active"><a data-toggle="tab" href="#taxes"><strong>{vtranslate('LBL_TAXES', $QUALIFIED_MODULE)}</strong></a></li>
 				<li class="tab-item chargesTab"><a data-toggle="tab" href="#charges"><strong>{vtranslate('LBL_CHARGES_AND ITS_TAXES', $QUALIFIED_MODULE)}</strong></a></li>
 				<li class="tab-item taxRegionsTab"><a data-toggle="tab" href="#taxRegions"><strong>{vtranslate('LBL_TAX_REGIONS', $QUALIFIED_MODULE)}</strong></a></li>
 			</ul>
-			<div class="tab-content layoutContent padding20 overflowVisible">
+			<div class="tab-content layoutContent marginTop10px">
 				<div class="tab-pane active" id="taxes">
-					<div class="col-lg-3 col-md-3 col-sm-3"></div>
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						{assign var=CREATE_TAX_URL value=$TAX_RECORD_MODEL->getCreateTaxUrl()}
 						{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
-						<div class="marginBottom10px">
+						<div class="marginBottom10px marginTop10px">
 							<button type="button" class="btn btn-default addTax addButton btn-default module-buttons" data-url="{$CREATE_TAX_URL}" data-type="0">
 								<i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD_NEW_TAX', $QUALIFIED_MODULE)}
 							</button>

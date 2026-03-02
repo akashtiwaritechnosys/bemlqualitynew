@@ -19,24 +19,24 @@
 		{assign var="TO_EMAILS" value=$RECORD->get('saved_toid')|replace:']':''}
 		{assign var="TO_EMAIL" value=$TO_EMAILS|replace:'[':''}
 		{assign var="TO_EMAIL_VALUE" value=$TO_EMAIL|replace:'&quot;':''}
-		<span style="position:absolute;right:6%;top:3%;font-family:'Lucida Grande';font-size:15px">
+		<span style="position:absolute;right:6%;top:3%;font-size:15px">
 			{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')} &lt;{$USER_MODEL->get('email1')}&gt;
 		</span><hr/>
-		<span style="font-family:'Lucida Grande';font-size:15px">
+		<span style="font-size:15px">
 			{$RECORD->get('subject')}
 		</span><hr/>
 		<div>
-			<div style="width:100%;text-align: right;font-family:'Lucida Grande';font-size:15px">
+			<div style="width:100%;text-align: right;font-size:15px">
 				<span>
 					{Vtiger_Util_Helper::formatDateTimeIntoDayString($RECORD->get('createdtime'))}
 				</span>
 			</div>
 		</div>
 		<div>
-			<div style="float:left;width:10%;text-align: right;font-family:'Lucida Grande';font-size:15px">
+			<div style="float:left;width:10%;text-align: right;font-size:15px">
 				{vtranslate('LBL_FROM',$MODULE)}
 			</div>
-			<div style="width:90%;text-align: left;font-family:'Lucida Grande';font-size:15px">
+			<div style="width:90%;text-align: left;font-size:15px">
 				<span style="margin-left:7%;">
 					{$FROM}
 				</span>
@@ -44,11 +44,11 @@
 			<div class="clear-both"></div>
 		</div>
 		<div>
-			<div style="float:left;width:10%;text-align: right;font-family:'Lucida Grande';font-size:15px">
+			<div style="float:left;width:10%;text-align: right;font-size:15px">
 				{vtranslate('LBL_TO',$MODULE)}
 			</div>
-			<div style="width:90%;text-align: left;font-family:'Lucida Grande';font-size:15px">
-				<span style="margin-left:7%;font-family:'Lucida Grande';font-size:15px">
+			<div style="width:90%;text-align: left;font-size:15px">
+				<span style="margin-left:7%;font-size:15px">
 					{assign var=TO_EMAILS value=","|implode:$TO}
 					{$TO_EMAILS}
 				</span>
@@ -57,10 +57,10 @@
 		</div>
 		{if !empty($CC)}
 			<div>
-				<div style="float:left;width:10%;text-align: right;font-family:'Lucida Grande';font-size:15px">
+				<div style="float:left;width:10%;text-align: right;font-size:15px">
 					{vtranslate('LBL_CC',$MODULE)}
 				</div>
-				<div style="width:90%;text-align: left;font-family:'Lucida Grande';font-size:15px">
+				<div style="width:90%;text-align: left;font-size:15px">
 					<span style="margin-left:7%;">
 						{if !empty($CC)}
 							{$CC}
@@ -72,10 +72,10 @@
 		{/if}
 		{if !empty($BCC)}
 			<div>
-				<div style="float:left;width:10%;text-align: right;font-family:'Lucida Grande';font-size:15px">
+				<div style="float:left;width:10%;text-align: right;font-size:15px">
 					{vtranslate('LBL_BCC',$MODULE)}
 				</div>
-				<div style="width:90%;text-align: left;font-family:'Lucida Grande';font-size:15px">
+				<div style="width:90%;text-align: left;font-size:15px">
 					<span style="margin-left:7%;">
 						{if !empty($BCC)}
 							{$BCC}
@@ -86,10 +86,10 @@
 			</div>
 		{/if}
 		<div>
-			<div style="float:left;width:10%;text-align: right;font-family:'Lucida Grande';font-size:15px">
+			<div style="float:left;width:10%;text-align: right;font-size:15px">
 				{vtranslate('LBL_SUBJECT',$MODULE)}
 			</div>
-			<div style="width:90%;text-align: left;font-family:'Lucida Grande';font-size:15px">
+			<div style="width:90%;text-align: left;font-size:15px">
 				<span style="margin-left:7%;">
 					{$RECORD->get('subject')}
 				</span>
@@ -99,10 +99,10 @@
 		{assign var="ATTACHMENT_DETAILS" value=$RECORD->getAttachmentDetails()}
 		{if !empty($ATTACHMENT_DETAILS)}
 			<div>
-				<div style="float:left;width:10%;text-align: right;font-family:'Lucida Grande';font-size:15px">
+				<div style="float:left;width:10%;text-align: right;font-size:15px">
 					{vtranslate('LBL_ATTACHMENT',$MODULE)}
 				</div>
-				<div style="width:90%;text-align: left;font-family:'Lucida Grande';font-size:15px">
+				<div style="width:90%;text-align: left;font-size:15px">
 					<span style="margin-left:7%;">
 						{foreach item=ATTACHMENT_DETAIL  from=$ATTACHMENT_DETAILS}
 							<a href="javascript:void(0)">{$ATTACHMENT_DETAIL['attachment']}</a>&nbsp;&nbsp;
@@ -113,7 +113,7 @@
 			</div>
 		{/if}
 		<div>
-			<div style="width:90%;text-align: left;margin-left:7%;font-family:'Lucida Grande';font-size:15px">
+			<div style="width:90%;text-align: left;margin-left:7%;font-size:15px">
 				<span style="margin-left:7%;">
 					{decode_html($RECORD->get('description'))}
 				</span>

@@ -10,7 +10,7 @@
 {* modules/Vtiger/views/Import.php *}
 
 {strip}
-	<div class='fc-overlay-modal modal-content'>
+	<div class='fc-overlay-modal modal-content import-modal'>
 		<div class="overlayHeader">
 			{assign var=TITLE value="{'LBL_IMPORT'|@vtranslate:$MODULE} {$FOR_MODULE|@vtranslate:$FOR_MODULE}"}
 			{include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$TITLE}
@@ -32,7 +32,7 @@
 					{/if}
 
 					{if $FORMAT neq 'ics'}
-						{if $DUPLICATE_HANDLING_NOT_SUPPORTED eq 'true'}
+						{if isset($DUPLICATE_HANDLING_NOT_SUPPORTED) && $DUPLICATE_HANDLING_NOT_SUPPORTED eq 'true'}
 							{$LABELS["step3"] = 'LBL_FIELD_MAPPING'}
 						{else}
 							{$LABELS["step2"] = 'LBL_DUPLICATE_HANDLING'}
@@ -48,28 +48,30 @@
 				</div>
 			</form>
 		</div>
-		<div class='modal-overlay-footer border1px clearfix'>
+		<div class='modal-overlay-footer clearfix'>
 			<div class="row clearfix">
 				<div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-					{if $FORMAT eq 'ics'}
-						<button type="submit" name="import" id="importButton" class="btn btn-soft-success btn-lg" onclick="return Calendar_Edit_Js.uploadAndParse();">{vtranslate('LBL_IMPORT_BUTTON_LABEL', $MODULE)}</button>
-						&nbsp;&nbsp;&nbsp;<a class="btn-soft-danger cancelLink" data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-					{else}
-						<div id="importStepOneButtonsDiv">
-							{if $DUPLICATE_HANDLING_NOT_SUPPORTED eq 'true'}
-								<button class="btn btn-soft-blue btn-lg" id="skipDuplicateMerge" onclick="Vtiger_Import_Js.uploadAndParse('0');">{vtranslate('LBL_NEXT_BUTTON_LABEL', $MODULE)}</button>
-							{else}
-								<button class="btn btn-soft-blue btn-lg" id ="importStep2" onclick="Vtiger_Import_Js.importActionStep2();">{vtranslate('LBL_NEXT_BUTTON_LABEL', $MODULE)}</button>
-							{/if}
-							&nbsp;&nbsp;&nbsp;<a class='cancelLink btn btn-soft-danger' onclick="Vtiger_Import_Js.loadListRecords();" data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-						</div>
-						<div id="importStepTwoButtonsDiv" class = "hide">
-							<button class="btn btn-default btn-lg" id="backToStep1" onclick="Vtiger_Import_Js.bactToStep1();">{vtranslate('LBL_BACK', $MODULE)}</button>
-							&nbsp;&nbsp;&nbsp;<button name="next" class="btn btn-success btn-lg" id="uploadAndParse" onclick="Vtiger_Import_Js.uploadAndParse('1');">{vtranslate('LBL_NEXT_BUTTON_LABEL', $MODULE)}</button>
-							&nbsp;&nbsp;&nbsp;<button class="btn btn-primary btn-lg" id="skipDuplicateMerge" onclick="Vtiger_Import_Js.uploadAndParse('0');">{vtranslate('Skip this step', $MODULE)}</button>
-							&nbsp;&nbsp;&nbsp;<a class='cancelLink' data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-						</div>
-					{/if}
+					<div class='footer-btns'>
+						{if $FORMAT eq 'ics'}
+							<button type="submit" name="import" id="importButton" class="btn btn-submit btn-lg" onclick="return Calendar_Edit_Js.uploadAndParse();">{vtranslate('LBL_IMPORT_BUTTON_LABEL', $MODULE)}</button>
+							<a class="cancelLink" data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+						{else}
+							<div id="importStepOneButtonsDiv">
+								{if isset($DUPLICATE_HANDLING_NOT_SUPPORTED) && $DUPLICATE_HANDLING_NOT_SUPPORTED eq 'true'}
+									<button class="btn btn-submit btn-lg" id="skipDuplicateMerge" onclick="Vtiger_Import_Js.uploadAndParse('0');">{vtranslate('LBL_NEXT_BUTTON_LABEL', $MODULE)}</button>
+								{else}
+									<button class="btn btn-submit btn-lg" id ="importStep2" onclick="Vtiger_Import_Js.importActionStep2();">{vtranslate('LBL_NEXT_BUTTON_LABEL', $MODULE)}</button>
+								{/if}
+								<a class='cancelLink' onclick="Vtiger_Import_Js.loadListRecords();" data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+							</div>
+							<div id="importStepTwoButtonsDiv" class = "hide">
+								<button class="btn btn-default btn-lg" id="backToStep1" onclick="Vtiger_Import_Js.bactToStep1();">{vtranslate('LBL_BACK', $MODULE)}</button>
+								<button name="next" class="btn btn-lg" id="uploadAndParse" onclick="Vtiger_Import_Js.uploadAndParse('1');">{vtranslate('LBL_NEXT_BUTTON_LABEL', $MODULE)}</button>
+								<button class="btn btn-primary btn-lg" id="skipDuplicateMerge" onclick="Vtiger_Import_Js.uploadAndParse('0');">{vtranslate('Skip this step', $MODULE)}</button>
+								<a class='cancelLink' data-dismiss="modal" href="#">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+							</div>
+						{/if}
+					</div>
 				</div>
 			</div>
 		</div>

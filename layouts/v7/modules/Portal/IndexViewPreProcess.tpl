@@ -24,10 +24,10 @@
 		</div>
 	</div>  
 	<div class="main-container main-container-{$MODULE}">
-		<div id="modnavigator" class="module-nav">
+		{* <div id="modnavigator" class="module-nav">
 			<div class="hidden-xs hidden-sm mod-switcher-container">
 				{include file="partials/Menubar.tpl"|vtemplate_path:$MODULE}
 			</div>
-		</div>
+		</div> *}
 		<div class="listViewPageDiv content-area full-width" id="listViewContent">
 {/strip}

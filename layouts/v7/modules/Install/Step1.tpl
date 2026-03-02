@@ -34,7 +34,7 @@
 						<h3>{vtranslate('LBL_WELCOME_TO_VTIGER7_SETUP_WIZARD', 'Install')}</h3>
 						{vtranslate('LBL_VTIGER7_SETUP_WIZARD_DESCRIPTION','Install')}
 					</div>
-					{if $LANGUAGES|@count > 1}
+					{if $LANGUAGES|php7_count > 1}
 						<div>
 							<span>{vtranslate('LBL_CHOOSE_LANGUAGE', 'Install')}
 								<select name="lang" id="lang">

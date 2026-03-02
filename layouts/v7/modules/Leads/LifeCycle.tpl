@@ -322,7 +322,7 @@
             </table>
         </div>
 
-        {if $ticketType|@count > 0 and $equipmentModel|@count > 0 and $warrantyStatus|@count > 0}
+        {if $ticketType|php7_count > 0 and $equipmentModel|php7_count > 0 and $warrantyStatus|php7_count > 0}
             <table class="tNoBackGround able table-bordered">
                 <tbody>
                     <tr>
@@ -340,14 +340,14 @@
                         {assign var=deptRowspan value=0}
                         {foreach from=$models item=statuses}
                             {foreach from=$statuses item=rows}
-                                {assign var=deptRowspan value=$deptRowspan+count($rows)}
+                                {assign var=deptRowspan value=$deptRowspan+php7_count($rows)}
                             {/foreach}
                         {/foreach}
                         {assign var=firstDept value=true}
                         {foreach from=$models key=model item=statuses}
                             {assign var=teamRowspan value=0}
                             {foreach from=$statuses item=rows}
-                                {assign var=teamRowspan value=$teamRowspan+count($rows)}
+                                {assign var=teamRowspan value=$teamRowspan+php7_count($rows)}
                             {/foreach}
                             {assign var=firstTeam value=true}
                             {foreach from=$statuses key=status item=records}
@@ -363,7 +363,7 @@
                                             {assign var=firstTeam value=false}
                                         {/if}
                                         {if $firstStatus}
-                                            <td class="NoBackGround" rowspan="{count($records)}">{$status|default:"-"}</td>
+                                            <td class="NoBackGround" rowspan="{php7_count($records)}">{$status|default:"-"}</td>
                                             {assign var=firstStatus value=false}
                                         {/if}
                                         <td class="NoBackGround">{$record.no_of_tickets}</td>
@@ -382,7 +382,7 @@
             </table>
         {/if}
 
-        {if $ticketType|@count == 0 and $equipmentModel|@count == 0 and $warrantyStatus|@count == 0}
+        {if $ticketType|php7_count == 0 and $equipmentModel|php7_count == 0 and $warrantyStatus|php7_count == 0}
             <table  class="tNoBackGround able table-bordered">
                 <tbody>
                     <tr>
@@ -400,14 +400,14 @@
                         {assign var=deptRowspan value=0}
                         {foreach from=$models item=statuses}
                             {foreach from=$statuses item=rows}
-                                {assign var=deptRowspan value=$deptRowspan+count($rows)}
+                                {assign var=deptRowspan value=$deptRowspan+php7_count($rows)}
                             {/foreach}
                         {/foreach}
                         {assign var=firstDept value=true}
                         {foreach from=$models key=model item=statuses}
                             {assign var=teamRowspan value=0}
                             {foreach from=$statuses item=rows}
-                                {assign var=teamRowspan value=$teamRowspan+count($rows)}
+                                {assign var=teamRowspan value=$teamRowspan+php7_count($rows)}
                             {/foreach}
                             {assign var=firstTeam value=true}
                             {foreach from=$statuses key=status item=records}
@@ -423,7 +423,7 @@
                                             {assign var=firstTeam value=false}
                                         {/if}
                                         {if $firstStatus}
-                                            <td class="NoBackGround" rowspan="{count($records)}">{$status|default:"-"}</td>
+                                            <td class="NoBackGround" rowspan="{php7_count($records)}">{$status|default:"-"}</td>
                                             {assign var=firstStatus value=false}
                                         {/if}
                                         <td class="NoBackGround">{$record.no_of_tickets}</td>
@@ -442,7 +442,7 @@
             </table>
         {/if}
 
-        {if $ticketType|@count == 0 and $equipmentModel|@count > 0 and $warrantyStatus|@count > 0}
+        {if $ticketType|php7_count == 0 and $equipmentModel|php7_count > 0 and $warrantyStatus|php7_count > 0}
             <table>
                 <tr>
                     <th>Equipment Model</th>
@@ -458,11 +458,11 @@
                 {foreach from=$GROUPED_DATA key=model item=warranties}
                     {assign var=modelRowspan value=0}
                     {foreach from=$warranties item=entries}
-                        {assign var=modelRowspan value=$modelRowspan+count($entries)}
+                        {assign var=modelRowspan value=$modelRowspan+php7_count($entries)}
                     {/foreach}
                     {assign var=firstModelPrinted value=false}
                     {foreach from=$warranties key=warranty item=entries}
-                        {assign var=warrantyRowspan value=count($entries)}
+                        {assign var=warrantyRowspan value=php7_count($entries)}
                         {assign var=firstWarrantyPrinted value=false}
                         {foreach from=$entries item=entry}
                             <tr>
@@ -488,7 +488,7 @@
             </table>
         {/if}
 
-        {if $ticketType|@count > 0 and $equipmentModel|@count > 0 and $warrantyStatus|@count == 0}
+        {if $ticketType|php7_count > 0 and $equipmentModel|php7_count > 0 and $warrantyStatus|php7_count == 0}
             <table>
                 <tbody>
                     <tr>
@@ -504,11 +504,11 @@
                     {foreach from=$GROUPED_DATA key=ticketType item=models}
                         {assign var=typeRowCount value=0}
                         {foreach from=$models item=rows}
-                            {assign var=typeRowCount value=$typeRowCount+count($rows)}
+                            {assign var=typeRowCount value=$typeRowCount+php7_count($rows)}
                         {/foreach}
                         {assign var=firstTypeRowPrinted value=false}
                         {foreach from=$models key=model item=records}
-                            {assign var=modelRowCount value=count($records)}
+                            {assign var=modelRowCount value=php7_count($records)}
                             {assign var=firstModelRowPrinted value=false}
                             {foreach from=$records item=row}
                                 <tr>
@@ -537,7 +537,7 @@
             </table>
         {/if}
 
-        {if $ticketType|@count > 0 and $equipmentModel|@count == 0 and $warrantyStatus|@count > 0}
+        {if $ticketType|php7_count > 0 and $equipmentModel|php7_count == 0 and $warrantyStatus|php7_count > 0}
             <table  class="NoBackGround" border="1">
                 <tbody>
                     <tr>
@@ -554,12 +554,12 @@
                     {foreach from=$GROUPED_DATA key=ticketType item=statusGroup}
                         {assign var=typeRowCount value=0}
                         {foreach from=$statusGroup item=records}
-                            {assign var=typeRowCount value=$typeRowCount + count($records)}
+                            {assign var=typeRowCount value=$typeRowCount + php7_count($records)}
                         {/foreach}
                         {assign var=firstTypeRowPrinted value=false}
 
                         {foreach from=$statusGroup key=warrantyStatus item=records}
-                            {assign var=statusRowCount value=count($records)}
+                            {assign var=statusRowCount value=php7_count($records)}
                             {assign var=firstStatusRowPrinted value=false}
 
                             {foreach from=$records item=row}
@@ -587,7 +587,7 @@
             </table>
         {/if}
 
-        {if $ticketType|@count > 0 and $equipmentModel|@count == 0 and $warrantyStatus|@count == 0}
+        {if $ticketType|php7_count > 0 and $equipmentModel|php7_count == 0 and $warrantyStatus|php7_count == 0}
             <table class="tNoBackGround able table-bordered" class="table table-bordered">
                 <tbody>
                     <tr>
@@ -603,7 +603,7 @@
                         {foreach from=$records item=row name=recordloop}
                             <tr>
                                 {if $smarty.foreach.recordloop.first}
-                                    <td class="NoBackGround" rowspan="{count($records)}">{$ticketType|default:'-'}</td>
+                                    <td class="NoBackGround" rowspan="{php7_count($records)}">{$ticketType|default:'-'}</td>
                                 {/if}
                                 <td class="NoBackGround">{$row.no_of_tickets}</td>
                                 <td class="NoBackGround">{$row.open}</td>
@@ -620,7 +620,7 @@
             </table>
         {/if}
 
-        {if $ticketType|@count == 0 and $equipmentModel|@count > 0 and $warrantyStatus|@count == 0}
+        {if $ticketType|php7_count == 0 and $equipmentModel|php7_count > 0 and $warrantyStatus|php7_count == 0}
             <table  class="tNoBackGround able table-bordered" class="table table-bordered">
                 <tbody>
                     <tr>
@@ -636,7 +636,7 @@
                         {foreach from=$records item=row name=recordloop}
                             <tr>
                                 {if $smarty.foreach.recordloop.first}
-                                    <td class="NoBackGround" rowspan="{count($records)}">{$model|default:'-'}</td>
+                                    <td class="NoBackGround" rowspan="{php7_count($records)}">{$model|default:'-'}</td>
                                 {/if}
                                 <td class="NoBackGround">{$row.no_of_tickets}</td>
                                 <td class="NoBackGround">{$row.open}</td>
@@ -652,7 +652,7 @@
             </table>
         {/if}
 
-        {if $warrantyStatus|@count > 0 and $ticketType|@count == 0 and $equipmentModel|@count == 0}
+        {if $warrantyStatus|php7_count > 0 and $ticketType|php7_count == 0 and $equipmentModel|php7_count == 0}
             <table  class="tNoBackGround able table-bordered" class="table table-bordered">
                 <tbody>
                     <tr>
@@ -665,7 +665,7 @@
                         <th>MTTR</th>
                     </tr>
                     {foreach from=$GROUPED_DATA key=warranty item=records}
-                        {assign var=rowspanCount value=count($records)}
+                        {assign var=rowspanCount value=php7_count($records)}
                         {assign var=firstRowPrinted value=false}
                         {foreach from=$records item=row}
                             <tr>

@@ -1,15 +1,88 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+// jQuery.validator.addMethod("date", function(value, element, params) {
+// 		try {
+// 			if(value) {
+// 				app.helper.getDateInstance(value, app.getDateFormat(),'date');
+// 			}
+// 			return true;
+// 		} catch(err) {
+// 			console.log(err);
+// 			return false;
+// 		}
+// 	}, jQuery.validator.format("Please enter the correct date")
+// );
+
 jQuery.validator.addMethod("date", function(value, element, params) {
-		try {
-			if(value) {
-				app.helper.getDateInstance(value, app.getDateFormat(),'date');
-			}
-			return true;
-		} catch(err) {
-			console.log(err);
-			return false;
-		}
-	}, jQuery.validator.format("Please enter the correct date")
-);
+    try {
+        if(value) {
+            // Get the date instance
+            app.helper.getDateInstance(value, app.getDateFormat(),'date');
+            
+            // Extract day, month, year from the input value
+            var format = app.getDateFormat();
+            var dateParts;
+            var day, month, year;
+            
+            // Parse based on common formats
+            if(format === 'dd-mm-yyyy' || format === 'DD-MM-YYYY') {
+                dateParts = value.split('-');
+                day = parseInt(dateParts[0], 10);
+                month = parseInt(dateParts[1], 10);
+                year = parseInt(dateParts[2], 10);
+            } else if(format === 'mm-dd-yyyy' || format === 'MM-DD-YYYY') {
+                dateParts = value.split('-');
+                month = parseInt(dateParts[0], 10);
+                day = parseInt(dateParts[1], 10);
+                year = parseInt(dateParts[2], 10);
+            } else if(format === 'yyyy-mm-dd' || format === 'YYYY-MM-DD') {
+                dateParts = value.split('-');
+                year = parseInt(dateParts[0], 10);
+                month = parseInt(dateParts[1], 10);
+                day = parseInt(dateParts[2], 10);
+            }
+            
+            // Validate if date actually exists using checkdate logic
+            if(day && month && year) {
+                // Check if month is valid
+                if(month < 1 || month > 12) {
+                    return false;
+                }
+                
+                // Check if day is valid for the given month
+                var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                
+                // Check for leap year
+                if((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+                    daysInMonth[1] = 29;
+                }
+                
+                // Validate day
+                if(day < 1 || day > daysInMonth[month - 1]) {
+                    return false;
+                }
+            }
+            
+            // Additional check: compare parsed date with formatted date
+            var testDate = new Date(year, month - 1, day);
+            if(testDate.getDate() !== day || 
+               testDate.getMonth() !== month - 1 || 
+               testDate.getFullYear() !== year) {
+                return false;
+            }
+        }
+        return true;
+    } catch(err) {
+        console.log(err);
+        return false;
+    }
+}, jQuery.validator.format("Please enter a valid date"));
 
 jQuery.validator.addMethod("datetime", function(value, element, params) {
 		try {
@@ -25,38 +98,7 @@ jQuery.validator.addMethod("reference", function(value, element, params) {
 		return true;
 	}, jQuery.validator.format("Please enter the correct date")
 );
-jQuery.validator.addMethod("oldHmrValue", function (value, element, params) {
-	value = parseFloat(value);
-	var value2 = parseFloat(jQuery('input[name="' + params[0] + '"]').val());
-	jQuery.validator.messages.oldHmrValue = 'Please Enter More Than Previous HMR : ' + value2;
-	let EqId = $("input[name=equipment_id]").val();
-	if(value2 == undefined || isNaN(value2)){
-		return true;
-	}
-	if (EqId == '' || EqId == null) {
-		return true;
-	}
-	if (value2 < value) {
-		return true;
-	}
-}, jQuery.validator.format("This Value less than Last HMR")
-);
-jQuery.validator.addMethod("oldKmValue", function (value, element, params) {
-	value = parseFloat(value);
-	var value2 = parseFloat(jQuery('input[name="' + params[0] + '"]').val());
-	jQuery.validator.messages.oldKmValue = 'Please Enter More Than Previous Kilo Meter Reading : ' + value2;
-	let EqId = $("input[name=equipment_id]").val();
-	if(value2 == undefined || isNaN(value2)){
-		return true;
-	}
-	if (EqId == '' || EqId == null) {
-		return true;
-	}
-	if (value2 < value) {
-		return true;
-	}
-}, jQuery.validator.format("This Value less than Last KM Run")
-);
+
 jQuery.validator.addMethod("double", function(value, element, params) {
 		element = jQuery(element);
 
@@ -82,7 +124,24 @@ jQuery.validator.addMethod("double", function(value, element, params) {
 	}, jQuery.validator.format(app.vtranslate('JS_PLEASE_ENTER_VALID_VALUE'))
 );
 
+jQuery.validator.addMethod("nospecialchar", function (value, element, params) {
+	if (value == '' || value == undefined || value == null) {
+		return true;
+	}
+	var regex = /^[A-Za-z ]+$/;
+	if (!regex.test(value)) {
+		var originalValue = '';
+		// Restore original value
+        var originalValue = jQuery(element).attr('data-original-value');
 
+        if (typeof originalValue !== 'undefined') {
+            jQuery(element).val(originalValue);
+        }
+		return false;
+	}
+	return true;
+}, jQuery.validator.format(app.vtranslate('This Field can contain letters and spaces only.'))
+);
 
 jQuery.validator.addMethod("WholeNumber", function(value, element, params) {
 		var regex= /[^+\-0-9.]+/; // not number?
@@ -322,17 +381,6 @@ jQuery.validator.addMethod("integer", function(value, element, params) {
 		}
 	}, jQuery.validator.format(app.vtranslate("JS_PLEASE_ENTER_INTEGER_VALUE"))
 );
-jQuery.validator.addMethod("onlyinteger", function(value, element, params) {
-	if (value.length && (value == '00000')) {
-		return false;
-	}
-	if (value.length && (!value.match("^\\d+$"))) {
-		return false;
-	} else{
-		return true;
-	}
-}, jQuery.validator.format(app.vtranslate("Please Enter Valid 5 Digit Badge Number"))
-);
 
 jQuery.validator.addMethod("boolean", function(value, element, params) {
 	return true;
@@ -374,7 +422,7 @@ jQuery.validator.addMethod("time", function(value, element, params) {
 			var timeValue = time.split(":");
 			var dateformat = element.data('format');
 
-			if(isNaN(timeValue[0]) || isNaN(timeValue[1])
+			if(timeValue.length != 2 || isNaN(timeValue[0]) || isNaN(timeValue[1])
 				|| timeValue[0] > dateformat || timeValue[1] > 59) {
 				return false;
 			}
@@ -396,7 +444,7 @@ jQuery.validator.addMethod("email", function(value, element, params) {
 			return false;
 		}
 		return true;
-	}, jQuery.validator.format(app.vtranslate('Please Enter a Vaild Email Address'))
+	}, jQuery.validator.format(app.vtranslate('JS_PLEASE_ENTER_VALID_EMAIL_ADDRESS'))
 );
 
 jQuery.validator.addMethod("multiEmails", function(value, element, params) {
@@ -469,28 +517,50 @@ jQuery.validator.addMethod("text", function(value, element, params) {
 	}, jQuery.validator.format("Please enter the correct date")
 );
 
-jQuery.validator.addMethod("picklist", function(value, element, params) {
-		try {
-			var specialChars = /(\<|\>)/gi ;
-			if (specialChars.test(value)) {
-				return false;
-			}
-			return true;
-		} catch(err) {
-			console.log(err);
-			return false;
-		}
-	}, jQuery.validator.format(app.vtranslate('JS_SPECIAL_CHARACTERS')+" < >"+app.vtranslate('JS_NOT_ALLOWED'))
-);
-
+// jQuery.validator.addMethod("picklist", function(value, element, params) {
+// 		try {
+// 			var specialChars = /(\<|\>)/gi ;
+// 			if (specialChars.test(value)) {
+// 				return false;
+// 			}
+// 			return true;
+// 		} catch(err) {
+// 			console.log(err);
+// 			return false;
+// 		}
+// 	}, jQuery.validator.format(app.vtranslate('JS_SPECIAL_CHARACTERS')+" < >"+app.vtranslate('JS_NOT_ALLOWED'))
+// );
 jQuery.validator.addMethod("phone", function(value, element, params) {
 		try {
-			return true;
+			if (value == '' || value == undefined || value == null) {
+				return true;
+			}
+			var regex = /^\+?[0-9 ]+$/;
+    		if (!regex.test(value)) {
+               return false;
+            }
 		} catch(err) {
 			console.log(err);
 			return false;
 		}
-	}, jQuery.validator.format("Please enter the correct date")
+		return true;
+	}, jQuery.validator.format("Please enter the correct phone number")
+);
+
+jQuery.validator.addMethod("nomorethanfifteen", function(value, element, params) {
+		try {
+			if (value == '' || value == undefined || value == null) {
+				return true;
+			}
+			if (value.length < 7 || value.length > 15) {
+               return false;
+            }
+		} catch(err) {
+			console.log(err);
+			return false;
+		}
+		return true;
+	}, jQuery.validator.format("Please enter the correct phone number, Phone Number Length is less than 7 or greater than 15")
 );
 
 jQuery.validator.addMethod("url", function(value, element, params) {
@@ -530,38 +600,6 @@ jQuery.validator.addMethod("lessThanToday", function(value, element, params) {
 	}, function(params, element) {
 		return app.vtranslate('JS_SHOULD_BE_LESS_THAN_CURRENT_DATE');
 	}
-);
-
-jQuery.validator.addMethod("lessThanThreeDays", function(value, element, params) {
-	try {
-		if(value) {
-			let ticketType = $("select[name='ticket_type']").val();
-			var fieldDateInstance = app.helper.getDateInstance(value, app.getDateFormat());
-			fieldDateInstance.setHours(0,0,0,0);
-			var todayDateInstance = new Date();
-			if (ticketType == 'SERVICE FOR SPARES PURCHASED') {
-				todayDateInstance.setDate(todayDateInstance.getDate() - 30);
-			} else {
-				todayDateInstance.setDate(todayDateInstance.getDate() - 3);
-			}
-			todayDateInstance.setHours(0,0,0,0);
-			var comparedDateVal = todayDateInstance - fieldDateInstance;
-			if(comparedDateVal >= 0){
-				return false;
-			}
-		}
-		return true;
-	} catch(err) {
-		return false;
-	}
-}, function(params, element) {
-	let ticketType = $("select[name='ticket_type']").val();
-	if (ticketType == 'SERVICE FOR SPARES PURCHASED') {
-		return app.vtranslate('JS_SHOULD_NOT_BE_LESS_THAN_30_DAYS');
-	} else {
-		return app.vtranslate('JS_SHOULD_NOT_BE_LESS_THAN_3_DAYS');
-	}
-}
 );
 
 jQuery.validator.addMethod("lessThanOrEqualToToday", function(value, element, params) {
@@ -727,80 +765,6 @@ jQuery.validator.addMethod("maximumlength", function(value, element, params) {
 	}, jQuery.validator.format(app.vtranslate('JS_LENGTH_SHOULD_BE_LESS_THAN_EQUAL_TO') + ' {0}')
 );
 
-jQuery.validator.addMethod("maxsizeInSignUP", function (value, element, params) {
-	if (value.length > params) {
-		return false;
-	}
-	return true;
-}, jQuery.validator.format(app.vtranslate('Maximum Allowed Charcters ') + ' {0}')
-);
-jQuery.validator.addMethod("date_of_birthValidate", function (value, element, params) {
-	let dateOfBirth = $("input[name='date_of_birth'").val();
-	let dateValues = dateOfBirth.split("/");
-	let day = dateValues[0];
-	let month = dateValues[1];
-	let year = dateValues[2];
-	let minYears = 18;
-	let chhosenDate = new Date();
-	chhosenDate.setFullYear(year, month-1, day);
-	let currdate = new Date();
-	currdate.setFullYear(currdate.getFullYear() - minYears);
-	if (currdate >= chhosenDate) {
-		return true;
-	} else {
-		return false;
-	}
-}, jQuery.validator.format("Date Of Birth Should Be Atleaset Greater Than 18 Years From User Registration Date")
-);
-jQuery.validator.addMethod("date_of_joiningValidate", function (value, element, params) {
-	let dateOfJoining = $("input[name='date_of_joining'").val();
-	let dateValues = dateOfJoining.split("/");
-	let day = dateValues[0];
-	let month = dateValues[1];
-	let year = dateValues[2];
-	let minYears = 18;
-	let chhosenDate = new Date();
-	chhosenDate.setFullYear(year, month, day);
-
-	let currdate = new Date();
-	let dateOfBirth = $("input[name='date_of_birth'").val();
-	if(dateOfBirth == "" || dateOfBirth == undefined || dateOfBirth == null){
-		return true;
-	}
-	let dateValues1 = dateOfBirth.split("/");
-	let day1 = dateValues1[0];
-	let month1 = dateValues1[1];
-	let year1 = dateValues1[2];
-	currdate.setFullYear(year1, month1, day1);
-	currdate.setFullYear(currdate.getFullYear() + minYears);
-
-	if (currdate <= chhosenDate) {
-		return true;
-	} else {
-		return false;
-	}
-}, jQuery.validator.format("Date Of Joining Should Be Atleaset Greater Than 18 Years From Date Of Birth")
-);
-jQuery.validator.addMethod("checkPasswordMatching", function (value, element, params) {
-	var password = $("input[name='user_password'").val();
-	var confirmPassword = $("input[name='confirm_password'").val();
-	if (password == confirmPassword) {
-		return true;
-	} else {
-		return false;
-	}
-}, jQuery.validator.format(app.vtranslate('Set Password And Re-Type Password Is Not Same'))
-);
-jQuery.validator.addMethod("allowOnlyCertainSpecialCharcters", function (value, element, params) {
-	const specialChars = /[`!%^()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-  	specialChars.test(value);
-	if (specialChars.test(value)) {
-		return false;
-	} else {
-		return true;
-	}
-}, jQuery.validator.format(app.vtranslate(' Only Allowed Special Charcters Are @#$&*'))
-);
 jQuery.validator.addMethod("maxsize", function(value, element, params) {
 		if(value.length > params) {
 			return false;
@@ -808,37 +772,14 @@ jQuery.validator.addMethod("maxsize", function(value, element, params) {
 		return true;
 	}, jQuery.validator.format(app.vtranslate('JS_MAX_ALLOWED_CHARACTERS') + ' {0}')
 );
-jQuery.validator.addMethod("passwordmix", function(value, element, params) {
-	var strongPasswordRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
-	var isStrong = strongPasswordRegex.test(value)? true : false;
-	return isStrong;
-}, jQuery.validator.format(app.vtranslate('Password Is Not Strong'))
-);
 
-jQuery.validator.addMethod("minsize", function(value, element, params) {
-	if(value.length < params) {
-		return false;
-	}
-	return true;
-}, jQuery.validator.format(app.vtranslate('Minimum Charcters') + ' {0}')
-);
-
-jQuery.validator.addMethod("stringonlychars", function(value, element, params) {
-	let  stringonlychars= /^[a-zA-Z\s]*$/;
-	if(isNaN(value) || value < 0 || value.match(stringonlychars)){
+jQuery.validator.addMethod("range", function(value, element, params) {
+		value = parseInt(value);
+		if (value < params[0] || value > params[1]) {
+			return false;
+		}
 		return true;
-	}
-	return false;
-}, jQuery.validator.format(app.vtranslate('Only Charcters Are Allowed'))
-);
-
-jQuery.validator.addMethod("STOValidation", function(value, element, params) {
-	let stoValidated = jQuery(element).data('stoValidated');
-	if(stoValidated != true){
-		return false;
-	}
-	return true;
-}, jQuery.validator.format(app.vtranslate('STO Number Is Not Validated'))
+	}, jQuery.validator.format(app.vtranslate("JS_PLEASE_ENTER_NUMBER_IN_RANGE") + ' {0} ' + app.vtranslate("TO") + ' {1}' )
 );
 
 jQuery.validator.addMethod("itivalidate", function(value, element, params) {
@@ -851,27 +792,6 @@ jQuery.validator.addMethod("itivalidate", function(value, element, params) {
 	}
 	return window.igiti.isValidNumber();
 }, jQuery.validator.format(app.vtranslate('Please Enter Valid Number'))
-);
-jQuery.validator.addMethod("tele", function(tval) {
-	if(tval == '' || tval == undefined || tval == null){
-		return true;
-	}
-	let val = /^[0-9- +]+$/;
-	if(val.test(tval)){
-		return true;  
-	}
-}, jQuery.validator.format(app.vtranslate('Enter a Valid TelePhone Number'))
-);
-
-
-
-jQuery.validator.addMethod("range", function(value, element, params) {
-		value = parseInt(value);
-		if (value < params[0] || value > params[1]) {
-			return false;
-		}
-		return true;
-	}, jQuery.validator.format(app.vtranslate("JS_PLEASE_ENTER_NUMBER_IN_RANGE") + ' {0} ' + app.vtranslate("TO") + ' {1}' )
 );
 
 jQuery.validator.addMethod("positive", function(value, element, params){
@@ -923,14 +843,7 @@ jQuery.validator.addMethod("greater_than_zero", function(value, element, params)
 }, jQuery.validator.format(app.vtranslate('JS_VALUE_SHOULD_BE_GREATER_THAN_ZERO')));
 
 // End
-jQuery.validator.addMethod("stringonlychars",function(value,element,params){
-	let stringonlychars= /^[a-zA-Z\s.]*$/;
-	if(stringonlychars.test(value)){
-		return true;
-	}
-	return false;
-},jQuery.validator.format(app.vtranslate('Only Characters, Space And [dot] Is Allowed'))
-);
+
 jQuery.validator.addMethod("RepeatMonthDate", function(value, element, params) {
 	return true;
 	}, jQuery.validator.format("Please enter the proper value")

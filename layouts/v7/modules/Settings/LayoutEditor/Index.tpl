@@ -15,11 +15,11 @@
 		<input class="selectedMode" type="hidden" value="{$MODE}">
 		<input type="hidden" id="selectedModuleLabel" value="{vtranslate($SELECTED_MODULE_NAME,$SELECTED_MODULE_NAME)}" />
 		<div class="widget_header row">
-			<label class="col-sm-2 textAlignCenter" style="padding-top: 7px;">
-				{vtranslate('SELECT_MODULE', $QUALIFIED_MODULE)}
-			</label>
-			<div class="col-sm-6">
-				<select class="select2 col-sm-6" name="layoutEditorModules">
+			<div class="col-sm-4 col-md-4 col-lg-2 textAlignCenter" style="padding-top: 7px;">
+				<p>{vtranslate('SELECT_MODULE', $QUALIFIED_MODULE)}</p>
+			</div>
+			<div class="col-sm-8 col-md-8 col-lg-5 site-select">
+				<select class="select2 col-sm-10" name="layoutEditorModules">
 					<option value=''>{vtranslate('LBL_SELECT_OPTION', $QUALIFIED_MODULE)}</option>
 					{foreach item=MODULE_NAME key=TRANSLATED_MODULE_NAME from=$SUPPORTED_MODULES}
 						<option value="{$MODULE_NAME}" {if $MODULE_NAME eq $SELECTED_MODULE_NAME} selected {/if}>
@@ -30,7 +30,7 @@
 			</div>
 		</div>
 		<br>
-		<br>
+		
 		{if $SELECTED_MODULE_NAME}
 			<div class="contents tabbable">
 				<ul class="nav nav-tabs layoutTabs massEditTabs marginBottom10px">

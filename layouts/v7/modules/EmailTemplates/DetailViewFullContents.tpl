@@ -10,15 +10,14 @@
 {strip}
 	<input id="recordId" type="hidden" value="{$RECORD->getId()}" />
 	{include file="DetailViewHeader.tpl"|vtemplate_path:$MODULE}
-	<div class="email_detailview_content">
-	   	<div class="detailview-content container-fluid">
+	<div class="detailview-content container-fluid">
 		<div class="details row">
 			<div class="block">
 				{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
 				<div>
-					<h4>{vtranslate('Email Template - Properties of ', $MODULE_NAME)} " {$RECORD->get('templatename')} "</h4>
+					<h5>{vtranslate('Email Template - Properties of ', $MODULE_NAME)} " {$RECORD->get('templatename')} "</h5>
 				</div>
-				<hr>
+				
 				<table class="table detailview-table no-border">
 					<tbody> 
 						<tr>
@@ -47,9 +46,7 @@
 				</table>
 			</div>
 		</div>
-	</div> 
-	</div> 
-
+	</div>
 </div>
 </div>
 {/strip}

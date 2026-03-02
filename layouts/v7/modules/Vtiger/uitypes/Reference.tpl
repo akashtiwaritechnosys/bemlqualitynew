@@ -14,7 +14,7 @@
 {assign var=FIELD_NAME value=$FIELD_MODEL->get('name')}
 {assign var=FIELD_VALUE value=$FIELD_MODEL->get('fieldvalue')}
 {assign var="REFERENCE_LIST" value=$FIELD_MODEL->getReferenceList()}
-{assign var="REFERENCE_LIST_COUNT" value=count($REFERENCE_LIST)}
+{assign var="REFERENCE_LIST_COUNT" value=php7_count($REFERENCE_LIST)}
 {assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
 {assign var="AUTOFILL_VALUE" value=$FIELD_MODEL->getAutoFillValue()}
 {assign var="QUICKCREATE_RESTRICTED_MODULES" value=Vtiger_Functions::getNonQuickCreateSupportedModules()}
@@ -28,7 +28,7 @@
         {if !empty($REFERENCED_MODULE_STRUCT)}
             {assign var="REFERENCED_MODULE_NAME" value=$REFERENCED_MODULE_STRUCT->get('name')}
         {/if}
-        {if in_array($REFERENCED_MODULE_NAME, $REFERENCE_LIST)}
+        {if isset($REFERENCED_MODULE_NAME) && in_array($REFERENCED_MODULE_NAME, $REFERENCE_LIST)}
             <input name="popupReferenceModule" type="hidden" value="{$REFERENCED_MODULE_NAME}" />
         {else}
             <input name="popupReferenceModule" type="hidden" value="{$REFERENCE_LIST[0]}" />
@@ -41,19 +41,18 @@
             class="marginLeftZero autoComplete inputElement" 
             value="{$FIELD_MODEL->getEditViewDisplayValue($displayId)}" 
             placeholder="{vtranslate('LBL_TYPE_SEARCH',$MODULE)}"
-            {if $displayId neq 0}disabled="disabled"{/if}  
+            {if !empty($displayId)}disabled="disabled"{/if}  
             {if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" data-rule-reference_required="true" {/if}
-            {if count($FIELD_INFO['validator'])} 
+            {if php7_count($FIELD_INFO['validator'])} 
                 data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
             {/if}
-             />
-
-        <a href="#" class="clearReferenceSelection  {if $FIELD_VALUE eq 0}hide{/if}"> x </a>
-            <span class="input-group-addon relatedPopup cursorPointer " title="{vtranslate('LBL_SELECT', $MODULE)}">
+            />
+        <a href="#" class="clearReferenceSelection {if empty($FIELD_VALUE) || $FIELD_VALUE lte 0}hide{/if}"> x </a>
+            <span class="input-group-addon relatedPopup cursorPointer" title="{vtranslate('LBL_SELECT', $MODULE)}">
                 <i id="{$MODULE}_editView_fieldName_{$FIELD_NAME}_select" class="fa fa-search"></i>
             </span>
-        {if (($smarty.request.view eq 'Edit') or ($MODULE_NAME eq 'Webforms')) && !in_array($REFERENCE_LIST[0],$QUICKCREATE_RESTRICTED_MODULES)}
-            <span class="input-group-addon createReferenceRecord cursorPointer clearfix " title="{vtranslate('LBL_CREATE', $MODULE)}">
+        {if (($REQ->get('view') eq 'Edit') or ($MODULE_NAME eq 'Webforms')) && ($REFERENCE_LIST && !in_array($REFERENCE_LIST[0],$QUICKCREATE_RESTRICTED_MODULES))}
+            <span class="input-group-addon createReferenceRecord cursorPointer clearfix" title="{vtranslate('LBL_CREATE', $MODULE)}">
             <i id="{$MODULE}_editView_fieldName_{$FIELD_NAME}_create" class="fa fa-plus"></i>
         </span>
         {/if}

@@ -15,10 +15,11 @@
 {if !empty($CHART_VALUES)}
     <input type='hidden' name='charttype' value="{$CHART_TYPE}" />
     <input type='hidden' class="widgetData" name='data' value='{$DATA}' /> 
+    <input type='hidden' class="widgetId" name='widgetId' value='widget{$WIDGET_ID}' />
     <input type='hidden' name='clickthrough' value="{$CLICK_THROUGH}" />
     <div style="margin:0px 10px;">
         <div>
-            <div name='chartcontent' class="widgetChartContainer" style="height:245px;min-width:300px; margin: 0 auto">
+            <div id="widget{$WIDGET_ID}" name='chartcontent' class="widgetChartContainer" style="height:245px;min-width:300px; margin: 0 auto">
             <br>
             </div>
         </div>

@@ -1,26 +1,15 @@
-{*+**********************************************************************************
-* The contents of this file are subject to the vtiger CRM Public License Version 1.1
+{*<!--
+/* * *******************************************************************************
+* The content of this file is subject to the MultiWarehouses4You license.
 * ("License"); You may not use this file except in compliance with the License
-* The Original Code is: vtiger CRM Open Source
-* The Initial Developer of the Original Code is vtiger.
-* Portions created by vtiger are Copyright (C) vtiger.
+* The Initial Developer of the Original Code is IT-Solutions4You s.r.o.
+* Portions created by IT-Solutions4You s.r.o. are Copyright(C) IT-Solutions4You s.r.o.
 * All Rights Reserved.
-************************************************************************************}
+* ****************************************************************************** */
+-->*}
 
-<footer class="app-footer">	
-</footer>
-</div>
-<div id='overlayPage'>
-	<!-- arrow is added to point arrow to the clicked element (Ex:- TaskManagement),
-	any one can use this by adding "show" class to it -->
-	<div class='arrow'></div>
-	<div class='data'>
-	</div>
-</div>
-<div id='helpPageOverlay'></div>
-<div id="js_strings" class="hide noprint">{Zend_Json::encode($LANGUAGE_STRINGS)}</div>
-<div class="modal myModal fade"></div>
-{include file='JSResources.tpl'|@vtemplate_path: $MODULE}
-</body>
-
-</html>
+{strip}
+    {* <br>
+    <div class="small" style="color: rgb(153, 153, 153);text-align: center;">{vtranslate($MODULE,$MODULE)} {PDFMaker_Version_Helper::$version} {vtranslate("COPYRIGHT",$QUALIFIED_MODULE)}</div> *}
+    {include file="Footer.tpl"|@vtemplate_path:'Vtiger'}
+{/strip}

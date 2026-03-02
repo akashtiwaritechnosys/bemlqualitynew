@@ -434,9 +434,72 @@
 .vicon-volumeon:before {
 	content: "\e686";
 }
+/* .vicon-vtigeruser:before {
+	content: "\e687";
+} */
+ 
 .vicon-vtigeruser:before {
 	content: "\e687";
 }
 .vicon-vtigeruser2:before {
 	content: "\e688";
+}
+
+
+
+
+/* ---------------------  for custom  --------------- */
+.vicon-serviceengineer:before {
+	content: "\F4CF";
+	display: inline-block;
+    font-family: bootstrap-icons;
+    font-weight: 400;
+}
+.vicon-payment:before {
+	content: "\F2DC";
+	display: inline-block;
+    font-family: bootstrap-icons;
+    font-weight: 400;
+}
+.vicon-meetingnotes:before {
+	content: "\F439";
+	display: inline-block;
+    font-family: bootstrap-icons;
+    font-weight: 400;
+}
+.vicon-measurement:before {
+	content: "\F523";
+	display: inline-block;
+    font-family: bootstrap-icons;
+    font-weight: 400;
+}
+.vicon-sitevalidationmasking:before {
+	content: "\F52F";
+	display: inline-block;
+    font-family: bootstrap-icons;
+    font-weight: 400;
+}
+.vicon-expense:before {
+	content: "\F2D9";
+	display: inline-block;
+    font-family: bootstrap-icons;
+    font-weight: 400;
+}
+.vicon-extrawork:before {
+	content: "\F41F";
+	display: inline-block;
+    font-family: bootstrap-icons;
+    font-weight: 400;
+}
+.vicon-geolocation:before {
+	content: "\F3E7";
+	display: inline-block;
+    font-family: bootstrap-icons;
+    font-weight: 400;
+}
+.vicon-productcat:before {
+	content: "\F2C9";
+	display: inline-block;
+    font-family: bootstrap-icons;
+    font-weight: 400;
 }

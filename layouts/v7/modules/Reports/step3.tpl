@@ -14,13 +14,6 @@
         <input type="hidden" name="module" value="{$MODULE}" />
         <input type="hidden" name="action" value="Save" />
         <input type="hidden" name="record" value="{$RECORD_ID}" />
-
-        <!--Pivot Report-->
-        <input type="hidden" name="pivot_rows" value="{$pivot_rows}" />
-        <input type="hidden" name="pivot_columns" value="{$pivot_columns}" />
-        <input type="hidden" name="pivot_datafield" value="{$pivot_datafield}" />
-        <!--Pivot Report-->
-        
         <input type="hidden" name="reportname" value="{Vtiger_Util_Helper::toSafeHTML($REPORT_MODEL->get('reportname'))}" />
         {if $REPORT_MODEL->get('members')}
             <input type="hidden" name="members" value={ZEND_JSON::encode($REPORT_MODEL->get('members'))} />
@@ -29,9 +22,9 @@
         <input type="hidden" name="reports_description" value="{Vtiger_Util_Helper::toSafeHTML($REPORT_MODEL->get('description'))}" />
         <input type="hidden" name="primary_module" value="{$PRIMARY_MODULE}" />
         <input type="hidden" name="secondary_modules" value={ZEND_JSON::encode($SECONDARY_MODULES)} />
-        <input type="hidden" name="selected_fields" id="seleted_fields" value='{$REPORT_MODEL->get('selected_fields')}' />
-        <input type="hidden" name="selected_sort_fields" id="selected_sort_fields" value={$REPORT_MODEL->get('selected_sort_fields')} />
-        <input type="hidden" name="selected_calculation_fields" id="calculation_fields" value={$REPORT_MODEL->get('calculation_fields')} />
+        <input type="hidden" name="selected_fields" id="selected_fields" value='{Vtiger_Util_Helper::toSafeHTML($REPORT_MODEL->get('selected_fields'))}' />
+        <input type="hidden" name="selected_sort_fields" id="selected_sort_fields" value={Vtiger_Util_Helper::toSafeHTML($REPORT_MODEL->get('selected_sort_fields'))} />
+        <input type="hidden" name="selected_calculation_fields" id="calculation_fields" value={Vtiger_Util_Helper::toSafeHTML($REPORT_MODEL->get('calculation_fields'))} />
         <input type="hidden" name="advanced_filter" id="advanced_filter" value="" />
         <input type="hidden" name="isDuplicate" value="{$IS_DUPLICATE}" />
         <input type="hidden" class="step" value="3" />
@@ -66,22 +59,27 @@
                 {$RECORD_STRUCTURE[$key] = $BLOCK_FIELDS}
             {/foreach}
         {/foreach}
-        <div style="padding:2%;" class="report_step">
+        <div class="report-content-form" style="padding:2%;">
             <div class="row">
                 <h4><strong>{vtranslate('LBL_CHOOSE_FILTER_CONDITIONS',$MODULE)}</strong></h4>
                 <br>
                 <span class="col-lg-12">
+                {if !isset($SELECTED_ADVANCED_FILTER_FIELDS)}
+                    {assign var="SELECTED_ADVANCED_FILTER_FIELDS" value=array()}
+                {/if}
                     {include file='AdvanceFilter.tpl'|@vtemplate_path RECORD_STRUCTURE=$RECORD_STRUCTURE ADVANCE_CRITERIA=$SELECTED_ADVANCED_FILTER_FIELDS COLUMNNAME_API=getReportFilterColumnName}
                 </span>
             </div>
         </div>
         <br>
-        <div class="modal-overlay-footer border1px clearfix">
+        <div class="modal-overlay-footer clearfix">
             <div class="row clearfix">
                 <div class="textAlignCenter col-lg-12 col-md-12 col-sm-12 ">
-                    <button type="button" class="btn btn-soft-secondary backStep"><strong>{vtranslate('LBL_BACK',$MODULE)}</strong></button>&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-soft-secondary" id="generateReport"><strong>{vtranslate('LBL_GENERATE_REPORT',$MODULE)}</strong></button>&nbsp;&nbsp;
-                    <a class="cancelLink btn btn-soft-danger" onclick="window.history.back()">{vtranslate('LBL_CANCEL',$MODULE)}</a>
+                    <div class="footer-btns">
+                        <button type="button" class="btn btn-danger backStep">{vtranslate('LBL_BACK',$MODULE)}</button>
+                        <button type="submit" class="btn btn-submit" id="generateReport">{vtranslate('LBL_GENERATE_REPORT',$MODULE)}</button>
+                        <a class="cancelLink" onclick="window.history.back()">{vtranslate('LBL_CANCEL',$MODULE)}</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -12,12 +12,8 @@
 {strip}
 	<div class="col-sm-12 col-xs-12 content-area" id="importModules">
 		<div class="row">
-			<div class="col-sm-4 col-xs-4">
-				<div class="row">
-					<div class="col-sm-8 col-xs-8">
-						<input type="text" id="searchExtension" class="extensionSearch form-control" placeholder="{vtranslate('Search for an extension..', $QUALIFIED_MODULE)}"/>
-					</div>
-				</div>
+			<div class="col-sm-5 col-xs-5">
+				<input type="text" id="searchExtension" class="extensionSearch form-control" placeholder="{vtranslate('Search for an extension..', $QUALIFIED_MODULE)}"/>
 			</div>
 		</div>
 		<br>

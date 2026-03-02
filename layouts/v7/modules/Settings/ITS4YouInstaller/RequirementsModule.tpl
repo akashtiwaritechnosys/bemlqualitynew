@@ -48,7 +48,7 @@
                                         </tr>
                                         {foreachelse}
                                         <tr>
-                                            <td colspan="{count($HEADERS) + 2}">
+                                            <td colspan="{php7_count($HEADERS) + 2}">
                                                 {vtranslate('LBL_NO_RECORDS', $QUALIFIED_MODULE)}
                                             </td>
                                         </tr>

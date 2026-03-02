@@ -26,8 +26,8 @@
                <div class="modal-body accordion container-fluid" id="potentialAccordion">
                   {foreach item=MODULE_FIELD_MODEL key=MODULE_NAME from=$CONVERT_POTENTIAL_FIELDS}
                      <div class="row">
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-10 moduleContent" style="border:1px solid #CCC;">
+                        
+                        <div class="col-lg-10 moduleContent">
                            <div class="accordion-group convertPotentialModules">
                               <div class="header accordion-heading">
                                  <div data-parent="#potentialAccordion" data-toggle="collapse" class="accordion-toggle moduleSelection" href="#{$MODULE_NAME}_FieldInfo">
@@ -57,30 +57,30 @@
                               </div>
                            </div>
                         </div>
-                        <div class="col-lg-1"></div>
+                        
                      </div>
                      <br>
                   {/foreach}
                   <div class="defaultFields">
                      <div class="row">
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-10" style="border:1px solid #CCC;">
+                        
+                        <div class="col-lg-10 moduleContent">
                            <div style="margin-top:20px;margin-bottom: 20px;">
                               <div class="row">
                                  {assign var=FIELD_MODEL value=$ASSIGN_TO}
-                                 <div class="fieldLabel col-lg-4">
+                                 <div class="fieldLabel col-lg-5">
                                     <label class='muted pull-right'>
                                        {vtranslate($FIELD_MODEL->get('label'), $MODULE_NAME)}&nbsp;
                                        <span class="redColor">*</span> 
                                     </label>
                                  </div>
-                                 <div class="fieldValue col-lg-8">
+                                 <div class="fieldValue col-lg-7">
                                     {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
                                  </div>
                               </div>
                            </div>
                         </div>
-                        <div class="col-lg-1"></div>
+                       
                      </div>
                   </div>
                </div>

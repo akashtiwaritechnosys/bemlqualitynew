@@ -8,10 +8,10 @@
 *************************************************************************************}
 
 {strip}
-	<div class="col-lg-7 col-md-7 col-sm-7 row">
+	<div class="col-lg-6 col-md-12 col-sm-12">
 		<div class="portal-annoucement-widget-container">
 			<div class="portal-annoucement-widget" >
-				<h5>{vtranslate('LBL_ANNOUNCEMENT',$QUALIFIED_MODULE)}</h5>
+				<h6>{vtranslate('LBL_ANNOUNCEMENT',$QUALIFIED_MODULE)}</h6>
 			</div>
 			<div class="portal" >
 				<textarea class="inputElement portal" name="announcement" id="portalAnnouncement" style="resize:vertical;">
@@ -23,7 +23,7 @@
 			{if $module eq 'HelpDesk' && isset($WIDGETS_MODULE_LIST['HelpDesk'])}
 				<div class="portal-record-widget-container" >
 					<div class="portal-record-widget-content" >
-						<h5>{vtranslate('LBL_RECENT',$QUALIFIED_MODULE)} {vtranslate({$module},'Vtiger')} {vtranslate('LBL_REC_WIDGET',$QUALIFIED_MODULE)}</h5>
+						<h6>{vtranslate('LBL_RECENT',$QUALIFIED_MODULE)} {vtranslate({$module},'Vtiger')} {vtranslate('LBL_REC_WIDGET',$QUALIFIED_MODULE)}</h6>
 					</div>
 
 					<div class="portal-record-control-container">
@@ -38,11 +38,11 @@
 			{/if}
 		{/foreach}
 	</div>
-	<div class="col-sm-5">
+	<div class="col-lg-6 col-md-12 col-sm-12">
 		{if $WIDGETS_MODULE_LIST['HelpDesk'] eq 1 || $WIDGETS_MODULE_LIST['Documents'] eq 1}
 			<div class="portal-shortcuts-container" >
 				<div class="portal-shortcuts-header" >
-					<h5>{vtranslate('LBL_SHORTCUTS',$QUALIFIED_MODULE)}</h5>
+					<h6>{vtranslate('LBL_SHORTCUTS',$QUALIFIED_MODULE)}</h6>
 				</div>
 				<div class="portal-shortcuts-content" >
 					<input type="hidden" name="defaultShortcuts" value='{$DEFAULT_SHORTCUTS}' />
@@ -53,7 +53,7 @@
 								{if isset($WIDGETS_MODULE_LIST[$key])}
 									{foreach from=$value key=key1 item=value1}
 										{if $value1 == 1}
-											<li class="portal-shortcut-list" data-field="{$key1}">&nbsp;<div class="btn btn-large">{vtranslate({$key1},$QUALIFIED_MODULE)}&nbsp;&nbsp; {*{if $key neq 'HelpDesk'}<span class="deleteShortcut">X</span>{/if}*}</div></li>
+											<li class="portal-shortcut-list" data-field="{$key1}">&nbsp;<button class="btn btn-large">{vtranslate({$key1},$QUALIFIED_MODULE)} {*{if $key neq 'HelpDesk'}<span class="deleteShortcut">X</span>{/if}*}</button></li>
 										{/if}
 									{/foreach}
 								{/if}
@@ -68,7 +68,7 @@
 			{if $module neq 'HelpDesk' && isset($WIDGETS_MODULE_LIST[$module])}
 				<div class="portal-helpdesk-widget-container" >
 					<div class="portal-helpdesk-widget-header" >
-						<h5>{vtranslate('LBL_RECENT',$QUALIFIED_MODULE)} {vtranslate({$module},'Vtiger')} {vtranslate('LBL_REC_WIDGET',$QUALIFIED_MODULE)}</h5>
+						<h6>{vtranslate('LBL_RECENT',$QUALIFIED_MODULE)} {vtranslate({$module},'Vtiger')} {vtranslate('LBL_REC_WIDGET',$QUALIFIED_MODULE)}</h6>
 					</div>
 
 					<div class="portal-helpdesk-widget-controls">

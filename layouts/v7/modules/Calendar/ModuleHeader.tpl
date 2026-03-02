@@ -1,4 +1,4 @@
-b{*+**********************************************************************************
+{*+**********************************************************************************
 * The contents of this file are subject to the vtiger CRM Public License Version 1.1
 * ("License"); You may not use this file except in compliance with the License
 * The Original Code is: vtiger CRM Open Source
@@ -10,7 +10,7 @@ b{*+****************************************************************************
 {strip}
 	<div class="col-sm-12 col-xs-12 module-action-bar clearfix coloredBorderTop">
 		<div class="module-action-content clearfix {$MODULE}-module-action-content">
-			<div class="col-lg-7 col-md-7 module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
+			<div class="col-lg-6 col-md-6 module-breadcrumb module-breadcrumb-{$REQ->get('view')} transitionsAllHalfSecond">
 				{assign var=MODULE_MODEL value=Vtiger_Module_Model::getInstance($MODULE)}
 				{if $MODULE_MODEL->getDefaultViewName() neq 'List'}
 					{assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getDefaultUrl()}
@@ -39,23 +39,23 @@ b{*+****************************************************************************
 					<p class="current-filter-name filter-name pull-left cursorPointer" title="{$CVNAME}">&nbsp;<span class="fa fa-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;{$CVNAME}&nbsp;</a></p>
 				{/if}
 				{assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
-				{if $RECORD and $smarty.request.view eq 'Edit'}
+				{if $RECORD and $REQ->get('view') eq 'Edit'}
 					<p class="current-filter-name filter-name pull-left "><span class="fa fa-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;{vtranslate('LBL_EDITING', $MODULE)} : {$RECORD->get('label')}&nbsp;</a></p>
-				{else if $smarty.request.view eq 'Edit'}
+				{else if $REQ->get('view') eq 'Edit'}
 					<p class="current-filter-name filter-name pull-left "><span class="fa fa-angle-right pull-left" aria-hidden="true"></span><a>&nbsp;{vtranslate('LBL_ADDING_NEW', $MODULE)}&nbsp;</a></p>
 				{/if}
 
-				{if $smarty.request.view eq 'Detail'}
+				{if $REQ->get('view') eq 'Detail'}
 					<p class="current-filter-name filter-name pull-left"><span class="fa fa-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;{$RECORD->get('label')}&nbsp;</a></p>
 				{/if}
 			</div>
-			<div class="col-lg-5 col-md-5 pull-right">
+			<div class="col-lg-6 col-md-6 pull-right">
 				<div id="appnav" class="navbar-right">
 					<ul class="nav navbar-nav">
 						{foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}
 							{if $BASIC_ACTION->getLabel() == 'LBL_IMPORT'}
 								<li>
-									<button id="{$MODULE}_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn addButton btn-soft-info module-btn" 
+									<button id="{$MODULE}_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn addButton btn-default module-buttons" 
 										{if stripos($BASIC_ACTION->getUrl(), 'javascript:')===0}
 											onclick='{$BASIC_ACTION->getUrl()|substr:strlen("javascript:")};'
 										{else}
@@ -67,7 +67,7 @@ b{*+****************************************************************************
 								</li>
 							{else}
 								<li>
-									<button id="{$MODULE}_listView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn addButton btn-soft-blue module-btn" 
+									<button id="{$MODULE}_listView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn addButton btn-default module-buttons" 
 										{if stripos($BASIC_ACTION->getUrl(), 'javascript:')===0}
 											onclick='{$BASIC_ACTION->getUrl()|substr:strlen("javascript:")};'
 										{else} 
@@ -79,10 +79,10 @@ b{*+****************************************************************************
 								</li>
 							{/if}
 						{/foreach}
-						{if $MODULE_SETTING_ACTIONS|@count gt 0}
+						{if $MODULE_SETTING_ACTIONS|php7_count gt 0}
 							<li>
 								<div class="settingsIcon">
-									<button type="button" class="btn btn-soft-dark module-btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+									<button type="button" class="btn btn-default module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 										<span class="fa fa-wrench" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}"></span>&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}&nbsp; <span class="caret"></span>
 									</button>
 									<ul class="detailViewSetting dropdown-menu">

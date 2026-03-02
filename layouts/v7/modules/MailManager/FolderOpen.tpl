@@ -44,11 +44,11 @@
         </span>
         <span class="col-lg-6 padding0px">
             <span class="pull-right">
-			{if $FOLDER->mails()}<span class="pageInfo">{$FOLDER->pageInfo()}&nbsp;&nbsp;</span> <span class="pageInfoData" data-start="{$FOLDER->getStartCount()}" data-end="{$FOLDER->getEndCount()}" data-total="{$FOLDER->count()}" data-label-of="{vtranslate('LBL_OF')}"></span>{/if}
-                <button type="button" id="PreviousPageButton" class="btn btn-soft-secondary marginRight0px" {if $FOLDER->hasPrevPage()}data-folder='{$FOLDER->name()}' data-page='{$FOLDER->pageCurrent(-1)}'{else}disabled="disabled"{/if}>
+			{if $FOLDER->mails()}<span class="pageInfo">{$FOLDER->pageInfo()}&nbsp;&nbsp;</span> <span class="pageInfoData" data-start="{$FOLDER->getStartCount()}" data-end="{$FOLDER->getEndCount()}" data-total="{$FOLDER->php7_count()}" data-label-of="{vtranslate('LBL_OF')}"></span>{/if}
+                <button type="button" id="PreviousPageButton" class="btn btn-default marginRight0px" {if $FOLDER->hasPrevPage()}data-folder='{$FOLDER->name()}' data-page='{$FOLDER->pageCurrent(-1)}'{else}disabled="disabled"{/if}>
                     <i class="fa fa-caret-left"></i>
                 </button>
-                <button type="button" id="NextPageButton" class="btn btn-soft-secondary" {if $FOLDER->hasNextPage()}data-folder='{$FOLDER->name()}' data-page='{$FOLDER->pageCurrent(1)}'{else}disabled="disabled"{/if}>
+                <button type="button" id="NextPageButton" class="btn btn-default" {if $FOLDER->hasNextPage()}data-folder='{$FOLDER->name()}' data-page='{$FOLDER->pageCurrent(1)}'{else}disabled="disabled"{/if}>
                     <i class="fa fa-caret-right"></i>
                 </button>
             </span>
@@ -109,7 +109,7 @@
                         <div class="col-lg-4 padding0px">
                             {assign var=ATTACHMENT value=$MAIL->attachments()}
                             {assign var=INLINE_ATTCH value=$MAIL->inlineAttachments()}
-                            {assign var=ATTCHMENT_COUNT value=(count($ATTACHMENT) - count($INLINE_ATTCH))}
+                            {assign var=ATTCHMENT_COUNT value=(php7_count($ATTACHMENT) - php7_count($INLINE_ATTCH))}
                             <span class="pull-right">
                                 {if $ATTCHMENT_COUNT}
                                     <i class="fa fa-paperclip font14px"></i>&nbsp;

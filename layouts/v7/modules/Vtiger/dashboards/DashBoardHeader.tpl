@@ -10,24 +10,26 @@
 ********************************************************************************/
 -->*}
 
-<div class='dashboardHeading container-fluid'>
-	<div class="buttonGroups pull-right">
+<div class='dashboardHeading'>
+	<div class="buttonGroups pull-right dashboard-addWidget-tabs">
 		<div class="btn-group">
-			{if $SELECTABLE_WIDGETS|count gt 0}
-				<button class='btn btn-soft-info addButton dropdown-toggle' data-toggle='dropdown'>
+			{if $SELECTABLE_WIDGETS|php7_count gt 0}
+				<button class='bg-blue-btn addButton dropdown-toggle' data-toggle='dropdown'>
 					{vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
 				</button>
 
-				<ul class="dropdown-menu dropdown-menu-right widgetsList pull-right" style="min-width:100%;text-align:left;">
+				<ul class="dropdown-menu dropdown-menu-right widgetsList pull-right" style="width:100%;text-align:left;">
 					{assign var="MINILISTWIDGET" value=""}
 					{foreach from=$SELECTABLE_WIDGETS item=WIDGET}
 						{if $WIDGET->getName() eq 'MiniList'}
 							{assign var="MINILISTWIDGET" value=$WIDGET} {* Defer to display as a separate group *}
 						{elseif $WIDGET->getName() eq 'Notebook'}
-							{assign var="NOTEBOOKWIDGET" value=$WIDGET} {* Defer to display as a separate group *}
+							{assign var="NOTEBOOKWIDGET" value=$WIDGET}
+						{* {elseif $WIDGET->getName() eq 'AddCard'}
+							{assign var="ADDCARDWIDGET" value=$WIDGET} *}
 						{else}
 							<li>
-								<a onclick="Vtiger_DashBoard_Js.addWidget(this, '{$WIDGET->getUrl()}')" href="javascript:void(0);"
+								<a style="white-space: normal;" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$WIDGET->getUrl()}')" href="javascript:void(0);"
 									data-linkid="{$WIDGET->get('linkid')}" data-name="{$WIDGET->getName()}" data-width="{$WIDGET->getWidth()}" data-height="{$WIDGET->getHeight()}">
 									{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}</a>
 							</li>
@@ -46,11 +48,16 @@
 								data-linkid="{$NOTEBOOKWIDGET->get('linkid')}" data-name="{$NOTEBOOKWIDGET->getName()}" data-width="{$NOTEBOOKWIDGET->getWidth()}" data-height="{$NOTEBOOKWIDGET->getHeight()}">
 								{vtranslate($NOTEBOOKWIDGET->getTitle(), $MODULE_NAME)}</a>
 						</li>
+						{* <li>
+							<a onclick="Vtiger_DashBoard_Js.addCardWidget(this, '{$ADDCARDWIDGET->getUrl()}')" href="javascript:void(0);"
+								data-linkid="{$ADDCARDWIDGET->get('linkid')}" data-name="{$ADDCARDWIDGET->getName()}" data-width="{$ADDCARDWIDGET->getWidth()}" data-height="{$ADDCARDWIDGET->getHeight()}">
+								{vtranslate($ADDCARDWIDGET->getTitle(), $MODULE_NAME)}</a>
+						</li> *}
 					{/if}
 
 				</ul>
 			{else if $MODULE_PERMISSION}
-				<button class='btn btn-soft-blue addButton dropdown-toggle' disabled="disabled" data-toggle='dropdown'>
+				<button class='bg-blue-btn addButton dropdown-toggle' disabled="disabled" data-toggle='dropdown'>
 					<strong>{vtranslate('LBL_ADD_WIDGET')}</strong> &nbsp;&nbsp;
 					<i class="caret"></i>
 				</button>

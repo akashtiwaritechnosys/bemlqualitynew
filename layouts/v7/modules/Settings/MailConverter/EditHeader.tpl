@@ -20,7 +20,7 @@
 					{vtranslate('LBL_EDIT_MAILBOX', $QUALIFIED_MODULE)}
 				{/if}
 			</h4>
-			<hr>
+		
 			<div class="editViewContainer" style="padding-left: 2%;padding-right: 2%">
 				<div class="row">
 					{assign var=BREADCRUMB_LABELS value = ["step1" => "MAILBOX_DETAILS", "step2" => "SELECT_FOLDERS"]}

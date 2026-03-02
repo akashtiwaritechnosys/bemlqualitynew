@@ -12,15 +12,14 @@
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="clearfix">
 				<h3 style="margin-top: 0px;">{vtranslate('LabelManager', $QUALIFIED_MODULE)} - <a href="index.php?module={$sourceModule}&view=List" target="_blank">{vtranslate($sourceModule, $sourceModule)}</a></h3>
-				<button class="btn btn-success addNewLabel" onclick='window.location.href = "index.php?module=LabelManager&parent=Settings&view=LabelManager&mode=addNewLabelPopup&sourceModule={$sourceModule}&language={$language}"' style="float: right;margin: -40px 0px 0px 0px;">{vtranslate('Add New Label', $QUALIFIED_MODULE)}</button>
 				<hr>
 			</div>
 			<div class="fieldBlockContainer">
 				<form class="form-horizontal recordEditView" id="EditView" name="edit" method="post" action="index.php" enctype="multipart/form-data">
-					<!--<input type="hidden" name="module" value="LabelManager" />
+					<input type="hidden" name="module" value="LabelManager" />
 					<input type="hidden" name="parent" value="Settings" />
 					<input type="hidden" name="action" value="SaveLanguage" />
-					<input type="hidden" name="mode" value="saveLanguageLabel" />-->
+					<input type="hidden" name="mode" value="saveLanguageLabel" />
 					<input type="hidden" id="language" name="language" value="{$language}">
 					<input type="hidden" id="sourceModule" name="sourceModule" value="{$sourceModule}">
 					
@@ -31,7 +30,7 @@
 									<span><b>{$languageStrings_key}</b></span>
 								</td>
 								<td>
-									<input type="text" class="inputElement" name="{$languageStrings_key}" value="{$languageStrings_value|replace:"'":"\'"}">
+									<input type="text" class="inputElement" name="{$languageStrings_key}" value="{$languageStrings_value}">
 								</td>
 							</tr>
 						{/foreach}

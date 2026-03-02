@@ -1,3 +1,11 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
 }, {
     workFlowsContainer: false,
@@ -139,12 +147,13 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
             clonedPopupUi.find('.fieldValueContainer div').prepend(clonedDateElement);
          } else if (fieldValueElement.hasClass('time')) {
             clonedPopupUi.find('.textType').find('option[value="rawtext"]').attr('data-ui', 'input');
+            var timeFormat = fieldValueElement.data('time-format');
             if (valueType == 'rawtext') {
                var value = fieldValueElement.val();
             } else {
                value = '';
             }
-            var clonedTimeElement = '<input type="text" style="width: 30%;" class="timepicker-default fieldValue inputElement" value="' + value + '" data-input="true" >'
+            var clonedTimeElement = '<input type="text" style="width: 30%;" class="timepicker-default fieldValue inputElement" value="' + value + '" data-format="' + timeFormat + '" data-input="true" >'
             clonedPopupUi.find('.fieldValueContainer div').prepend(clonedTimeElement);
          } else if (fieldValueElement.hasClass('boolean')) {
             clonedPopupUi.find('.textType').find('option[value="rawtext"]').attr('data-ui', 'input');
@@ -250,6 +259,7 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
          var uiType = jQuery(e.currentTarget).find('option:selected').data('ui');
          jQuery('.fieldValue', data).hide();
          jQuery('[data-' + uiType + ']', data).show();
+         valueType = app.helper.purifyContent(valueType);
          if (valueType == 'fieldname') {
             useFieldContainer.removeClass('hide');
             useFunctionContainer.addClass('hide');
@@ -415,6 +425,28 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
          });
       });
    },
+   
+   getParams: function (form, taskType) {
+       var preSaveActionFunctionName = 'preSave' + taskType;
+       if (typeof this[preSaveActionFunctionName] != 'undefined') {
+           this[preSaveActionFunctionName].apply(this, [taskType]);
+       }
+       var params = form.serializeFormData();
+       
+       //when using the VTCreateEntityTask
+       //we avoid sending individual fieldmapping inputs as part of the request because 
+       //they will be already present as json in the "field_value_mapping" hidden input
+       //and we want to avoid requests conflicts when doing server-side validation of individual fields such as parent_id in HelpDesk module.
+       if (taskType == 'VTCreateEntityTask') {
+           let mappingInputs = jQuery('#save_fieldvaluemapping').find('input.inputElement');
+           mappingInputs.each(function(index) {
+               let fieldName = $(this).attr('name');
+               delete params[fieldName];
+           });
+       }
+       return params;
+   },
+   
    registerSaveTaskSubmitEvent: function (taskType) {
       var thisInstance = this;
       var form = jQuery('#saveTask');
@@ -424,12 +456,9 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
                 // to Prevent submit if already submitted
                 jQuery("button[name='saveButton']", form).attr("disabled","disabled");
                 var record = jQuery('#record').val();
+                var params = thisInstance.getParams(form, taskType);
+                
                 if(!record) {
-                    var preSaveActionFunctionName = 'preSave' + taskType;
-                    if (typeof thisInstance[preSaveActionFunctionName] != 'undefined') {
-                       thisInstance[preSaveActionFunctionName].apply(thisInstance, [taskType]);
-                    }
-                    var params = form.serializeFormData();
                     var clonedParams = jQuery.extend({}, params);
                     clonedParams.action ='ValidateExpression';
                     clonedParams.mode ='ForTaskEdit';
@@ -469,12 +498,7 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
                     });
                     
                 } else {
-                   var preSaveActionFunctionName = 'preSave' + taskType;
-                   if (typeof thisInstance[preSaveActionFunctionName] != 'undefined') {
-                      thisInstance[preSaveActionFunctionName].apply(thisInstance, [taskType]);
-                   }
                    form.find('[name="saveButton"]').attr('disabled', 'disabled');
-                   var params = form.serializeFormData();
                    app.helper.showProgress();
                    app.request.post({data:params}).then(function (error, data) {
                         app.helper.hideProgress();
@@ -580,7 +604,7 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
    isEmptyFieldSelected: function (fieldSelect) {
       var selectedOption = fieldSelect.find('option:selected');
       //assumption that empty field will be having value none
-      if (selectedOption.val() == 'none') {
+      if (selectedOption.val() == 'none' || selectedOption.val() === '') {
          return true;
       }
       return false;
@@ -921,6 +945,19 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
       }
 
       fieldUiHolder.html(fieldSpecificUi);
+
+      if (fieldInfo.type === 'picklist' || fieldInfo.type === 'multipicklist') {
+         var editablePicklistValues = Object.values(fieldInfo.editablepicklistvalues);
+         fieldSpecificUi.val(fieldInfo.value);
+         jQuery('.btn-submit').on('click', function(event) {
+            var enteredValue = fieldSpecificUi.val().trim();
+            if (!editablePicklistValues.includes(enteredValue)) {
+               var message = app.vtranslate('INVALID PICKLIST');
+               app.helper.showErrorNotification({'message': message})
+               event.preventDefault();
+            }
+         });
+      }
 
       if (fieldSpecificUi.is('input.select2')) {
          var tagElements = fieldSpecificUi.data('tags');

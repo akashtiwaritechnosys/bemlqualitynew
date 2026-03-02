@@ -12,32 +12,11 @@
 <div class="dashboardWidgetHeader">
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
-<div class="dashboardWidgetContent">
-	{include file="dashboards/DashBoardWidgetContents.tpl"|@vtemplate_path:$MODULE_NAME}
+<div id="OpenTickets" class="dashboardWidgetContent">
+	{include file="dashboards/DashBoardWidgetContentsNewDashboard.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 <div class="widgeticons dashBoardWidgetFooter">
     <div class="footerIcons pull-right">
         {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME}
     </div>
 </div>
-
-
-<script type="text/javascript">
-	Vtiger_Pie_Widget_Js('Vtiger_OpenTickets_Widget_Js',{},{
-		/**
-		 * Function which will give chart related Data
-		 */
-		generateData : function() {
-			var container = this.getContainer();
-			var jData = container.find('.widgetData').val();
-			var data = JSON.parse(jData);
-			var chartData = [];
-			for(var index in data) {
-				var row = data[index];
-				var rowData = [row.name, parseInt(row.count), row.id];
-				chartData.push(rowData);
-			}
-			return {literal}{'chartData':chartData}{/literal};
-		}
-	});
-</script>

@@ -1,3 +1,12 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.1
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
 Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 	showTransferOwnershipForm : function() {
 		var thisInstance = this;
@@ -183,32 +192,38 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 							var old_password  = form.find('[name="old_password"]');
 							var userid = form.find('[name="userid"]').val();
 
-							if(new_password.val() === confirm_password.val()){
-								var params = {
-									'data' : {
-										'module': app.getModuleName(),
-										'action' : "SaveAjax",
-										'mode' : 'savePassword',
-										'old_password' : old_password.val(),
-										'new_password' : new_password.val(),
-										'userid' : userid
-									}
-								};
+                                                        if(vtUtils.isPasswordStrong(new_password.val())) {
+                                                            if(new_password.val() === confirm_password.val()){
+                                                                    var params = {
+                                                                            'data' : {
+                                                                                    'module': app.getModuleName(),
+                                                                                    'action' : "SaveAjax",
+                                                                                    'mode' : 'savePassword',
+                                                                                    'old_password' : old_password.val(),
+                                                                                    'new_password' : new_password.val(),
+                                                                                    'userid' : userid
+                                                                            }
+                                                                    };
 
-								app.request.post(params).then(
-									function(err, data) {
-										if(err == null){
-											app.helper.hideModal();
-											var successMessage = app.vtranslate(data.message);
-											app.helper.showSuccessNotification({"message":successMessage});
-										}else{
-											app.helper.showErrorNotification({"message":err});	
-											return false;
-										}
-									}
-								);
-							} else {
-								var errorMessage = app.vtranslate('JS_PASSWORD_MISMATCH_ERROR');
+                                                                    app.request.post(params).then(
+                                                                            function(err, data) {
+                                                                                    if(err == null){
+                                                                                            app.helper.hideModal();
+                                                                                            var successMessage = app.vtranslate(data.message);
+                                                                                            app.helper.showSuccessNotification({"message":successMessage});
+                                                                                    }else{
+                                                                                            app.helper.showErrorNotification({"message":err});	
+                                                                                            return false;
+                                                                                    }
+                                                                            }
+                                                                    );
+                                                            } else {
+                                                                    var errorMessage = app.vtranslate('JS_PASSWORD_MISMATCH_ERROR');
+                                                                    app.helper.showErrorNotification({"message":errorMessage});
+                                                                    return false;
+                                                            }
+                                                        } else {
+								var errorMessage = app.vtranslate('JS_PASSWORD_NOT_STRONG');
 								app.helper.showErrorNotification({"message":errorMessage});
 								return false;
 							}
@@ -236,6 +251,11 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 							var form = jQuery(form);
 							var new_password = form.find('[name="new_password"]');
 							var confirm_password = form.find('[name="confirm_password"]');
+                                                        if(!vtUtils.isPasswordStrong(new_password.val())) {
+								var errorMessage = app.vtranslate('JS_PASSWORD_NOT_STRONG');
+								app.helper.showErrorNotification({"message":errorMessage});
+								return false;
+							}
 							if (new_password.val() !== confirm_password.val()) {
 
 								var params = {

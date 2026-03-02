@@ -10,7 +10,7 @@
 ********************************************************************************/
 -->*}
 {strip}
-    <div class="col-lg-6 detailViewButtoncontainer">
+    <div class="col-lg-7 col-md-6 col-sm-6 detailViewButtoncontainer">
         <div class="pull-right btn-toolbar">
             <div class="btn-group">
             {assign var=STARRED value=$RECORD->get('starred')}
@@ -45,25 +45,27 @@
                 {/if}
             {/foreach}
             <button class="btn btn-soft-info" id="employeeDetailsEditSingle">Edit</button>
-            {if !empty($DETAILVIEW_LINKS['DETAILVIEW']) && ($DETAILVIEW_LINKS['DETAILVIEW']|@count gt 0)}
-                <button class="btn btn-soft-secondary dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-                   {vtranslate('LBL_MORE', $MODULE_NAME)}&nbsp;&nbsp;<i class="caret"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    {foreach item=DETAIL_VIEW_LINK from=$DETAILVIEW_LINKS['DETAILVIEW']}
-                        {if $DETAIL_VIEW_LINK->getLabel() eq ""} 
-                            <li class="divider"></li>	
-                            {else}
-                            <li id="{$MODULE_NAME}_detailView_moreAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_LINK->getLabel())}">
-                                {if $DETAIL_VIEW_LINK->getUrl()|strstr:"javascript"} 
-                                    <a href='{$DETAIL_VIEW_LINK->getUrl()}'>{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE_NAME)}</a>
+            {if !empty($DETAILVIEW_LINKS['DETAILVIEW']) && ($DETAILVIEW_LINKS['DETAILVIEW']|php7_count gt 0)}
+                <div style="position: relative;display: inline-block;">
+                    <button class="btn btn-soft-secondary dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
+                    {vtranslate('LBL_MORE', $MODULE_NAME)}&nbsp;&nbsp;<i class="caret"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" style="position: absolute;z-index: 999;">
+                        {foreach item=DETAIL_VIEW_LINK from=$DETAILVIEW_LINKS['DETAILVIEW']}
+                            {if $DETAIL_VIEW_LINK->getLabel() eq ""} 
+                                <li class="divider"></li>	
                                 {else}
-                                    <a href='{$DETAIL_VIEW_LINK->getUrl()}&app={$SELECTED_MENU_CATEGORY}' >{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE_NAME)}</a>
-                                {/if}
-                            </li>
-                        {/if}
-                    {/foreach}
-                </ul>
+                                <li id="{$MODULE_NAME}_detailView_moreAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_LINK->getLabel())}">
+                                    {if $DETAIL_VIEW_LINK->getUrl()|strstr:"javascript"} 
+                                        <a href='{$DETAIL_VIEW_LINK->getUrl()}'>{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE_NAME)}</a>
+                                    {else}
+                                        <a href='{$DETAIL_VIEW_LINK->getUrl()}&app={$SELECTED_MENU_CATEGORY}' >{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE_NAME)}</a>
+                                    {/if}
+                                </li>
+                            {/if}
+                        {/foreach}
+                    </ul>
+                </div>
             {/if}
             </div>
             {if !{$NO_PAGINATION}}

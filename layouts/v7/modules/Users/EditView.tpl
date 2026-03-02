@@ -10,18 +10,18 @@
 <div class="editViewPageDiv detailViewContainer">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php" enctype="multipart/form-data">
-            <div class="editViewHeader">
+            {*<div class="editViewHeader create-new-user">
                 <div class='row'>
                     <div class="col-lg-12 col-md-12 col-sm-12 ">
                         {assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
                         {if $RECORD_ID neq ''}
-                            <h4 class="editHeader"  title="{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} {$RECORD_STRUCTURE_MODEL->getRecordName()}">{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} - {$RECORD_STRUCTURE_MODEL->getRecordName()}</h4>
+                            <h5 class="editHeader"  title="{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} {$RECORD_STRUCTURE_MODEL->getRecordName()}">{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} - {$RECORD_STRUCTURE_MODEL->getRecordName()}</h5>
                         {else}
-                            <h4 class="editHeader">{vtranslate('LBL_CREATING_NEW', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)}</h4>
+                            <h5 class="editHeader">{vtranslate('LBL_CREATING_NEW', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)}</h5>
                         {/if}
                     </div>
                 </div>
-            </div>
+            </div> *}
             <hr>    
             <div class="editViewBody">
                 <div class="editViewContents" >
@@ -40,6 +40,7 @@
                     <input type="hidden" name="defaultCallDuration" value="{$USER_MODEL->get('callduration')}" />
                     <input type="hidden" name="defaultOtherEventDuration" value="{$USER_MODEL->get('othereventduration')}" />
                     <input type="hidden" name="isPreference" value="{$IS_PREFERENCE}" />
+                    <input type='hidden' name='pwd_regex' value= {ZEND_json::encode($PWD_REGEX)} />
                     {if $IS_RELATION_OPERATION }
                         <input type="hidden" name="sourceModule" value="{$SOURCE_MODULE}" />
                         <input type="hidden" name="sourceRecord" value="{$SOURCE_RECORD}" />
@@ -69,8 +70,11 @@
             <div class='modal-overlay-footer clearfix'>
                 <div class="row clearfix">
                     <div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                        <button type='submit' class='btn btn-soft-success saveButton'  >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-                        <a class='cancelLink btn btn-soft-danger'  href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                        <div class='footer-btns'>
+                            <button type='submit' class='btn btn-success saveAndNewButton' style="margin-right:5px;">{vtranslate('LBL_SAVE_AND_NEW', $MODULE)}</button>
+                            <button type='submit' class='btn btn-submit saveButton'>{vtranslate('LBL_SAVE', $MODULE)}</button>
+                            <a class='cancelLink'  href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -105,7 +105,7 @@
 					{/if}
 
 					<ul class="nav navbar-nav navbar-right">
-						{if ITS4YouReports_Functions_Helper::count($LISTVIEW_LINKS['LISTVIEWSETTING']) gt 0}
+						{if ITS4YouReports_Functions_Helper::php7_count($LISTVIEW_LINKS['LISTVIEWSETTING']) gt 0}
 							<li>
 								<div class="settingsIcon">
 									<button type="button" class="btn btn-default module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

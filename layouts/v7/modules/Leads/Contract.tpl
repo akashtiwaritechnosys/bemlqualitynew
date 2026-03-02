@@ -127,7 +127,7 @@
 	</div>
 	<table id="data_table">
 		<tr>
-			<th style="text-align: center;" class="NoBackGround" colspan="{$PickListValues|@count + 2}">
+			<th style="text-align: center;" class="NoBackGround" colspan="{$PickListValues|php7_count + 2}">
 				<h5 style="text-align: center;"><b> Report - {$REPORT_LABEL}</b></h1>
 			</th>
 		</tr>
@@ -142,7 +142,7 @@
 			{foreach item=INNER_VALUE key=INNER_KEY from=$NAME_FIELD1 name=foo}
 				<tr>
 					{if $smarty.foreach.foo.first}
-						<th colspan="{$PickListValues|@count + 2}" style="font-weight: 900" class="NoBackGround">{$KEY_FIELD}</th>
+						<th colspan="{$PickListValues|php7_count + 2}" style="font-weight: 900" class="NoBackGround">{$KEY_FIELD}</th>
 					{/if}
 				</tr>
 				<tr>

@@ -1,3 +1,13 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.1
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
+
 PriceBooks_Detail_Js("Products_Detail_Js", {
     triggerEditQuantity: function(url) {
         app.request.get({url: url}).then(
@@ -92,7 +102,7 @@ PriceBooks_Detail_Js("Products_Detail_Js", {
                 'html': true,
                 'container':'body',
                 'placement': 'top',
-            }).data('bs.popover').tip().addClass('productBundlePopover');
+            }).data('bs.popover').tip().addClass('productBundlePopover').css({'left':'0px', 'margin-left': '60px'}); /* 60px to overcome sidebar-offset + container-padding */
             element.one('shown.bs.popover',function(){
                 app.helper.showVerticalScroll(jQuery('.productBundlePopover .popover-content'));
             });

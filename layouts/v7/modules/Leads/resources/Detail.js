@@ -1,3 +1,12 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
 Vtiger_Detail_Js("Leads_Detail_Js", {
     //cache will store the convert lead data(Model)
     cache: {},
@@ -14,21 +23,121 @@ Vtiger_Detail_Js("Leads_Detail_Js", {
         instance.convertLeadModules = false;
         if (jQuery.isEmptyObject(Leads_Detail_Js.cache)) {
             app.helper.showProgress();
-            app.request.get({"url": convertLeadUrl}).then(
-                    function (err, data) {
-                        app.helper.hideProgress();
-                        if (data) {
-                            Leads_Detail_Js.cache = data;
-                            instance.displayConvertLeadModel(data, buttonElement);
-                        }
-                    },
-                    function (error, err) {
-
+            app.request.get({ "url": convertLeadUrl }).then(
+                function (err, data) {
+                    app.helper.hideProgress();
+                    if (data) {
+                        Leads_Detail_Js.cache = data;
+                        instance.displayConvertLeadModel(data, buttonElement);
                     }
+                },
+                function (error, err) {
+
+                }
             );
         } else {
             instance.displayConvertLeadModel(Leads_Detail_Js.cache, buttonElement);
         }
+    },
+
+    triggerVoiceNote: function () {
+        var instance = Leads_Detail_Js.detailCurrentInstance;
+        var content =
+            '<div class="modal-dialog">' +
+            '<div class="modal-content">' +
+            '<div class="modal-header">' +
+            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '<h4 class="modal-title">Voice Note</h4>' +
+            '</div>' +
+            '<div class="modal-body text-center">' +
+            '<div id="recordingStatus">Ready to record</div>' +
+            '<br>' +
+            '<button id="startRecording" class="btn btn-success">Start Recording</button> ' +
+            '<button id="stopRecording" class="btn btn-danger" disabled>Stop Recording</button>' +
+            '<br><br>' +
+            '<audio id="audioPlayback" controls style="display:none; width: 100%;"></audio>' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            '<button id="saveVoiceNote" class="btn btn-primary" disabled>Save</button>' +
+            '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+        var modal = app.helper.showModal(content);
+
+        var mediaRecorder;
+        var audioChunks = [];
+        var audioBlob;
+
+        modal.find('#startRecording').on('click', function () {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+                    audioChunks = [];
+
+                    mediaRecorder.addEventListener("dataavailable", event => {
+                        audioChunks.push(event.data);
+                    });
+
+                    mediaRecorder.addEventListener("stop", () => {
+                        audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        var audioUrl = URL.createObjectURL(audioBlob);
+                        var audioPlayback = modal.find('#audioPlayback');
+                        audioPlayback.attr('src', audioUrl);
+                        audioPlayback.show();
+                        modal.find('#saveVoiceNote').removeAttr('disabled');
+                    });
+
+                    modal.find('#startRecording').attr('disabled', 'disabled');
+                    modal.find('#stopRecording').removeAttr('disabled');
+                    modal.find('#recordingStatus').text('Recording...');
+                })
+                .catch(err => {
+                    console.error("Error accessing microphone:", err);
+                    alert("Could not access microphone.");
+                });
+        });
+
+        modal.find('#stopRecording').on('click', function () {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+                modal.find('#startRecording').removeAttr('disabled');
+                modal.find('#stopRecording').attr('disabled', 'disabled');
+                modal.find('#recordingStatus').text('Recording stopped.');
+            }
+        });
+
+        modal.find('#saveVoiceNote').on('click', function () {
+            if (!audioBlob) return;
+
+            var fd = new FormData();
+            fd.append('module', 'Leads');
+            fd.append('action', 'SaveVoiceNote');
+            fd.append('record', instance.getRecordId());
+            fd.append('voice_note', audioBlob, 'voicenote_' + Date.now() + '.webm');
+
+            app.helper.showProgress();
+            jQuery.ajax({
+                url: 'index.php',
+                type: 'POST',
+                data: fd,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    app.helper.hideProgress();
+                    app.helper.hideModal();
+                    app.helper.showSuccessNotification({ message: 'Voice Note Saved' });
+                    window.location.reload();
+                },
+                error: function (err) {
+                    app.helper.hideProgress();
+                    console.error("Error saving voice note:", err);
+                    app.helper.showErrorNotification({ message: 'Error saving voice note' });
+                }
+            });
+        });
     }
 
 }, {
@@ -42,7 +151,7 @@ Vtiger_Detail_Js("Leads_Detail_Js", {
     init: function () {
         this._super();
         Leads_Detail_Js.detailCurrentInstance = this;
-   },
+    },
     /*
      * function to enable all the input and textarea elements
      */
@@ -99,7 +208,7 @@ Vtiger_Detail_Js("Leads_Detail_Js", {
                     'parent': '#leadAccordion',
                     'toggle': false
                 });
-                app.helper.showVerticalScroll(jQuery(data).find('#leadAccordion'), {'setHeight': '350px'});
+                app.helper.showVerticalScroll(jQuery(data).find('#leadAccordion'), { 'setHeight': 'auto' });
                 editViewObj.registerBasicEvents(data);
                 var checkBoxElements = instance.getConvertLeadModules();
                 jQuery.each(checkBoxElements, function (index, element) {
@@ -109,8 +218,9 @@ Vtiger_Detail_Js("Leads_Detail_Js", {
                 instance.registerForDisableCheckEvent();
                 instance.registerConvertLeadEvents();
                 instance.registerConvertLeadSubmit();
+                app.event.trigger('post.ConvertLeadForm.show');
             }
-            app.helper.showModal(data, {"cb": callBackFunction});
+            app.helper.showModal(data, { "cb": callBackFunction });
         }
     },
     /*
@@ -216,17 +326,17 @@ Vtiger_Detail_Js("Leads_Detail_Js", {
 
                 if (contactElement != '0' && organizationElement != '0') {
                     if (jQuery.inArray('Accounts', moduleArray) == -1 && jQuery.inArray('Contacts', moduleArray) == -1) {
-                        app.helper.showErrorNotification({message:app.vtranslate('JS_SELECT_ORGANIZATION_OR_CONTACT_TO_CONVERT_LEAD')});
+                        app.helper.showErrorNotification({ message: app.vtranslate('JS_SELECT_ORGANIZATION_OR_CONTACT_TO_CONVERT_LEAD') });
                         return false;
                     }
                 } else if (organizationElement != '0') {
                     if (jQuery.inArray('Accounts', moduleArray) == -1) {
-                       app.helper.showErrorNotification({message:app.vtranslate('JS_SELECT_ORGANIZATION')});
+                        app.helper.showErrorNotification({ message: app.vtranslate('JS_SELECT_ORGANIZATION') });
                         return false;
                     }
                 } else if (contactElement != '0') {
                     if (jQuery.inArray('Contacts', moduleArray) == -1) {
-                        app.helper.showErrorNotification({message:app.vtranslate('JS_SELECT_CONTACTS')});
+                        app.helper.showErrorNotification({ message: app.vtranslate('JS_SELECT_CONTACTS') });
                         return false;
                     }
                 }
@@ -243,19 +353,19 @@ Vtiger_Detail_Js("Leads_Detail_Js", {
 
         jQuery('#PotentialsModule').on('click', function () {
             if ((jQuery('#PotentialsModule').is(':checked')) && oppAccMandatory) {
-                jQuery('#AccountsModule').attr({'disabled': 'disabled', 'checked': 'checked'});
+                jQuery('#AccountsModule').attr({ 'disabled': 'disabled', 'checked': 'checked' });
             } else if (!conAccMandatory || !jQuery('#ContactsModule').is(':checked')) {
                 jQuery('#AccountsModule').removeAttr('disabled');
             }
             if ((jQuery('#PotentialsModule').is(':checked')) && oppConMandatory) {
-                jQuery('#ContactsModule').attr({'disabled': 'disabled', 'checked': 'checked'});
+                jQuery('#ContactsModule').attr({ 'disabled': 'disabled', 'checked': 'checked' });
             } else {
                 jQuery('#ContactsModule').removeAttr('disabled');
             }
         });
         jQuery('#ContactsModule').on('click', function () {
             if ((jQuery('#ContactsModule').is(':checked')) && conAccMandatory) {
-                jQuery('#AccountsModule').attr({'disabled': 'disabled', 'checked': 'checked'});
+                jQuery('#AccountsModule').attr({ 'disabled': 'disabled', 'checked': 'checked' });
             } else if (!oppAccMandatory || !jQuery('#PotentialsModule').is(':checked')) {
                 jQuery('#AccountsModule').removeAttr('disabled');
             }

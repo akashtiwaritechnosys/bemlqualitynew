@@ -1,3 +1,12 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
 Vtiger_BasicSearch_Js("Vtiger_AdvanceSearch_Js",{
 
 	//cache will store the search data
@@ -120,6 +129,9 @@ Vtiger_BasicSearch_Js("Vtiger_AdvanceSearch_Js",{
 		var thisInstance = this;
 		this.getAdvanceSearch().then(
 			function(data){
+		    jQuery('#advanceSearchButton').prop('disabled',false);
+		    jQuery('#advanceSave').prop('disabled',false);
+		    jQuery('#advanceIntiateSave').prop('disabled',false);
                 thisInstance.showAdvanceSearch(data).then(function(){
                     thisInstance.setContainer(jQuery('#advanceSearchContainer'));
                     vtUtils.showSelect2ElementView(thisInstance.getContainer().find('select.select2'));
@@ -319,8 +331,10 @@ Vtiger_BasicSearch_Js("Vtiger_AdvanceSearch_Js",{
 		//To perform validation registration only once
 		if(!this.filterValidationRegistered){
 			this.filterValidationRegistered = true;
-			controlForm.validationEngine({
-				'onValidationComplete' : validationDone
+			controlForm.vtValidate({
+                            success : function(){
+                                thisInstance.formValidationDeferred.resolve();
+                            }
 			});
 		}
 		//This will trigger the validation

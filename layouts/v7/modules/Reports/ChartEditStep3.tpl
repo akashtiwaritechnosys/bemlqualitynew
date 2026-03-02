@@ -11,16 +11,6 @@
         <input type="hidden" name="module" value="{$MODULE}" >
         <input type="hidden" name="action" value="ChartSave" >
         <input type="hidden" name="record" value="{$RECORD_ID}" >
-
-        <!--Pivot Report-->
-        <input type="hidden" name="type" value="{$type}" />
-        {if $type eq 'Pivot'}
-            <input type="hidden" name="charttype" value="horizontalbarChart">
-        {else}
-            <input type="hidden" name='charttype' value={$CHART_MODEL->getChartType()}>
-        {/if}
-        <!--Pivot Report-->
-
         <input type="hidden" name="reportname" value="{Vtiger_Util_Helper::toSafeHTML($REPORT_MODEL->get('reportname'))}" >
         {if $REPORT_MODEL->get('members')}
             <input type="hidden" name="members" value={ZEND_JSON::encode($REPORT_MODEL->get('members'))} />
@@ -33,12 +23,8 @@
         <input type="hidden" name="advanced_filter" id="advanced_filter" value="" >
         <input type="hidden" class="step" value="3" >
         <input type="hidden" name='groupbyfield' value={$CHART_MODEL->getGroupByField()} >
-
-        <!--Pivot Report-->
-        <input type="hidden" name='groupbyfield1' value={$CHART_MODEL->getGroupByField1()} >
-        <!--Pivot Report-->
-        
         <input type="hidden" name='datafields' value={Zend_JSON::encode($CHART_MODEL->getDataFields())}>
+        <input type="hidden" name='charttype' value={$CHART_MODEL->getChartType()}>
 
         <input type="hidden" name="enable_schedule" value="{$REPORT_MODEL->get('enable_schedule')}">
         <input type="hidden" name="schtime" value="{$REPORT_MODEL->get('schtime')}">
@@ -50,36 +36,36 @@
         <input type="hidden" name="specificemails" value={ZEND_JSON::encode($REPORT_MODEL->get('specificemails'))}>
         <input type="hidden" name="schtypeid" value="{$REPORT_MODEL->get('schtypeid')}">
 
-        <div class="report_step" style="padding:1%;">
-                    <div {if $type eq 'Pivot'} class="hide" {/if}><h4><strong>{vtranslate('LBL_SELECT_CHART_TYPE',$MODULE)}</strong></h4></div><br>
+        <div style="border:1px solid #ccc;padding:1%;">
+                    <div><h4><strong>{vtranslate('LBL_SELECT_CHART_TYPE',$MODULE)}</strong></h4></div><br>
                     <div>
-                        <ul class="nav nav-tabs charttabs  {if $type eq 'Pivot'} hide {/if}" name="charttab" style="text-align:center;font-size:14px;font-weight: bold;margin:0 3%;border:0px">
+                        <ul class="nav nav-tabs charttabs" name="charttab" style="text-align:center;font-size:14px;font-weight: bold;margin:0 3%;border:0px">
                             <li class="active marginRight5px" >
                                 <a data-type="pieChart" data-toggle="tab">
-                                    <div><img src="layouts/v7/skins/images/pie.PNG" style=""/></div>
+                                    <div><img src="layouts/v7/skins/images/pie.PNG" style="border:1px solid #ccc;"/></div>
                                     <div class="chartname">{vtranslate('LBL_PIE_CHART', $MODULE)}</div>
                                 </a>
                             </li>
                             <li class="marginRight5px">
                                 <a data-type="verticalbarChart" data-toggle="tab">
-                                    <div><img src="layouts/v7/skins/images/vbar.PNG" style=""/></div>
+                                    <div><img src="layouts/v7/skins/images/vbar.PNG" style="border:1px solid #ccc;"/></div>
                                     <div class="chartname">{vtranslate('LBL_VERTICAL_BAR_CHART', $MODULE)}</div>
                                 </a>
                             </li>
                             <li class="marginRight5px">
                                 <a data-type="horizontalbarChart" data-toggle="tab">
-                                    <div><img src="layouts/v7/skins/images/hbar.PNG" style=""/></div>
+                                    <div><img src="layouts/v7/skins/images/hbar.PNG" style="border:1px solid #ccc;"/></div>
                                     <div class="chartname">{vtranslate('LBL_HORIZONTAL_BAR_CHART', $MODULE)}</div>
                                 </a>
                             </li>
                             <li class="marginRight5px" >
                                 <a data-type="lineChart" data-toggle="tab">
-                                    <div><img src="layouts/v7/skins/images/line.PNG" style=""/></div>
+                                    <div><img src="layouts/v7/skins/images/line.PNG" style="border:1px solid #ccc;"/></div>
                                     <div class="chartname">{vtranslate('LBL_LINE_CHART', $MODULE)}</div>
                                 </a>
                             </li>
                         </ul>
-                        <div class='tab-content contentsBackground' style="height:auto;padding:4%;border:1px solid #ccc; background-color: #f5f7fb;">
+                        <div class='tab-content contentsBackground' style="height:auto;padding:4%;border:1px solid #ccc; background-color: white;">
                             <br>
                             <div class="row tab-pane active">
                                 <div>
@@ -89,18 +75,7 @@
                                             <select id='groupbyfield' name='groupbyfield' class="validate[required]" data-validation-engine="validate[required]" style='min-width:300px;'></select>
                                         </div>
                                     </span>
-
-                                    <!--Pivot Report-->
-                                    {if $type eq 'Pivot'}
-                                        <span class="col-lg-4">
-                                            <div><span>{vtranslate('Select Column Field', $MODULE)}</span><span class="redColor">*</span></div><br>
-                                            <div class="row">
-                                                <select id='groupbyfield1' name='groupbyfield1' class="validate[required]" data-validation-engine="validate[required]" style='min-width:300px;'></select>
-                                            </div>
-                                        </span>
-                                    {/if}
-                                    <!--Pivot Report-->
-                                     
+                                    <span class="col-lg-2">&nbsp;</span>
                                     <span class="col-lg-4">
                                         <div><span>{vtranslate('LBL_SELECT_DATA_FIELD', $MODULE)}</span><span class="redColor">*</span></div><br>
                                         <div class="row">
@@ -128,9 +103,11 @@
         <div class="modal-overlay-footer border1px clearfix">
             <div class="row clearfix">
                 <div class="textAlignCenter col-lg-12 col-md-12 col-sm-12 ">
-                    <button type="button" class="btn btn-soft-secondary backStep"><strong>{vtranslate('LBL_BACK',$MODULE)}</strong></button>&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-soft-secondary" id="generateReport"><strong>{vtranslate('LBL_GENERATE_REPORT',$MODULE)}</strong></button>&nbsp;&nbsp;
-                    <a class="cancelLink btn btn-soft-danger" onclick="window.history.back()">{vtranslate('LBL_CANCEL',$MODULE)}</a>
+                    <div class="footer-btns">
+                        <button type="button" class="btn btn-danger backStep">{vtranslate('LBL_BACK',$MODULE)}</button>
+                        <button type="submit" class="btn btn-submit" id="generateReport">{vtranslate('LBL_GENERATE_REPORT',$MODULE)}</button>
+                        <a class="cancelLink" onclick="window.history.back()">{vtranslate('LBL_CANCEL',$MODULE)}</a>
+                    </div>
                 </div>
             </div>
         </div>

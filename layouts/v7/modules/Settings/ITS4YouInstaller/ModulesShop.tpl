@@ -9,10 +9,10 @@
     <div class="tab-pane col-lg-12" id="modulesShop">
         <div class="clearfix">
             <div class="grid-container-block-3">
-            <div class="grid-container-3">
+            <div class="row">
             {foreach item=PACKAGE from=$PACKAGES_LIST name=packages}
                 {if $PACKAGE->get('inshop') neq "1"}{continue}{/if}
-                <div class="grid-container-div-3">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="thumbnail extension_container extensionWidgetContainer padding10">
                         <div class="contentHeader">
                             <div style="margin-bottom: 5px;">
@@ -50,7 +50,7 @@
                         {/if}
                         <div class="caption">
                             <hr>
-                            <div class="font-x-x-large boxSizingBorderBox">
+                            <div class="font-x-x-large boxSizingBorderBox moduleshop-extension-desc">
                                 {$PACKAGE->getMoreInfo()}
                             </div>
                             {if $PACKAGE->get('thumbnailURLBottom') neq NULL}
@@ -59,7 +59,7 @@
                             {/if}
                             <br>
                             <div class="row" style="padding: 10px 0 5px 0">
-                                <div class="col-md-12" style="text-align: right;">
+                                <div class="col-md-12" style="text-align: center;">
                                     <span>
                                         {if !$PACKAGE->isRegisteredUser()}
                                             <button class="m0550 btn btn-secondary logintoInstaller" type="button">{vtranslate('LBL_TRIAL', $QUALIFIED_MODULE)}</button>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                </div class="grid-container-div">
+                </div>
             {/foreach}
             </div>
             </div>
@@ -118,6 +118,9 @@
                             <div class="row">
                                 <div class="col-md-12" style="text-align: right">
                                     <span>
+                                        {if $EXTENSION->isExtensionTrialReady()}
+                                            <button class="m0550 btn btn-warning trialButton" data-trial="{$EXTENSION->get('id')}">{vtranslate('LBL_TRIAL', $QUALIFIED_MODULE)}</button>
+                                        {/if}
                                         {if 'Free' neq $EXTENSION->get('price') or 0 neq $EXTENSION->get('price')}
                                             <button class="m0550 btn btn-success {*installExtension*} buyButton" data-url="{$SHOP_LINK}?addidtob={$EXTENSION->get('bid')}" data-trial=false>{vtranslate('LBL_BUY',$QUALIFIED_MODULE)}{$EXTENSION->get('currency_symbol')}{$EXTENSION->get('price')}</button>
                                         {/if}

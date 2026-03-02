@@ -28,7 +28,7 @@
                     {foreach item=RELATED_LINK from=$RELATED_LIST_LINKS['LISTVIEWBASIC']}
                         <div class="btn-group">
                             {assign var=IS_SELECT_BUTTON value={$RELATED_LINK->get('_selectRelation')}}
-                            <button onclick="javascript:Vtiger_Detail_Js.triggerSendEmail('index.php?module={$MODULE}&view=MassActionAjax&mode=showComposeEmailForm&step=step1&relatedLoad=true','Emails');" type="button" class="btn addButton btn-soft-primary
+                            <button onclick="javascript:Vtiger_Detail_Js.triggerSendEmail('index.php?module={$MODULE}&view=MassActionAjax&mode=showComposeEmailForm&step=step1&relatedLoad=true','Emails');" type="button" class="btn addButton btn-default
                                     {if $IS_SELECT_BUTTON eq true} selectRelation {/if} "
                                     {if $IS_SELECT_BUTTON eq true} data-moduleName={$RELATED_LINK->get('_module')->get('name')} {/if}
                                     {if ($RELATED_LINK->isPageLoadLink())}
@@ -45,7 +45,7 @@
                 {assign var=CLASS_VIEW_PAGING_INPUT_SUBMIT value='relatedViewPagingInputSubmit'}
                 {assign var=CLASS_VIEW_BASIC_ACTION value='relatedViewBasicAction'}
                 {assign var=PAGING_MODEL value=$PAGING}
-                {assign var=RECORD_COUNT value=$RELATED_RECORDS|@count}
+                {assign var=RECORD_COUNT value=$RELATED_RECORDS|php7_count}
                 {assign var=PAGE_NUMBER value=$PAGING->get('page')}
                 {include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true}
             </div>

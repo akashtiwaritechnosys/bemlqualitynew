@@ -1,3 +1,10 @@
+/* * *******************************************************************************
+ * The content of this file is subject to the ITS4YouInstaller license.
+ * ("License"); You may not use this file except in compliance with the License
+ * The Initial Developer of the Original Code is IT-Solutions4You s.r.o.
+ * Portions created by IT-Solutions4You s.r.o. are Copyright(C) IT-Solutions4You s.r.o.
+ * All Rights Reserved.
+ * ****************************************************************************** */
 /** @var Settings_ITS4YouInstaller_Extensions_Js */
 Settings_Vtiger_Index_Js("Settings_ITS4YouInstaller_Extensions_Js", {
     showPopover : function(e) {
@@ -56,6 +63,29 @@ Settings_Vtiger_Index_Js("Settings_ITS4YouInstaller_Extensions_Js", {
         this.registerShowChangeLog(container);
         this.registerOneClickInstallFree(container);
         this.registerModuleSearch(container);
+        this.registerRequirementsAlert(container);
+    },
+    registerRequirementsAlert: function () {
+        let requirementsAlert = $('.requirements-alert');
+
+        if (requirementsAlert.is('.btn-danger')) {
+            app.helper.showConfirmationBox({
+                title: app.vtranslate('JS_REQUIREMENTS'),
+                message: app.vtranslate('JS_REQUIREMENTS_MESSAGE'),
+                buttons: {
+                    confirm: {
+                        label: app.vtranslate('JS_REQUIREMENTS_YES'),
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: app.vtranslate('JS_REQUIREMENTS_NO'),
+                        className: 'btn-default'
+                    },
+                },
+            }).then(function () {
+                requirementsAlert.trigger('click');
+            });
+        }
     },
     registerModuleSearch: function (container) {
         const modules = $('.extensionsTable tbody tr');
@@ -146,7 +176,8 @@ Settings_Vtiger_Index_Js("Settings_ITS4YouInstaller_Extensions_Js", {
             extensionType = extensionContainer.find('[name="extensionType"]').val(),
             extensionName = extensionContainer.find('[name="extensionName"]').val(),
             moduleAction = extensionContainer.find('[name="moduleAction"]').val(),
-            moduleMode = extensionContainer.find('[name="moduleMode"]').val();
+            moduleMode = extensionContainer.find('[name="moduleMode"]').val(),
+            moduleMessage = extensionContainer.find('[name="moduleMessage"]').val();
 
         return {
             'module': app.getModuleName(),
@@ -155,6 +186,7 @@ Settings_Vtiger_Index_Js("Settings_ITS4YouInstaller_Extensions_Js", {
             'mode': moduleMode,
             'extensionId': extensionId,
             'moduleAction': moduleAction,
+            'moduleMessage': moduleMessage,
             'extensionName': extensionName,
             'extensionType': extensionType,
         };
@@ -167,12 +199,17 @@ Settings_Vtiger_Index_Js("Settings_ITS4YouInstaller_Extensions_Js", {
             const element = jQuery(e.currentTarget),
                 params = self.getExtensionParams(element);
 
+            if (params['moduleMessage']) {
+                app.helper.showErrorNotification({message: params['moduleMessage'], showDuration: 10000});
+                return;
+            }
+
             self.getImportModuleStepView(params).then(function (data) {
                 let modalData = {
-                        cb: function(data) {
-                            self.registerOneClickInstall(data);
-                        }
-                    };
+                    cb: function (data) {
+                        self.registerOneClickInstall(data);
+                    }
+                };
 
                 app.helper.showModal(data, modalData);
             });
@@ -303,7 +340,7 @@ Settings_Vtiger_Index_Js("Settings_ITS4YouInstaller_Extensions_Js", {
                     let params = {
                         module: app.getModuleName(),
                         parent: 'Settings',
-                        view: 'License',
+                        view: 'ActivateLicense',
                         mode: 'activate',
                         license: data.license,
                     };
@@ -332,17 +369,23 @@ Settings_Vtiger_Index_Js("Settings_ITS4YouInstaller_Extensions_Js", {
         this.trialButtonActions();
     },
     showActivateLicense(params) {
+        const self = this;
+
         app.helper.hideModal();
         app.helper.showProgress();
-        app.request.post({data: params}).then(function(error, data) {
-            if(!error) {
+        app.request.post({data: params}).then(function (error, data) {
+            if (!error) {
                 app.helper.hideProgress();
-                app.helper.showModal(data);
+                app.helper.showModal(data, {
+                    cb: function () {
+                        self.activateLicense();
+                    }
+                });
             }
         });
     },
     activateLicense() {
-        jQuery('#activateLicense').live('submit', function(e) {
+        jQuery('#activateLicense').on('submit', function(e) {
             e.preventDefault();
             let form = jQuery(this),
                 formData = form.serializeFormData(),
@@ -382,11 +425,11 @@ Settings_Vtiger_Index_Js("Settings_ITS4YouInstaller_Extensions_Js", {
     },
     activateButton() {
         let self = this;
-        jQuery('.activateButton').live('click', function() {
+        jQuery('.activateButton').on('click', function() {
             let params = {
                     module: app.getModuleName(),
                     parent: 'Settings',
-                    view: 'License',
+                    view: 'ActivateLicense',
                     mode: 'activate',
                 };
 
@@ -434,6 +477,7 @@ Settings_Vtiger_Index_Js("Settings_ITS4YouInstaller_Extensions_Js", {
 
                                 if(mode === 'deactivate') {
                                     button.parents('tr').hide();
+                                    $('tr.parent' + data.license).hide();
                                 }
                             } else {
                                 app.helper.showErrorNotification({message: message})

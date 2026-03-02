@@ -17,8 +17,8 @@
         {/if}
         {assign var="REPORT_TYPE" value=$LISTVIEW_ENTRY->get('reporttype')}
         {if $REPORT_TYPE eq 'chart'}
-            <span class="list_view_eye">
-                <a class="quickView icon action"  title="{vtranslate('LBL_QUICK_VIEW', $MODULE)}"><i  data-feather="plus-circle"></i></a>
+            <span>
+                <a class="quickView fa fa-eye icon action" title="{vtranslate('LBL_QUICK_VIEW', $MODULE)}"></a>
             </span>
         {/if}
         {assign var="PINNED" value=$LISTVIEW_ENTRY->get('pinned')}
@@ -32,7 +32,7 @@
             <span title="{if $PIN_CLASS eq 'vicon-pin'}{vtranslate('LBL_PIN_CHART_TO_DASHBOARD',$MODULE)}{else}{vtranslate('LBL_UNPIN_CHART_FROM_DASHBOARD',$MODULE)}{/if}" 
                   class="pinToDashboard dropdown-toggle"  data-recordid="{$LISTVIEW_ENTRY->get('reportid')}" 
                   data-primemodule="{$LISTVIEW_ENTRY->get('primarymodule')}" data-toggle="dropdown"
-                  data-dashboard-tab-count='{count($DASHBOARD_TABS)}'>
+                  data-dashboard-tab-count='{php7_count($DASHBOARD_TABS)}'>
                 <i class="fa icon {$PIN_CLASS} action" style="font-size:13px;"></i>
             </span>
             <ul class="dropdown-menu dashBoardTabMenu">
@@ -59,8 +59,8 @@
             {/if}    
         
         <div class="btn-group inline-save hide">
-            <button class="button btn-soft-success btn-small save" name="save"><i class="fa fa-check"></i></button>
-            <button class="button btn-soft-danger btn-small cancel" name="Cancel"><i class="fa fa-close"></i></button>
+            <button class="button btn-submit btn-small save" name="save"><i class="fa fa-check"></i></button>
+            <button class="button btn-danger btn-small cancel" name="Cancel"><i class="fa fa-close"></i></button>
         </div>
     </div>
 {/strip}

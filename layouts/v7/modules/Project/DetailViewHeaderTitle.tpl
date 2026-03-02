@@ -10,23 +10,23 @@
 ********************************************************************************/
 -->*}
 {strip}
-    <div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="col-lg-5 col-md-6 col-sm-6">
         <div class="record-header clearfix">
             <div class="recordImage bgproject app-{$SELECTED_MENU_CATEGORY}">
                 <div class="name"><span><strong> <i class="vicon-project"></i> </strong></span></div>
             </div>
             <div class="recordBasicInfo">
                 <div class="info-row">
-                    <h4>
+                    <div>
                         <div class="recordLabel pushDown" title="{$RECORD->getName()}">
                             {foreach item=NAME_FIELD from=$MODULE_MODEL->getNameFields()}
                                 {assign var=FIELD_MODEL value=$MODULE_MODEL->getField($NAME_FIELD)}
                                 {if $FIELD_MODEL->getPermissions()}
-                                    <span class="{$NAME_FIELD}">{$RECORD->get($NAME_FIELD)}</span>&nbsp;
+                                    <h4 class="{$NAME_FIELD}">{$RECORD->get($NAME_FIELD)}</h4>
                                 {/if}
                             {/foreach}
                         </div>
-                    </h4>
+                    </div>
                 </div>
                 {include file="DetailViewHeaderFieldsView.tpl"|vtemplate_path:$MODULE}
                 

@@ -14,12 +14,12 @@
         <div class="title row">
             <div class="rulehead col-sm-6">
                 <!-- Check if the module should the for module to get the translations-->
-                <strong>{vtranslate('LBL_SHARING_RULE', $QUALIFIED_MODULE)}&nbsp;{vtranslate('LBL_FOR', $MODULE)}&nbsp;
-                        {if $FOR_MODULE == 'Accounts'}{vtranslate($FOR_MODULE, $QUALIFIED_MODULE)}{else}{vtranslate($FOR_MODULE, $MODULE)}{/if} :</strong>
+                <p>{vtranslate('LBL_SHARING_RULE', $QUALIFIED_MODULE)}&nbsp;{vtranslate('LBL_FOR', $MODULE)}&nbsp;
+                        {if $FOR_MODULE == 'Accounts'}{vtranslate($FOR_MODULE, $QUALIFIED_MODULE)}{else}{vtranslate($FOR_MODULE, $MODULE)}{/if} :</p>
             </div>
             <div class="col-sm-6">
                 <div class="pull-right">
-                    <button class="btn btn-sm btn-soft-default addButton addCustomRule" type="button" data-url="{$MODULE_MODEL->getCreateRuleUrl()}">
+                    <button class="btn btn-sm btn-default addButton addCustomRule" type="button" data-url="{$MODULE_MODEL->getCreateRuleUrl()}">
                       <i class="fa fa-plus"></i> &nbsp;&nbsp;{vtranslate('LBL_ADD_CUSTOM_RULE', $QUALIFIED_MODULE)}
                     </button>
                 </div>
@@ -28,35 +28,35 @@
         <hr>	
             <div class="contents">
                 {if $RULE_MODEL_LIST}
-                    <table class="table table-bordered table-condensed customRuleTable">
+                    <table class="table table-borderedd sharing-sub-table table-condensed customRuleTable">
                         <thead>
                             <tr class="customRuleHeaders">
-                                <th>{vtranslate('LBL_RULE_NO', $QUALIFIED_MODULE)}</th>
+                                <th><p>{vtranslate('LBL_RULE_NO', $QUALIFIED_MODULE)}</p></th>
                                 <!-- Check if the module should the for module to get the translations -->
-                                <th>{if $FOR_MODULE == 'Accounts'}{vtranslate($FOR_MODULE, $QUALIFIED_MODULE)}{else}{vtranslate($FOR_MODULE, $MODULE)}{/if}
-                                        &nbsp;{vtranslate('LBL_OF', $MODULE)}</th>
-                                <th>{vtranslate('LBL_CAN_ACCESSED_BY', $QUALIFIED_MODULE)}</th>
-                                <th>{vtranslate('LBL_PRIVILEGES', $QUALIFIED_MODULE)}</th>
+                                <th><p>{if $FOR_MODULE == 'Accounts'}{vtranslate($FOR_MODULE, $QUALIFIED_MODULE)}{else}{vtranslate($FOR_MODULE, $MODULE)}{/if}
+                                        &nbsp;{vtranslate('LBL_OF', $MODULE)}</p></th>
+                                <th><p>{vtranslate('LBL_CAN_ACCESSED_BY', $QUALIFIED_MODULE)}</p></th>
+                                <th><p>{vtranslate('LBL_PRIVILEGES', $QUALIFIED_MODULE)}</p></th>
                             </tr>
                         </thead>
                             <tbody>
                                 {foreach item=RULE_MODEL key=RULE_ID from=$RULE_MODEL_LIST name="customRuleIterator"}
                                     <tr class="customRuleEntries">
                                         <td class="sequenceNumber">
-                                            {$smarty.foreach.customRuleIterator.index + 1}
+                                            <span>{$smarty.foreach.customRuleIterator.index + 1}</span>
                                         </td>
                                         <td>
-                                            <a href="{$RULE_MODEL->getSourceDetailViewUrl()}">{vtranslate('SINGLE_'|cat:$RULE_MODEL->getSourceMemberName(), $QUALIFIED_MODULE)}::{$RULE_MODEL->getSourceMember()->getName()}</a>
+                                           <span> <a href="{$RULE_MODEL->getSourceDetailViewUrl()}">{vtranslate('SINGLE_'|cat:$RULE_MODEL->getSourceMemberName(), $QUALIFIED_MODULE)}::{$RULE_MODEL->getSourceMember()->getName()}</a></span>
                                         </td>
                                         <td>
-                                            <a href="{$RULE_MODEL->getTargetDetailViewUrl()}">{vtranslate('SINGLE_'|cat:$RULE_MODEL->getTargetMemberName(), $QUALIFIED_MODULE)}::{$RULE_MODEL->getTargetMember()->getName()}</a>
+                                            <span><a href="{$RULE_MODEL->getTargetDetailViewUrl()}">{vtranslate('SINGLE_'|cat:$RULE_MODEL->getTargetMemberName(), $QUALIFIED_MODULE)}::{$RULE_MODEL->getTargetMember()->getName()}</a></span>
                                         </td>
                                         <td>
-                                            {if $RULE_MODEL->isReadOnly()}
+                                            <span>{if $RULE_MODEL->isReadOnly()}
                                                 {vtranslate('Read Only', $QUALIFIED_MODULE)}
                                             {else}
                                                 {vtranslate('Read Write', $QUALIFIED_MODULE)}
-                                            {/if}
+                                            {/if}</span>
 
                                             <div class="table-actions pull-right">
                                                 <span><a href="javascript:void(0);" class="edit" data-url="{$RULE_MODEL->getEditViewUrl()}"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="fa fa-pencil"></i></a></span>
@@ -67,12 +67,12 @@
                                 {/foreach}
                             </tbody>
                     </table>
-                    <div class="recordDetails hide">
-                        <p class="textAlignCenter">{vtranslate('LBL_CUSTOM_ACCESS_MESG', $QUALIFIED_MODULE)}.<!--<a href="">{vtranslate('LBL_CLICK_HERE', $QUALIFIED_MODULE)}</a>&nbsp;{vtranslate('LBL_CREATE_RULE_MESG', $QUALIFIED_MODULE)}--></p>
+                    <div class="recordDetails textAlignCenter hide">
+                        <span class="text-light-color">{vtranslate('LBL_CUSTOM_ACCESS_MESG', $QUALIFIED_MODULE)}.<!--<a href="">{vtranslate('LBL_CLICK_HERE', $QUALIFIED_MODULE)}</a>&nbsp;{vtranslate('LBL_CREATE_RULE_MESG', $QUALIFIED_MODULE)}--></span>
                     </div>
                 {else}
-                    <div class="recordDetails">
-                        <p class="textAlignCenter">{vtranslate('LBL_CUSTOM_ACCESS_MESG', $QUALIFIED_MODULE)}.<!--<a href="">{vtranslate('LBL_CLICK_HERE', $QUALIFIED_MODULE)}</a>&nbsp;{vtranslate('LBL_CREATE_RULE_MESG', $QUALIFIED_MODULE)}--></p>
+                    <div class="recordDetails textAlignCenter">
+                        <span class="text-light-color">{vtranslate('LBL_CUSTOM_ACCESS_MESG', $QUALIFIED_MODULE)}.<!--<a href="">{vtranslate('LBL_CLICK_HERE', $QUALIFIED_MODULE)}</a>&nbsp;{vtranslate('LBL_CREATE_RULE_MESG', $QUALIFIED_MODULE)}--></span>
                     </div>
                 {/if}
             </div>

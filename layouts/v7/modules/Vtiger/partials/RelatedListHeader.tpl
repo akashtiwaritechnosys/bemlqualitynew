@@ -14,7 +14,7 @@
 				 {foreach item=RELATED_LINK from=$RELATED_LIST_LINKS['LISTVIEWBASIC']}
 					<div class="btn-group">
 						{assign var=DROPDOWNS value=$RELATED_LINK->get('linkdropdowns')}
-						{if !empty($DROPDOWNS) && (count($DROPDOWNS) gt 0)}
+						{if !empty($DROPDOWNS) && (php7_count($DROPDOWNS) gt 0)}
 							<a class="btn dropdown-toggle" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200" data-close-others="false" style="width:20px;height:18px;">
 								<img title="{$RELATED_LINK->getLabel()}" alt="{$RELATED_LINK->getLabel()}" src="{vimage_path("{$RELATED_LINK->getIcon()}")}">
 							</a>
@@ -38,15 +38,11 @@
 									{if $IS_SELECT_BUTTON eq true} data-moduleName="{$RELATED_LINK->get('_module')->get('name')}" {/if}
 									{if ($RELATED_LINK->isPageLoadLink())}
 										{if $RELATION_FIELD} data-name="{$RELATION_FIELD->getName()}" {/if}
-										data-url="{$RELATED_LINK->getUrl()}{if $SELECTED_MENU_CATEGORY}&app={$SELECTED_MENU_CATEGORY}{/if}"
+										data-url="{$RELATED_LINK->getUrl()}{if isset($SELECTED_MENU_CATEGORY)}&app={$SELECTED_MENU_CATEGORY}{/if}"
 									{/if}
 									>{if $IS_SELECT_BUTTON eq false}<i class="fa fa-plus"></i>&nbsp;{/if}&nbsp;{$RELATED_LINK->getLabel()}</button>
 							{/if}
 						{/if}
-						<!---remoove unlink button for bankguarantee module  purvesh-->
-						{if $RELATED_MODULE_NAME neq 'BankGuaranteeExtensions'}
-                            <button type="button" class="btn btn-default unlinkbutton" disabled="disabled"> Un Link </button>
-                        {/if}
 					</div>
 				{/foreach}
 				&nbsp;
@@ -56,7 +52,7 @@
 			{assign var=CLASS_VIEW_PAGING_INPUT_SUBMIT value='relatedViewPagingInputSubmit'}
 			{assign var=CLASS_VIEW_BASIC_ACTION value='relatedViewBasicAction'}
 			{assign var=PAGING_MODEL value=$PAGING}
-			{assign var=RECORD_COUNT value=$RELATED_RECORDS|@count}
+			{assign var=RECORD_COUNT value=$RELATED_RECORDS|php7_count}
 			{assign var=PAGE_NUMBER value=$PAGING->get('page')}
 			{include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true}
 		</div>

@@ -206,7 +206,7 @@
 						value="{Vtiger_Functions::IGcurrentUserDisplayDate($data.${$fieldName})}"
 						{if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if}
 						{if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
-						{if count($FIELD_INFO['validator'])}
+						{if php7_count($FIELD_INFO['validator'])}
 							data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
 						{/if}  data-rule-date="true" />
 					<span class="input-group-addon"><i class="fa fa-calendar "></i></span>
@@ -300,7 +300,7 @@
 				{if $data.${$fieldName} eq true} checked {/if}
 				{if !empty($SPECIAL_VALIDATOR)}data-validator="{Zend_Json::encode($SPECIAL_VALIDATOR)}"{/if}
 				{if $FIELD_INFO["mandatory"] eq true} data-rule-required = "true" {/if}
-				{if count($FIELD_INFO['validator'])}
+				{if php7_count($FIELD_INFO['validator'])}
 					data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
 				{/if}/>
 			{elseif $LINEITEM_CUSTOM_FIELD['uitype'] eq '10'}
@@ -335,7 +335,7 @@
 			{/if}
 		</td>
 
-			{if $LINEITEM_CUSTOM_FIELD['fieldlabel'] eq 'Present Status' and $SUB_LINEITEM_CUSTOM_FIELDS|@count gt 0}
+			{if $LINEITEM_CUSTOM_FIELD['fieldlabel'] eq 'Present Status' and $SUB_LINEITEM_CUSTOM_FIELDS|php7_count gt 0}
 				<td a="{$LINEITEM_CUSTOM_FIELD['fieldlabel']}">
 				{foreach key=SUB_LINEITEM_CUSTOM_FIELDKEY item=SUB_LINEITEM_CUSTOM_FIELD from=$SUB_LINEITEM_CUSTOM_FIELDS}
 					{assign var="subfieldName" value=$SUB_LINEITEM_CUSTOM_FIELD['fieldname']}
@@ -353,7 +353,7 @@
 				</td>
 			{/if}
 
-			{if $LINEITEM_CUSTOM_FIELD['fieldlabel'] eq 'Action Taken by DSM' and $SUB2_LINEITEM_CUSTOM_FIELDS|@count gt 0}
+			{if $LINEITEM_CUSTOM_FIELD['fieldlabel'] eq 'Action Taken by DSM' and $SUB2_LINEITEM_CUSTOM_FIELDS|php7_count gt 0}
 			  	<td a="{$LINEITEM_CUSTOM_FIELD['fieldlabel']}">
 				{foreach key=SUB2_LINEITEM_CUSTOM_FIELDKEY item=SUB2_LINEITEM_CUSTOM_FIELD from=$SUB2_LINEITEM_CUSTOM_FIELDS}
 					{assign var="sub2fieldName" value=$SUB2_LINEITEM_CUSTOM_FIELD['fieldname']}

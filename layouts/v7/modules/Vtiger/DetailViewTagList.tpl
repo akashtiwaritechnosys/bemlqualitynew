@@ -17,8 +17,8 @@
                 {include file="Tag.tpl"|vtemplate_path:$MODULE}
             {/foreach}
 
-            <a href="javascript:void(0);" class="moreTags {if count($TAGS_LIST) <= Vtiger_Tag_Model::NUM_OF_TAGS_DETAIL } hide {/if}">
-                <span class="tagMoreCount">{count($TAGS_LIST)-Vtiger_Tag_Model::NUM_OF_TAGS_DETAIL}</span>
+            <a href="javascript:void(0);" class="moreTags {if php7_count($TAGS_LIST) <= Vtiger_Tag_Model::NUM_OF_TAGS_DETAIL } hide {/if}">
+                <span class="tagMoreCount">{php7_count($TAGS_LIST)-Vtiger_Tag_Model::NUM_OF_TAGS_DETAIL}</span>
                 &nbsp;{vtranslate('LBL_MORE',$MODULE)|strtolower}
             </a>
         </div>
@@ -74,11 +74,11 @@
                 </div>
             </div>
         </div>
-        <div>
-            <button class="btn btn-mini btn-soft-success saveTag" type="button" style="width:50%;float:left">
+        <div style="display:flex; gap: 10px;">
+            <button class="btn btn-mini btn-submit saveTag" type="button" style="width:50%;float:left">
                 <center> <i class="fa fa-check"></i> </center>
             </button>
-            <button class="btn btn-mini btn-soft-danger cancelSaveTag" type="button" style="width:50%">
+            <button class="btn btn-mini btn-danger cancelSaveTag" type="button" style="width:50%">
                 <center> <i class="fa fa-close"></i> </center>
             </button>
         </div>

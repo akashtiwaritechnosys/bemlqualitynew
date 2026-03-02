@@ -11,7 +11,7 @@
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
 {strip}
 	<div class="listViewContentDiv" id="listViewContents">
-		<div class="col-sm-12 col-xs-12">
+		<div class="col-sm-12 col-xs-12 padding-right-zero">
 			{assign var=LEFTPANELHIDE value=$CURRENT_USER_MODEL->get('leftpanelhide')}
 			<div class="essentials-toggle" title="{vtranslate('LBL_LEFT_PANEL_SHOW_HIDE', 'Vtiger')}">
 				<span class="essentials-toggle-marker fa {if $LEFTPANELHIDE eq '1'}fa-chevron-right{else}fa-chevron-left{/if} cursorPointer"></span>
@@ -28,8 +28,8 @@
 						<div class="row-fluid detailViewButtoncontainer">
 							<span class="btn-toolbar pull-right">
 								<span class="btn-group">
-									<button id="deleteButton" class="btn btn-soft-secondary">&nbsp;{vtranslate('LBL_DELETE', $MODULE)}</button>
-									<button id="makeDefaultButton" class="btn btn-soft-secondary">&nbsp;{vtranslate('LBL_SET_AS_DEFAULT', $MODULE)}</button>
+									<button id="deleteButton" class="btn btn-default">&nbsp;{vtranslate('LBL_DELETE', $MODULE)}</button>
+									<button id="makeDefaultButton" class="btn btn-default">&nbsp;{vtranslate('LBL_SET_AS_DEFAULT', $MODULE)}</button>
 								</span>
 							</span>
 							<span class="row-fluid" id="rssFeedHeading">

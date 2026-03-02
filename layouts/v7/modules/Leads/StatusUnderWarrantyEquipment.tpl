@@ -123,7 +123,7 @@ $( document ).ready(function() {
         </div>
         <table id="data_table">
 			<tr>
-				<th class="NoBackGround" colspan="{$PickListValues|@count + 2}">
+				<th class="NoBackGround" colspan="{$PickListValues|php7_count + 2}">
 					<h5>{$REPORT_LABEL}</h1>
 				</th>
 			</tr>
@@ -148,7 +148,7 @@ $( document ).ready(function() {
                 {foreach item=INNER_VALUE key=INNER_KEY from=$NAME_FIELD name=foo}
                     <tr>
                         {if $smarty.foreach.foo.first}
-                            <th rowspan="{$NAME_FIELD|@count}" class="NoBackGround">{$KEY_FIELD}</th>
+                            <th rowspan="{$NAME_FIELD|php7_count}" class="NoBackGround">{$KEY_FIELD}</th>
                         {/if}
                         {foreach item=INNER_VALUE1 key=INNER_KEY1 from=$INNER_VALUE}
                             {if $INNER_VALUE1 eq '0'}

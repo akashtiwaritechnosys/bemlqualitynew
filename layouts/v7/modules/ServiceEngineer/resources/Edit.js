@@ -5,6 +5,7 @@ Vtiger_Edit_Js("ServiceEngineer_Edit_Js", {}, {
 		this.hide();
 		this.phoneCountryCode();
 		this.myFunction();
+		this.convertMultiPicklistToRadios();
 	},
 	hide: function () {
 		$("#ServiceEngineer_editView_fieldName_rejection_reason").parent().parent().parent().parent().addClass("hide");
@@ -113,5 +114,66 @@ Vtiger_Edit_Js("ServiceEngineer_Edit_Js", {}, {
 			});
 		}
 	},
+	
+	convertMultiPicklistToRadios: function () {
+		var self = this;
+		
+		function convertFields() {
+			var $selects = $('select[data-fieldtype="multipicklist"], select[multiple="multiple"]');
+			
+			console.log('Found multipicklist selects:', $selects.length);
+			
+			$selects.each(function() {
+				var $select = $(this);
+				var fieldName = $select.attr('name');
+
+				// Skip if already converted
+				if ($select.data('converted-to-radio')) {
+					console.log('Already converted:', fieldName);
+					return;
+				}
+
+				var selectedValues = $select.val() || [];
+				var optionsHtml = '';
+
+				$select.find('option').each(function() {
+					var val = $(this).val();
+					var text = $(this).text();
+					
+					if (!val) return;
+					
+					var checked = selectedValues.includes(val) ? 'checked' : '';
+
+					optionsHtml += '<label class="radio-inline" style="margin-right:15px;">' +
+						'<input type="radio" name="' + fieldName + '" value="' + val + '" ' + checked + '> ' + text +
+						'</label>';
+				});
+
+				if (!optionsHtml) {
+					console.log('No options found for:', fieldName);
+					return;
+				}
+
+				var $radioGroup = $('<div class="custom-radio-group">' + optionsHtml + '</div>');
+				
+				var $parent = $select.parent();
+				
+				$parent.html($radioGroup);
+				
+				$select.data('converted-to-radio', true);
+				
+				console.log('Successfully converted:', fieldName);
+			});
+		}
+
+		setTimeout(convertFields, 500);
+		setTimeout(convertFields, 1200);
+		setTimeout(convertFields, 2000);
+		
+		$(document).on('Vtiger.Post.EditViewLoad', convertFields);
+		$(document).on('Vtiger.Field.PostRender', convertFields);
+	}
 });
+
+
 

@@ -36,7 +36,7 @@
 			&nbsp;
 		</div>
 	</div>
-	<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 listViewContentDiv" id="listViewContents">
+	<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 listViewContentDiv padding-left-zero padding-right-zero" id="listViewContents">
 		<div id="table-content" class="table-container">
 			{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
 			<table id="listview-table" class="table listview-table portal-table">
@@ -104,10 +104,7 @@
 										<span href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 											<i class="fa fa-ellipsis-v icon"></i>
 										</span>
-										<ul class="dropdown-menu" style="top:auto;bottom:30%;" data-id="{$RECORD_ID}">
-											<li><a href="javascript:void(0);" class="editPortalRecord" >{vtranslate('LBL_EDIT', $MODULE)}</a></li>
-											<li><a href="javascript:void(0);" class="deleteRecordButton">{vtranslate('LBL_DELETE', $MODULE)}</a></li>
-										</ul>
+										
 									</span>
 								</div>
 							</td>
@@ -122,7 +119,10 @@
 					{/foreach}
 					{if $PAGING_INFO['recordCount'] eq '0'}
 						<tr class="emptyRecordsDiv">
-							{assign var=COLSPAN_WIDTH value={count($LISTVIEW_HEADERS)}+1}
+							{assign var=COLSPAN_WIDTH value=1}
+							{if isset($LISTVIEW_HEADERS)}
+								{assign var=COLSPAN_WIDTH value=php7_count($LISTVIEW_HEADERS)+1}
+							{/if}
 							<td colspan="{$COLSPAN_WIDTH}">
 								<div class="emptyRecordsContent">
 									{assign var=SINGLE_MODULE value="SINGLE_$MODULE"}

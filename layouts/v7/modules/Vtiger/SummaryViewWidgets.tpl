@@ -33,7 +33,7 @@
 
                             {if $DETAIL_VIEW_WIDGET->get('action')}
                                 <div class="pull-right">
-                                    <button class="btn addButton btn-soft-blue btn-sm createRecord" type="button" data-url="{$DETAIL_VIEW_WIDGET->get('actionURL')}">
+                                    <button class="btn addButton btn-default btn-sm createRecord" type="button" data-url="{$DETAIL_VIEW_WIDGET->get('actionURL')}">
                                         <i class="fa fa-plus"></i>&nbsp;&nbsp; {vtranslate('LBL_ADD',$MODULE_NAME)|cat:" "|cat:$DETAIL_VIEW_WIDGET->getLabel()}
                                     </button>
                                 </div>

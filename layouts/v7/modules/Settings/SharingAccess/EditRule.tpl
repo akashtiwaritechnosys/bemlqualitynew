@@ -16,9 +16,9 @@
         {assign var=RULE_MODEL_EXISTS value=false}
     {/if}
     <div class="modal-dialog modelContainer"'>
+        <div class="modal-content">
         {assign var=HEADER_TITLE value={vtranslate('LBL_ADD_CUSTOM_RULE_TO', $QUALIFIED_MODULE)}|cat:" "|cat:{vtranslate($MODULE_MODEL->get('name'), $MODULE)}}
         {include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
-        <div class="modal-content">
             <form class="form-horizontal" id="editCustomRule" method="post">
                 <input type="hidden" name="for_module" value="{$MODULE_MODEL->get('name')}" />
                 <input type="hidden" name="record" value="{$RULE_ID}" />

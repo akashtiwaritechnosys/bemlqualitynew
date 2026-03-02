@@ -34,7 +34,7 @@
         <input type="hidden" value="Inventory_Popup_Js" id="popUpClassName"/>
         {assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
         <div class="bottomscroll-div">
-            <table class="listview-table table-bordered listViewEntriesTable">
+            <table class="listview-table listViewEntriesTable">
                 <thead>
                     <tr class="listViewHeaders">
                         {if $MULTI_SELECT}
@@ -64,13 +64,17 @@
                 {if $MODULE_MODEL && $MODULE_MODEL->isQuickSearchEnabled()}
                     <tr class="searchRow">
                         <td class="searchBtn textAlignCenter">
-                            <button class="btn btn-success" data-trigger="PopupListSearch">{vtranslate('LBL_SEARCH', $MODULE )}</button>
+                            <button class="btn btn-submit" data-trigger="PopupListSearch">{vtranslate('LBL_SEARCH', $MODULE )}</button>
                         </td>
                         {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
                             <td>
                                 {assign var=FIELD_UI_TYPE_MODEL value=$LISTVIEW_HEADER->getUITypeModel()}
+                                {assign var=FIELD_SEARCH_INFO value=array("searchValue" => "")}
+                                {if isset($SEARCH_DETAILS[$LISTVIEW_HEADER->getName()])}
+                                    {{assign var=FIELD_SEARCH_INFO value=$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()]}}
+                                {/if}
                                 {include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$MODULE_NAME)
-                                FIELD_MODEL= $LISTVIEW_HEADER SEARCH_INFO=$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()] USER_MODEL=$CURRENT_USER_MODEL}
+                                FIELD_MODEL= $LISTVIEW_HEADER SEARCH_INFO=$FIELD_SEARCH_INFO USER_MODEL=$CURRENT_USER_MODEL}
                             </td>
                         {/foreach}
 						{if $RELATED_MODULE eq 'Products'}
@@ -79,7 +83,7 @@
                     </tr>
                 {/if}
                 {foreach item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES name=popupListView}
-                    {assign var="RECORD_DATA" value="{$LISTVIEW_ENTRY->getRawData()}"}
+                    {assign var="RECORD_DATA" value="{implode(' ',$LISTVIEW_ENTRY->getRawData())}"}
                     <tr class="listViewEntries" data-id="{$LISTVIEW_ENTRY->getId()}" data-name='{$LISTVIEW_ENTRY->getName()}' data-info='{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($LISTVIEW_ENTRY->getRawData()))}'
                         {if $GETURL neq '' } data-url="{$LISTVIEW_ENTRY->$GETURL()|cat:'&sourceModule='|cat:$SOURCE_MODULE}" {/if}  id="{$MODULE}_popUpListView_row_{$smarty.foreach.popupListView.index+1}">
                         {if $MULTI_SELECT}
@@ -91,7 +95,7 @@
                         {/if}
                         {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
                             {assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
-                            <td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}" title="{$RECORD_DATA[$LISTVIEW_HEADERNAME]}">
+                            <td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}">
                                 {if $LISTVIEW_HEADER->isNameField() eq true or $LISTVIEW_HEADER->get('uitype') eq '4'}
                                     <a>{$LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME)}</a>
                                 {else if $LISTVIEW_HEADER->get('uitype') eq '72'}
@@ -132,7 +136,7 @@
     {if (!empty($SUBPRODUCTS_POPUP)) and (!empty($PARENT_PRODUCT_ID))}
         <div style="margin-top: 10px; height:50px">
             <div class="pull-right">
-                <button type="button" class="btn btn-default" id="backToProducts"><strong>{vtranslate('LBL_BACK_TO_PRODUCTS', $MODULE)}</strong></button>
+                <button type="button" class="btn btn-default" id="backToProducts">{vtranslate('LBL_BACK_TO_PRODUCTS', $MODULE)}</button>
             </div>
         </div>
     {/if}

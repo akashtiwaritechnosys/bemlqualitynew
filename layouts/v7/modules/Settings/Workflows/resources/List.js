@@ -1,9 +1,18 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 Settings_Vtiger_List_Js("Settings_Workflows_List_Js", {
     
     triggerCreate : function(url) {
         var selectedModule = jQuery('#moduleFilter').val();
+        selectedModule = app.helper.purifyContent(selectedModule);
         if(selectedModule.length > 0) {
-            url += '&source_module='+selectedModule
+            url += '&source_module='+encodeURIComponent(selectedModule)
         }
         window.location.href = url;
     }

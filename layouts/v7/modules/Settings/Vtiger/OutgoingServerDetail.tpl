@@ -13,10 +13,10 @@
 	<div class="detailViewContainer" id="OutgoingServerDetails">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="clearfix">
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<h3 style="margin-top: 0px;">{vtranslate('LBL_OUTGOING_SERVER', $QUALIFIED_MODULE)}</h3>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+				{*<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 outgoing-server">
+					<h4 style="margin-top: 0px;">{vtranslate('LBL_OUTGOING_SERVER', $QUALIFIED_MODULE)}</h4>
+				</div>*}
+				<div class="">
 					<div class="btn-group pull-right">
 						<button class="btn btn-default editButton" data-url='{$MODEL->getEditViewUrl()}' type="button" title="{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}">{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}</button>
 					</div>
@@ -26,13 +26,13 @@
 				{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
 				<div class="block">
 					<div>
-						<h4>{vtranslate('LBL_MAIL_SERVER_SMTP', $QUALIFIED_MODULE)}</h4>
+						<h5>{vtranslate('LBL_MAIL_SERVER_SMTP', $QUALIFIED_MODULE)}</h5>
 					</div>
 					<hr>
 					<table class="table editview-table no-border">
 						<tbody>
 							<tr>
-								<td class="{$WIDTHTYPE} fieldLabel"style="width:25%" ><label>{vtranslate('LBL_SERVER_NAME', $QUALIFIED_MODULE)}</label></td>
+								<td class="{$WIDTHTYPE} fieldLabel"style="width:35%" ><label>{vtranslate('LBL_SERVER_NAME', $QUALIFIED_MODULE)}</label></td>
 								<td class="{$WIDTHTYPE} fieldValue"><span>{$MODEL->get('server')}</span></td>
 							</tr>
 							<tr>

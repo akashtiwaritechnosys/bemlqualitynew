@@ -99,23 +99,4 @@ Vtiger_Detail_Js("ServiceEngineer_Detail_Js", {
 			);
 		});
 	},
-	triggerEmployeeTransfer : function (url, module) {
-		var message = "Do You Really Want To Transfer This Employee?";
-		app.helper.showConfirmationBox({ 'message': message }).then(function (e) {
-			app.helper.showProgress();
-			app.request.get({ 'url': url }).then(
-				function (err, data) {
-					app.helper.hideProgress();
-					if (err == null) {
-						app.helper.hideModal();
-						var successMessage = app.vtranslate(data.message);
-						app.helper.showSuccessNotification({ "message": successMessage });
-					} else {
-						app.helper.showErrorNotification({ "message": err });
-						return false;
-					}
-				}
-			);
-		});
-	},
 }, {});

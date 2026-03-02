@@ -13,24 +13,22 @@
 				<form id="ConfigEditorForm" class="form-horizontal" data-detail-url="{$MODEL->getDetailViewUrl()}" method="POST">
 					{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
 					{assign var=FIELD_VALIDATION  value=['HELPDESK_SUPPORT_EMAIL_ID'	=> 'data-rule-email="true"',
-																	'upload_maxsize'	=> 'data-rule-range=[1,41] data-rule-positive="true" data-rule-wholeNumber="true"',
+																	'upload_maxsize'	=> 'data-rule-range=[1,5] data-rule-positive="true" data-rule-wholeNumber="true"',
 																'history_max_viewed'	=> 'data-rule-range=[1,5] data-rule-positive="true" data-rule-wholeNumber="true"',
 															'listview_max_textlength'	=> 'data-rule-range=[1,100] data-rule-positive="true" data-rule-wholeNumber="true"',
 															'list_max_entries_per_page'	=> 'data-rule-range=[1,100] data-rule-positive="true" data-rule-wholeNumber="true"']}
 
-					<div>
+					{*<div class='configuration-editor'>
 						<h4>{vtranslate('LBL_CONFIG_EDITOR', $QUALIFIED_MODULE)}</h4>
-					</div>
-					<hr>
-					<br>
+					</div>*}
 					<div class="detailViewInfo">
 						{assign var=FIELD_DATA value=$MODEL->getViewableData()}
 						{foreach key=FIELD_NAME item=FIELD_DETAILS from=$MODEL->getEditableFields()}
 							<div class="row form-group">
-								<div class="col-lg-4 control-label fieldLabel">
+								<div class="col-lg-4 col-md-6 col-sm-5 control-label fieldLabel">
 									<label>{if $FIELD_NAME == 'upload_maxsize'}{if $FIELD_DATA[$FIELD_NAME] gt 5}{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE,$FIELD_DATA[$FIELD_NAME])}{else}{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE,5)}{/if}{else}{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}{/if}</label>
 								</div>
-								<div  class="{$WIDTHTYPE}  col-lg-4 input-group">
+								<div  class="{$WIDTHTYPE}  col-lg-4 col-md-6 col-sm-6 input-group">
 									{if $FIELD_DETAILS['fieldType'] == 'picklist'}
 
 										<select class="select2-container inputElement select2 col-lg-11" name="{$FIELD_NAME}" >
@@ -58,7 +56,7 @@
 										</div>
 									{else}
 										<div class=" input-group inputElement"> 
-											<input type="text" class="inputElement "  name="{$FIELD_NAME}" data-rule-required="true" {if $FIELD_VALIDATION[$FIELD_NAME]} {$FIELD_VALIDATION[$FIELD_NAME]} {/if} value="{$FIELD_DATA[$FIELD_NAME]}" />
+											<input type="text" class="inputElement "  name="{$FIELD_NAME}" data-rule-required="true" {if isset($FIELD_VALIDATION[$FIELD_NAME]) && $FIELD_VALIDATION[$FIELD_NAME]} {$FIELD_VALIDATION[$FIELD_NAME]} {/if} value="{$FIELD_DATA[$FIELD_NAME]}" />
 											{if $FIELD_NAME == 'upload_maxsize'}
 												<div class="input-group-addon">{vtranslate('LBL_MB', $QUALIFIED_MODULE)}</div>
 											{/if}
@@ -71,8 +69,10 @@
 					<div class='modal-overlay-footer clearfix'>
 						<div class=" row clearfix">
 							<div class=' textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-								<button type='submit' class='btn btn-success saveButton'  >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-								<a class='cancelLink' type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+								<div class='footer-btns'>
+									<button type='submit' class='btn btn-submit saveButton'>{vtranslate('LBL_SAVE', $MODULE)}</button>
+									<a class='cancelLink' type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+								</div>
 							</div>
 						</div>
 					</div>

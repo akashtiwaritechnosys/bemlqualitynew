@@ -14,23 +14,11 @@
 			<div id="listview-actions" class="listview-actions-container">
 				<div class="clearfix">
 					<h4 class="pull-left">{vtranslate('LBL_MODULE_MANAGER', $QUALIFIED_MODULE)}</h4>
-					<div class="pull-right">
-						<div class="btn-group">
-							<button class="btn btn-default" type="button" onclick='window.location.href="{$IMPORT_USER_MODULE_FROM_FILE_URL}"'>
-								{vtranslate('LBL_IMPORT_MODULE_FROM_ZIP', $QUALIFIED_MODULE)}
-							</button>
-						</div>&nbsp;
-						<div class="btn-group">
-							<button class="btn btn-default" type="button" onclick='window.location.href = "{$IMPORT_MODULE_URL}"'>
-								{vtranslate('LBL_EXTENSION_STORE', 'Settings:ExtensionStore')}
-							</button>
-						</div>
-					</div>
 				</div>
 				<br>
-				<div class="contents">
+				<div class="contents module-management-contents">
 					{assign var=COUNTER value=0}
-					<table class="table table-bordered modulesTable">
+					<table class="table table-bordered modulesTable table-formed">
 						<tr>
 							{foreach item=MODULE_MODEL key=MODULE_ID from=$ALL_MODULES}
 								{assign var=MODULE_NAME value=$MODULE_MODEL->get('name')}
@@ -42,20 +30,20 @@
 								{/if}
 								<td class="ModulemanagerSettings">
 									<div class="moduleManagerBlock">
-										<span class="col-lg-1" style="line-height: 2.5;">
+										<span class="col-lg-1 col-md-1 col-sm-1" style="line-height: 2.5;">
 											<input type="checkbox" value="" name="moduleStatus" data-module="{$MODULE_NAME}" data-module-translation="{$MODULE_LABEL}" {if $MODULE_MODEL->isActive()}checked{/if} />
 										</span>
-										<span class="col-lg-1 moduleImage {if !$MODULE_ACTIVE}dull {/if}">
+										<span class="col-lg-1 col-md-1 col-sm-1 moduleImage {if !$MODULE_ACTIVE}dull {/if}">
 											{if vimage_path($MODULE_NAME|cat:'.png') != false}
 												<img class="alignMiddle" src="{vimage_path($MODULE_NAME|cat:'.png')}" alt="{$MODULE_LABEL}" title="{$MODULE_LABEL}"/>
 											{else}
 												<img class="alignMiddle" src="{vimage_path('DefaultModule.png')}" alt="{$MODULE_LABEL}" title="{$MODULE_LABEL}"/>
 											{/if}	
 										</span>
-										<span class="col-lg-7 moduleName {if !$MODULE_ACTIVE} dull {/if}"><h5 style="line-height: 0.5;">{$MODULE_LABEL}</h5></span>
+										<span class="col-lg-7 col-md-8 col-sm-8 moduleName management-module-name {if !$MODULE_ACTIVE} dull {/if}">{$MODULE_LABEL}</span>
 											{assign var=SETTINGS_LINKS value=$MODULE_MODEL->getSettingLinks()}
-											{if !in_array($MODULE_NAME, $RESTRICTED_MODULES_LIST) && (count($SETTINGS_LINKS) > 0)}
-											<span class="col-lg-3 moduleblock">
+											{if !in_array($MODULE_NAME, $RESTRICTED_MODULES_LIST) && (php7_count($SETTINGS_LINKS) > 0)}
+											<span class="col-lg-3 col-md-12 col-sm-12 moduleblock">
 												<span class="btn-group pull-right actions {if !$MODULE_ACTIVE}hide{/if}">
 													<button class="btn btn-default btn-sm dropdown-toggle unpin hiden " data-toggle="dropdown">
 														{vtranslate('LBL_SETTINGS', $QUALIFIED_MODULE)}&nbsp;<i class="caret"></i>

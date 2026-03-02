@@ -32,7 +32,7 @@
         {elseif $BLOCK_LABEL eq 'LBL_ITEM_DETAILS'}
                 {include file="partials/LineItemsEdit.tpl"|@vtemplate_path:'ServiceReports'}
         {else}
-            {if $BLOCK_FIELDS|@count gt 0}
+            {if $BLOCK_FIELDS|php7_count gt 0}
                 <div class='fieldBlockContainer' id="{$BLOCK_LABEL}hideOrShowId" data-block="{$BLOCK_LABEL}">
                         {if $BLOCK_LABEL eq 'Equipment Details' and $REPORTTYPE eq 'WARRANTY CLAIM FOR SUB ASSEMBLY / OTHER SPARE PARTS'}
                             <h4 class='fieldBlockHeader'>{vtranslate('Equipment details where Sub Assembly /Spares Parts fitted', $MODULE)}</h4>
@@ -118,7 +118,7 @@
                         {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
                             {assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
                             {assign var="refrenceList" value=$FIELD_MODEL->getReferenceList()}
-                            {assign var="refrenceListCount" value=count($refrenceList)}
+                            {assign var="refrenceListCount" value=php7_count($refrenceList)}
                             {if $FIELD_MODEL->isEditable() eq true}
                                 {if $FIELD_MODEL->get('uitype') eq "19"}
                                     {if $COUNTER eq '1'}

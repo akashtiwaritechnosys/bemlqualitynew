@@ -40,7 +40,7 @@
                 <input type="hidden" value="{Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($SEARCH_DETAILS))}" id="currentSearchParams" />
                 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
                 <div class="bottomscroll-div">
-                    <table class="listview-table table-bordered listViewEntriesTable">
+                    <table class="listview-table listViewEntriesTable">
                         <thead>
                             <tr class="listViewHeaders">
                                 <th class="{$WIDTHTYPE}">
@@ -64,29 +64,33 @@
                         {if $MODULE_MODEL->isQuickSearchEnabled()}
                             <tr class="searchRow">
                                 <td class="searchBtn">
-                                    <button class="btn btn-success" data-trigger="PopupListSearch">{vtranslate('LBL_SEARCH', $MODULE )}</button>
+                                    <button class="btn btn-submit" data-trigger="PopupListSearch">{vtranslate('LBL_SEARCH', $MODULE )}</button>
                                 </td>
                                 {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
                                     <td>
                                         {assign var=FIELD_UI_TYPE_MODEL value=$LISTVIEW_HEADER->getUITypeModel()}
+                                        {assign var=FIELD_SEARCH_INFO value=array("searchValue" => "")}
+                                        {if isset($SEARCH_DETAILS[$LISTVIEW_HEADER->getName()])}
+                                            {{assign var=FIELD_SEARCH_INFO value=$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()]}}
+                                        {/if}
                                         {include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$MODULE_NAME)
-                                        FIELD_MODEL= $LISTVIEW_HEADER SEARCH_INFO=$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()] USER_MODEL=$USER_MODEL}
+                                        FIELD_MODEL= $LISTVIEW_HEADER SEARCH_INFO=$FIELD_SEARCH_INFO USER_MODEL=$CURRENT_USER_MODEL}
                                     </td>
                                 {/foreach}
                                 <td></td>
                            </tr>
                         {/if}
                         {foreach item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES name=popupListView}
-                            {assign var="RECORD_DATA" value="{$LISTVIEW_ENTRY->getRawData()}"}
-                            {assign var=EDITED_VALUE value=$SELECTED_RECORDS[$LISTVIEW_ENTRY->getId()]}
+                            {assign var="RECORD_DATA" value="{implode(' ',$LISTVIEW_ENTRY->getRawData())}"}
+                            {assign var=EDITED_VALUE value=(isset($SELECTED_RECORDS[$LISTVIEW_ENTRY->getId()])) ? $SELECTED_RECORDS[$LISTVIEW_ENTRY->getId()] : ''}
                             <tr class="listViewEntries" data-id="{$LISTVIEW_ENTRY->getId()}" data-name='{$LISTVIEW_ENTRY->getName()}'
-                                {if $GETURL neq ''} data-url='{$LISTVIEW_ENTRY->$GETURL()}' {/if} id="{$MODULE}_popUpListView_row_{$smarty.foreach.popupListView.index+1}">
+                                {if isset($GETURL) && $GETURL neq ''} data-url='{$LISTVIEW_ENTRY->$GETURL()}' {/if} id="{$MODULE}_popUpListView_row_{$smarty.foreach.popupListView.index+1}">
                                 <td class="{$WIDTHTYPE}">
                                     <input class="entryCheckBox" type="checkbox" {if $EDITED_VALUE}checked{/if}/>
                                 </td>
                                 {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
                                 {assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
-                                <td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}" title="{$RECORD_DATA[$LISTVIEW_HEADERNAME]}">
+                                <td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}">
                                     {if $LISTVIEW_HEADER->get('uitype') eq '72' || $LISTVIEW_HEADER->get('uitype') eq '71'}
                                         {assign var=CURRENCY_SYMBOL value=$LISTVIEW_ENTRY->get('currencySymbol')}
                                         {if $LISTVIEW_HEADER->get('uitype') eq '71'}

@@ -1,3 +1,12 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
 Vtiger.Class("Vtiger_List_Js", {
 	listInstance: false,
 	filterClick: false,
@@ -70,95 +79,6 @@ Vtiger.Class("Vtiger_List_Js", {
 		}
 
 	},
-	syncToSAP : function () {
-		let self = this;
-		var message = "Are You want To Sync To Sap Now?";
-			app.helper.showConfirmationBox({'message': message}).then(function (e) {
-				app.helper.showProgress();
-				self.getSAPAPICall().then(
-				function (data) {
-					app.helper.hideProgress();
-				},
-				function (error, err) {
-					app.helper.hideProgress();
-				}
-			);
-		});
-	},
-	getSAPAPICall: function () {
-        var aDeferred = jQuery.Deferred();
-        var url = "module=Accounts&action=AccountsExternalAppSync";
-        AppConnector.request(url).then(
-                function (data) {
-                    if (data['success']) {
-                        aDeferred.resolve(data);
-                    } else {
-                        aDeferred.reject(data['message']);
-                    }
-                },
-                function (error) {
-                    aDeferred.reject();
-                }
-        )
-        return aDeferred.promise();
-    },
-	
-	syncToSAPFunctionalLocations : function () {
-		app.helper.showProgress();
-		this.getSAPAPICallFunctionalLocations().then(
-				function (data) {
-					app.helper.hideProgress();
-				},
-				function (error, err) {
-					app.helper.hideProgress();
-				}
-		);
-	},
-	getSAPAPICallFunctionalLocations : function () {
-        var aDeferred = jQuery.Deferred();
-        var url = "module=FunctionalLocations&action=getAllFunctionalLocations";
-        AppConnector.request(url).then(
-                function (data) {
-                    if (data['success']) {
-                        aDeferred.resolve(data);
-                    } else {
-                        aDeferred.reject(data['message']);
-                    }
-                },
-                function (error) {
-                    aDeferred.reject();
-                }
-        )
-        return aDeferred.promise();
-    },
-	syncAllMaintainancePlant : function () {
-		app.helper.showProgress();
-		this.getSAPAPICallMaintainancePlant().then(
-			function (data) {
-				app.helper.hideProgress();
-			},
-			function (error, err) {
-				app.helper.hideProgress();
-			}
-		);
-	},
-	getSAPAPICallMaintainancePlant : function () {
-        var aDeferred = jQuery.Deferred();
-        var url = "module=MaintenancePlant&action=getAllMaintainancePlants";
-        AppConnector.request(url).then(
-			function (data) {
-				if (data['success']) {
-					aDeferred.resolve(data);
-				} else {
-					aDeferred.reject(data['message']);
-				}
-			},
-			function (error) {
-				aDeferred.reject();
-			}
-        )
-        return aDeferred.promise();
-    },
 	getListViewInstance: function () {
 		return window.app.controller();
 	},
@@ -333,7 +253,30 @@ Vtiger.Class("Vtiger_List_Js", {
 				jQuery('.filePreview .preview-area').height(jQuery(window).height() - 143);
 			});
 		}
-	}
+	},
+
+    triggerShowNotes: function(recordId) {
+        var params = {
+            module: 'ModComments',
+            view: 'InRelation',
+            record: recordId,
+            rollup_settings: { rollup_status: false } // Force direct comments only for now
+        };
+        app.helper.showProgress();
+        app.request.post({data: params}).then(function(err, res) {
+            app.helper.hideProgress();
+            if (!err) {
+                app.helper.showModal(res, {
+                    'cb': function(modalContainer) {
+                        // Initialize any JS needed for the comments widget
+                        // For example, registering the add comment form
+                         var commentsInstance = new Vtiger_RelatedList_Js(recordId, app.getModuleName(), false, 'ModComments');
+                         commentsInstance.registerEvents();
+                    }
+                });
+            }
+        });
+    }
 }, {
 	//contains the List View element.
 	listViewContainer: false,
@@ -960,9 +903,6 @@ Vtiger.Class("Vtiger_List_Js", {
 			var tdElement = jQuery(tdElements[i]);
 			var newValueElement = jQuery('.inputElement', tdElement);
 			var fieldName = tdElement.data("name");
-			if (fieldName == 'is_submitted') {
-				continue;
-			}
 			values[fieldName] = thisInstance.getInlineEditedFieldValue(tdElement, newValueElement);
 		}
 
@@ -1446,6 +1386,7 @@ Vtiger.Class("Vtiger_List_Js", {
     	
     	var autoIncludeFieldsInMassEditCallback = function() {
 			var fieldName = $(this).attr('name');
+			if (!fieldName) return;
 			fieldName = fieldName.replace(/\[\]$/, ''); //remove trailing [] for cases like multiselect
 			
 			$(this).closest('tr').find("input[id=include_in_mass_edit_" + fieldName + "]").prop( "checked", true );
@@ -2026,7 +1967,7 @@ Vtiger.Class("Vtiger_List_Js", {
 			return;
 		}
 		currentEle.find('.showTotalCountIcon').addClass('hide');
-		if (totalNumberOfRecords === '') {
+		if (totalNumberOfRecords == 0) {
 			thisInstance.totalNumOfRecords_performingAsyncAction = true;
 			thisInstance.getPageCount().then(function (data) {
 				currentEle.addClass('hide');
@@ -2047,6 +1988,7 @@ Vtiger.Class("Vtiger_List_Js", {
 		var totalNumberOfRecords = jQuery('#totalCount', listViewContainer).val();
 		var pageNumberElement = jQuery('.pageNumbersText', listViewContainer);
 		var pageRange = pageNumberElement.text();
+		totalNumberOfRecords = app.helper.purifyContent(totalNumberOfRecords);
 		var newPagingInfo = pageRange.trim() + " " + app.vtranslate('of') + " " + totalNumberOfRecords + "  ";
 		var listViewEntriesCount = parseInt(jQuery('#noOfEntries', listViewContainer).val());
 
@@ -2070,7 +2012,8 @@ Vtiger.Class("Vtiger_List_Js", {
 	},
 	registerMoreRecentUpdatesClickEvent: function (container, recordId) {
 		container.find('.moreRecentUpdates').on('click', function () {
-			var recentUpdateURL = "index.php?view=Detail&mode=showRecentActivities&page=1&module=" + app.getModuleName() + "&record=" + recordId + "&tab_label=LBL_UPDATES";
+			recordId = app.helper.purifyContent(recordId);
+			var recentUpdateURL = "index.php?view=Detail&mode=showRecentActivities&page=1&module=" + encodeURIComponent(app.getModuleName()) + "&record=" + encodeURIComponent(recordId) + "&tab_label=LBL_UPDATES";
 			window.location.href = recentUpdateURL;
 		});
 	},
@@ -2518,8 +2461,9 @@ Vtiger.Class("Vtiger_List_Js", {
 				//add available field to selected list
 				availFieldsList.on('click', '.item', function (e) {
 					var selectedFieldsEles = selectedFieldsList.find('.item');
-					if (selectedFieldsEles.length > 150) {
-						app.helper.showErrorNotification({message: app.vtranslate('JS_ADD_MAX_15_ITEMS')});
+					var limit = jQuery('#maxListFieldsSelectionSize').text();
+					if (selectedFieldsEles.length > limit) {
+						app.helper.showErrorNotification({message: app.vtranslate('JS_YOU_CAN_SELECT_ONLY')+' '+limit+' '+app.vtranslate('JS_ITEMS')});
 						return false;
 					}
 					var sourceFieldEle = jQuery(e.currentTarget);
@@ -2832,31 +2776,26 @@ Vtiger.Class("Vtiger_List_Js", {
 		if (typeof $.fn.perfectScrollbar !== 'function' || typeof $.fn.floatThead !== 'function') {
 			return;
 		}
-		let self = this; 
-		$(window).on('load', function () {
-			var $table = jQuery('#listview-table');
-			if (!$table.length)
-				return;
-			var height = self.getListViewContentHeight();
-			var width = self.getListViewContentWidth();
-			var tableContainer = $table.closest('.table-container');
-			tableContainer.css({
-				'position': 'relative',
-				'height': height,
-				'width': width
-			});
+		var $table = jQuery('#listview-table');
+		if (!$table.length)
+			return;
+		var height = this.getListViewContentHeight();
+		var width = this.getListViewContentWidth();
+		var tableContainer = $table.closest('.table-container');
+		tableContainer.css({
+			'position': 'relative',
+			'height': height,
+			'width': width
+		});
 
-			tableContainer.perfectScrollbar({
-				'wheelPropagation': true
-			});
-			// $table.floatThead({
-			// 	scrollContainer: function ($table) {
-			// 		return $table.closest('.table-container');
-			// 	}
-			// });
-			setTimeout(function() {
-				$table.floatThead('reflow');
-			}, 500);
+		tableContainer.perfectScrollbar({
+			'wheelPropagation': true
+		});
+
+		$table.floatThead({
+			scrollContainer: function ($table) {
+				return $table.closest('.table-container');
+			}
 		});
 	},
 	getSelectedRecordCount: function () {

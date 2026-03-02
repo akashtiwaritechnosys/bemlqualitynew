@@ -13,7 +13,7 @@
 	<div class="listViewPageDiv">
 		<div class="reportHeader">
 			<div class="row">
-				<div class="col-lg-4 detailViewButtoncontainer">
+				<div class="col-lg-4 col-md-4 col-sm-4 detailViewButtoncontainer">
 					<div class="btn-toolbar">
 						<div class="btn-group">
 						{foreach item=DETAILVIEW_LINK from=$DETAILVIEW_ACTIONS}
@@ -24,12 +24,12 @@
 									<div class="btn-group">
 								{/if}
 								<button {if $LINK_URL} onclick='window.location.href = "{$LINK_URL}"' {/if} type="button" 
-										class="cursorPointer btn btn-soft-dark {$DETAILVIEW_LINK->get('customclass')} 
-										{if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach' && count($DASHBOARD_TABS) gt 1} dropdown-toggle{/if}"
+										class="cursorPointer btn btn-default {$DETAILVIEW_LINK->get('customclass')} 
+										{if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach' && php7_count($DASHBOARD_TABS) gt 1} dropdown-toggle{/if}"
 										title="{if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach'}
 										{if $REPORT_MODEL->isPinnedToDashboard()}{vtranslate('LBL_UNPIN_CHART_FROM_DASHBOARD', $MODULE)}{else}{vtranslate('LBL_PIN_CHART_TO_DASHBOARD', $MODULE)}{/if}
-										{else}{$DETAILVIEW_LINK->get('linktitle')}{/if}" {if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach' && count($DASHBOARD_TABS) gt 1 }data-toggle="dropdown"{/if}
-											{if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach'}data-dashboard-tab-count='{count($DASHBOARD_TABS)}'{/if} >
+										{else}{$DETAILVIEW_LINK->get('linktitle')}{/if}" {if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach' && php7_count($DASHBOARD_TABS) gt 1 }data-toggle="dropdown"{/if}
+											{if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach'}data-dashboard-tab-count='{php7_count($DASHBOARD_TABS)}'{/if} >
 									{if $LINK_NAME} {$LINK_NAME}{/if}
 									{if $LINK_ICON_CLASS}
 										{if $LINK_ICON_CLASS eq 'icon-pencil'}&nbsp;&nbsp;&nbsp;{/if}
@@ -56,8 +56,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 textAlignCenter">
-					<h3 class="marginTop0px">{$REPORT_MODEL->getName()}</h3>
+				<div class="col-lg-4 col-md-4 col-sm-4 textAlignCenter">
+					<h5 class="marginTop0px">{$REPORT_MODEL->getName()}</h5>
 					{if $REPORT_MODEL->getReportType() == 'tabular' || $REPORT_MODEL->getReportType() == 'summary'}
 						<div id="noOfRecords">{vtranslate('LBL_NO_OF_RECORDS',$MODULE)} <span id="countValue">{$COUNT}</span></div>
 						{if $COUNT > $REPORT_LIMIT}
@@ -67,16 +67,18 @@
 						{/if}
 					{/if}
 				</div>
-				<div class='col-lg-4 detailViewButtoncontainer'>
+				<div class='col-lg-4 col-md-4 col-sm-4 detailViewButtoncontainer'>
 					<span class="pull-right">
 						<div class="btn-toolbar">
 							<div class="btn-group">
+							{if isset($DETAILVIEW_LINKS) && $DETAILVIEW_LINKS}
 								{foreach item=DETAILVIEW_LINK from=$DETAILVIEW_LINKS}
 									{assign var=LINKNAME value=$DETAILVIEW_LINK->getLabel()}
-									<button class="btn btn-soft-dark reportActions" name="{$LINKNAME}" data-href="{$DETAILVIEW_LINK->getUrl()}&source={$REPORT_MODEL->getReportType()}">
+									<button class="btn btn-default reportActions" name="{$LINKNAME}" data-href="{$DETAILVIEW_LINK->getUrl()}&source={$REPORT_MODEL->getReportType()}">
 										{$LINKNAME}
 									</button>
 								{/foreach}
+							{/if}
 							</div>
 						</div>
 					</span>

@@ -14,22 +14,22 @@
 	<input id="recordId" type="hidden" value="{$RECORD->getId()}" />
 	<div class="detailViewContainer">
 		<div class="detailViewTitle" id="prefPageHeader">
-			<div class="col-lg-12 col-sm-12 col-xs-12">
-				<div class="col-xs-8">
+			<div class="col-lg-12 col-sm-12 col-xs-12 preferences-topbar">
+				<div class="col-xs-9">
 					{assign var=IMAGE_DETAILS value=$RECORD->getImageDetails()}
 					{foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
 						{if !empty($IMAGE_INFO.url)}
-							<span class="logo col-xs-2">
+							<span class="logo col-lg-2 col-sm-3">
 								<img height="75px" width="75px" src="{$IMAGE_INFO.url}" alt="{$IMAGE_INFO.orgname}" title="{$IMAGE_INFO.orgname}" data-image-id="{$IMAGE_INFO.id}">
 							</span>
 						{/if}
 					{/foreach}
 					{if $IMAGE_DETAILS[0]['id'] eq null}
-						<span class="logo col-xs-2">
+						<span class="logo col-lg-2 col-sm-3">
 							<i class="fa fa-user" style="font-size: 75px"></i>
 						</span>
 					{/if}
-					<span class="col-xs-9">
+					<span class="col-lg-9 col-sm-9">
 						<span id="myPrefHeading">
 							<h3>{vtranslate('LBL_MY_PREFERENCES', $MODULE_NAME)} </h3>
 						</span>
@@ -38,11 +38,11 @@
 						</span>
 					</span>
 				</div>
-				<div class="col-xs-4">
+				<div class="col-xs-3">
 					<div class="row detailViewButtoncontainer">
 						<div class="btn-group pull-right">
 							{foreach item=DETAIL_VIEW_BASIC_LINK from=$DETAILVIEW_LINKS['DETAILVIEWPREFERENCE']}
-								<button class="btn btn-soft-secondary"
+								<button class="btn btn-default"
 									{if $DETAIL_VIEW_BASIC_LINK->isPageLoadLink()}
 										onclick="window.location.href='{$DETAIL_VIEW_BASIC_LINK->getUrl()}'"
 									{else}
@@ -51,8 +51,8 @@
 									{vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE_NAME)}
 								</button>
 							{/foreach}
-							{if $DETAILVIEW_LINKS['DETAILVIEW']|@count gt 0}
-								<button class="btn btn-soft-secondary" data-toggle="dropdown" href="javascript:void(0);">
+							{if $DETAILVIEW_LINKS['DETAILVIEW']|php7_count gt 0}
+								<button class="btn btn-default" data-toggle="dropdown" href="javascript:void(0);">
 									{vtranslate('LBL_MORE', $MODULE)}&nbsp;<i class="caret"></i>
 								</button>
 								<ul class="dropdown-menu pull-right">
@@ -77,5 +77,5 @@
 			</div>
 			<div class="detailViewInfo userPreferences">
 				<div class="details col-xs-12">
-					<br>
+					
 {/strip}

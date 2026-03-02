@@ -13,12 +13,12 @@
     <input type="hidden" name="selectedFieldsData" val=""/>
     <input type="hidden" name="mode" value="{$MODE}"/>
     <input type="hidden" name="targetModule" value="{$SOURCE_MODULE}"/>
-    <div class="fieldBlockContainer-webform" style="margin-bottom: 0;">
-        <div class="fieldBlockHeader">
-            <h4>{vtranslate($SOURCE_MODULE, $SOURCE_MODULE)} {vtranslate('LBL_FIELD_INFORMATION', $MODULE)}</h4>
+    <div class="fieldBlockContainer-webform">
+        <div>
+            <h4 class="fieldBlockHeader">{vtranslate($SOURCE_MODULE, $SOURCE_MODULE)} {vtranslate('LBL_FIELD_INFORMATION', $MODULE)}</h4>
         </div>
         <hr>
-        <table class="table table-bordered" width="100%" name="targetModuleFields">
+        <table class="table table-borderedd table-formed" width="100%" name="targetModuleFields">
             <colgroup>
                 <col style="width:5%;">
                 <col style="width:5%;">
@@ -30,7 +30,7 @@
                 <td colspan="5">
                     <div class="row">
                         <div class="col-sm-2 col-lg-2"><div class="textAlignCenter" style="margin-top:8px;"><b>{vtranslate('LBL_ADD_FIELDS', $MODULE)}</b></div></div>
-                        <div class="col-sm-8 col-lg-8">
+                        <div class="col-sm-7 col-lg-7">
                             <select id="fieldsList" multiple="multiple" data-placeholder="{vtranslate('LBL_SELECT_FIELDS_OF_TARGET_MODULE', $MODULE)}" class="select2" style="width:100%">
                                 {foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$ALL_FIELD_MODELS_LIST name="EditViewBlockLevelLoop"}
                                     {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
@@ -46,8 +46,8 @@
                                 {/foreach}
                             </select>
                         </div>
-                        <div class="col-sm-2 col-lg-2" style="margin-top: 2px">
-                            <button type="button" id="saveFieldsOrder" class="btn btn-success" disabled="disabled">{vtranslate('LBL_SAVE_FIELDS_ORDER', $MODULE)}</button>
+                        <div class="col-sm-3 col-lg-3" style="margin-top: 2px">
+                            <button type="button" id="saveFieldsOrder" class="btn btn-submit" disabled="disabled">{vtranslate('LBL_SAVE_FIELDS_ORDER', $MODULE)}</button>
                         </div>
                     </div>
                 </td>
@@ -128,8 +128,8 @@
     </div>
 	{if Vtiger_Functions::isDocumentsRelated($SOURCE_MODULE)}
 		<div class="fieldBlockContainer">
-			<div class="fieldBlockHeader">
-				<h4>{vtranslate('LBL_UPLOAD_DOCUMENTS', $QUALIFIED_MODULE)}</h4>
+			<div>
+				<h4 class="fieldBlockHeader">{vtranslate('LBL_UPLOAD_DOCUMENTS', $QUALIFIED_MODULE)}</h4>
 			</div>
 			<hr>
 			<div>
@@ -141,7 +141,7 @@
 			</div>
 			<div class="row" style="margin-top: 10px;">
 				<div class="col-lg-7">
-					<table class="table table-bordered" id='fileFieldsTable'>
+					<table class="table table-bordered table-formed" id='fileFieldsTable'>
 						<tbody>
 							<tr>
 								<td><b>{vtranslate('LBL_FIELD_LABEL', $QUALIFIED_MODULE)}</b></td>
@@ -161,7 +161,7 @@
 									</td>
 								</tr>
 							{/foreach}
-							<tr class="noFileField {if count($DOCUMENT_FILE_FIELDS) gt 0}hide{/if}">
+							<tr class="noFileField {if php7_count($DOCUMENT_FILE_FIELDS) gt 0}hide{/if}">
 								<td colspan="3" style="height: 100px; vertical-align: middle;">
 									<center>{vtranslate('LBL_NO_FILE_FIELD', $QUALIFIED_MODULE)}</center>
 								</td>
@@ -180,8 +180,8 @@
 					</div>
 				</div>
 			</div>
-			<input type="hidden" id='fileFieldNextIndex' value='{count($DOCUMENT_FILE_FIELDS) + 1}'>
-			<input type="hidden" id="fileFieldsCount" value="{count($DOCUMENT_FILE_FIELDS)}">
+			<input type="hidden" id='fileFieldNextIndex' value='{php7_count($DOCUMENT_FILE_FIELDS) + 1}'>
+			<input type="hidden" id="fileFieldsCount" value="{php7_count($DOCUMENT_FILE_FIELDS)}">
 		</div>
 	{/if}
 {/strip}

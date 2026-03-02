@@ -16,7 +16,7 @@
         <div class="sidebar-container lists-menu-container">
             <div class="sidebar-header clearfix">
                 <h5 class="pull-left">{vtranslate($SIDEBARWIDGET->getLabel(), $MODULE)}</h5>
-                <button class="btn btn-soft-primary pull-right sidebar-btn rssAddButton" title="{vtranslate('LBL_FEED_SOURCE',$MODULE)}">
+                <button class="btn btn-default pull-right sidebar-btn rssAddButton" title="{vtranslate('LBL_FEED_SOURCE',$MODULE)}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
             </div>

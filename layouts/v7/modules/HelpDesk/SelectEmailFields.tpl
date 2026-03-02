@@ -43,7 +43,7 @@
                                     {if $RECORDS_COUNT > 1}<h4>{$RECORD_LABEL}</h4>{/if}
                                     <div style="{if $RECORDS_COUNT > 1}padding-left: 3%;{/if}">
                                         {foreach item=EMAIL_FIELDS key=EMAIL_MODULE from=$EMAIL_MODULE_INFO}
-                                            <h5>{vtranslate('SINGLE_'|cat:$EMAIL_MODULE, $EMAIL_MODULE)}</h5>
+                                            <h6>{vtranslate('SINGLE_'|cat:$EMAIL_MODULE, $EMAIL_MODULE)}</h6>
                                             {foreach item=EMAIL_FIELD  key=EMAIL_VALUE from=$EMAIL_FIELDS}
                                                 <label class="checkbox" style="padding-left: {if $RECORDS_COUNT > 1}10{else}7{/if}%;padding-top: 1%; font-weight:normal;">
                                                     <input type="checkbox" class="emailField" name="selectedFields[{$count}]" data-moduleName="{$EMAIL_MODULE}" value='{Vtiger_Functions::jsonEncode(['record'=>$RECORD_ID,'field_value'=>$EMAIL_VALUE,'record_label'=>$RECORD_LABEL|cat:':'|cat:vtranslate('SINGLE_'|cat:$EMAIL_MODULE,$EMAIL_MODULE),'field_id'=> $EMAIL_FIELD->getId(),'module_id'=>$EMAIL_FIELD->getModule()->getId()])}' {if $EMAIL_FIELD->get('isPreferred')}checked="true"{/if}/>
@@ -62,7 +62,7 @@
             </div>
             <div class="preferenceDiv" style="padding: 0px 0px 10px 35px;">
                 <label class="checkbox displayInlineBlock">
-                    <input type="checkbox" name="saveRecipientPrefs" id="saveRecipientPrefs" {if $RECIPIENT_PREF_ENABLED}checked="true"{/if}/>&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="saveRecipientPrefs" id="saveRecipientPrefs" {if isset($RECIPIENT_PREF_ENABLED) &&  $RECIPIENT_PREF_ENABLED}checked="true"{/if}/>&nbsp;&nbsp;&nbsp;
                     {vtranslate('LBL_REMEMBER_MY_PREF',$MODULE)}&nbsp;&nbsp;
                 </label>
                 <i class="fa fa-info-circle" title="{vtranslate('LBL_EDIT_EMAIL_PREFERENCE_TOOLTIP', $MODULE)}"></i>

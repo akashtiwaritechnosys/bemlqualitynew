@@ -60,6 +60,13 @@ class Vtiger_Viewer extends SmartyBC {
 		$this->setTemplateDir(array($templatesDir));
 		$this->setCompileDir($compileDir);		
 
+		// Register PHP 7 compatibility shims for Smarty
+		$this->registerPlugin('function', 'php7_count', 'php7_count');
+		$this->registerPlugin('modifier', 'php7_count', 'php7_count');
+		$this->registerPlugin('modifier', 'php7_htmlentities', 'php7_htmlentities');
+		$this->registerPlugin('modifier', 'php7_trim', 'php7_trim');
+		$this->registerPlugin('function', 'php7_sizeof', 'php7_sizeof');
+
 		// FOR SECURITY
 		// Escape all {$variable} to overcome XSS
 		// We need to use {$variable nofilter} to overcome double escaping

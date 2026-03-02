@@ -72,7 +72,7 @@
         <div class='modal-overlay-footer border1px clearfix'>
             <div class="row clearfix">
                 <div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                    <button name="cancel" class="btn btn-soft-danger btn-lg"
+                    <button name="cancel" class="btn btn-danger btn-lg"
                             onclick="return Vtiger_Import_Js.cancelImport('index.php?module={$FOR_MODULE}&view=Import&mode=cancelImport&import_id={$IMPORT_ID}')">{'LBL_CANCEL_IMPORT'|@vtranslate:$MODULE}</button>
                 </div>
             </div>

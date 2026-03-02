@@ -36,4 +36,4 @@
                 <div class="detailview-content container-fluid">
                     <input id="recordId" type="hidden" value="{$RECORD->getId()}" />
                     {include file="ModuleRelatedTabs.tpl"|vtemplate_path:$MODULE}
-                    <div class="details row" style="margin-top:10px;">
+                    <div class="details row">

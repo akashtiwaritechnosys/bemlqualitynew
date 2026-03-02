@@ -20,29 +20,37 @@
 		</div>
 	</div>
 	<div class="col-lg-12" style="margin-top: 10px;">
-		<div class="row" style="margin-left: -28px;">
+		<div class="row main-menu-list" style="margin-left: -28px;">
 			{assign var=APP_LIST value=Vtiger_MenuStructure_Model::getAppMenuList()}
 			{foreach item=APP_IMAGE key=APP_NAME from=$APP_IMAGE_MAP name=APP_MAP}
 				{if !in_array($APP_NAME, $APP_LIST)} {continue} {/if}
-				<div class="col-lg-2{if $smarty.foreach.APP_MAP.index eq 0 or count($APP_LIST) eq 1}{/if}">
+				<div class="menueditor col-sm-3 col-md-3 col-lg-2 {if $smarty.foreach.APP_MAP.index eq 0 or php7_count($APP_LIST) eq 1}{/if}">
 					<div class="menuEditorItem app-{$APP_NAME}" data-app-name="{$APP_NAME}">
-						<span class="fa {$APP_IMAGE}"></span>
+						<span class="fa {$APP_IMAGE} head-icon"></span>
 						{assign var=TRANSLATED_APP_NAME value={vtranslate("LBL_$APP_NAME")}}
 						<div class="textOverflowEllipsis" title="{$TRANSLATED_APP_NAME}">{$TRANSLATED_APP_NAME}</div>
 					</div>
 					<div class="sortable appContainer" data-appname="{$APP_NAME}">
 						{foreach key=moduleName item=moduleModel from=$APP_MAPPED_MODULES[$APP_NAME]}
 							<div class="modules noConnect" data-module="{$moduleName}">
-								<i data-appname="{$APP_NAME}" class="fa fa-times pull-right whiteIcon menuEditorRemoveItem" style="margin: 5%;padding-top:15px;"></i>
-								<div class="menuEditorItem menuEditorModuleItem">
-									<span class="pull-left marginRight10px marginTop5px">
+								<div>
+									<div class="marginRight10px marginLeft10px">
+									<i data-appname="{$APP_NAME}" class="fa fa-times pull-right whiteIcon menuEditorRemoveItem marginTop10px"></i>
+									</div>
+									<div>
+									<span class="pull-left marginRight10px marginLeft10px marginTop5px">
 										<img class="alignMiddle cursorDrag" src="{vimage_path('drag.png')}"/>
 									</span>
+									</div>
+								</div>
+								
+								<div class="menuEditorItem menuEditorModuleItem">
+									
 									{assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
 									<span>
-										<span class="marginRight10px marginTop5px pull-left">{$moduleModel->getModuleIcon()}</span>
+										<span class="marginRight10px marginTop5px">{$moduleModel->getModuleIcon()}</span>
 									</span>
-									<div class="textOverflowEllipsis marginTop5px textAlignLeft" title="{$translatedModuleLabel}">{$translatedModuleLabel}</div>
+									<div class="textOverflowEllipsis marginTop5px" title="{$translatedModuleLabel}">{$translatedModuleLabel}</div>
 								</div>
 							</div>
 						{/foreach}

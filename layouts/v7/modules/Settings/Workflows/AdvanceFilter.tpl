@@ -35,25 +35,25 @@
 			&nbsp;
 			<span>({vtranslate('LBL_ALL_CONDITIONS_DESC',$MODULE)})</span>
 		</div>
-        <br>
+    
 		<div class="contents">
 			<div class="conditionList">
 			 {foreach item=CONDITION_INFO from=$ALL_CONDITION_CRITERIA['columns']}
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$QUALIFIED_MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE CONDITION_INFO=$CONDITION_INFO MODULE=$MODULE}
 			{/foreach}
-			{if count($ALL_CONDITION_CRITERIA) eq 0}
+			{if php7_count($ALL_CONDITION_CRITERIA) eq 0}
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$QUALIFIED_MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE MODULE=$MODULE CONDITION_INFO=array()}
 			{/if}
 			</div>
 			<div class="hide basic">
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$QUALIFIED_MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE CONDITION_INFO=array() MODULE=$MODULE NOCHOSEN=true}
 			</div>
-            <br>
+           
             <div class="addCondition">
 				<button type="button" class="btn btn-default">{vtranslate('LBL_ADD_CONDITION',$MODULE)}</button>
 			</div>
 			<div class="groupCondition">
-				{assign var=GROUP_CONDITION value=$ALL_CONDITION_CRITERIA['condition']}
+				{assign var=GROUP_CONDITION value=(isset($ALL_CONDITION_CRITERIA['condition'])) ? $ALL_CONDITION_CRITERIA['condition'] : ''}
 				{if empty($GROUP_CONDITION)}
 					{assign var=GROUP_CONDITION value="and"}
 				{/if}
@@ -61,30 +61,29 @@
 			</div>
 		</div>
 	</div>
-    <br>
-    <br>
+  
 	<div class="anyConditionContainer conditionGroup contentsBackground">
 		<div class="header">
 			<span><strong>{vtranslate('LBL_ANY_CONDITIONS',$MODULE)}</strong></span>
 			&nbsp;
 			<span>({vtranslate('LBL_ANY_CONDITIONS_DESC',$MODULE)})</span>
 		</div>
-        <br>
+       
 		<div class="contents">
 			<div class="conditionList">
 			{foreach item=CONDITION_INFO from=$ANY_CONDITION_CRITERIA['columns']}
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$QUALIFIED_MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE CONDITION_INFO=$CONDITION_INFO MODULE=$MODULE CONDITION="or"}
 			{/foreach}
-			{if count($ANY_CONDITION_CRITERIA) eq 0}
+			{if php7_count($ANY_CONDITION_CRITERIA) eq 0}
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$QUALIFIED_MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE MODULE=$MODULE CONDITION_INFO=array() CONDITION="or"}
 			{/if}
 			</div>
 			<div class="hide basic">
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$QUALIFIED_MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE MODULE=$MODULE CONDITION_INFO=array() CONDITION="or" NOCHOSEN=true}
 			</div>
-            <br>
+            
 			<div class="addCondition">
-				<button type="button" class="btn  btn-soft-default">{vtranslate('LBL_ADD_CONDITION',$MODULE)}</button>
+				<button type="button" class="btn  btn-default">{vtranslate('LBL_ADD_CONDITION',$MODULE)}</button>
 			</div>
 		</div>
 	</div>

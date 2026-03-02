@@ -50,7 +50,7 @@
 							</div>
 							<div class="navbar-collapse collapse" id="appnavcontent" aria-expanded="false" style="height: 1px;">
 								<ul class="nav navbar-nav">
-								{if $MODULE_BASIC_ACTIONS|@count gt 0}
+								{if $MODULE_BASIC_ACTIONS|php7_count gt 0}
 									{foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}
 										{if $BASIC_ACTION->getLabel() == 'LBL_IMPORT'}
 											<li>
@@ -80,7 +80,7 @@
 										
 									{/foreach}
 								{/if}
-									{if $MODULE_SETTING_ACTIONS|@count gt 0}
+									{if $MODULE_SETTING_ACTIONS|php7_count gt 0}
 										<li>
 											<div class="settingsIcon">
 												<button type="button" class="btn btn-soft-dark dropdown-toggle module-btn" data-toggle="dropdown" aria-expanded="false" title="{vtranslate('LBL_SETTINGS', $MODULE)}">

@@ -1,4 +1,14 @@
+{* ********************************************************************************
+* The content of this file is subject to the PDF Maker Free license.
+* ("License"); You may not use this file except in compliance with the License
+* The Initial Developer of the Original Code is IT-Solutions4You s.r.o.
+* Portions created by IT-Solutions4You s.r.o. are Copyright(C) IT-Solutions4You s.r.o.
+* All Rights Reserved.
+* ****************************************************************************** *}
+
 <div class="contents tabbable ui-sortable">
+
+
     <form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php" enctype="multipart/form-data">
         <input type="hidden" name="module" value="PDFMaker">
         <input type="hidden" name="parenttab" value="{$PARENTTAB}">
@@ -10,7 +20,7 @@
         <input type="hidden" name="selectedTab" id="selectedTab" value="properties">
         <input type="hidden" name="selectedTab2" id="selectedTab2" value="body">
 
-        <ul class="nav nav-tabs layoutTabs massEditTabs">
+        <ul class="nav nav-tabs layoutTabs massEditTabs pdf-maker-tabs">
             <li class="detailviewTab active">
                 <a data-toggle="tab" href="#pdfContentEdit" aria-expanded="true"><strong>{vtranslate('LBL_PROPERTIES_TAB',$MODULE)}</strong></a>
             </li>
@@ -30,25 +40,25 @@
                 <a data-toggle="tab" href="#editTabSettings" aria-expanded="false"><strong>{vtranslate('LBL_SETTINGS_TAB',$MODULE)}</strong></a>
             </li>
         </ul>
-        <div >
+        <div class="pdf-maker-edit">
             {********************************************* Settings DIV *************************************************}
-            <div>
+          
                 <div class="row" >
-                    <div class="left-block col-xs-4">
-                        <div>
+                    <div class="left-block col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                 
                             <div class="tab-content layoutContent themeTableColor overflowVisible">
                                 <div class="tab-pane active" id="pdfContentEdit">
-                                    <div class="edit-template-content col-lg-4" style="position:fixed;z-index:1000;">
+                                    <div class="edit-template-content col-lg-12">
                                         {********************************************* PROPERTIES DIV*************************************************}
                                         <div id="properties_div">
-                                            <br>
+                                           
                                             {* pdf source module and its available fields *}
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-sm-5">
                                                     {vtranslate('LBL_MODULENAMES',$MODULE)} {$MODULENAME}:
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-sm-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <input type="hidden" name="modulename" id="modulename" value="{$SELECTMODULE}">
                                                         <select name="modulefields" id="modulefields" class="select2 form-control">
                                                             <option value="">{vtranslate('LBL_SELECT_MODULE_FIELD',$MODULE)}</option>
@@ -62,15 +72,15 @@
                                             </div>
                                             {* related modules and its fields *}
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-sm-5">
                                                     {vtranslate('LBL_RELATED_MODULES',$MODULE)}:
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-sm-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <select name="relatedmodulesorce" id="relatedmodulesorce" class="select2 form-control">
                                                             <option value="">{vtranslate('LBL_SELECT_MODULE',$MODULE)}</option>
                                                             {foreach item=RelMod from=$RELATED_MODULES}
-{*                                                                <option value="{$RelMod.0}" data-module="{$RelMod.3}">{$RelMod.1} ({$RelMod.2})</option>*}
+                                                                <option value="{$RelMod.0}" data-module="{$RelMod.3}">{$RelMod.1} ({$RelMod.2})</option>
                                                             {/foreach}
                                                         </select>
                                                     </div>
@@ -78,10 +88,10 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-sm-5">
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-sm-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <select name="relatedmodulefields" id="relatedmodulefields" class="select2 form-control">
                                                             <option value="">{vtranslate('LBL_SELECT_MODULE_FIELD',$MODULE)}</option>
                                                         </select>
@@ -96,15 +106,15 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="pdfContentOther">
-                                    <div class="edit-template-content col-lg-4" style="position:fixed;z-index:1000;">
+                                    <div class="edit-template-content col-lg-12" >
                                         <br>
                                         {********************************************* Company and User information DIV *************************************************}
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                            <label class="control-label fieldLabel col-lg-5">
                                                 {vtranslate('LBL_COMPANY_USER_INFO',$MODULE)}:
                                             </label>
-                                            <div class="controls col-sm-9">
-                                                <div class="input-group">
+                                            <div class="controls col-lg-7">
+                                                <div class="input-group" style="width:100%">
                                                     <select name="acc_info_type" id="acc_info_type" class="select2 form-control">
                                                         {html_options  options=$CUI_BLOCKS}
                                                     </select>
@@ -112,11 +122,11 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal"></label>
-                                            <div class="controls col-sm-9">
+                                            <label class="control-label fieldLabel col-lg-5"></label>
+                                            <div class="controls col-lg-7">
                                                 <div>
                                                     <div id="acc_info_div" class="au_info_div" style="display:inline;">
-                                                        <div class="input-group">
+                                                        <div class="input-group site-select">
                                                             <select name="acc_info" id="acc_info" class="select2 form-control">
                                                                 {html_options  options=$ACCOUNTINFORMATIONS}
                                                             </select>
@@ -127,7 +137,7 @@
                                                         </div>
                                                     </div>
                                                     <div id="user_info_div" class="au_info_div" style="display:none;">
-                                                        <div class="input-group">
+                                                        <div class="input-group site-select">
                                                             <select name="user_info" id="user_info" class="select2 form-control">
                                                                 {html_options  options=$USERINFORMATIONS['a']}
                                                             </select>
@@ -138,7 +148,7 @@
                                                         </div>
                                                     </div>
                                                     <div id="logged_user_info_div" class="au_info_div" style="display:none;">
-                                                        <div class="input-group">
+                                                        <div class="input-group site-select">
                                                             <select name="logged_user_info" id="logged_user_info" class="select2 form-control">
                                                                 {html_options  options=$USERINFORMATIONS['l']}
                                                             </select>
@@ -149,7 +159,7 @@
                                                         </div>
                                                     </div>
                                                     <div id="modifiedby_user_info_div" class="au_info_div" style="display:none;">
-                                                        <div class="input-group">
+                                                        <div class="input-group site-select">
                                                             <select name="modifiedby_user_info" id="modifiedby_user_info" class="select2 form-control">
                                                                 {html_options  options=$USERINFORMATIONS['m']}
                                                             </select>
@@ -160,7 +170,7 @@
                                                         </div>
                                                     </div>
                                                     <div id="smcreator_user_info_div" class="au_info_div form-control" style="display:none;">
-                                                        <div class="input-group">
+                                                        <div class="input-group site-select">
                                                             <select name="smcreator_user_info" id="smcreator_user_info" class="select2 form-control">
                                                                 {html_options  options=$USERINFORMATIONS['c']}
                                                             </select>
@@ -174,11 +184,11 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                            <label class="control-label fieldLabel col-lg-5">
                                                 {vtranslate('TERMS_AND_CONDITIONS',$MODULE)}:
                                             </label>
-                                            <div class="controls col-sm-9">
-                                                <div class="input-group">
+                                            <div class="controls col-lg-7">
+                                                <div class="input-group"  style="width:100%">
                                                     <select name="invterandcon" id="invterandcon" class="select2 form-control">
                                                         {html_options  options=$INVENTORYTERMSANDCONDITIONS}
                                                     </select>
@@ -189,11 +199,11 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                            <label class="control-label fieldLabel col-lg-5">
                                                 {vtranslate('LBL_CURRENT_DATE',$MODULE)}:
                                             </label>
-                                            <div class="controls col-sm-9">
-                                                <div class="input-group">
+                                            <div class="controls col-lg-7">
+                                                <div class="input-group" style="width:100%">
                                                     <select name="dateval" id="dateval" class="select2 form-control">
                                                         {html_options  options=$DATE_VARS}
                                                     </select>
@@ -206,16 +216,16 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="pdfContentLabels">
-                                    <dic class="edit-template-content col-lg-4" style="position:fixed;z-index:1000;">
+                                    <div class="edit-template-content col-lg-12" >
                                         {********************************************* Labels *************************************************}
                                         <div id="labels_div">
                                             <br>
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-lg-5" >
                                                     {vtranslate('LBL_GLOBAL_LANG',$MODULE)}:
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-lg-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <select name="global_lang" id="global_lang" class="select2 form-control">
                                                             {html_options  options=$GLOBAL_LANG_LABELS}
                                                         </select>
@@ -226,11 +236,11 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-lg-5">
                                                     {vtranslate('LBL_MODULE_LANG',$MODULE)}:
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-lg-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <select name="module_lang" id="module_lang" class="select2 form-control">
                                                             {html_options  options=$MODULE_LANG_LABELS}
                                                         </select>
@@ -241,19 +251,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </dic>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="pdfContentProducts">
-                                    <dic class="edit-template-content col-lg-4" style="position:fixed;z-index:1000;">
+                                    <div class="edit-template-content col-lg-12">
                                         {*********************************************Products bloc DIV*************************************************}
                                         <div id="products_div">
                                             <br>
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-lg-5">
                                                     {vtranslate('LBL_PRODUCT_BLOC_TPL',$MODULE)}:
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-lg-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <select name="productbloctpl2" id="productbloctpl2" class="select2 form-control">
                                                             {html_options  options=$PRODUCT_BLOC_TPL}
                                                         </select>
@@ -264,11 +274,11 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-lg-5">
                                                     {vtranslate('LBL_ARTICLE',$MODULE)}:
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-lg-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <select name="articelvar" id="articelvar" class="select2 form-control">
                                                             {html_options  options=$ARTICLE_STRINGS}
                                                         </select>
@@ -280,11 +290,11 @@
                                             </div>
                                             {* insert products & services fields into text *}
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
-                                                    *{vtranslate('LBL_PRODUCTS_AVLBL',$MODULE)}:
+                                                <label class="control-label fieldLabel col-lg-5">
+                                                    {vtranslate('LBL_PRODUCTS_AVLBL',$MODULE)}:<span class="redColor"> *</span>
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-lg-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <select name="psfields" id="psfields" class="select2 form-control">
                                                             {html_options  options=$SELECT_PRODUCT_FIELD}
                                                         </select>
@@ -296,11 +306,11 @@
                                             </div>
                                             {* products fields *}
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
-                                                    *{vtranslate('LBL_PRODUCTS_FIELDS',$MODULE)}:
+                                                <label class="control-label fieldLabel col-lg-5">
+                                                    {vtranslate('LBL_PRODUCTS_FIELDS',$MODULE)}:<span class="redColor"> *</span>
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-lg-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <select name="productfields" id="productfields" class="select2 form-control">
                                                             {html_options  options=$PRODUCTS_FIELDS}
                                                         </select>
@@ -312,11 +322,11 @@
                                             </div>
                                             {* services fields *}
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
-                                                    *{vtranslate('LBL_SERVICES_FIELDS',$MODULE)}:
+                                                <label class="control-label fieldLabel col-lg-5">
+                                                    {vtranslate('LBL_SERVICES_FIELDS',$MODULE)}:<span class="redColor"> *</span>
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-lg-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <select name="servicesfields" id="servicesfields" class="select2 form-control">
                                                             {html_options  options=$SERVICES_FIELDS}
                                                         </select>
@@ -327,22 +337,22 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <label class="muted"><small>{vtranslate('LBL_PRODUCT_FIELD_INFO',$MODULE)}</small></label>
+                                                <label class="muted"><small><span class="redColor">* </span>{vtranslate('LBL_PRODUCT_FIELD_INFO',$MODULE)}</small></label>
                                             </div>
                                         </div>
-                                    </dic>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="pdfContentHeaderFooter">
-                                    <dic class="edit-template-content col-lg-4" style="position:fixed;z-index:1000;">
+                                    <div class="edit-template-content col-lg-12" >
                                         {********************************************* Header/Footer *************************************************}
                                         <div id="headerfooter_div">
                                             <br>
                                             {* pdf header variables*}
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-lg-5">
                                                     {vtranslate('LBL_HEADER_FOOTER_VARIABLES',$MODULE)}:
                                                 </label>
-                                                <div class="controls col-sm-9">
+                                                <div class="controls col-lg-7">
                                                     <div class="input-group">
                                                         <select name="header_var" id="header_var" class="select2 form-control">
                                                             {html_options  options=$HEAD_FOOT_VARS selected=""}
@@ -355,10 +365,10 @@
                                             </div>
                                             {* don't display header on first page *}
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-lg-5">
                                                     {vtranslate('LBL_DISPLAY_HEADER',$MODULE)}:
                                                 </label>
-                                                <div class="controls col-sm-9">
+                                                <div class="controls col-lg-7">
                                                     <div class="input-group">
                                                         <b>{vtranslate('LBL_ALL_PAGES',$MODULE)}</b>&nbsp;<input type="checkbox" id="dh_allid" name="dh_all" onclick="PDFMaker_EditFreeJs.hf_checkboxes_changed(this, 'header');" {$DH_ALL}/>
                                                         &nbsp;&nbsp;
@@ -369,11 +379,11 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                                <label class="control-label fieldLabel col-lg-5">
                                                     {vtranslate('LBL_DISPLAY_FOOTER',$MODULE)}:
                                                 </label>
-                                                <div class="controls col-sm-9">
-                                                    <div class="input-group">
+                                                <div class="controls col-lg-7">
+                                                    <div class="input-group" style="width:100%">
                                                         <b>{vtranslate('LBL_ALL_PAGES',$MODULE)}</b>&nbsp;<input type="checkbox" id="df_allid" name="df_all" onclick="PDFMaker_EditFreeJs.hf_checkboxes_changed(this, 'footer');" {$DF_ALL}/>
                                                         &nbsp;&nbsp;
                                                         {vtranslate('LBL_FIRST_PAGE',$MODULE)}&nbsp;<input type="checkbox" id="df_firstid" name="df_first" onclick="PDFMaker_EditFreeJs.hf_checkboxes_changed(this, 'footer');" {$DF_FIRST}/>
@@ -385,30 +395,30 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </dic>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="editTabSettings">
                                     <div id="settings_div">
                                         <br>
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                            <label class="control-label fieldLabel col-lg-5">
                                                 {vtranslate('LBL_DESCRIPTION',$MODULE)}:
                                             </label>
-                                            <div class="controls col-sm-9">
+                                            <div class="controls col-lg-7">
                                                 <input name="description" type="text" value="{$DESCRIPTION}" class="col-sm-12 form-control" tabindex="2">
                                             </div>
                                         </div>
                                         {* pdf format settings *}
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                            <label class="control-label fieldLabel col-lg-5">
                                                 {vtranslate('LBL_PDF_FORMAT',$MODULE)}:
                                             </label>
-                                            <div class="controls col-sm-9">
-                                                <div class="input-group">
+                                            <div class="controls col-lg-7">
+                                                <div class="">
                                                     <select name="pdf_format" id="pdf_format" class="select2 col-sm-12" onchange="PDFMaker_EditFreeJs.CustomFormat();">
                                                         {html_options  options=$FORMATS selected=$SELECT_FORMAT}
                                                     </select>
-                                                    <br>
+                                                  
                                                     <table class="table showInlineTable" id="custom_format_table" {if $SELECT_FORMAT neq 'Custom'}style="display:none"{/if}>
                                                         <tr>
                                                             <td align="right" nowrap>{vtranslate('LBL_WIDTH',$MODULE)}</td>
@@ -426,11 +436,11 @@
                                         </div>
                                         {* pdf orientation settings *}
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                            <label class="control-label fieldLabel col-lg-5">
                                                 {vtranslate('LBL_PDF_ORIENTATION',$MODULE)}:
                                             </label>
-                                            <div class="controls col-sm-9">
-                                                <div class="input-group">
+                                            <div class="controls col-lg-7">
+                                                <div class="">
                                                     <select name="pdf_orientation" id="pdf_orientation" class="select2 form-control">
                                                         {html_options  options=$ORIENTATIONS selected=$SELECT_ORIENTATION}
                                                     </select>
@@ -439,80 +449,55 @@
                                         </div>
                                         {* ignored picklist values settings *}
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                            <label class="control-label fieldLabel col-lg-5">
                                                 {vtranslate('LBL_IGNORE_PICKLIST_VALUES',$MODULE)}:
                                             </label>
-                                            <div class="controls col-sm-9">
+                                            <div class="controls col-lg-7">
                                                 <input type="text" name="ignore_picklist_values" value="{$IGNORE_PICKLIST_VALUES}" class="form-control"/>
                                             </div>
-                                         </div>                                          
-                                            <div class="form-group">
-                                                <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
-                                                    {vtranslate('LBL_SHARING_TAB',$MODULE)}:
-                                                </label>
-                                                <div class="controls col-sm-9">
-                                                    <select name="sharing" id="sharing" data-toogle-members="true" class="select2 col-sm-12">
-                                                        {html_options options=$SHARINGTYPES selected=$SHARINGTYPE}
-                                                    </select><br><br>
-                                                    <select id="memberList" class="select2 col-sm-12 members op" multiple="true" name="members[]" data-placeholder="{vtranslate('LBL_ADD_USERS_ROLES', $MODULE)}" style="margin-bottom: 10px;" data-rule-required="{if $SHARINGTYPE eq "share"}true{else}false{/if}">
-
-                                                        {foreach from=$MEMBER_GROUPS key=GROUP_LABEL item=ALL_GROUP_MEMBERS}
-                                                            {assign var=TRANS_GROUP_LABEL value=$GROUP_LABEL}
-                                                            {if $GROUP_LABEL eq 'RoleAndSubordinates'}
-                                                                {assign var=TRANS_GROUP_LABEL value='LBL_ROLEANDSUBORDINATE'}
-                                                            {/if}
-                                                            {assign var=TRANS_GROUP_LABEL value={vtranslate($TRANS_GROUP_LABEL)}}
-                                                            <optgroup label="{$TRANS_GROUP_LABEL}">
-                                                                {foreach from=$ALL_GROUP_MEMBERS item=MEMBER}
-                                                                    <option value="{$MEMBER->getId()}" data-member-type="{$GROUP_LABEL}" {if isset($SELECTED_MEMBERS_GROUP[$GROUP_LABEL][$MEMBER->getId()])}selected="true"{/if}>{$MEMBER->getName()}</option>
-                                                                {/foreach}
-                                                            </optgroup>
-                                                        {/foreach}
-                                                    </select>
-                                                </div>
                                         </div>
                                         {* pdf margin settings *}
                                         {assign var=margin_input_width value='50px'}
                                         {assign var=margin_label_width value='50px'}
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                            <label class="control-label fieldLabel col-lg-5">
                                                 {vtranslate('LBL_MARGINS',$MODULE)}:
                                             </label>
-                                            <div class="controls col-sm-9">
+                                            <div class="controls col-lg-7">
 
-                                                <div class="form-group">
-                                                    <label class="control-label fieldLabel col-sm-1" style="font-weight: normal">
+                                                <div class="form-group" style="width:100%">
+                                                    <label class="control-label fieldLabel col-sm-2">
                                                         {vtranslate('LBL_TOP',$MODULE)}:
                                                     </label>
-                                                    <div class="controls col-sm-11">
-                                                        <input type="text" name="margin_top" id="margin_top" class="inputElement" value="{$MARGINS.top}" style="width:{$margin_input_width}" onKeyUp="PDFMaker_EditFreeJs.ControlNumber('margin_top', false);">
+                                                    <div class="controls col-sm-12">
+                                                        <input type="text" name="margin_top" id="margin_top" class="inputElement" value="{$MARGINS.top}"  onKeyUp="PDFMaker_EditFreeJs.ControlNumber('margin_top', false);">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="control-label fieldLabel col-sm-1" style="font-weight: normal">
+                                                    <label class="control-label fieldLabel col-sm-1">
                                                         {vtranslate('LBL_BOTTOM',$MODULE)}:
                                                     </label>
-                                                    <div class="controls col-sm-11">
-                                                        <input type="text" name="margin_bottom" id="margin_bottom" class="inputElement" value="{$MARGINS.bottom}" style="width:{$margin_input_width}" onKeyUp="PDFMaker_EditFreeJs.ControlNumber('margin_bottom', false);">
+                                                    <div class="controls col-sm-12">
+                                                        <input type="text" name="margin_bottom" id="margin_bottom" class="inputElement" value="{$MARGINS.bottom}" onKeyUp="PDFMaker_EditFreeJs.ControlNumber('margin_bottom', false);">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="control-label fieldLabel col-sm-1" style="font-weight: normal">
+                                                    <label class="control-label fieldLabel col-sm-2">
                                                         {vtranslate('LBL_LEFT',$MODULE)}:
                                                     </label>
-                                                    <div class="controls col-sm-11">
-                                                        <input type="text" name="margin_left"  id="margin_left" class="inputElement" value="{$MARGINS.left}" style="width:{$margin_input_width}" onKeyUp="PDFMaker_EditFreeJs.ControlNumber('margin_left', false);">
+                                                    <div class="controls col-sm-12">
+                                                        <input type="text" name="margin_left"  id="margin_left" class="inputElement" value="{$MARGINS.left}" onKeyUp="PDFMaker_EditFreeJs.ControlNumber('margin_left', false);">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="control-label fieldLabel col-sm-1" style="font-weight: normal">
+                                                    <label class="control-label fieldLabel col-sm-2">
                                                         {vtranslate('LBL_RIGHT',$MODULE)}:
                                                     </label>
-                                                    <div class="controls col-sm-11">
-                                                        <input type="text" name="margin_right" id="margin_right" class="inputElement" value="{$MARGINS.right}" style="width:{$margin_input_width}" onKeyUp="PDFMaker_EditFreeJs.ControlNumber('margin_right', false);">
+                                                    <div class="controls col-sm-12">
+                                                        <input type="text" name="margin_right" id="margin_right" class="inputElement" value="{$MARGINS.right}" onKeyUp="PDFMaker_EditFreeJs.ControlNumber('margin_right', false);">
                                                     </div>
                                                 </div>
                                             </div>
@@ -520,35 +505,35 @@
 
                                         {* decimal settings *}
                                         <div class="form-group">
-                                            <label class="control-label fieldLabel col-sm-3" style="font-weight: normal">
+                                            <label class="control-label fieldLabel col-lg-5">
                                                 {vtranslate('LBL_DECIMALS',$MODULE)}:
                                             </label>
-                                            <div class="controls col-sm-9">
+                                            <div class="controls col-lg-7">
 
-                                                <div class="form-group">
-                                                    <label class="control-label fieldLabel col-sm-4" style="font-weight: normal">
+                                                <div class="form-group" style="width:100%">
+                                                    <label class="control-label fieldLabel col-sm-6">
                                                         {vtranslate('LBL_DEC_POINT',$MODULE)}:
                                                     </label>
-                                                    <div class="controls col-sm-8">
-                                                        <input type="text" maxlength="2" name="dec_point" class="inputElement" value="{$DECIMALS.point}" style="width:{$margin_input_width}"/>
+                                                    <div class="controls col-sm-6">
+                                                        <input type="text" maxlength="2" name="dec_point" class="inputElement" value="{$DECIMALS.point}" />
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="control-label fieldLabel col-sm-4" style="font-weight: normal">
+                                                    <label class="control-label fieldLabel col-sm-6">
                                                         {vtranslate('LBL_DEC_DECIMALS',$MODULE)}:
                                                     </label>
-                                                    <div class="controls col-sm-8">
-                                                        <input type="text" maxlength="2" name="dec_decimals" class="inputElement" value="{$DECIMALS.decimals}" style="width:{$margin_input_width}"/>
+                                                    <div class="controls col-sm-6">
+                                                        <input type="text" maxlength="2" name="dec_decimals" class="inputElement" value="{$DECIMALS.decimals}" />
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="control-label fieldLabel col-sm-4" style="font-weight: normal">
+                                                    <label class="control-label fieldLabel col-sm-6">
                                                         {vtranslate('LBL_DEC_THOUSANDS',$MODULE)}:
                                                     </label>
-                                                    <div class="controls col-sm-8">
-                                                        <input type="text" maxlength="2" name="dec_thousands" class="inputElement" value="{$DECIMALS.thousands}" style="width:{$margin_input_width}"/>
+                                                    <div class="controls col-sm-6">
+                                                        <input type="text" maxlength="2" name="dec_thousands" class="inputElement" value="{$DECIMALS.thousands}" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -556,11 +541,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
 
                    {************************************** END OF TABS BLOCK *************************************}
-                    <div class="middle-block col-xs-8">
+                    <div class="middle-block col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <div id="ContentEditorTabs">
                             <ul class="nav nav-pills">
                                 <li class="active" data-type="body">
@@ -597,7 +582,7 @@
                         </script>
                     </div>
                 </div>
-            </div>
+           
         </div>
         {*literal} <script type="text/javascript" src="modules/PDFMaker/fck_config.js"></script>{/literal*}
 
@@ -611,6 +596,7 @@
                     <a class="cancelLink" type="reset" onclick="javascript:window.history.back();">{vtranslate('LBL_CANCEL', $MODULE)}</a>
                 {/if}            			
             </div>
+            {* <div align="center" class="small" style="color: rgb(153, 153, 153);">{vtranslate('PDF_MAKER',$MODULE)} {$VERSION} {vtranslate('COPYRIGHT',$MODULE)}</div> *}
         </div>
     </form>
 </div>
@@ -648,7 +634,7 @@
 
         var $el = jQuery('.edit-template-content');
         var $window = jQuery(window);
-        var top = 127;
+        
 
         $window.bind("scroll resize", function() {
 
@@ -670,3 +656,4 @@
     });
 
 </script>
+

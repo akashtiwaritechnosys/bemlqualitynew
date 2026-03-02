@@ -10,11 +10,11 @@
 
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
 <input type="hidden" id="fieldValueMapping" name="field_value_mapping" value='{$TASK_OBJECT->field_value_mapping}' />
-<input type="hidden" value="{if $TASK_ID}{$TASK_OBJECT->reference_field}{else}{$REFERENCE_FIELD_NAME}{/if}" name='reference_field' id='reference_field' />
+<input type="hidden" value="{if $TASK_ID}{$TASK_OBJECT->reference_field}{else}{(isset($REFERENCE_FIELD_NAME)) ? $REFERENCE_FIELD_NAME : ''}{/if}" name='reference_field' id='reference_field' />
 <div class="conditionsContainer" id="save_fieldvaluemapping">
 	{if $RELATED_MODULE_MODEL_NAME neq '' && getTabid($RELATED_MODULE_MODEL_NAME)}
 		<div>
-			<button type="button" class="btn btn-soft-default" id="addFieldBtn">{vtranslate('LBL_ADD_FIELD',$QUALIFIED_MODULE)}</button>
+			<button type="button" class="btn btn-default" id="addFieldBtn">{vtranslate('LBL_ADD_FIELD',$QUALIFIED_MODULE)}</button>
 		</div><br>
 		{assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance($TASK_OBJECT->entity_type)}
 		{assign var=FIELD_VALUE_MAPPING value=ZEND_JSON::decode($TASK_OBJECT->field_value_mapping)}
@@ -25,7 +25,7 @@
 			{/if}
 			{assign var=SELECTED_FIELD_MODEL_FIELD_TYPE value=$SELECTED_FIELD_MODEL->getFieldDataType()}
 			<div class="row conditionRow form-group">
-				<span class="col-lg-4">
+				<span class="col-lg-3">
 					<select name="fieldname" class="select2" style="min-width: 250px" {if $SELECTED_FIELD_MODEL->isMandatory() || ($DISABLE_ROW eq 'true') } disabled="" {/if} >
 						<option value="none"></option>
 						{foreach from=$RELATED_MODULE_MODEL->getFields() item=FIELD_MODEL}
@@ -42,7 +42,7 @@
 						{if $FIELD_MAP['modulename'] eq $RELATED_MODULE_MODEL_NAME} value="{$RELATED_MODULE_MODEL_NAME}" {/if} 
 					/>
 				</span>
-				<span class="fieldUiHolder col-lg-4">
+				<span class="fieldUiHolder col-lg-3">
 					<input type="text" class="getPopupUi inputElement" {if ($DISABLE_ROW eq 'true')} disabled=""{/if} readonly="" name="fieldValue" value="{$FIELD_MAP['value']}" />
 					<input type="hidden" name="valuetype" value="{$FIELD_MAP['valuetype']}" />
 				</span>
@@ -56,9 +56,9 @@
 
 		{include file="FieldExpressions.tpl"|@vtemplate_path:$QUALIFIED_MODULE RELATED_MODULE_MODEL=$RELATED_MODULE_MODEL MODULE_MODEL=$MODULE_MODEL FIELD_EXPRESSIONS=$FIELD_EXPRESSIONS}
 	{else}
-		{if $RELATED_MODULE_MODEL}
+		{if isset($RELATED_MODULE_MODEL) && $RELATED_MODULE_MODEL}
 			<div>
-				<button type="button" class="btn btn-soft-default" id="addFieldBtn">{vtranslate('LBL_ADD_FIELD',$QUALIFIED_MODULE)}</button>
+				<button type="button" class="btn btn-default" id="addFieldBtn">{vtranslate('LBL_ADD_FIELD',$QUALIFIED_MODULE)}</button>
 			</div><br>
 			{assign var=MANDATORY_FIELD_MODELS value=$RELATED_MODULE_MODEL->getMandatoryFieldModels()}
 			{foreach from=$MANDATORY_FIELD_MODELS item=MANDATORY_FIELD_MODEL}
@@ -66,7 +66,7 @@
 					{continue}
 				{/if}
 				<div class="row conditionRow form-group">
-					<span class="col-lg-4">
+					<span class="col-lg-3">
 						<select name="fieldname" class="select2" disabled="" style="min-width: 250px">
 							<option value="none"></option>
 							{foreach from=$RELATED_MODULE_MODEL->getFields() item=FIELD_MODEL}
@@ -84,7 +84,7 @@
 							<input type="hidden" name="modulename" value="{$SOURCE_MODULE}" />
 						{/if}
 					</span>
-					<span class="fieldUiHolder col-lg-4">
+					<span class="fieldUiHolder col-lg-3">
 						<input type="text" class="getPopupUi inputElement" name="fieldValue" value="" />
 						<input type="hidden" name="valuetype" value="rawtext" />
 					</span>
@@ -94,10 +94,10 @@
 		{/if}
 	{/if}
 </div><br>
-{if $RELATED_MODULE_MODEL}
+{if isset($RELATED_MODULE_MODEL) && $RELATED_MODULE_MODEL}
 	<div class="row form-group basicAddFieldContainer hide">
-		<span class="col-lg-4">
-			<select name="fieldname" style="min-width: 250px">
+		<span class="col-lg-3 site-select">
+			<select name="fieldname">
 				<option value="none">{vtranslate('LBL_NONE',$QUALIFIED_MODULE)}</option>
 				{foreach from=$RELATED_MODULE_MODEL->getFields() item=FIELD_MODEL}
 					{assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
@@ -112,11 +112,11 @@
 		<span>
 			<input type="hidden" name="modulename" value="{$SOURCE_MODULE}" />
 		</span>
-		<span class="fieldUiHolder col-lg-4">
+		<span class="fieldUiHolder col-lg-3">
 			<input type="text" class="inputElement" readonly="" name="fieldValue" value="" />
 			<input type="hidden" name="valuetype" value="rawtext" />
 		</span>
-		<span class="cursorPointer col-lg-1">
+		<span class="cursorPointer col-lg-1 paddingLeftZero">
 			<i class="alignMiddle deleteCondition fa fa-trash"></i>
 		</span>
 	</div>

@@ -23,8 +23,9 @@
 
                     {if $ALL_LANGUAGES[$LANG_KEY] neq ""}
                         {if $LANGUAGE->isUpgradableLanguage()}
-                        <input type="hidden" name="moduleAction" value="Update"/>
-                        <button class="oneClickInstall isUpdateBtn btn btn-success {if $IS_AUTH}authenticated {else} loginRequired{/if}">{vtranslate('LBL_UPDATE', $QUALIFIED_MODULE)}</button>
+                            <input type="hidden" name="moduleAction" value="Update"/>
+                            <input type="hidden" name="moduleMessage" value="{$EXTENSION->getUpdateMessage()}"/>
+                            <button class="oneClickInstall isUpdateBtn btn btn-success {if $IS_AUTH}authenticated {else} loginRequired{/if}">{vtranslate('LBL_UPDATE', $QUALIFIED_MODULE)}</button>
                         {/if}
                     {else}
                         <input type="hidden" name="moduleAction" value="Install"/>

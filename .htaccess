@@ -4,7 +4,7 @@ Header set X-XSS-Protection "1; mode=block"
 Header always append X-Frame-Options SAMEORIGIN
 Header set X-Content-Type-Options nosniff
 Header set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
-Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval';script-src-elem 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'none'; style-src 'self' 'unsafe-inline'"
+Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fpjscdn.net https://fpcdn.io; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fpjscdn.net https://fpcdn.io; object-src 'none'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob:"
 Header always append X-Frame-Options SAMEORIGIN
 # RewriteCond %{HTTP_USER_AGENT} (Wappalyzer|BuiltWith|WhatRuns) [NC]
 # RewriteRule .* - [F,L]

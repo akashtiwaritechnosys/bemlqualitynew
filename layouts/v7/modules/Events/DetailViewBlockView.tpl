@@ -22,7 +22,6 @@
     <div>
         <h4>{vtranslate('LBL_INVITE_USER_BLOCK',{$MODULE_NAME})}</h4>
     </div>
-    <hr>
 
     <div class="blockData">
         <table class="table detailview-table no-border">

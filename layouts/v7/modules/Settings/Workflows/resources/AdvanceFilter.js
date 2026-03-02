@@ -1,3 +1,11 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 Vtiger_AdvanceFilter_Js('Workflows_AdvanceFilter_Js',{},{
 
     validationSupportedFieldConditionMap : {
@@ -288,7 +296,7 @@ Vtiger_Date_Field_Js('Workflows_Date_Field_Js',{},{
         var dateSpecificConditions = this.get('dateSpecificConditions');
         if(comparatorSelectedOptionVal.length > 0) {
             if(comparatorSelectedOptionVal == 'between' || comparatorSelectedOptionVal == 'custom'){
-                var html = '<div class="date"><input class="dateField inputElement" style="width:auto;" data-calendar-type="range" name="'+ this.getName() +'" data-date-format="'+ this.getDateFormat() +'" type="text" ReadOnly="true" value="'+  this.getValue() + '"></div>';
+                var html = '<div class="date"><input class="dateField inputElement" style="width:auto;" data-calendar-type="range" name="'+ this.getName() +'" data-date-format="'+ this.getDateFormat() +'" type="text" value="'+  this.getValue() + '"></div>';
                 var element = jQuery(html);
                 return this.addValidationToElement(element);
             } else if(this._specialDateComparator(comparatorSelectedOptionVal)) {
@@ -377,11 +385,18 @@ Vtiger_Currency_Field_Js('Workflows_Currency_Field_Js',{},{
 Vtiger_Time_Field_Js('Workflows_Time_Field_Js',{},{
 
     /**
+	 * Function to get the user time format
+	 */
+    getTimeFormat : function(){
+        return this.get('time-format');
+    },
+    
+    /**
 	 * Function to get the ui
 	 * @return - input text field
 	 */
     getUi : function() {
-        var html = '<input type="text" class="getPopupUi time inputElement" name="'+ this.getName() +'"  value="'+  this.getValue() + '" />'+
+        var html = '<input type="text" class="getPopupUi time inputElement" name="'+ this.getName() +'" data-time-format="'+ this.getTimeFormat() + '" value="'+  this.getValue() + '" />'+
         '<input type="hidden" name="valuetype" value="'+this.get('workflow_valuetype')+'" />';
         var element = jQuery(html);
         return this.addValidationToElement(element);

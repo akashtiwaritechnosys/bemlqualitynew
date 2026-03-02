@@ -7,20 +7,10 @@
 * ****************************************************************************** *}
 
 {if $ENABLE_PDFMAKER eq 'true'}
-    
+
      <div class="col-sm-4 pull-right" id="PDFMakerContentDiv">
         <div class="row clearfix">
-            <div class=" col-lg-4 col-md-4 col-sm-4 pull-right">
-                <select class="select2 inputElement" id="igtemp" name="pickListField">
-                    <option></option>
-                    {foreach key=index item=PICKLIST_FIELD from=$IG_TEMPS}
-                        <option value="{$PICKLIST_FIELD[0]}" {if $PICKLIST_FIELD[1] eq $TEMPLATE_ISDEFAULT} selected {/if}>
-                           {$PICKLIST_FIELD[1]}
-                        </option>
-                    {/foreach}
-                </select>
-            </div>
-                <div class="col-sm-6 padding0px pull-right">
+                <div class="padding0px pull-right">
                     <div class="btn-group pull-right">
                         <button class="btn btn-default selectPDFTemplates">{vtranslate('LBL_EXPORT_TO_PDF','PDFMaker')}</button>
                         <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split PDFMoreAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

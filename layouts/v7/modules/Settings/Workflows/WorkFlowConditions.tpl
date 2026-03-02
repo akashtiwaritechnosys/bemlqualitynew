@@ -20,7 +20,7 @@
            </div>
         </div>
     </div>
-    <hr style="margin-top: 0px !important;">
+
     <div class="editViewBody">
        <div class="editViewContents" style="padding-bottom: 0px;">
           <div class="form-group">
@@ -36,7 +36,7 @@
 				{/if}
                  <div id="advanceFilterContainer"  class="conditionsContainer {if $IS_FILTER_SAVED_NEW == false} zeroOpacity {/if}">
                      <div class="col-sm-12">
-                         <div class="table table-bordered" style="padding: 5%">
+                         <div class="table">
                              {include file='AdvanceFilter.tpl'|@vtemplate_path:$QUALIFIED_MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE}
                          </div>
                      </div>
@@ -53,11 +53,10 @@
             </div>
         </div>
     </div>
-    <hr style="margin-top: 0px !important;">
     <div class="editViewBody" id="workflow_action" style="padding-bottom: 15px;">
         <div style="padding-left: 15px;">
             <div class="btn-group">
-               <button class="btn btn-soft-default btn-sm dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="true">
+               <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="true">
                   <strong>{vtranslate('LBL_ADD_TASK',$QUALIFIED_MODULE)}</strong>&nbsp;&nbsp;
                   <span class="caret"></span>
                </button>

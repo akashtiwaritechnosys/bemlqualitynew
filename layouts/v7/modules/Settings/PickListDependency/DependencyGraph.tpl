@@ -25,12 +25,12 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-sm-2 col-xs-2">
+        <div class="col-lg-3 col-sm-4">
             <div class="btn-group">
                 <button class="btn btn-default sourceValues" type="button">{vtranslate('LBL_SELECT_SOURCE_VALUES', $QUALIFIED_MODULE)}</button>
             </div>
         </div>
-        <div class="col-sm-10 col-xs-10">
+        <div class="col-lg-9 col-sm-8">
             <div class="btn-group">
                 <button class="btn btn-default selectAllValues" type="button">{vtranslate('LBL_SELECT_ALL_VALUES', $QUALIFIED_MODULE)}</button>
                 <button class="btn btn-default unSelectAllValues" type="button">{vtranslate('LBL_UNSELECT_ALL_VALUES', $QUALIFIED_MODULE)}</button>
@@ -50,7 +50,7 @@
     <input type="hidden" class="allSourceValues" value='{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($SOURCE_PICKLIST_VALUES))}' />
 
     <div class="row depandencyTable" style="padding-right: 10px;">
-        <div class="col-sm-2 col-xs-2" style="padding-right: 0px;">
+        <div class="col-lg-3 col-sm-4" style="padding-right: 0px;">
             <table class="listview-table table-bordered table-condensed" style="width: 100%; border-collapse:collapse;">
                 <thead>
                     <tr class="blockHeader"><th>{$RECORD_MODEL->getSourceFieldLabel()}</th></tr>
@@ -71,7 +71,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-10 col-xs-10 dependencyMapping">
+        <div class="col-lg-9 col-sm-8 dependencyMapping">
             <table class="listview-table table-bordered pickListDependencyTable" style="width:auto;">
                 <thead>
                     <tr class="blockHeader">
@@ -87,7 +87,7 @@
                     {foreach key=TARGET_VALUE item=TRANSLATED_TARGET_VALUE from=$TARGET_PICKLIST_VALUES}
                         <tr>
                             {foreach key=SOURCE_PICKLIST_VALUE item=TRANSLATED_SOURCE_PICKLIST_VALUE from=$SOURCE_PICKLIST_VALUES}
-                                {assign var=targetValues value=$MAPPED_TARGET_PICKLIST_VALUES[$SAFEHTML_SOURCE_PICKLIST_VALUES[$SOURCE_PICKLIST_VALUE]]}
+                                {assign var=targetValues value=(isset($MAPPED_TARGET_PICKLIST_VALUES[$SAFEHTML_SOURCE_PICKLIST_VALUES[$SOURCE_PICKLIST_VALUE]])) ? $MAPPED_TARGET_PICKLIST_VALUES[$SAFEHTML_SOURCE_PICKLIST_VALUES[$SOURCE_PICKLIST_VALUE]] : array()}
                                 {assign var=IS_SELECTED value=false}
                                 {if empty($targetValues) || in_array($TARGET_VALUE, $targetValues)}
                                     {assign var=IS_SELECTED value=true}

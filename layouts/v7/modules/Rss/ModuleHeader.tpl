@@ -12,7 +12,7 @@
 {strip}
 	<div class="col-sm-12 col-xs-12 module-action-bar clearfix coloredBorderTop">
 		<div class="module-action-content clearfix">
-			<div class="col-lg-7 col-md-7 module-breadcrumb">
+			<div class="col-lg-6 col-md-6 module-breadcrumb">
 				<span>
 					{assign var=MODULE_MODEL value=Vtiger_Module_Model::getInstance($MODULE)}
 					{assign var=DEFAULT_FILTER_ID value=$MODULE_MODEL->getDefaultCustomFilter()}
@@ -27,7 +27,7 @@
 				<span>
 					<p class="current-filter-name pull-left">&nbsp;<span class="fa fa-angle-right" aria-hidden="true"></span>&nbsp;{$VIEW}&nbsp;</p>
 				</span>
-				{if $VIEWID}
+				{if isset($VIEWID) && $VIEWID}
 					{foreach item=FILTER_TYPES from=$CUSTOM_VIEWS}
 						{foreach item=FILTERS from=$FILTER_TYPES}
 							{if $FILTERS->get('cvid') eq $VIEWID}
@@ -41,12 +41,12 @@
 					</span>
 				{/if}
 			</div>
-			<div class="col-lg-5 col-md-5 pull-right">
+			<div class="col-lg-6 col-md-6 pull-right">
 				<div id="appnav" class="navbar-right">
 					<ul class="nav navbar-nav">
 						{assign var=BASIC_ACTION value=$MODULE_BASIC_ACTIONS}
 						<li>
-							<button class="btn btn-soft-primary rssAddButton module-btn" >
+							<button class="btn btn-default rssAddButton module-buttons" >
 								<i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_FEED_SOURCE',$MODULE)}</i>
 							</button>
 						</li>

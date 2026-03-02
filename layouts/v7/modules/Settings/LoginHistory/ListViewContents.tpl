@@ -25,11 +25,11 @@
    <div class="col-sm-12 col-xs-12 ">
         <div id="listview-actions" class="listview-actions-container">
             <div class = "row">
-                <div class='col-md-6 usersListDiv'>
-                    <select class="select2 col-md-4" id="usersFilter" >
+                <div class='col-md-5 col-sm-5 usersListDiv site-select'>
+                    <select class="select2 " id="usersFilter" >
                         <option value="">{vtranslate('LBL_ALL', $QUALIFIED_MODULE)}</option>
                         {foreach item=USERNAME key=USER from=$USERSLIST}
-                            <option value="{$USER}" name="{$USERNAME}" {if $USERNAME eq $SELECTED_USER} selected {/if}>{$USERNAME}</option>
+                            <option value="{$USER}" name="{$USERNAME}" {if isset($SELECTED_USER ) && $USERNAME eq $SELECTED_USER} selected {/if}>{$USERNAME}</option>
                         {/foreach}
                     </select>
                 </div>
@@ -62,7 +62,7 @@
                                  {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
                                      {assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
                                      {assign var=LAST_COLUMN value=$LISTVIEW_HEADER@last}
-                                     <td class="listViewEntryValue {$WIDTHTYPE}"  width="{$WIDTH}%" nowrap style='cursor:text;'>
+                                     <td class="listViewEntryValue {$WIDTHTYPE}"  width="{(isset($WIDTH)) ? $WIDTH : ''}%" nowrap style='cursor:text;'>
                                         {$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}
                                         {if $LAST_COLUMN && $LISTVIEW_ENTRY->getRecordLinks()}
                                         </td>

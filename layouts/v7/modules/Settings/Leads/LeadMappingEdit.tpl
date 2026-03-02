@@ -17,7 +17,7 @@
                         <div class="editViewContents table-container" >
                             <input type="hidden" id="restrictedFieldsList" value={ZEND_JSON::encode($RESTRICTED_FIELD_IDS_LIST)} />
                             <table class="table listview-table-norecords" width="100%" id="convertLeadMapping">
-                                <tbody>
+                                <thead style="border-radius:10px">
                                     <tr>
                                         <th width="7%"></th>
                                         <th width="15%">{vtranslate('LBL_FIELD_LABEL', $QUALIFIED_MODULE)}</th>
@@ -30,6 +30,9 @@
                                             <th width="15%">{vtranslate($LABEL, $LABEL)}</th>
                                         {/foreach}
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    
                                     {foreach key=MAPPING_ID item=MAPPING_ARRAY from=$MODULE_MODEL->getMapping()  name="mappingLoop"}
                                         <tr class="listViewEntries" sequence-number="{$smarty.foreach.mappingLoop.iteration}">
                                             <td width="7%">
@@ -62,7 +65,7 @@
                                                         {foreach key=FIELD_TYPE item=FIELDS_INFO from=$ACCOUNTS_MODULE_MODEL->getFields()}
                                                             {foreach key=FIELD_ID item=FIELD_OBJECT from=$FIELDS_INFO}
                                                                 {if $MAPPING_ARRAY['Leads']['fieldDataType'] eq $FIELD_TYPE}
-                                                                    <option data-type="{$FIELD_TYPE}" {if $FIELD_ID eq $MAPPING_ARRAY['Accounts']['id']} selected {/if} label="{vtranslate($FIELD_OBJECT->get('label'), $ACCOUNTS_MODULE_MODEL->getName())}" value="{$FIELD_ID}">
+                                                                    <option data-type="{$FIELD_TYPE}" {if isset($MAPPING_ARRAY['Accounts']['id']) && $FIELD_ID eq $MAPPING_ARRAY['Accounts']['id']} selected {/if} label="{vtranslate($FIELD_OBJECT->get('label'), $ACCOUNTS_MODULE_MODEL->getName())}" value="{$FIELD_ID}">
                                                                             {vtranslate($FIELD_OBJECT->get('label'), $ACCOUNTS_MODULE_MODEL->getName())}
                                                                     </option>
                                                                 {/if}
@@ -76,7 +79,7 @@
                                                     {foreach key=FIELD_TYPE item=FIELDS_INFO from=$CONTACTS_MODULE_MODEL->getFields()}
                                                         {foreach key=FIELD_ID item=FIELD_OBJECT from=$FIELDS_INFO}
                                                             {if $MAPPING_ARRAY['Leads']['fieldDataType'] eq $FIELD_TYPE}
-                                                                <option data-type="{$FIELD_TYPE}" {if $FIELD_ID eq $MAPPING_ARRAY['Contacts']['id']} selected {/if} label="{vtranslate($FIELD_OBJECT->get('label'), $CONTACTS_MODULE_MODEL->getName())}" value="{$FIELD_ID}">
+                                                                <option data-type="{$FIELD_TYPE}" {if isset($MAPPING_ARRAY['Contacts']['id']) && $FIELD_ID eq $MAPPING_ARRAY['Contacts']['id']} selected {/if} label="{vtranslate($FIELD_OBJECT->get('label'), $CONTACTS_MODULE_MODEL->getName())}" value="{$FIELD_ID}">
                                                                     {vtranslate($FIELD_OBJECT->get('label'), $CONTACTS_MODULE_MODEL->getName())}
                                                                 </option>
                                                             {/if}
@@ -90,7 +93,7 @@
                                                     {foreach key=FIELD_TYPE item=FIELDS_INFO from=$POTENTIALS_MODULE_MODEL->getFields()}
                                                         {foreach key=FIELD_ID item=FIELD_OBJECT from=$FIELDS_INFO}
                                                             {if $MAPPING_ARRAY['Leads']['fieldDataType'] eq $FIELD_TYPE}
-                                                                <option data-type="{$FIELD_TYPE}" {if $FIELD_ID eq $MAPPING_ARRAY['Potentials']['id']} selected {/if} label="{vtranslate($FIELD_OBJECT->get('label'), $POTENTIALS_MODULE_MODEL->getName())}" value="{$FIELD_ID}">
+                                                                <option data-type="{$FIELD_TYPE}" {if isset($MAPPING_ARRAY['Potentials']['id']) && $FIELD_ID eq $MAPPING_ARRAY['Potentials']['id']} selected {/if} label="{vtranslate($FIELD_OBJECT->get('label'), $POTENTIALS_MODULE_MODEL->getName())}" value="{$FIELD_ID}">
                                                                     {vtranslate($FIELD_OBJECT->get('label'), $POTENTIALS_MODULE_MODEL->getName())}
                                                                 </option>
                                                             {/if}
@@ -173,8 +176,10 @@
 						<div class='modal-overlay-footer clearfix'>
 							<div class="row clearfix">
 								<div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-									<button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-									<a class="cancelLink" type="reset" href="{$MODULE_MODEL->getDetailViewUrl()}">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                                    <div class='footer-btns'>
+                                        <button type='submit' class='btn btn-submit saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>
+                                        <a class="cancelLink" type="reset" href="{$MODULE_MODEL->getDetailViewUrl()}">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                                    </div>
 								</div>
 							</div>
 						</div>

@@ -9,7 +9,7 @@
 {strip}
     <div class="HistoryContainer">
         <div class="historyButtons btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-soft-blue" onclick='Vtiger_Detail_Js.showUpdates(this);'>
+            <button type="button" class="btn btn-default" onclick='Vtiger_Detail_Js.showUpdates(this);'>
                 {vtranslate("LBL_UPDATES",$MODULE_NAME)}
             </button>
         </div>

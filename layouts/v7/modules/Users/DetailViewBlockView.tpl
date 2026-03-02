@@ -9,15 +9,16 @@
 
 {strip}
 	<input type=hidden name="timeFormatOptions" data-value='{$DAY_STARTS}' />
-	{foreach key=BLOCK_LABEL_KEY item=FIELD_MODEL_LIST from=$RECORD_STRUCTURE}
+        <input type='hidden' name='pwd_regex' value= {ZEND_json::encode($PWD_REGEX)} />
+	{foreach key=BLOCK_LABEL_KEY item=FIELD_MODEL_LIST from=$RECORD_STRUCTURE name=DetailViewBlockViewLoop}
 		{if $BLOCK_LABEL_KEY neq 'LBL_CALENDAR_SETTINGS'}
 			{assign var=BLOCK value=$BLOCK_LIST[$BLOCK_LABEL_KEY]}
-			{if $BLOCK eq null or $FIELD_MODEL_LIST|@count lte 0}{continue}{/if}
+			{if $BLOCK eq null or $FIELD_MODEL_LIST|php7_count lte 0}{continue}{/if}
 			<div class="block block_{$BLOCK_LABEL_KEY}" data-block="{$BLOCK_LABEL_KEY}" data-blockid="{$BLOCK_LIST[$BLOCK_LABEL_KEY]->get('id')}">
 				{assign var=IS_HIDDEN value=$BLOCK->isHidden()}
 				{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
 				<div>
-					<h4>{vtranslate({$BLOCK_LABEL_KEY},{$MODULE_NAME})}</h4>
+					<h5>{vtranslate({$BLOCK_LABEL_KEY},{$MODULE_NAME})}</h5>
 				</div>
 				<hr>
 				<div class="blockData">
@@ -28,9 +29,6 @@
 								{foreach item=FIELD_MODEL key=FIELD_NAME from=$FIELD_MODEL_LIST}
 									{assign var=fieldDataType value=$FIELD_MODEL->getFieldDataType()}
 									{if !$FIELD_MODEL->isViewableInDetailView()}
-										{continue}
-									{/if}
-									{if $FIELD_MODEL->getName() eq 'first_name'}
 										{continue}
 									{/if}
 									{if $FIELD_MODEL->getName() eq 'theme' or $FIELD_MODEL->getName() eq 'rowheight'}
@@ -66,10 +64,10 @@
 										{/if}
 										<td class="fieldLabel {$WIDTHTYPE}"><span class="muted">{vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}</span></td>
 										<td class="fieldValue {$WIDTHTYPE}">
-											<div id="imageContainer" width="300" height="200">
+											<div id="imageContainer" style="height: 250px;width: 335px;">
 												{foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
 													{if !empty($IMAGE_INFO.url)}
-														<img src="{$IMAGE_INFO.url}" width="300" height="200">
+														<img src="{$IMAGE_INFO.url}" style="height: 100%;width: 100%; border-radius: 5px;">
 													{/if}
 												{/foreach}
 											</div>
@@ -129,12 +127,12 @@
 										</td>
 									{/if}
 
-									{if $FIELD_MODEL_LIST|@count eq 1 and $FIELD_MODEL->get('uitype') neq "19" and $FIELD_MODEL->get('uitype') neq "20" and $FIELD_MODEL->get('uitype') neq "30" and $FIELD_MODEL->get('name') neq "recurringtype" and $FIELD_MODEL->get('uitype') neq "69" and $FIELD_MODEL->get('uitype') neq "105"}
+									{if $FIELD_MODEL_LIST|php7_count eq 1 and $FIELD_MODEL->get('uitype') neq "19" and $FIELD_MODEL->get('uitype') neq "20" and $FIELD_MODEL->get('uitype') neq "30" and $FIELD_MODEL->get('name') neq "recurringtype" and $FIELD_MODEL->get('uitype') neq "69" and $FIELD_MODEL->get('uitype') neq "105"}
 										<td class="fieldLabel {$WIDTHTYPE}"></td><td class="{$WIDTHTYPE}"></td>
 									{/if}
 								{/foreach}
 								{* adding additional column for odd number of fields in a block *}
-								{if $FIELD_MODEL_LIST|@end eq true and $FIELD_MODEL_LIST|@count neq 1 and $COUNTER eq 1}
+								{if $smarty.foreach.DetailViewBlockViewLoop.last and $FIELD_MODEL_LIST|php7_count neq 1 and $COUNTER eq 1}
 									<td class="fieldLabel {$WIDTHTYPE}"></td><td class="{$WIDTHTYPE}"></td>
 								{/if}
 							</tr>
@@ -142,7 +140,7 @@
 					</table>
 				</div>
 			</div>
-			<br>
+			
 		{/if}
 	{/foreach}
 {/strip}

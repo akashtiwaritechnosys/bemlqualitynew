@@ -15,9 +15,9 @@
 			<input type="hidden" name="parent" value="Settings"/>
 			<input type="hidden" class="recordid" name="id" value="{$RECORD_ID}">
 			<div class="widget_header row">
-				<div class="col-sm-8"><h4>{vtranslate('LBL_PBXMANAGER', $QUALIFIED_MODULE)}</h4></div>
+				{*<div class="col-sm-8 pbx-manager"><h4>{vtranslate('LBL_PBXMANAGER', $QUALIFIED_MODULE)}</h4></div> *}
 				{assign var=MODULE_MODEL value=Settings_PBXManager_Module_Model::getCleanInstance()}
-				<div class="col-sm-4">
+				<div class="col-sm-12">
 					<div class="clearfix">
 						<div class="btn-group pull-right editbutton-container">
 							<button class="btn btn-default editButton" data-url="{$MODULE_MODEL->getEditViewUrl()}&mode=showpopup&id={$RECORD_ID}" title="{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}">{vtranslate('LBL_EDIT',$QUALIFIED_MODULE)}</button>
@@ -25,15 +25,15 @@
 					</div>
 				</div>
 			</div>
-			<hr>
-			<div class="contents col-lg-12">
+			
+			<div class="contents col-lg-12 detail-view-container">
 				<table class="table detailview-table no-border">
 					<tbody>
 						{assign var=FIELDS value=PBXManager_PBXManager_Connector::getSettingsParameters()}
 						{foreach item=FIELD_TYPE key=FIELD_NAME from=$FIELDS}
 							<tr>
-								<td class="fieldLabel" style="width:25%"><label>{vtranslate($FIELD_NAME, $QUALIFIED_MODULE)}</label></td>
-								<td style="word-wrap:break-word;">{$RECORD_MODEL->get($FIELD_NAME)}</td>
+								<td class="fieldLabel" style="width:35%"><label>{vtranslate($FIELD_NAME, $QUALIFIED_MODULE)}</label></td>
+								<td style="word-wrap:break-word;width:65%;display: table-cell;">{$RECORD_MODEL->get($FIELD_NAME)}</td>
 							</tr>
 						{/foreach}
 					</tbody>

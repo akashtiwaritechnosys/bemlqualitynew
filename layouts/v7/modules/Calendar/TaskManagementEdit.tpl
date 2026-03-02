@@ -16,7 +16,7 @@
 							<div class='fieldLabel pull-left col-lg-5' style='position:relative;top:2px;'>
 								{if $FIELD_MODEL->getFieldDataType() eq "reference"}
 									{assign var="REFERENCE_LIST" value=$FIELD_MODEL->getReferenceList()}
-									{assign var="REFERENCE_LIST_COUNT" value=count($REFERENCE_LIST)}
+									{assign var="REFERENCE_LIST_COUNT" value=php7_count($REFERENCE_LIST)}
 									{if $REFERENCE_LIST_COUNT > 1}
 										{assign var="DISPLAYID" value=$FIELD_MODEL->get('fieldvalue')}
 										{assign var="REFERENCED_MODULE_STRUCT" value=$FIELD_MODEL->getUITypeModel()->getReferenceModule($DISPLAYID)}
@@ -48,10 +48,10 @@
 			</div>
 		</div>
 		<div class="popover-footer">
-			<center>
-				<button class="btn btn-success popoverSave" type="submit" name="saveButton"><strong>{vtranslate('LBL_SAVE', $MODULE)}</strong></button>
+			<div class="footer-btns">
+				<button class="btn btn-submit popoverSave" type="submit" name="saveButton">{vtranslate('LBL_SAVE', $MODULE)}</button>
 				<a href="#" class="cancelLink popoverClose" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-			</center>
+			</div>
 		</div>
 	</form>
 {/strip}

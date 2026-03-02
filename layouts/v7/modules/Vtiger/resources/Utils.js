@@ -1,3 +1,11 @@
+/*+**********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.1
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ ************************************************************************************/
 
 var vtUtils = {
 
@@ -15,7 +23,7 @@ var vtUtils = {
 		if(data != null) {
 			params = jQuery.extend(data,params);
 		}
-
+    if(jQuery('#minilistWizardContainer').length){params.maximumSelectionSize=4};
         // Fix to eliminate flicker happening on list view load
         var ele = jQuery(selectElement);
         if(ele.hasClass("listSearchContributor")){
@@ -127,18 +135,23 @@ var vtUtils = {
                         showShortcuts: true,
                         autoClose : false,
                         duration : 500
-                    });
+                    }).on('datepicker-opened', function(e){
+						vtUtils.addMask(jQuery('.date-picker-wrapper:visible'));
+					}).on('datepicker-closed',vtUtils.removeMask);
                 }else{
                     var elementDateFormat = element.data('dateFormat');
                     if(typeof elementDateFormat !== 'undefined') {
                         userDateFormat = elementDateFormat;
                     }
+			let thelang= jQuery('body').data('language');
+                  	 thelang=thelang.substring(0, 2);
 					var defaultPickerParams = {
                         autoclose: true,
                         todayBtn: "linked",
                         format: userDateFormat,
                         todayHighlight: true,
-						clearBtn : true
+						clearBtn : true,
+			language :thelang
                     };
 					jQuery.extend(defaultPickerParams, params);
                     element.datepicker(defaultPickerParams);
@@ -367,5 +380,37 @@ var vtUtils = {
         return string.replace(tags, function ($0, $1) {
             return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
         });
-    }
+    },
+	
+    addMask: function (container) {
+            if (container.length && jQuery('#vt-mask').length == 0) {
+                    var mask = '<div id="vt-mask" class="vt-page-mask" ></div>'
+                    container.before(mask);
+            }
+    },
+
+    removeMask: function () {
+            if (jQuery('#vt-mask').length) {
+                    jQuery('#vt-mask').remove();
+            }
+    },
+        
+    isPasswordStrong : function(password) {
+            /*
+            * ^					The password string will start this way
+            * (?=.*[a-z])			The string must contain at least 1 lowercase alphabetical character
+            * (?=.*[A-Z])			The string must contain at least 1 uppercase alphabetical character
+            * (?=.*[0-9])			The string must contain at least 1 numeric character
+            * (?=.*[!@#\$%\^&\*])	The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict
+            * (?=.{8,})			The string must be eight characters or longer
+            */
+           var password_regex = jQuery('[name="pwd_regex"]').val();
+           if((typeof password_regex != 'undefined') && (password_regex != '')){
+                var strongPasswordRegex = new RegExp(password_regex);
+                var isStrong = strongPasswordRegex.test(password)? true : false; 
+                return isStrong;
+           }
+	   // If password regex is not set - consider it as strong.
+           return true;
+    },
 }

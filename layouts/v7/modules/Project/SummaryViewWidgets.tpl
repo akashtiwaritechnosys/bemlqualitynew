@@ -24,7 +24,7 @@
 		{/if}
 	{/foreach}
 
-	<div class="left-block col-lg-4 col-md-4 col-sm-4">
+	<div class="left-block col-lg-5 col-md-12 col-sm-12">
 		<div class="summaryView">
 			<div class="summaryViewHeader" style="margin-bottom: 15px;">
 				<h4 class="display-inline-block">{vtranslate('LBL_KEY_METRICS', $MODULE_NAME)}</h4>
@@ -33,15 +33,15 @@
 				{foreach item=SUMMARY_CATEGORY from=$SUMMARY_INFORMATION}
 					<div class="row textAlignCenter roundedCorners">
 						{foreach key=FIELD_NAME item=FIELD_VALUE from=$SUMMARY_CATEGORY}
-							<div class="col-lg-3">
-								<div class="well" style="min-height: 125px; padding-left: 0px; padding-right: 0px;">
+							<div class="col-lg-6">
+								<div class="well" style="padding:5px 0px;">
 									<div>
-										<label class="font-x-small">
+										<label class="">
 											{vtranslate($FIELD_NAME,$MODULE_NAME)}
 										</label>
 									</div>
 									<div>
-										<label class="font-x-x-large">
+										<label class="">
 											{if !empty($FIELD_VALUE)}{$FIELD_VALUE}{else}0{/if}
 										</label>
 									</div>
@@ -76,14 +76,15 @@
 							{assign var=PARENT_ID value=$RECORD->getId()}
 							<div class="pull-right">
 								<div class="dropdown">
-									<button type="button" class="btn btn-soft-blue dropdown-toggle" data-toggle="dropdown">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 										<span class="fa fa-plus" title="{vtranslate('LBL_NEW_DOCUMENT', $MODULE_NAME)}"></span>&nbsp;{vtranslate('LBL_NEW_DOCUMENT', 'Documents')}&nbsp; <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu">
 										<li class="dropdown-header"><i class="fa fa-upload"></i> {vtranslate('LBL_FILE_UPLOAD', 'Documents')}</li>
 										<li id="VtigerAction">
 											<a href="javascript:Documents_Index_Js.uploadTo('Vtiger',{$PARENT_ID},'{$MODULE_NAME}')">
-											     Upload New Document
+												<img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
+												{vtranslate('LBL_TO_SERVICE', 'Documents', {vtranslate('LBL_VTIGER', 'Documents')})}
 											</a>
 										</li>
 										<li role="separator" class="divider"></li>
@@ -102,28 +103,10 @@
 			</div>
 		{/if}
 		{* Summary View Documents Widget Ends Here*}
-	</div>
 
-	<div class="middle-block col-lg-4 col-md-4 col-sm-4">
-		{* Summary View Comments Widget*}
-		{if $COMMENTS_WIDGET_MODEL}
-			<div class="summaryWidgetContainer">
-				<div class="widgetContainer_comments" data-url="{$COMMENTS_WIDGET_MODEL->getUrl()}" data-name="{$COMMENTS_WIDGET_MODEL->getLabel()}">
-					<div class="widget_header">
-						<input type="hidden" name="relatedModule" value="{$COMMENTS_WIDGET_MODEL->get('linkName')}" />
-						<h4 class="display-inline-block">{vtranslate($COMMENTS_WIDGET_MODEL->getLabel(),$MODULE_NAME)}</h4>
-					</div>
-					<div class="widget_contents">
-					</div>
-				</div>
-			</div>
-		{/if}
-		{* Summary View Comments Widget Ends Here*}
-	</div>
 
-	<div class="right-block col-lg-4 col-md-4 col-sm-4">
-
-		{* Summary View Contacts Widget *}
+{* ----------------------- right block starts here----------------- *}
+	{* Summary View Contacts Widget *}
 		{if $HELPDESK_WIDGET_MODEL}
 			<div class="summaryWidgetContainer">
 				<div class="widgetContainer_troubleTickets" data-url="{$HELPDESK_WIDGET_MODEL->getUrl()}" data-name="{$HELPDESK_WIDGET_MODEL->getLabel()}">
@@ -134,7 +117,7 @@
 
 						{if $HELPDESK_WIDGET_MODEL->get('action')}
 							<div class="pull-right">
-								<button class="btn addButton btn-soft-blue btn-sm createRecord" type="button" data-url="{$HELPDESK_WIDGET_MODEL->get('actionURL')}">
+								<button class="btn addButton btn-default btn-sm createRecord" type="button" data-url="{$HELPDESK_WIDGET_MODEL->get('actionURL')}">
 									<i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD',$MODULE_NAME)}
 								</button>
 							</div>
@@ -142,14 +125,14 @@
 					</div>
 					<div class="clearfix">
 						<div class="widget_filter clearfix">
-							<div class="pull-left">
+							<div class="pull-left" style="width:100%">
 								{assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance('HelpDesk')}
 								{assign var=FIELD_MODEL value=$RELATED_MODULE_MODEL->getField('ticketstatus')}
 								{assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
 								{assign var=PICKLIST_VALUES value=$FIELD_INFO['picklistvalues']}
 								{assign var=FIELD_INFO value=Vtiger_Util_Helper::toSafeHTML(Zend_Json::encode($FIELD_INFO))}
 								{assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
-								<select class="select2" name="{$FIELD_MODEL->get('name')}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-fieldinfo='{$FIELD_INFO|escape}' {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if} >
+								<select style="width:100%" class="select2" name="{$FIELD_MODEL->get('name')}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-fieldinfo='{$FIELD_INFO|escape}' {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if} >
 									<option value="">{vtranslate('LBL_SELECT_STATUS',$MODULE_NAME)}</option>
 									{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$PICKLIST_VALUES}
 										<option value="{$PICKLIST_NAME}" {if $FIELD_MODEL->get('fieldvalue') eq $PICKLIST_NAME} selected {/if}>{$PICKLIST_VALUE}</option>
@@ -175,7 +158,7 @@
 
 						{if $MILESTONE_WIDGET_MODEL->get('action')}
 							<div class="pull-right">
-								<button class="btn addButton btn-sm btn-soft-blue createRecord"  id="createProjectMileStone" type="button" data-url="{$MILESTONE_WIDGET_MODEL->get('actionURL')}">
+								<button class="btn addButton btn-sm btn-default createRecord"  id="createProjectMileStone" type="button" data-url="{$MILESTONE_WIDGET_MODEL->get('actionURL')}">
 									<i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD',$MODULE_NAME)}
 								</button>
 							</div>
@@ -201,7 +184,7 @@
 
 						{if $TASKS_WIDGET_MODEL->get('action')}
 							<div class="pull-right">
-								<button class="btn addButton btn-sm btn-soft-blue createRecord" id="createProjectTask" type="button" data-url="{$TASKS_WIDGET_MODEL->get('actionURL')}">
+								<button class="btn addButton btn-sm btn-default createRecord" id="createProjectTask" type="button" data-url="{$TASKS_WIDGET_MODEL->get('actionURL')}">
 									<i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD',$MODULE_NAME)}
 								</button>
 							</div>
@@ -210,7 +193,7 @@
 					<div class="clearfix">
 						<div class="widget_filter clearfix">
 							{if $PROGRESS_FIELD_MODEL->isViewableInDetailView()}
-								<div class="pull-left marginRight15">
+								<div class="pull-left marginRight15 site-select">
 									{assign var=FIELD_INFO value=$PROGRESS_FIELD_MODEL->getFieldInfo()}
 									{assign var=PICKLIST_VALUES value=$FIELD_INFO['picklistvalues']}
 									{assign var=FIELD_INFO value=Vtiger_Util_Helper::toSafeHTML(Zend_Json::encode($FIELD_INFO))}
@@ -225,7 +208,7 @@
 							{/if}
 							&nbsp;&nbsp;
 							{if $STATUS_FIELD_MODEL->isViewableInDetailView()}
-								<div class="pull-left marginRight15">
+								<div class="pull-left marginRight15 site-select">
 									{assign var=FIELD_INFO value=$STATUS_FIELD_MODEL->getFieldInfo()}
 									{assign var=PICKLIST_VALUES value=$FIELD_INFO['picklistvalues']}
 									{assign var=FIELD_INFO value=Vtiger_Util_Helper::toSafeHTML(Zend_Json::encode($FIELD_INFO))}
@@ -245,5 +228,28 @@
 			</div>
 		{/if}
 		{* Summary View Contacts Widget Ends Here *}
+{* ----------------------- right block ends here----------------- *}
 	</div>
+
+	<div class="middle-block col-lg-7 col-md-12 col-sm-12">
+		{* Summary View Comments Widget*}
+		{if $COMMENTS_WIDGET_MODEL}
+			<div class="summaryWidgetContainer">
+				<div class="widgetContainer_comments" data-url="{$COMMENTS_WIDGET_MODEL->getUrl()}" data-name="{$COMMENTS_WIDGET_MODEL->getLabel()}">
+					<div class="widget_header">
+						<input type="hidden" name="relatedModule" value="{$COMMENTS_WIDGET_MODEL->get('linkName')}" />
+						<h4 class="display-inline-block">{vtranslate($COMMENTS_WIDGET_MODEL->getLabel(),$MODULE_NAME)}</h4>
+					</div>
+					<div class="widget_contents">
+					</div>
+				</div>
+			</div>
+		{/if}
+		{* Summary View Comments Widget Ends Here*}
+	</div>
+
+	{* <div class="right-block col-lg-4 col-md-4 col-sm-4">
+
+	
+	</div> *}
 {/strip}

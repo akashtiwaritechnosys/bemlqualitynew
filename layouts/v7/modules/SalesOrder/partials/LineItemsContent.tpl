@@ -163,7 +163,7 @@
 						value="{Vtiger_Functions::currentUserDisplayDate($data.${$fieldName})}"
 						{if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if}
 						{if $LINEITEM_CUSTOM_FIELD["isMandatory"] eq true} data-rule-required="true" {/if}
-						{if count($LINEITEM_CUSTOM_FIELD['validator'])}
+						{if php7_count($LINEITEM_CUSTOM_FIELD['validator'])}
 							data-specific-rules='{ZEND_JSON::encode($LINEITEM_CUSTOM_FIELD["validator"])}'
 						{/if}  data-rule-date="true" />
 					<span class="input-group-addon"><i class="fa fa-calendar "></i></span>
@@ -206,7 +206,7 @@
 				{if $data.${$fieldName} eq true} checked {/if}
 				{if !empty($SPECIAL_VALIDATOR)}data-validator="{Zend_Json::encode($SPECIAL_VALIDATOR)}"{/if}
 				{if $LINEITEM_CUSTOM_FIELD["isMandatory"] eq true} data-rule-required = "true" {/if}
-				{if count($LINEITEM_CUSTOM_FIELD['validator'])}
+				{if php7_count($LINEITEM_CUSTOM_FIELD['validator'])}
 					data-specific-rules='{ZEND_JSON::encode($LINEITEM_CUSTOM_FIELD["validator"])}'
 				{/if}/>
 			{/if}

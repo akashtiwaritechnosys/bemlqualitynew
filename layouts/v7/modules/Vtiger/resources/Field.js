@@ -1,4 +1,11 @@
-
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 jQuery.Class("Vtiger_Field_Js",{
 
 	/**
@@ -180,7 +187,7 @@ Vtiger_Field_Js('Vtiger_Reference_Field_Js',{},{
 	getUi : function(){
 		var referenceModules = this.getReferenceModules();
 		var value = this.getValue();
-		var html = '<div class="referencefield-wrapper';
+		var html = '<div class="';
 		if(value){
 			html += ' selected';
 		} else {
@@ -276,71 +283,6 @@ Vtiger_Field_Js('Vtiger_Picklist_Field_Js',{},{
 			html +='<\style>';
 		}
 
-		var selectContainer = jQuery(html);
-		this.addValidationToElement(selectContainer);
-		return selectContainer;
-	}
-});
-Vtiger_Field_Js('Vtiger_Radio_Field_Js', {}, {
-
-	getPickListValues: function () {
-		return this.get('editablepicklistvalues');
-	},
-
-	getUi: function () {
-		var html = '<div id="payCC" class="floatBlock">';
-		var pickListValues = this.getPickListValues();
-		var selectedOption = app.htmlDecode(this.getValue());
-		var data = this.getData();
-		var fieldName = this.getName();
-		if (fieldName == 'ser_usr_log_plat') {
-			let custRoleValue = $("#ServiceEngineer_detailView_fieldValue_cust_role > span").text().trim();
-			if (custRoleValue == "Service Engineer") {
-				pickListValues = { "Mobile App": "Mobile App" };
-			} else {
-				let custRoleValue1 = $("#ServiceEngineer_detailView_fieldValue_cust_role > span > span").text().trim();
-				if (custRoleValue1 == "Service Engineer") {
-					pickListValues = { "Mobile App": "Mobile App" };
-				}
-			}
-		}
-		for (var option in pickListValues) {
-			html += '<input type="radio" value="' + option + '" name="' + this.getName() + '" ';
-			if (option == selectedOption) {
-				html += ' checked="checked" ';
-			}
-			html += '>';
-			html += '<label> &nbsp ' + pickListValues[option] + '</label><br>';
-		}
-		html = html + '</div>';
-		var selectContainer = jQuery(html);
-		this.addValidationToElement(selectContainer);
-		return selectContainer;
-	}
-});
-
-Vtiger_Field_Js('Vtiger_Multiselectcheckbox_Field_Js', {}, {
-
-	getPickListValues: function () {
-		return this.get('editablepicklistvalues');
-	},
-
-	getUi: function () {
-		var html = '<div id="payCC" class="floatBlock">';
-		var pickListValues = this.getPickListValues();
-		var selectedOption = app.htmlDecode(this.getValue());
-		var selectedOption = Object.values(selectedOption)
-		var data = this.getData();
-		var fieldName = this.getName();
-		for (var option in pickListValues) {
-			html += '<input type="checkbox" value="' + option + '" name="' + this.getName() + '[]" ';
-			if (selectedOption.includes(option)) {
-				html += ' checked="checked" ';
-			}
-			html += '>';
-			html += '<label> &nbsp ' + pickListValues[option] + '</label><br>';
-		}
-		html = html + '</div>';
 		var selectContainer = jQuery(html);
 		this.addValidationToElement(selectContainer);
 		return selectContainer;
@@ -478,6 +420,9 @@ Vtiger_Field_Js('Vtiger_Multipicklist_Field_Js',{},{
 				if (picklistColor) {
 					className = '.picklistColor_'+fieldName+'_'+option.replace(' ', '_');
 					html += className+'{background-color: '+picklistColor+' !important;}';
+
+					className = className + '.select2-highlighted';
+					html += className+'{white: #ffffff !important; background-color: #337ab7 !important;}';
 				}
 			}
 			html +='<\style>';
@@ -508,7 +453,7 @@ Vtiger_Field_Js('Vtiger_Boolean_Field_Js',{},{
 	 * @return - checkbox element
 	 */
 	getUi : function() {
-		var	html = '<input type="hidden" name="'+this.getName() +'" value="0"/><input class="inputElement" type="checkbox" name="'+ this.getName() +'" ';
+		var	html = '<input type="hidden" name="'+this.getName() +'"/><input class="inputElement" type="checkbox" name="'+ this.getName() +'" ';
 		if(this.isChecked()) {
 			html += 'checked';
 		}
@@ -533,7 +478,7 @@ Vtiger_Field_Js('Vtiger_Date_Field_Js',{},{
 	 */
 	getUi : function() {
 		//wrappig with another div for consistency
-		var html = '<div class="referencefield-wrapper"><div class="input-group date">'+
+		var html = '<div class=""><div class="input-group date">'+
 						'<input class="inputElement dateField form-control" type="text" data-rule-date="true" data-format="'+ this.getDateFormat() +'" name="'+ this.getName() +'" value="'+ this.getValue() + '" />'+
 						'<span class="input-group-addon"><i class="fa fa-calendar"></i></span>'+
 					'</div></div>';
@@ -553,7 +498,7 @@ Vtiger_Field_Js('Vtiger_Currency_Field_Js',{},{
 
 	getUi : function() {
 		//wrappig with another div for consistency
-		var html = '<div class="referencefield-wrapper"><div class="input-group">'+
+		var html = '<div class=""><div class="input-group">'+
 						'<span class="input-group-addon" id="basic-addon1">'+this.getCurrencySymbol()+'</span>'+
 						'<input class="inputElement" type="text" name="'+ this.getName() +'" data-rule-currency="true" value="'+ this.getValue() + '" />'+
 					'</div></div>';
@@ -618,8 +563,8 @@ Vtiger_Field_Js('Vtiger_Time_Field_Js',{},{
 	 * @return - input text field
 	 */
 	getUi : function() {
-		var html = '<div class="referencefield-wrapper">'+'<div class="input-group time">'+
-						'<input class="timepicker-default form-control inputElement" type="text" data-format="'+ this.getTimeFormat() +'" name="'+ this.getName() +'" value="'+ this.getValue() + '" />'+
+		var html = '<div class="">'+'<div class="input-group time">'+
+						'<input class="timepicker-default form-control inputElement" type="text" data-rule-time="true" data-format="'+ this.getTimeFormat() +'" name="'+ this.getName() +'" value="'+ this.getValue() + '" />'+
 						'<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>'+
 					'</div>'+'</div>';
 		var element = jQuery(html);

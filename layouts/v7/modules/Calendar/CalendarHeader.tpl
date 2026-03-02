@@ -26,13 +26,13 @@
 						{if $IS_CREATE_PERMITTED}
 							<li>
 								<button id="calendarview_basicaction_addevent" type="button" 
-										class="btn addButton btn-soft-blue module-btn cursorPointer" 
+										class="btn addButton btn-default module-buttons cursorPointer" 
 										onclick='Calendar_Calendar_Js.showCreateEventModal();'>
 									<div class="fa fa-plus" aria-hidden="true"></div>&nbsp;&nbsp;
 									{vtranslate('LBL_ADD_EVENT', $MODULE)}
 								</button>
 								<button id="calendarview_basicaction_addtask" type="button" 
-										class="btn addButton btn-soft-blue module-btn cursorPointer" 
+										class="btn addButton btn-default module-buttons cursorPointer" 
 										onclick='Calendar_Calendar_Js.showCreateTaskModal();'>
 									<div class="fa fa-plus" aria-hidden="true"></div>&nbsp;&nbsp;
 									{vtranslate('LBL_ADD_TASK', $MODULE)}
@@ -41,7 +41,7 @@
 						{/if}
 						<li>
 							<div class="settingsIcon">
-								<button type="button" class="btn btn-soft-dark module-btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+								<button type="button" class="btn btn-default module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 									<span class="fa fa-wrench" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}"></span>&nbsp;&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}&nbsp; <span class="caret"></span>
 								</button>
 								<ul class="detailViewSetting dropdown-menu">

@@ -29,9 +29,11 @@
 						</li>
 					{/foreach}
 
-					{assign var=RELATEDTABS value=$DETAILVIEW_LINKS['DETAILVIEWRELATED']}
+                                        {if isset($DETAILVIEW_LINKS['DETAILVIEWRELATED'])}
+					        {assign var=RELATEDTABS value=$DETAILVIEW_LINKS['DETAILVIEWRELATED']}
+                                        {/if}
                                         {if !empty($RELATEDTABS)}
-                                            {assign var=COUNT value=$RELATEDTABS|@count}
+                                            {assign var=COUNT value=$RELATEDTABS|php7_count}
 
                                             {assign var=LIMIT value = 10}
                                             {if $COUNT gt 10}
@@ -49,24 +51,24 @@
                                                             data-module="{$RELATEDMODULENAME}" data-relation-id="{$RELATED_LINK->getId()}" {if $RELATEDMODULENAME eq "ModComments"} title {else} title="{$DETAILVIEWRELATEDLINKLBL}"{/if} {if $RELATEDFIELDNAME}data-relatedfield ="{$RELATEDFIELDNAME}"{/if}>
                                                             <a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" >
                                                                     {if $RELATEDMODULENAME eq "ModComments"}
-                                                                            <span class="tab-icon"><i class="fa fa-comment" style="font-size: 24px"></i></span>
+                                                                            <span class="tab-icon"><i class="fa fa-comment"></i></span>
                                                                     {else}
                                                                             <span class="tab-icon">
                                                                                     {assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance($RELATEDMODULENAME)}
                                                                                     {$RELATED_MODULE_MODEL->getModuleIcon()}
                                                                             </span>
                                                                     {/if}
-                                                                    &nbsp;<span class="numberCircle budge bg-danger  hide">0</span>
+                                                                    &nbsp;<span class="numberCircle hide">0</span>
                                                             </a>
                                                     </li>
-                                                    {if ($RELATED_LINK->getId() == {$smarty.request.relationId})}
+                                                    {if ($RELATED_LINK->getId() == {$REQ->get('relationId')})}
                                                             {assign var=MORE_TAB_ACTIVE value='true'}
                                                     {/if}
                                             {/for}
                                             {if $MORE_TAB_ACTIVE neq 'true'}
                                                     {for $i = 0 to $COUNT-1}
                                                             {assign var=RELATED_LINK value=$RELATEDTABS[$i]}
-                                                            {if ($RELATED_LINK->getId() == {$smarty.request.relationId})}
+                                                            {if ($RELATED_LINK->getId() == {$REQ->get('relationId')})}
                                                                     {assign var=RELATEDMODULENAME value=$RELATED_LINK->getRelatedModuleName()}
                                                                     {assign var=RELATEDFIELDNAME value=$RELATED_LINK->get('linkFieldName')}
                                                                     {assign var="DETAILVIEWRELATEDLINKLBL" value= vtranslate($RELATED_LINK->getLabel(),$RELATEDMODULENAME)}
@@ -74,7 +76,7 @@
                                                                             data-module="{$RELATEDMODULENAME}" data-relation-id="{$RELATED_LINK->getId()}" {if $RELATEDMODULENAME eq "ModComments"} title {else} title="{$DETAILVIEWRELATEDLINKLBL}"{/if} {if $RELATEDFIELDNAME}data-relatedfield ="{$RELATEDFIELDNAME}"{/if}>
                                                                             <a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" >
                                                                                     {if $RELATEDMODULENAME eq "ModComments"}
-                                                                                            <span class="tab-icon"><i class="fa fa-comment" style="font-size: 24px"></i></span>
+                                                                                            <span class="tab-icon"><i class="fa fa-comment"></i></span>
                                                                                     {else}
                                                                                             <span class="tab-icon">
                                                                                                     {assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance($RELATEDMODULENAME)}

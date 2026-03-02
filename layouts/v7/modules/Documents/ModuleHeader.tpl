@@ -12,7 +12,7 @@
 {strip}
 	<div class="col-sm-12 col-xs-12 module-action-bar clearfix coloredBorderTop">
 		<div class="module-action-content clearfix">
-			<div class="col-lg-7 col-md-7 module-breadcrumb module-breadcrumb-{$smarty.request.view}">
+			<div class="col-lg-6 col-md-6 module-breadcrumb module-breadcrumb-{$REQ->get('view')}">
 				{assign var=MODULE_MODEL value=Vtiger_Module_Model::getInstance($MODULE)}
 				{if $MODULE_MODEL->getDefaultViewName() neq 'List'}
 					{assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getDefaultUrl()}
@@ -41,30 +41,31 @@
 					<p  class="current-filter-name filter-name pull-left cursorPointer" title="{$CVNAME}">&nbsp;<span class="fa fa-angle-right pull-left" aria-hidden="true"></span><a  href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}'>&nbsp;{$CVNAME}&nbsp;</a> </p>
 				{/if}
 				{assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
-				{if $RECORD and $smarty.request.view eq 'Edit'}
+				{if isset($RECORD) and $RECORD and $REQ->get('view') eq 'Edit'}
 					<p class="current-filter-name filter-name pull-left "><span class="fa fa-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;{vtranslate('LBL_EDITING', $MODULE)} : {$RECORD->get('label')}&nbsp;</a></p>
-				{else if $smarty.request.view eq 'Edit'}
+				{else if $REQ->get('view') eq 'Edit'}
 					<p class="current-filter-name filter-name pull-left "><span class="fa fa-angle-right pull-left" aria-hidden="true"></span><a>&nbsp;{vtranslate('LBL_ADDING_NEW', $MODULE)}&nbsp;</a></p>
 				{/if}
-				{if $smarty.request.view eq 'Detail'}
+				{if $REQ->get('view') eq 'Detail'}
 					<p class="current-filter-name filter-name pull-left"><span class="fa fa-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;{$RECORD->get('label')}&nbsp;</a></p>
 				{/if}
 			</div>
-			<div class="col-lg-5 col-md-5 pull-right ">
+			<div class="col-lg-6 col-md-6 pull-right ">
 				<div id="appnav" class="navbar-right">
 					<ul class="nav navbar-nav">
 						{foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}
 							{if $BASIC_ACTION->getLabel() eq 'LBL_ADD_RECORD'}
 								<li>
 									<div>
-										<button type="button" class="btn btn-soft-blue module-btn dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn btn-default module-buttons dropdown-toggle" data-toggle="dropdown">
 											<span class="fa fa-plus" title="{vtranslate('LBL_NEW_DOCUMENT', $MODULE)}"></span>&nbsp;&nbsp;{vtranslate('LBL_NEW_DOCUMENT', $MODULE)}&nbsp;<span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu">
 											<li class="dropdown-header"><i class="fa fa-upload"></i> {vtranslate('LBL_FILE_UPLOAD', $MODULE)}</li>
 											<li id="VtigerAction">
 												<a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
-													Upload New Document
+													<img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
+													{vtranslate('LBL_TO_SERVICE', $MODULE_NAME, {vtranslate('LBL_VTIGER', $MODULE_NAME)})}
 												</a>
 											</li>
 											<li role="separator" class="divider"></li>
@@ -78,10 +79,10 @@
 							{/if}
 						{/foreach}
 
-						{if $MODULE_SETTING_ACTIONS|@count gt 0}
+						{if $MODULE_SETTING_ACTIONS|php7_count gt 0}
 							<li>
 								<div class="settingsIcon">
-									<button type="button" class="btn btn-soft-dark module-btn dropdown-toggle" data-toggle="dropdown">
+									<button type="button" class="btn btn-default module-buttons dropdown-toggle" data-toggle="dropdown">
 										<span class="fa fa-wrench" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}"></span>&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}&nbsp; <span class="caret"></span>
 									</button>
 									<ul class="detailViewSetting dropdown-menu">

@@ -10,12 +10,12 @@
 ********************************************************************************/
 -->*}
 {strip}
-    <div class="col-lg-6 detailViewButtoncontainer">
+    <div class="col-lg-7 col-md-6 col-sm-6 detailViewButtoncontainer">
         <div class="pull-right btn-toolbar">
             <div class="btn-group">
             {assign var=STARRED value=$RECORD->get('starred')}
             {if $MODULE_MODEL->isStarredEnabled()}
-                <button class="btn btn-soft-blue markStar {if $STARRED} active {/if}" id="starToggle" style="width:100px;">
+                <button class="btn btn-default markStar {if $STARRED} active {/if}" id="starToggle">
                     <div class='starredStatus' title="{vtranslate('LBL_STARRED', $MODULE)}">
                         <div class='unfollowMessage'>
                             <i class="fa fa-star-o"></i> &nbsp;{vtranslate('LBL_UNFOLLOW',$MODULE)}
@@ -29,8 +29,11 @@
                     </div>
                 </button>
             {/if}
+            <button class="btn btn-default" id="detailView_recordVoiceNote" onclick="Leads_Detail_Js.triggerVoiceNote()" title="Record Voice Note">
+                <i class="fa fa-microphone"></i>
+            </button>
             {foreach item=DETAIL_VIEW_BASIC_LINK from=$DETAILVIEW_LINKS['DETAILVIEWBASIC']}
-                <button class="btn btn-soft-info" id="{$MODULE_NAME}_detailView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel())}"
+                <button class="btn btn-default" id="{$MODULE_NAME}_detailView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel())}"
                         {if $DETAIL_VIEW_BASIC_LINK->isPageLoadLink()}
                             onclick="window.location.href = '{$DETAIL_VIEW_BASIC_LINK->getUrl()}&app={$SELECTED_MENU_CATEGORY}'"
                         {else}
@@ -42,8 +45,8 @@
                     {vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE_NAME)}
                 </button>
             {/foreach}
-            {if !empty($DETAILVIEW_LINKS['DETAILVIEW']) && ($DETAILVIEW_LINKS['DETAILVIEW']|@count gt 0)}
-                <button class="btn btn-soft-secondary dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
+            {if !empty($DETAILVIEW_LINKS['DETAILVIEW']) && ($DETAILVIEW_LINKS['DETAILVIEW']|php7_count gt 0)}
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
                    {vtranslate('LBL_MORE', $MODULE_NAME)}&nbsp;&nbsp;<i class="caret"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -65,15 +68,16 @@
             </div>
             {if !{$NO_PAGINATION}}
             <div class="btn-group pull-right">
-                <button class="btn btn-soft-secondary" id="detailViewPreviousRecordButton" {if empty($PREVIOUS_RECORD_URL)} disabled="disabled" {else} onclick="window.location.href = '{$PREVIOUS_RECORD_URL}&app={$SELECTED_MENU_CATEGORY}'" {/if} >
+                <button class="btn btn-default " id="detailViewPreviousRecordButton" {if empty($PREVIOUS_RECORD_URL)} disabled="disabled" {else} onclick="window.location.href = '{$PREVIOUS_RECORD_URL}&app={$SELECTED_MENU_CATEGORY}'" {/if} >
                     <i class="fa fa-chevron-left"></i>
                 </button>
-                <button class="btn btn-soft-secondary" id="detailViewNextRecordButton"{if empty($NEXT_RECORD_URL)} disabled="disabled" {else} onclick="window.location.href = '{$NEXT_RECORD_URL}&app={$SELECTED_MENU_CATEGORY}'" {/if}>
+                <button class="btn btn-default  " id="detailViewNextRecordButton"{if empty($NEXT_RECORD_URL)} disabled="disabled" {else} onclick="window.location.href = '{$NEXT_RECORD_URL}&app={$SELECTED_MENU_CATEGORY}'" {/if}>
                     <i class="fa fa-chevron-right"></i>
                 </button>
             </div>
             {/if}        
         </div>
         <input type="hidden" name="record_id" value="{$RECORD->getId()}">
+        {include file="DetailViewPickListStatus.tpl"|vtemplate_path:$MODULE}
     </div>
 {strip}

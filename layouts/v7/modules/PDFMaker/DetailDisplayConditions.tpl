@@ -11,7 +11,7 @@
 {assign var=DISPLAY_CONDITION value=$PDFMAKER_RECORD_MODEL->getConditonDisplayValue()}
 {assign var=ALL_CONDITIONS value=$DISPLAY_CONDITION['All']}
 {assign var=ANY_CONDITIONS value=$DISPLAY_CONDITION['Any']}
-{if $ALL_CONDITIONS|count eq "0" && $ANY_CONDITIONS|count eq "0"}
+{if $ALL_CONDITIONS|php7_count eq "0" && $ANY_CONDITIONS|php7_count eq "0"}
     {vtranslate('LBL_NO_DISPLAY_CONDITIONS_DEFINED',$MODULE)}
 {else}
     {if $DISPLAY_CONDITION['displayed'] eq "0"}

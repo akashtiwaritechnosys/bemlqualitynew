@@ -1,3 +1,12 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
 Vtiger.Class("Calendar_Calendar_Js", {
 	calendarViewContainer: false,
 	feedsWidgetPostLoadEvent: 'Calendar.Viewtypes.PostLoad.Event',
@@ -233,7 +242,8 @@ Vtiger.Class("Calendar_Calendar_Js", {
 		}
 	},
 	getFeedRequestParams: function (start, end, feedCheckbox) {
-		var dateFormat = 'YYYY-MM-DD';
+		var userFormat = jQuery('body').data('userDateformat').toUpperCase();
+		var dateFormat = userFormat;
 		var startDate = start.format(dateFormat);
 		var endDate = end.format(dateFormat);
 		return {
@@ -549,7 +559,11 @@ Vtiger.Class("Calendar_Calendar_Js", {
 					feedIndicatorTemplate.removeClass('.feed-indicator-template');
 					var newFeedIndicator = feedIndicatorTemplate.clone(true, true);
 					//replacing module name prefix with translated module name and concatinating with field name
-					feedIndicatorTitle = translatedModuleName + feedIndicatorTitle.substr(feedIndicatorTitle.indexOf('-'));
+					var feedIndicatorModuleEndIndex = feedIndicatorTitle.indexOf('('); // Events (ActivityType) - title...
+					if (feedIndicatorModuleEndIndex == -1) { // ModuleName - title...
+							feedIndicatorModuleEndIndex = feedIndicatorTitle.indexOf('-');
+					}
+					feedIndicatorTitle = translatedModuleName + feedIndicatorTitle.substr(feedIndicatorModuleEndIndex);
 					newFeedIndicator.find('span:first').text(feedIndicatorTitle);
 					var newFeedCheckbox = newFeedIndicator.find('.toggleCalendarFeed');
 					newFeedCheckbox.attr('data-calendar-sourcekey', calendarSourceKey).
@@ -778,12 +792,12 @@ Vtiger.Class("Calendar_Calendar_Js", {
 			}
 
 			thisInstance.checkDuplicateFeed(moduleName, fieldName, selectedColor, conditions).then(
-					function (result) {
-						app.helper.showErrorNotification({'message': result['message']});
-						currentTarget.removeAttr('disabled');
+					function(result) {
+					    app.helper.showErrorNotification({'message':result['message']});
+					    currentTarget.removeAttr('disabled');
 					},
-					function () {
-						thisInstance.saveFeedSettings(modalContainer);
+					function() {
+					    thisInstance.saveFeedSettings(modalContainer);
 					});
 		});
 	},
@@ -902,8 +916,30 @@ Vtiger.Class("Calendar_Calendar_Js", {
 					thisInstance.registerFeedChangeEvent();
 					thisInstance.registerFeedsColorEditEvent();
 					thisInstance.registerFeedDeleteEvent();
+					thisInstance.registerFeedMassSelectEvent();
 				});
 	},
+
+	/**
+	 * Event listener for change on mass select checkbox.
+	 * Click/set true/false on all non-matching checkboxes & 
+	 * trigger change event. Contributed by Libertus Solutions
+	**/
+	registerFeedMassSelectEvent : function() {
+		var container = jQuery('#calendarview-feeds');
+		var calendarFeeds = jQuery('ul.feedslist input.toggleCalendarFeed', container);
+		jQuery('input.mass-select', container).on('change', function() {
+			var massSelectchecked = this.checked;
+			calendarFeeds.each(function(i) {
+				// Only trigger change where necessary
+				if(this.checked != massSelectchecked) {
+					this.checked = massSelectchecked;
+					jQuery(this).change();
+				}
+			});
+		});
+	},
+
 	changeWidgetDisplayState: function (widget, state) {
 		var key = widget.data('widgetName') + '_WIDGET_DISPLAY_STATE';
 		app.storage.set(key, state);
@@ -1606,6 +1642,7 @@ Vtiger.Class("Calendar_Calendar_Js", {
 			defaultView: userDefaultActivityView,
 			slotLabelFormat: userDefaultTimeFormat,
 			timeFormat: userDefaultTimeFormat,
+			minTime: thisInstance.getUserPrefered('start_hour')+':00',//angelo
 			events: [],
 			monthNames: [
 				app.vtranslate('LBL_JANUARY'),
@@ -1789,8 +1826,8 @@ Vtiger.Class("Calendar_Calendar_Js", {
 					var part = '' +
 							'<div class="agendaListDay" data-date="' + date + '">' +
 							'<div class="agendaListViewHeader clearfix">' +
-							'<div class="day">' + day + '</div>' +
-							'<div class="weekDay">' + weekDay + '</div>' +
+							'<p class="day">' + day + '</p>' +
+							'<p class="weekDay">' + weekDay + '</p>' +
 							'</div>' +
 							'<hr>' +
 							'<div class="agendaListViewBody">' +

@@ -7,7 +7,6 @@
    * Portions created by vtiger are Copyright (C) vtiger.
    * All Rights Reserved.
   *
-  /* pointer events none for date format fields for all purvesh */
  ********************************************************************************/
 -->*}
 {strip}
@@ -26,11 +25,8 @@
 
 	<select data-fieldname="{$FIELD_MODEL->getFieldName()}" data-fieldtype="picklist" class="inputElement select2 {if $OCCUPY_COMPLETE_WIDTH} row {/if}" type="picklist" name="{$FIELD_MODEL->getFieldName()}" {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if} data-selected-value='{$FIELD_MODEL->get('fieldvalue')}' 
 			{if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
-			{if count($FIELD_INFO['validator'])} 
+			{if php7_count($FIELD_INFO['validator'])} 
 				data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
-			{/if}
-			{if $FIELD_MODEL->getFieldName() eq 'date_format' AND $MODULE eq 'Users'}
-			style="background-color: #DEDEDE !important;pointer-events:none;"
 			{/if}
 			>
 		{if $FIELD_MODEL->isEmptyPicklistOptionAllowed()}<option value="">{vtranslate('LBL_SELECT_OPTION','Vtiger')}</option>{/if}

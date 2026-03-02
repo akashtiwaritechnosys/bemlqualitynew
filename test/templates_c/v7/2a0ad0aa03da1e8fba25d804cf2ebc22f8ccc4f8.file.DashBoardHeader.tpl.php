@@ -1,20 +1,22 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2026-02-27 09:43:12
+<?php /* Smarty version Smarty-3.1.7, created on 2026-03-02 09:14:05
          compiled from "C:\wamp64\www\bemlqualitynew\includes\runtime/../../layouts/v7\modules\Vtiger\dashboards\DashBoardHeader.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:201066972069a1673052e8c0-44872587%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:183275043169a540be4e8759-17521932%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '2a0ad0aa03da1e8fba25d804cf2ebc22f8ccc4f8' => 
     array (
       0 => 'C:\\wamp64\\www\\bemlqualitynew\\includes\\runtime/../../layouts/v7\\modules\\Vtiger\\dashboards\\DashBoardHeader.tpl',
-      1 => 1733391379,
+      1 => 1772442503,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '201066972069a1673052e8c0-44872587',
+  'nocache_hash' => '183275043169a540be4e8759-17521932',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_69a540be685f6',
   'variables' => 
   array (
     'SELECTABLE_WIDGETS' => 0,
@@ -25,21 +27,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'MODULE_PERMISSION' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_69a167305e708',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_69a167305e708')) {function content_69a167305e708($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_69a540be685f6')) {function content_69a540be685f6($_smarty_tpl) {?>
 
-<div class='dashboardHeading container-fluid'>
-	<div class="buttonGroups pull-right">
+<div class='dashboardHeading'>
+	<div class="buttonGroups pull-right dashboard-addWidget-tabs">
 		<div class="btn-group">
-			<?php if (count($_smarty_tpl->tpl_vars['SELECTABLE_WIDGETS']->value)>0){?>
-				<button class='btn btn-soft-info addButton dropdown-toggle' data-toggle='dropdown'>
+			<?php if (php7_count($_smarty_tpl->tpl_vars['SELECTABLE_WIDGETS']->value)>0){?>
+				<button class='bg-blue-btn addButton dropdown-toggle' data-toggle='dropdown'>
 					<?php echo vtranslate('LBL_ADD_WIDGET');?>
 &nbsp;&nbsp;<i class="caret"></i>
 				</button>
 
-				<ul class="dropdown-menu dropdown-menu-right widgetsList pull-right" style="min-width:100%;text-align:left;">
+				<ul class="dropdown-menu dropdown-menu-right widgetsList pull-right" style="width:100%;text-align:left;">
 					<?php $_smarty_tpl->tpl_vars["MINILISTWIDGET"] = new Smarty_variable('', null, 0);?>
 					<?php  $_smarty_tpl->tpl_vars['WIDGET'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['WIDGET']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['SELECTABLE_WIDGETS']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -49,10 +49,11 @@ $_smarty_tpl->tpl_vars['WIDGET']->_loop = true;
 						<?php if ($_smarty_tpl->tpl_vars['WIDGET']->value->getName()=='MiniList'){?>
 							<?php $_smarty_tpl->tpl_vars["MINILISTWIDGET"] = new Smarty_variable($_smarty_tpl->tpl_vars['WIDGET']->value, null, 0);?> 
 						<?php }elseif($_smarty_tpl->tpl_vars['WIDGET']->value->getName()=='Notebook'){?>
-							<?php $_smarty_tpl->tpl_vars["NOTEBOOKWIDGET"] = new Smarty_variable($_smarty_tpl->tpl_vars['WIDGET']->value, null, 0);?> 
+							<?php $_smarty_tpl->tpl_vars["NOTEBOOKWIDGET"] = new Smarty_variable($_smarty_tpl->tpl_vars['WIDGET']->value, null, 0);?>
+						
 						<?php }else{ ?>
 							<li>
-								<a onclick="Vtiger_DashBoard_Js.addWidget(this, '<?php echo $_smarty_tpl->tpl_vars['WIDGET']->value->getUrl();?>
+								<a style="white-space: normal;" onclick="Vtiger_DashBoard_Js.addWidget(this, '<?php echo $_smarty_tpl->tpl_vars['WIDGET']->value->getUrl();?>
 ')" href="javascript:void(0);"
 									data-linkid="<?php echo $_smarty_tpl->tpl_vars['WIDGET']->value->get('linkid');?>
 " data-name="<?php echo $_smarty_tpl->tpl_vars['WIDGET']->value->getName();?>
@@ -89,11 +90,12 @@ $_smarty_tpl->tpl_vars['WIDGET']->_loop = true;
 								<?php echo vtranslate($_smarty_tpl->tpl_vars['NOTEBOOKWIDGET']->value->getTitle(),$_smarty_tpl->tpl_vars['MODULE_NAME']->value);?>
 </a>
 						</li>
+						
 					<?php }?>
 
 				</ul>
 			<?php }elseif($_smarty_tpl->tpl_vars['MODULE_PERMISSION']->value){?>
-				<button class='btn btn-soft-blue addButton dropdown-toggle' disabled="disabled" data-toggle='dropdown'>
+				<button class='bg-blue-btn addButton dropdown-toggle' disabled="disabled" data-toggle='dropdown'>
 					<strong><?php echo vtranslate('LBL_ADD_WIDGET');?>
 </strong> &nbsp;&nbsp;
 					<i class="caret"></i>

@@ -140,7 +140,7 @@ $( document ).ready(function() {
         </div>
         <div class="tableFixHead">
 			<tr>
-				<th class="NoBackGround" colspan="{$PickListValues|@count + 2}">
+				<th class="NoBackGround" colspan="{$PickListValues|php7_count + 2}">
 					<h5>{$REPORT_LABEL}</h1>
 				</th>
 			</tr>
@@ -165,7 +165,7 @@ $( document ).ready(function() {
 	                {foreach item=INNER_VALUE key=INNER_KEY from=$NAME_FIELD name=foo}
 	                    <tr>
 	                        {if $smarty.foreach.foo.first}
-	                            <td colspan="{(($PickListValues|@count) * 3)  + 2}" style="font-weight: 900" class="NoBackGround">
+	                            <td colspan="{(($PickListValues|php7_count) * 3)  + 2}" style="font-weight: 900" class="NoBackGround">
 	                                {$KEY_FIELD}
 	                            </td>
 	                        {/if}

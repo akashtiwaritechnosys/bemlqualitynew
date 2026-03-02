@@ -10,19 +10,19 @@
 ********************************************************************************/
 -->*}
 {strip}
-    <div class="col-sm-6 col-lg-6 col-md-6">
+    <div class="col-sm-6 col-lg-5 col-md-6">
         <div class="record-header clearfix">
                 {assign var=IMAGE_DETAILS value=$RECORD->getImageDetails()}
-            <div class="recordImage bgproducts app-{$SELECTED_MENU_CATEGORY}" {if $IMAGE_DETAILS|@count gt 1}style = "display:block"{/if}>
+            <div class="recordImage bgproducts app-{(isset($SELECTED_MENU_CATEGORY)) ? $SELECTED_MENU_CATEGORY : ''}" {if $IMAGE_DETAILS|php7_count gt 1}style = "display:block"{/if}>
                 {foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
 	               {if !empty($IMAGE_INFO.url)}
-	                {if $IMAGE_DETAILS|@count eq 1}
+	                {if $IMAGE_DETAILS|php7_count eq 1}
 	                    <img src="{$IMAGE_INFO.url}" alt="{$IMAGE_INFO.orgname}" title="{$IMAGE_INFO.orgname}" width="100%" height="100%" align="left"><br>
-	                {else if $IMAGE_DETAILS|@count eq 2}
+	                {else if $IMAGE_DETAILS|php7_count eq 2}
 	                    <span><img src="{$IMAGE_INFO.url}" alt="{$IMAGE_INFO.orgname}" title="{$IMAGE_INFO.orgname}" width="50%" height="100%" align="left"></span>
-	                {else if $IMAGE_DETAILS|@count eq 3}
+	                {else if $IMAGE_DETAILS|php7_count eq 3}
 	                    <span><img src="{$IMAGE_INFO.url}" alt="{$IMAGE_INFO.orgname}" title="{$IMAGE_INFO.orgname}" {if $ITER eq 0 or $ITER eq 1}width="50%" height = "50%"{/if}{if $ITER eq 2}width="100%" height="50%"{/if} align="left"></span>
-	                {else if $IMAGE_DETAILS|@count eq 4 or $IMAGE_DETAILS|@count gt 4}
+	                {else if $IMAGE_DETAILS|php7_count eq 4 or $IMAGE_DETAILS|php7_count gt 4}
 	                    {if $ITER gt 3}{break}{/if}
 	                    <span><img src="{$IMAGE_INFO.url}" alt="{$IMAGE_INFO.orgname}" title="{$IMAGE_INFO.orgname}"width="50%" height="50%" align="left"></span>
 	                {/if}
@@ -37,16 +37,16 @@
 
             <div class="recordBasicInfo">
                 <div class="info-row">
-                    <h4>
-                        <span class="recordLabel pushDown" title="{$RECORD->getName()}">
+                    <div>
+                        <div class="recordLabel pushDown" title="{$RECORD->getName()}">
                             {foreach item=NAME_FIELD from=$MODULE_MODEL->getNameFields()}
                                 {assign var=FIELD_MODEL value=$MODULE_MODEL->getField($NAME_FIELD)}
                                 {if $FIELD_MODEL->getPermissions()}
-                                    <span class="{$NAME_FIELD}">{$RECORD->get($NAME_FIELD)}</span>&nbsp;
+                                    <h4 class="{$NAME_FIELD}">{$RECORD->get($NAME_FIELD)}</h4>
                                 {/if}
                             {/foreach}
-                        </span>
-                    </h4>
+                        </div>
+                    </div>
                 </div>
                 {include file="DetailViewHeaderFieldsView.tpl"|vtemplate_path:$MODULE}
                 

@@ -1,3 +1,12 @@
+/*+**********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ ************************************************************************************/
+
 jQuery.Class('Install_Index_Js', {}, {
 
 	registerEventForStep3: function () {
@@ -64,7 +73,7 @@ jQuery.Class('Install_Index_Js', {}, {
 		});
 
 		jQuery('input[name="password"]').on('blur', function (e) {
-			var retypePassword = jQuery('input[name="retype_password"]');
+                        var retypePassword = jQuery('input[name="retype_password"]');
 			if (retypePassword.val() != '' && retypePassword.val() !== jQuery(e.currentTarget).val()) {
 				jQuery('#passwordError').html('Please re-enter passwords.  The \"Password\" and \"Re-type password\" values do not match.');
 			} else {
@@ -105,6 +114,13 @@ jQuery.Class('Install_Index_Js', {}, {
 				error = true;
 			}
 
+                        var passwordField = jQuery('input[name="password"]');
+                        if(passwordField.val() != ''){
+                            if(!vtUtils.isPasswordStrong(passwordField.val())) {
+                                    error = true;
+                                    var passwordNotStrong = true;
+                            }
+                        }
 			var emailField = jQuery('input[name="admin_email"]');
 			var regex = /^[_/a-zA-Z0-9*]+([!"#$%&'()*+,./:;<=>?\^_`{|}~-]?[a-zA-Z0-9/_/-])*@[a-zA-Z0-9]+([\_\-\.]?[a-zA-Z0-9]+)*\.([\-\_]?[a-zA-Z0-9])+(\.?[a-zA-Z0-9]+)?$/;
 			if (!regex.test(emailField.val()) && emailField.val() != '') {
@@ -124,7 +140,16 @@ jQuery.Class('Install_Index_Js', {}, {
 							'Warning! Invalid email address.' +
 							'</div>' +
 							'</div>';
-				} else {
+				} else if(passwordNotStrong){
+                                        content = '<div class="col-sm-12">' +
+							'<div class="alert errorMessageContent">' +
+							'<button class="close" data-dismiss="alert" type="button">x</button>' +
+							'To keep your data safe, we suggest that you use a strong password <br>'+
+                                                        '<ul> <li>Password should be at least 8 characters long </li> <li>Include at least one number </li><li>Include at least one lowercase alphabet </li> <li>Include at least one uppercase alphabet </li>'+
+                                                        '<li>Include at least one special character in the password </li> </ul>' +
+							'</div>' +
+							'</div>';
+                                }else {
 					content = '<div class="col-sm-12">' +
 							'<div class="alert errorMessageContent">' +
 							'<button class="close" data-dismiss="alert" type="button">x</button>' +
@@ -153,6 +178,16 @@ jQuery.Class('Install_Index_Js', {}, {
 
 	registerEventForStep6: function () {
 		jQuery('input[name="step7"]').on('click', function () {
+			var username = jQuery('input[name="myname"]').val();
+			if (username.length < 1) {
+				alert('Please enter your name.');
+				return;
+			}
+			var email = jQuery('input[name="myemail"]').val();
+			if (email.length < 1) {
+				alert('Please enter your email.');
+				return;
+			}
 			var industry = jQuery('select[name="industry"]').val();
 			if (industry.length < 1) {
 				alert('Please select appropriate industry option.');

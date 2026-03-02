@@ -28,6 +28,7 @@
                     </button>
                 {elseif $EXTENSION->isUpgradable()}
                     <input type="hidden" name="moduleAction" value="Upgrade"/>
+                    <input type="hidden" name="moduleMessage" value="{$EXTENSION->getUpdateMessage()}"/>
                     <button class="showChangeLog isUpdateBtn btn btn-success margin0px {if $IS_AUTH}authenticated {else} loginRequired{/if}">
                         {vtranslate('LBL_UPDATE', $QUALIFIED_MODULE)}
                     </button>
@@ -36,7 +37,7 @@
         </span>
         {if $MODULE_MODEL}
             {assign var=SETTINGS_LINKS value=$MODULE_MODEL->getSettingLinks()}
-            {if (count($SETTINGS_LINKS) > 0)}
+            {if (php7_count($SETTINGS_LINKS) > 0)}
                 <span class="btn-group pull-right {if !$MODULE_MODEL->isActive()}hide{/if}">
                     <button class="btn btn-default btn dropdown-toggle unpin hiden " data-toggle="dropdown">
                         {vtranslate('LBL_SETTINGS', $QUALIFIED_MODULE)}&nbsp;<i class="caret"></i>

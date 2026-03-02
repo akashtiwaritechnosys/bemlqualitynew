@@ -46,9 +46,9 @@
     <div class='modal-overlay-footer border1px clearfix'>
         <div class="row clearfix">
             <div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                <button  name="cancel" value="{'LBL_CANCEL_IMPORT'|@vtranslate:$MODULE}" class="btn btn-lg btn-soft-danger"
+                <button  name="cancel" value="{'LBL_CANCEL_IMPORT'|@vtranslate:$MODULE}" class="btn btn-lg btn-danger"
                          onclick="Vtiger_Import_Js.cancelImport('index.php?module={$FOR_MODULE}&view=Import&mode=cancelImport&import_id={$IMPORT_ID}')">{'LBL_CANCEL_IMPORT'|@vtranslate:$MODULE}</button>
-                <button class="btn btn-soft-success btn-lg" name="ok" onclick="Vtiger_Import_Js.scheduleImport('index.php?module={$FOR_MODULE}&view=Import')">{'LBL_OK_BUTTON_LABEL'|@vtranslate:$MODULE}</button> 
+                <button class="btn btn-submit btn-lg" name="ok" onclick="Vtiger_Import_Js.scheduleImport('index.php?module={$FOR_MODULE}&view=Import')">{'LBL_OK_BUTTON_LABEL'|@vtranslate:$MODULE}</button> 
             </div>
         </div>
     </div>

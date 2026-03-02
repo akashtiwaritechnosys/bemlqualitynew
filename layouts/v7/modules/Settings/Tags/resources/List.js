@@ -1,3 +1,12 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
 Settings_Vtiger_List_Js('Settings_Tags_List_Js',{
     triggerDelete : function(url) {
         var instance = app.controller();
@@ -73,7 +82,7 @@ Settings_Vtiger_List_Js('Settings_Tags_List_Js',{
         var editTagContainer = this.getEditTagContainer();
         editTagContainer.find('[name="id"]').val(tagInfo.id);
 
-        editTagContainer.find('[name="tagName"]').val(tagInfo.tag);
+        editTagContainer.find('[name="tagName"]').val(app.helper.getDecodedValue(tagInfo.tag));
         if(tagInfo.visibility == "public") {
             editTagContainer.find('[type="checkbox"]').prop('checked',true);
         }else{

@@ -15,19 +15,18 @@
             {assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
             <div class="contents ">
                 <div class="clearfix">
-                    <h4 class="pull-left">{vtranslate('LBL_CONFIG_EDITOR', $QUALIFIED_MODULE)}</h4>
+                    {*<h4 class="pull-left configuration-editor">{vtranslate('LBL_CONFIG_EDITOR', $QUALIFIED_MODULE)}</h4>*}
                     <div class="btn-group pull-right">
                         <button class="btn btn-default editButton" data-url='{$MODEL->getEditViewUrl()}' type="button" title="{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}">{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}</button>
                     </div>
                 </div>
                 <hr>
-                <br>
                 <div class="detailViewInfo">
                     {assign var=FIELD_DATA value=$MODEL->getViewableData()}
                     {foreach key=FIELD_NAME item=FIELD_DETAILS from=$MODEL->getEditableFields()}
-                        <div class="row form-group"><div class="col-lg-4 col-md-4 col-sm-4 fieldLabel"><label>{if $FIELD_NAME == 'upload_maxsize'}{if $FIELD_DATA[$FIELD_NAME] gt 5}{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE,$FIELD_DATA[$FIELD_NAME])}{else}{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE,5)}{/if}{else}{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}{/if}</label></div>
-                            <div  class="col-lg-8 col-md-8 col-sm-8 fieldValue break-word">
-                                <div>
+                        <div class="row form-group"><div class="col-lg-4 col-md-6 col-sm-6 fieldLabel"><label>{if $FIELD_NAME == 'upload_maxsize'}{if $FIELD_DATA[$FIELD_NAME] gt 5}{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE,$FIELD_DATA[$FIELD_NAME])}{else}{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE,5)}{/if}{else}{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}{/if}</label></div>
+                            <div  class="col-lg-8 col-md-6 col-sm-6 fieldValue break-word">
+                                <span>
                                     {if $FIELD_DETAILS['fieldType'] == 'checkbox'}
                                         {vtranslate($FIELD_DATA[$FIELD_NAME], $QUALIFIED_MODULE)}
                                         {if $FIELD_NAME == 'email_tracking'}
@@ -42,7 +41,7 @@
                                     {if $FIELD_NAME == 'upload_maxsize'}
                                         &nbsp;{vtranslate('LBL_MB', $QUALIFIED_MODULE)}
                                     {/if}
-                                </div>
+                                </span>
                             </div>
                         </div>
                     {/foreach}

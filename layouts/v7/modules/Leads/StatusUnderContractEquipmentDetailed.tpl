@@ -25,7 +25,7 @@
         {include file="exports.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
         <table id="data_table">
             <tr>
-                <th class="NoBackGround" colspan="{$PickListValues|@count + 2}">
+                <th class="NoBackGround" colspan="{$PickListValues|php7_count + 2}">
                     <h5>{$REPORT_LABEL}</h1>
                 </th>
             </tr>
@@ -53,7 +53,7 @@
                 </tr>
             {/foreach}
             <tr>
-                <th class="NoBackGround" colspan="{($headers|@count)}">
+                <th class="NoBackGround" colspan="{($headers|php7_count)}">
                     <b style="font-weight: 900">
                         RECOMMISSIONING DETAILS
                     </b>

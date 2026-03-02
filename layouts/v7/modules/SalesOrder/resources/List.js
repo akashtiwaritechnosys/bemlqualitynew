@@ -1,36 +1,10 @@
-Inventory_List_Js("SalesOrder_List_Js", {
-    syncToSAPForSettingsMaster: function () {
-        let self = this;
-        var message = "Are You want To Sync To Sap Now To Get Settings Data?";
-        app.helper.showConfirmationBox({ 'message': message }).then(function (e) {
-            app.helper.showProgress();
-            self.getSAPAPICall().then(
-                function (data) {
-                    app.helper.hideProgress();
-                },
-                function (error, err) {
-                    app.helper.hideProgress();
-                }
-            );
-        });
-    },
-    getSAPAPICall: function () {
-        var aDeferred = jQuery.Deferred();
-        var url = "module=SalesOrder&action=SyncMasterData";
-        AppConnector.request(url).then(
-            function (data) {
-                if (data['success']) {
-                    aDeferred.resolve(data);
-                } else {
-                    aDeferred.reject(data['message']);
-                }
-            },
-            function (error) {
-                aDeferred.reject();
-            }
-        )
-        return aDeferred.promise();
-    },
-}, {
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 
-});
+Inventory_List_Js("SalesOrder_List_Js",{},{});

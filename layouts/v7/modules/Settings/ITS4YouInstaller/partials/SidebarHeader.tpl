@@ -14,10 +14,10 @@
 'TOOLS'        => 'fa-wrench'
 ]}
 
-<div class="col-sm-12 col-xs-12 app-indicator-icon-container extensionstore app-MARKETING">
+{*<div class="col-sm-12 col-xs-12 app-indicator-icon-container extensionstore app-MARKETING">
     <div class="row" title="{vtranslate('LBL_EXTENSION_STORE', 'Settings:$QUALIFIED_MODULE')}">
         <span class="app-indicator-icon cursorPointer fa fa-shopping-cart"></span>
     </div>
-</div>
+</div>*}
 
 {include file="modules/Vtiger/partials/SidebarAppMenu.tpl"}

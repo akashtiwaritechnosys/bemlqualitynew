@@ -13,10 +13,10 @@
 	<div class="row">
         <div class="col-lg-9">
             <div class="row">
-                <div class="col-lg-2" style="position:relative;top:4px;padding-right: 0px;">
-                    {vtranslate('LBL_MODULES_TO_CREATE_RECORD',$QUALIFIED_MODULE)} <span class="redColor">*</span>
+                <div class="col-lg-3" style="padding-right: 0px;">
+                    <label>{vtranslate('LBL_MODULES_TO_CREATE_RECORD',$QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-5 site-select" style="padding-left:0px;">
                     {assign var=RELATED_MODULES_INFO value=$WORKFLOW_MODEL->getDependentModules()}
                     {assign var=RELATED_MODULES value=$RELATED_MODULES_INFO|array_keys}
                     {assign var=RELATED_MODULE_MODEL_NAME value=$TASK_OBJECT->entity_type}

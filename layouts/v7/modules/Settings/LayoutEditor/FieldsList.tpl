@@ -23,7 +23,7 @@
 		<div class="col-sm-6">
 			{if $IS_SORTABLE}
 				<span class="pull-right">
-					<button class="btn btn-success saveFieldSequence" type="button" style="opacity:0;margin-right:0px;">
+					<button class="btn btn-submit saveFieldSequence" type="button" style="opacity:0;margin-right:0px;">
 						{vtranslate('LBL_SAVE_LAYOUT', $QUALIFIED_MODULE)}
 					</button>
 				</span>
@@ -40,32 +40,39 @@
 					{if $BLOCK_LABEL_KEY neq 'LBL_INVITE_USER_BLOCK'}
 						{$ALL_BLOCK_LABELS[$BLOCK_ID] = $BLOCK_MODEL}
 					{/if}
-					<div id="block_{$BLOCK_ID}" class="editFieldsTable block_{$BLOCK_ID} marginBottom10px border1px {if $IS_BLOCK_SORTABLE} blockSortable{/if}" data-block-id="{$BLOCK_ID}" data-sequence="{$BLOCK_MODEL->get('sequence')}" style="background: white;"
+					<div id="block_{$BLOCK_ID}" class="editFieldsTable edit-layoutfield-table block_{$BLOCK_ID} marginBottom10px {if $IS_BLOCK_SORTABLE} blockSortable{/if}" data-block-id="{$BLOCK_ID}" data-sequence="{$BLOCK_MODEL->get('sequence')}"
 						 data-custom-fields-count="{$BLOCK_MODEL->getCustomFieldsCount()}">
 						<div class="col-sm-12">
 							<div class="layoutBlockHeader row">
-								<div class="blockLabel col-sm-3 padding10 marginLeftZero" style="word-break: break-all;">
+								<div class="blockLabel col-sm-6 padding10 marginLeftZero" style="word-break: break-all; display:flex; align-items:center;">
 									{if $IS_BLOCK_SORTABLE}
 										<img class="cursorPointerMove" src="{vimage_path('drag.png')}" />&nbsp;&nbsp;
 									{/if}
 									<strong class="translatedBlockLabel">{vtranslate($BLOCK_LABEL_KEY, $SELECTED_MODULE_NAME)}</strong>
 								</div>
-								<div class="col-sm-9 padding10 marginLeftZero">
+
+								<div class="col-sm-6 padding10">
+									<span class="collapseblock-btn pull-right">
+										<i class="fa fa-info-circle" title="{vtranslate('LBL_COLLAPSE_BLOCK_DETAIL_VIEW', $QUALIFIED_MODULE)}"></i>&nbsp; {vtranslate('LBL_COLLAPSE_BLOCK', $QUALIFIED_MODULE)}&nbsp;
+										<input style="opacity: 0;" type="checkbox" 
+												{if $BLOCK_MODEL->isHidden()} checked value='0' {else} value='1' {/if} class ='cursorPointer bootstrap-switch' name="collapseBlock" 
+												data-on-text="{vtranslate('LBL_YES', $QUALIFIED_MODULE)}" data-off-text="{vtranslate('LBL_NO', $QUALIFIED_MODULE)}" data-on-color="primary" data-block-id="{$BLOCK_MODEL->get('id')}"/>
+									</span>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-12 padding10 marginLeftZero">
 									<div class="blockActions" style="float:right !important;">
-										<span>
-											<i class="fa fa-info-circle" title="{vtranslate('LBL_COLLAPSE_BLOCK_DETAIL_VIEW', $QUALIFIED_MODULE)}"></i>&nbsp; {vtranslate('LBL_COLLAPSE_BLOCK', $QUALIFIED_MODULE)}&nbsp;
-											<input style="opacity: 0;" type="checkbox" 
-													{if $BLOCK_MODEL->isHidden()} checked value='0' {else} value='1' {/if} class ='cursorPointer bootstrap-switch' name="collapseBlock" 
-													data-on-text="{vtranslate('LBL_YES', $QUALIFIED_MODULE)}" data-off-text="{vtranslate('LBL_NO', $QUALIFIED_MODULE)}" data-on-color="primary" data-block-id="{$BLOCK_MODEL->get('id')}"/>
-										</span>
-										&nbsp;
+										
+								
 										{if $BLOCK_MODEL->isAddCustomFieldEnabled()}
 											<button class="btn btn-default addButton btn-sm addCustomField" type="button">
 												<i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD_CUSTOM_FIELD', $QUALIFIED_MODULE)}
-											</button>&nbsp;&nbsp;
+											</button>
 										{/if}
 										{if $BLOCK_MODEL->isActionsAllowed()}
-											<button class="inActiveFields addButton btn btn-default btn-sm">{vtranslate('LBL_SHOW_HIDDEN_FIELDS', $QUALIFIED_MODULE)}</button>&nbsp;&nbsp;
+											<button class="inActiveFields addButton btn btn-default btn-sm">{vtranslate('LBL_SHOW_HIDDEN_FIELDS', $QUALIFIED_MODULE)}</button>
 											{if $BLOCK_MODEL->isCustomized()}
 												<button class="deleteCustomBlock addButton btn btn-default btn-sm">{vtranslate('LBL_DELETE_CUSTOM_BLOCK', $QUALIFIED_MODULE)}</button>
 											{/if}
@@ -73,6 +80,7 @@
 									</div>
 								</div>
 							</div>
+
 						</div>
 						{assign var=IS_FIELDS_SORTABLE value=$SELECTED_MODULE_MODEL->isFieldsSortableAllowed($BLOCK_LABEL_KEY)}
 						<div class="blockFieldsList {if $IS_FIELDS_SORTABLE} blockFieldsSortable {/if} row">
@@ -80,35 +88,36 @@
 								{foreach item=FIELD_MODEL from=$FIELDS_LIST name=fieldlist}
 									{assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
 									{if $smarty.foreach.fieldlist.index % 2 eq 0}
-										<li>
-											<div class="row border1px">
-												<div class="col-sm-4">
+										<li class="sortable-list">
+											<div class="sortable-block">
+												<div class="">
 													<div class="opacity editFields marginLeftZero" data-block-id="{$BLOCK_ID}" data-field-id="{$FIELD_MODEL->get('id')}" 
 														 data-sequence="{$FIELD_MODEL->get('sequence')}" data-field-name="{$FIELD_MODEL->get('name')}" 
 														 >
-														<div class="row">
+														<div class="edit-header">
 															{assign var=IS_MANDATORY value=$FIELD_MODEL->isMandatory()}
-															<span class="col-sm-1">&nbsp;
+															
+															<div class="">
+																<div class="fieldLabelContainer ">
+																	<h6 class="fieldLabel">
+																		{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}
+																		&nbsp;{if $IS_MANDATORY}<span class="redColor">*</span>{/if}
+																	</h6>
+																	<p class="field-type">
+																		{vtranslate($FIELD_MODEL->getFieldDataTypeLabel(),$QUALIFIED_MODULE)}
+																	</p>
+																</div>
+															</div>
+															<div class="">
 																{if $IS_FIELDS_SORTABLE}
 																	<img src="{vimage_path('drag.png')}" class="cursorPointerMove" border="0" title="{vtranslate('LBL_DRAG',$QUALIFIED_MODULE)}"/>
 																{/if}
-															</span>
-															<div class="col-sm-9" style="word-wrap: break-word;">
-																<div class="fieldLabelContainer row">
-																	<span class="fieldLabel">
-																		<b>{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}</b>
-																		&nbsp;{if $IS_MANDATORY}<span class="redColor">*</span>{/if}
-																	</span><br>
-																	<span class="pull-right" style="opacity:0.6;">
-																		{vtranslate($FIELD_MODEL->getFieldDataTypeLabel(),$QUALIFIED_MODULE)}
-																	</span>
-																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-8 fieldPropertyContainer">
-													<div class="row " style="padding: 10px 0px;">
+												<div class="fieldPropertyContainer">
+													<div class="row">
 														{assign var=M_FIELD_TITLE value={vtranslate('LBL_MAKE_THIS_FIELD', $QUALIFIED_MODULE, vtranslate('LBL_PROP_MANDATORY',$QUALIFIED_MODULE))}}
 														{assign var=Q_FIELD_TITLE value={vtranslate('LBL_SHOW_THIS_FIELD_IN', $QUALIFIED_MODULE, vtranslate('LBL_QUICK_CREATE',$QUALIFIED_MODULE))}}
 														{assign var=M_E_FIELD_TITLE value={vtranslate('LBL_SHOW_THIS_FIELD_IN', $QUALIFIED_MODULE, vtranslate('LBL_MASS_EDIT',$QUALIFIED_MODULE))}}
@@ -121,50 +130,51 @@
 														{assign var=NOT_H_FIELD_TITLE value={vtranslate('LBL_HIDE_THIS_FIELD_IN', $QUALIFIED_MODULE, vtranslate('LBL_DETAIL_HEADER',$QUALIFIED_MODULE))}}
 														{assign var=IS_MANDATORY value=$FIELD_MODEL->isMandatory()}
 														<div class="fieldProperties col-sm-10" data-field-id="{$FIELD_MODEL->get('id')}">
-															<span class="mandatory switch text-capitalize {if (!$IS_MANDATORY)}disabled{/if} {if $FIELD_MODEL->isMandatoryOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
+														<div class="row">
+															<div class="col-sm-6 edit-field mandatory switch text-capitalize {if (!$IS_MANDATORY)}disabled{/if} {if $FIELD_MODEL->isMandatoryOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_MANDATORY} title="{$NOT_M_FIELD_TITLE}" {else} title="{$M_FIELD_TITLE}" {/if}>
 																<i class="fa fa-exclamation-circle" data-name="mandatory" 
 																	data-enable-value="M" data-disable-value="O"
 																	{if $FIELD_MODEL->isMandatoryOptionDisabled()}readonly="readonly"{/if}
 																	></i>&nbsp;{vtranslate('LBL_PROP_MANDATORY',$QUALIFIED_MODULE)}
-															</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															</div>
 															{assign var=IS_QUICK_EDIT_ENABLED value=$FIELD_MODEL->isQuickCreateEnabled()}
-															<span class="quickCreate switch {if (!$IS_QUICK_EDIT_ENABLED)}disabled{/if} 
+															<div class="col-sm-6 edit-field quickCreate switch {if (!$IS_QUICK_EDIT_ENABLED)}disabled{/if} 
 																	{if $FIELD_MODEL->isQuickCreateOptionDisabled() || $IS_MANDATORY } cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_QUICK_EDIT_ENABLED} title="{$NOT_Q_FIELD_TITLE}" {else} title="{$Q_FIELD_TITLE}" {/if}>
 																<i class="fa fa-plus" data-name="quickcreate" 
 																	data-enable-value="2" data-disable-value="1"
 																	{if $FIELD_MODEL->isQuickCreateOptionDisabled() || $IS_MANDATORY }readonly="readonly"{/if}
 																	title="{vtranslate('LBL_QUICK_CREATE',$QUALIFIED_MODULE)}"></i>&nbsp;{vtranslate('LBL_QUICK_CREATE',$QUALIFIED_MODULE)}
-															</span><br><br>
+															</div>
 															{assign var=IS_MASS_EDIT_ENABLED value=$FIELD_MODEL->isMassEditable()}
-															<span class="massEdit switch {if (!$IS_MASS_EDIT_ENABLED)} disabled {/if} 
+															<div class="col-sm-6 edit-field massEdit switch {if (!$IS_MASS_EDIT_ENABLED)} disabled {/if} 
 																	{if $FIELD_MODEL->isMassEditOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_MASS_EDIT_ENABLED} title="{$NOT_M_E_FIELD_TITLE}" {else} title="{$M_E_FIELD_TITLE}" {/if}>
 																<img src="{vimage_path('MassEdit.png')}" data-name="masseditable" 
 																	 data-enable-value="1" data-disable-value="2" title="{vtranslate('LBL_MASS_EDIT',$QUALIFIED_MODULE)}" 
 																	 {if $FIELD_MODEL->isMassEditOptionDisabled()}readonly="readonly"{/if} height=14 width=14 
 																	 />&nbsp;{vtranslate('LBL_MASS_EDIT',$QUALIFIED_MODULE)}
-															</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															</div>
 															{assign var=IS_HEADER_FIELD value=$FIELD_MODEL->isHeaderField()}
-															<span class="header switch {if (!$IS_HEADER_FIELD)} disabled {/if} 
+															<div class="col-sm-6 edit-field header switch {if (!$IS_HEADER_FIELD)} disabled {/if} 
 																	{if $FIELD_MODEL->isHeaderFieldOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_HEADER_FIELD} title="{$NOT_H_FIELD_TITLE}" {else} title="{$H_FIELD_TITLE}" {/if}>
 																<i class="fa fa-flag-o" data-name="headerfield" 
 																	data-enable-value="1" data-disable-value="0"
 																	{if $FIELD_MODEL->isHeaderFieldOptionDisabled()}readonly="readonly"{/if}
 																	title="{vtranslate('LBL_HEADER',$QUALIFIED_MODULE)}"></i>&nbsp;{vtranslate('LBL_HEADER',$QUALIFIED_MODULE)}
-															</span><br><br>
+															</div>
 															{assign var=IS_SUMMARY_VIEW_ENABLED value=$FIELD_MODEL->isSummaryField()}
-															<span class="summary switch {if (!$IS_SUMMARY_VIEW_ENABLED)} disabled {/if} 
+															<div class="col-sm-6 edit-field summary switch {if (!$IS_SUMMARY_VIEW_ENABLED)} disabled {/if} 
 																	{if $FIELD_MODEL->isSummaryFieldOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_SUMMARY_VIEW_ENABLED} title="{$NOT_S_FIELD_TITLE}" {else} title="{$S_FIELD_TITLE}" {/if}>
 																<i class="fa fa-key" data-name="summaryfield" 
 																	data-enable-value="1" data-disable-value="0"
 																	{if $FIELD_MODEL->isSummaryFieldOptionDisabled()}readonly="readonly"{/if}
 																	title="{vtranslate('LBL_KEY_FIELD',$QUALIFIED_MODULE)}"></i>&nbsp;{vtranslate('LBL_KEY_FIELD',$QUALIFIED_MODULE)}
-															</span><br><br>
-															<div class="defaultValue col-sm-12 {if !$FIELD_MODEL->hasDefaultValue()}disabled{/if} 
+															</div>
+															<div class="defaultValue col-sm-6 edit-field {if !$FIELD_MODEL->hasDefaultValue()}disabled{/if} 
 																 {if $FIELD_MODEL->isDefaultValueOptionDisabled()} cursorPointerNotAllowed {/if}">
 																{assign var=DEFAULT_VALUE value=$FIELD_MODEL->getDefaultFieldValueToViewInV7FieldsLayOut()}
 																{if $DEFAULT_VALUE}
@@ -174,7 +184,9 @@
 																				<span><img src="{vimage_path('DefaultValue.png')}"
 																							{if $FIELD_MODEL->isDefaultValueOptionDisabled()} readonly="readonly" {/if}
 																							{if $FIELD_MODEL->hasDefaultValue()} title="{$DEFAULT_VALUE}" {/if}
-																							data-name="defaultValueField" height=14 width=14 /></span>&nbsp;
+																							data-name="defaultValueField" height=14 width=14 />
+																							
+																							</span>&nbsp;
 																					{if $DEFAULT_FIELD_VALUE}
 																						{assign var=DEFAULT_FIELD_NAME value=$DEFAULT_FIELD_NAME|upper}
 																					<span>{vtranslate('LBL_DEFAULT_VALUE',$QUALIFIED_MODULE)}
@@ -208,6 +220,7 @@
 																		<span>{vtranslate('LBL_DEFAULT_VALUE_NOT_SET',$QUALIFIED_MODULE)}</span>
 																	</div>
 																{/if}
+															</div>
 															</div>
 														</div>
 														<span class="col-sm-2 actions">
@@ -247,15 +260,15 @@
 										</li>
 									{/if}
 								{/foreach}
-								{if count($FIELDS_LIST)%2 eq 0 }
+								{if php7_count($FIELDS_LIST)%2 eq 0 }
 									{if $BLOCK_MODEL->isAddCustomFieldEnabled()}
-										<li class="row dummyRow">
-											<span class="dragUiText col-sm-8">
+										<li class="dummyRow">
+											<p class="dragUiText">
 												{vtranslate('LBL_ADD_NEW_FIELD_HERE',$QUALIFIED_MODULE)}
-											</span>
-											<span class="col-sm-4" style="margin-top: 7%;margin-left: -15%;">
+											</p>
+											<div class="">
 												<button class="btn btn-default btn-sm addButton"><i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD',$QUALIFIED_MODULE)}</button>
-											</span>
+											</div>
 										</li>
 									{/if}
 								{/if}
@@ -264,81 +277,84 @@
 								{foreach item=FIELD_MODEL from=$FIELDS_LIST name=fieldlist1}
 									{assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
 									{if $smarty.foreach.fieldlist1.index % 2 neq 0}
-										<li>
-											<div class="row border1px">
-												<div class="col-sm-4">
+										<li class="sortable-list">
+											<div class="sortable-block">
+												<div class="">
 													<div class="opacity editFields marginLeftZero" data-block-id="{$BLOCK_ID}" data-field-id="{$FIELD_MODEL->get('id')}" 
 														 data-sequence="{$FIELD_MODEL->get('sequence')}" data-field-name="{$FIELD_MODEL->get('name')}"
 														 >
-														<div class="row" >
+														<div class="edit-header">
 															{assign var=IS_MANDATORY value=$FIELD_MODEL->isMandatory()}
-															<span class="col-sm-1">&nbsp;
+															
+															<div class="">
+																<div class="fieldLabelContainer">
+																	<h6 class="fieldLabel">
+																	{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}
+																		{if $IS_MANDATORY}&nbsp;<span class="redColor">*</span>{/if}
+																	</h6>
+																	<p class="field-type">
+																		{vtranslate($FIELD_MODEL->getFieldDataTypeLabel(),$QUALIFIED_MODULE)}
+																	</p>
+																</div>
+															</div>
+															<div class="">
 																{if $FIELD_MODEL->isEditable() && $IS_FIELDS_SORTABLE}
 																	<img src="{vimage_path('drag.png')}" class="cursorPointerMove" border="0" title="{vtranslate('LBL_DRAG',$QUALIFIED_MODULE)}"/>
 																{/if}
-															</span>
-															<div class="col-sm-9" style="word-wrap: break-word;">
-																<div class="fieldLabelContainer row">
-																	<span class="fieldLabel">
-																		<b>{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}</b>
-																		{if $IS_MANDATORY}&nbsp;<span class="redColor">*</span>{/if}
-																	</span><br>
-																	<span class="pull-right" style="opacity:0.6;">
-																		{vtranslate($FIELD_MODEL->getFieldDataTypeLabel(),$QUALIFIED_MODULE)}
-																	</span>
-																</div>
 															</div>
+
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-8 fieldPropertyContainer">
-													<div class="row " style="padding: 10px 0px;">
+												<div class="fieldPropertyContainer">
+													<div class="row">
 														{assign var=IS_MANDATORY value=$FIELD_MODEL->isMandatory()}
 														<div class="fieldProperties col-sm-10" data-field-id="{$FIELD_MODEL->get('id')}">
-															<span class="mandatory switch text-capitalize {if (!$IS_MANDATORY)}disabled{/if} {if $FIELD_MODEL->isMandatoryOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
+														  <div class="row">
+															<div class="col-sm-6 edit-field mandatory switch text-capitalize {if (!$IS_MANDATORY)}disabled{/if} {if $FIELD_MODEL->isMandatoryOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_MANDATORY} title="{$NOT_M_FIELD_TITLE}" {else} title="{$M_FIELD_TITLE}" {/if}>
 																<i class="fa fa-exclamation-circle" data-name="mandatory" 
 																	data-enable-value="M" data-disable-value="O"
 																	{if $FIELD_MODEL->isMandatoryOptionDisabled()}readonly="readonly"{/if}
 																	></i>&nbsp;{vtranslate('LBL_PROP_MANDATORY',$QUALIFIED_MODULE)}
-															</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															</div>
 															{assign var=IS_QUICK_EDIT_ENABLED value=$FIELD_MODEL->isQuickCreateEnabled()}
-															<span class="quickCreate switch {if (!$IS_QUICK_EDIT_ENABLED)}disabled{/if} 
+															<div class="col-sm-6 edit-field quickCreate switch {if (!$IS_QUICK_EDIT_ENABLED)}disabled{/if} 
 																	{if $FIELD_MODEL->isQuickCreateOptionDisabled() || $IS_MANDATORY } cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_QUICK_EDIT_ENABLED} title="{$NOT_Q_FIELD_TITLE}" {else} title="{$Q_FIELD_TITLE}" {/if}>
 																<i class="fa fa-plus" data-name="quickcreate" 
 																	data-enable-value="2" data-disable-value="1"
 																	{if $FIELD_MODEL->isQuickCreateOptionDisabled() || $IS_MANDATORY }readonly="readonly"{/if}
 																	title="{vtranslate('LBL_QUICK_CREATE',$QUALIFIED_MODULE)}"></i>&nbsp;{vtranslate('LBL_QUICK_CREATE',$QUALIFIED_MODULE)}
-															</span><br><br>
+															</div>
 															{assign var=IS_MASS_EDIT_ENABLED value=$FIELD_MODEL->isMassEditable()}
-															<span class="massEdit switch {if (!$IS_MASS_EDIT_ENABLED)} disabled {/if} 
+															<div class="col-sm-6 edit-field massEdit switch {if (!$IS_MASS_EDIT_ENABLED)} disabled {/if} 
 																	{if $FIELD_MODEL->isMassEditOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_MASS_EDIT_ENABLED} title="{$NOT_M_E_FIELD_TITLE}" {else} title="{$M_E_FIELD_TITLE}" {/if}>
 																<img src="{vimage_path('MassEdit.png')}" data-name="masseditable" 
 																	 data-enable-value="1" data-disable-value="2" title="{vtranslate('LBL_MASS_EDIT',$QUALIFIED_MODULE)}" 
 																	 {if $FIELD_MODEL->isMassEditOptionDisabled()}readonly="readonly"{/if} height=14 width=14 
 																	 />&nbsp;{vtranslate('LBL_MASS_EDIT',$QUALIFIED_MODULE)}
-															</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															</div>
 															{assign var=IS_HEADER_FIELD value=$FIELD_MODEL->isHeaderField()}
-															<span class="header switch {if (!$IS_HEADER_FIELD)} disabled {/if} 
+															<div class="col-sm-6 edit-field header switch {if (!$IS_HEADER_FIELD)} disabled {/if} 
 																	{if $FIELD_MODEL->isHeaderFieldOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_HEADER_FIELD} title="{$NOT_H_FIELD_TITLE}" {else} title="{$H_FIELD_TITLE}" {/if}>
 																<i class="fa fa-flag-o" data-name="headerfield" 
 																	data-enable-value="1" data-disable-value="0"
 																	{if $FIELD_MODEL->isHeaderFieldOptionDisabled()}readonly="readonly"{/if}
 																	title="{vtranslate('LBL_HEADER',$QUALIFIED_MODULE)}"></i>&nbsp;{vtranslate('LBL_HEADER',$QUALIFIED_MODULE)}
-															</span><br><br>
+															</div>
 															{assign var=IS_SUMMARY_VIEW_ENABLED value=$FIELD_MODEL->isSummaryField()}
-															<span class="summary switch {if (!$IS_SUMMARY_VIEW_ENABLED)} disabled {/if} 
+															<div class="col-sm-6 edit-field summary switch {if (!$IS_SUMMARY_VIEW_ENABLED)} disabled {/if} 
 																	{if $FIELD_MODEL->isSummaryFieldOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer {/if}"
 																	data-toggle="tooltip" {if $IS_SUMMARY_VIEW_ENABLED} title="{$NOT_S_FIELD_TITLE}" {else} title="{$S_FIELD_TITLE}" {/if}>
 																<i class="fa fa-key" data-name="summaryfield" 
 																	data-enable-value="1" data-disable-value="0"
 																	{if $FIELD_MODEL->isSummaryFieldOptionDisabled()}readonly="readonly"{/if}
 																	title="{vtranslate('LBL_KEY_FIELD',$QUALIFIED_MODULE)}"></i>&nbsp;{vtranslate('LBL_KEY_FIELD',$QUALIFIED_MODULE)}
-															</span><br><br>
-															<div class="defaultValue col-sm-12 {if !$FIELD_MODEL->hasDefaultValue()}disabled{/if} 
+															</div>
+															<div class="defaultValue col-sm-6 edit-field {if !$FIELD_MODEL->hasDefaultValue()}disabled{/if} 
 																 {if $FIELD_MODEL->isDefaultValueOptionDisabled()} cursorPointerNotAllowed {/if}">
 																{assign var=DEFAULT_VALUE value=$FIELD_MODEL->getDefaultFieldValueToViewInV7FieldsLayOut()}
 																{if $DEFAULT_VALUE}
@@ -382,6 +398,7 @@
 																	</div>
 																{/if}
 															</div>
+														  </div>
 														</div>
 														<span class="col-sm-2 actions">
 															{if $FIELD_MODEL->isEditable()}
@@ -420,15 +437,15 @@
 										</li>
 									{/if}
 								{/foreach}
-								{if count($FIELDS_LIST)%2 neq 0 }
+								{if php7_count($FIELDS_LIST)%2 neq 0 }
 									{if $BLOCK_MODEL->isAddCustomFieldEnabled()}
-										<li class="row dummyRow">
-											<span class="dragUiText col-sm-8">
+										<li class="dummyRow">
+											<p class="dragUiText">
 												{vtranslate('LBL_ADD_NEW_FIELD_HERE',$QUALIFIED_MODULE)}
-											</span>
-											<span class="col-sm-4" style="margin-top: 7%;margin-left: -15%;">
+											</p>
+											<div class="">
 												<button class="btn btn-default btn-sm addButton"><i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD',$QUALIFIED_MODULE)}</button>
-											</span>
+											</div>
 										</li>
 									{/if}
 								{/if}
@@ -467,13 +484,13 @@
 		</div>
 		<div class="blockFieldsList row blockFieldsSortable">
 			<ul class="connectedSortable col-sm-6 ui-sortable"name="sortable1">
-				<li class="row dummyRow">
-					<span class="dragUiText col-sm-8">
+				<li class="dummyRow">
+					<p class="dragUiText">
 						{vtranslate('LBL_ADD_NEW_FIELD_HERE',$QUALIFIED_MODULE)}
-					</span>
-					<span class="col-sm-4" style="margin-top: 7%;margin-left: -15%;">
+					</p>
+					<div class="">
 						<button class="btn btn-default btn-sm addButton"><i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD',$QUALIFIED_MODULE)}</button>
-					</span>
+					</div>
 				</li>
 			</ul>
 			<ul class="connectedSortable col-sm-6 ui-sortable" name="sortable2"></ul>
@@ -504,7 +521,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-8 fieldPropertyContainer">
+			<div class="col-sm-88 fieldPropertyContainer">
 				<div class="row " style="padding:10px 0px">
 					<div class="fieldProperties col-sm-10" data-field-id="">
 						<span class="mandatory switch text-capitalize">
@@ -563,15 +580,15 @@
 						<span class="redColor">*</span>
 					</label>
 					<div class="controls col-sm-6">
-						<input type="text" name="label" class="col-sm-3 inputElement" data-rule-required='true' style='width: 75%'/>
+						<input type="text" name="label" class="inputElement" data-rule-required='true'/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label fieldLabel col-sm-5">
 						{vtranslate('LBL_ADD_AFTER', $QUALIFIED_MODULE)}
 					</label>
-					<div class="controls col-sm-6">
-						<select class="col-sm-9" name="beforeBlockId">
+					<div class="controls col-sm-6 site-select">
+						<select class="" name="beforeBlockId">
 							{foreach key=BLOCK_ID item=BLOCK_MODEL from=$ALL_BLOCK_LABELS}
 								<option value="{$BLOCK_ID}" data-label="{$BLOCK_MODEL->get('label')}">{vtranslate($BLOCK_MODEL->get('label'), $SELECTED_MODULE_NAME)}</option>
 							{/foreach}
@@ -605,7 +622,7 @@
 					<div class="pull-right cancelLinkContainer">
 						<a class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $QUALIFIED_MODULE)}</a>
 					</div>
-					<button class="btn btn-success" type="submit" name="reactivateButton">
+					<button class="btn btn-submit" type="submit" name="reactivateButton">
 						<strong>{vtranslate('LBL_REACTIVATE', $QUALIFIED_MODULE)}</strong>
 					</button>
 				</div>

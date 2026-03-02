@@ -55,7 +55,7 @@
             <div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
                 {if $CUSTOM_ACTIONS neq ''}
                     {foreach key=_LABEL item=_ACTION from=$CUSTOM_ACTIONS}
-                        <button name="{$_LABEL}" onclick="return Vtiger_Import_Js.clearSheduledImportData()" class="btn btn-soft-danger btn-lg">{$_LABEL|@vtranslate:$MODULE}</button>
+                        <button name="{$_LABEL}" onclick="return Vtiger_Import_Js.clearSheduledImportData()" class="btn btn-danger btn-lg">{$_LABEL|@vtranslate:$MODULE}</button>
                     {/foreach}
                 {/if}
             </div>

@@ -16,12 +16,12 @@
 		{else}
 			{assign var=TITLE value={vtranslate('LBL_EDIT_FIELD', $QUALIFIED_MODULE,vtranslate($FIELD_MODEL->get('label'),$SELECTED_MODULE_NAME))}}
 		{/if}
-		{include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$TITLE}
 		<div class="modal-content">
+		{include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$TITLE}
 			<form class="form-horizontal createCustomFieldForm">
 				<input type="hidden" name="fieldid" value="{$FIELD_MODEL->getId()}" />
-				<input type="hidden" name="addToBaseTable" value="{$ADD_TO_BASE_TABLE}" />
-				<input type="hidden" name="_source" value="{$SOURCE}" />
+				<input type="hidden" name="addToBaseTable" value="{(isset($ADD_TO_BASE_TABLE)) ? $ADD_TO_BASE_TABLE : ''}" />
+				<input type="hidden" name="_source" value="{(isset($SOURCE)) ? $SOURCE : ''}" />
 				<input type="hidden" name="fieldname" value="{$FIELD_MODEL->get('name')}" />
 				<input type="hidden" id="headerFieldsCount" value="{$HEADER_FIELDS_COUNT}" />
 				<div class="modal-body model-body-scrollenabled">
@@ -122,9 +122,12 @@
 							</label>
 							<div class="controls col-sm-7">
 								<select class="col-sm-6 relationModule" name="relationmodule[]" multiple data-rule-required='true'>
+								{if isset($FIELD_TYPE_INFO['Relation'])}
 									{foreach item=RELATION_MODULE_NAME from=$FIELD_TYPE_INFO['Relation']['relationModules']}
 										<option value="{$RELATION_MODULE_NAME}">{vtranslate($RELATION_MODULE_NAME,$RELATION_MODULE_NAME)}</option>
 									{/foreach}
+								{/if}
+									
 								</select>
 							</div>
 						</div>
@@ -141,7 +144,7 @@
 								<input type="hidden" name="presence" value="1"/>
 								<label class="checkbox">
 									<input type="checkbox" class ='cursorPointer bootstrap-switch' id="fieldPresence" name="presence" {if $FIELD_MODEL->isViewable()} checked {/if}
-										{if $FIELD_MODEL->isActiveOptionDisabled()} readonly="readonly" {/if} {if $FIELD_MODEL->isMandatory()} readonly="readonly" {/if}
+										{if $FIELD_MODEL->isActiveOptionDisabled()} optionDisabled = "true" readonly="readonly" {/if} {if $FIELD_MODEL->isMandatory()} readonly="readonly" {/if}
 										data-on-text="Yes" data-off-text="No" value="{$FIELD_MODEL->get('presence')}"/>
 								</label>
 							</div>
@@ -153,7 +156,7 @@
 						<div class="properties">
 							<div class="row">
 								<div class="form-group">
-									<label class="control-label fieldLabel col-sm-5">
+									<label class="control-label fieldLabel col-sm-7">
 										{vtranslate('LBL_ENABLE_OR_DISABLE_FIELD_PROP',$QUALIFIED_MODULE)}
 									</label>
 								</div>
@@ -211,7 +214,7 @@
 										<input type="hidden" name="headerfield" value="0"/>
 										<label class="checkbox" style="margin-left: 9%;">
 											<input type="checkbox" class="{if $FIELD_MODEL->isHeaderFieldOptionDisabled()} cursorPointerNotAllowed {else} cursorPointer{/if}" name="headerfield" value="1" {if $FIELD_MODEL->get('headerfield') eq '1'}checked="checked"{/if}
-												{if $FIELD_MODEL->isHeaderFieldOptionDisabled() || $IS_NAME_FIELD}readonly="readonly"{/if} />
+												{if $FIELD_MODEL->isHeaderFieldOptionDisabled() || isset($IS_NAME_FIELD) && $IS_NAME_FIELD}readonly="readonly"{/if} />
 										</label>
 									</div>
 								</div>

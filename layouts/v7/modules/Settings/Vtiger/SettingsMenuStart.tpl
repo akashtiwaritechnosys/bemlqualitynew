@@ -24,7 +24,7 @@
         <div class="modal-dialog">
         </div>
     </div>
-{if $FIELDS_INFO neq null}
+{if isset($FIELDS_INFO) && $FIELDS_INFO neq null}
     <script type="text/javascript">
         var uimeta = (function() {
             var fieldInfo  = {$FIELDS_INFO};
@@ -55,10 +55,10 @@
         })();
     </script>
 {/if}
-<div style="margin-top:30px" class="main-container clearfix">
+<div class="main-container clearfix">
 		{assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
         <div class="module-nav clearfix settingsNav" id="modnavigator">
-            <div class="hidden-xs hidden-sm height100Per">
+            <div class="hidden-xs hidden-sm ">
                 {include file="modules/Settings/Vtiger/Sidebar.tpl"}
             </div>
         </div>

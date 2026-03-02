@@ -10,7 +10,7 @@
 ********************************************************************************/
 -->*}
 {strip}
-   <div class="col-lg-6 col-md-6 col-sm-6">
+   <div class="col-lg-5 col-md-6 col-sm-6">
 	  <div class="record-header clearfix ">
 		 <div class="recordImage bgcontacts app-{$SELECTED_MENU_CATEGORY}">
 			{assign var=IMAGE_DETAILS value=$RECORD->getImageDetails()}
@@ -27,8 +27,8 @@
 		 </div>
 		 <div class="recordBasicInfo">
 			<div class="info-row">
-			   <h4>
-				  <span class="recordLabel  pushDown" title="{$RECORD->getDisplayValue('salutationtype')}&nbsp;{$RECORD->getName()}">
+			   <div>
+				  <div class="recordLabel  pushDown" title="{$RECORD->getDisplayValue('salutationtype')}&nbsp;{$RECORD->getName()}">
 					 {assign var=COUNTER value=0}
 					 {foreach item=NAME_FIELD from=$MODULE_MODEL->getNameFields()}
 						{assign var=FIELD_MODEL value=$MODULE_MODEL->getField($NAME_FIELD)}
@@ -42,13 +42,13 @@
 						   {if $COUNTER eq 0 && ($RECORD->get($NAME_FIELD))}&nbsp;{assign var=COUNTER value=$COUNTER+1}{/if}
 						{/if}
 					 {/foreach}
-				  </span>
-			   </h4>
+				  </div>
+			   </div>
 			</div>
 			{include file="DetailViewHeaderFieldsView.tpl"|vtemplate_path:$MODULE}
 			<div class="info-row">
 			   <i class="fa fa-map-marker"></i>&nbsp;
-			   <a class="showMap" href="javascript:void(0);" onclick='Vtiger_Index_Js.showMap(this);' data-module='{$RECORD->getModule()->getName()}' data-record='{$RECORD->getId()}'>{vtranslate('LBL_SHOW_MAP', $MODULE_NAME)}</a>
+			   <a class="showMap show-map" href="javascript:void(0);" onclick='Vtiger_Index_Js.showMap(this);' data-module='{$RECORD->getModule()->getName()}' data-record='{$RECORD->getId()}'>{vtranslate('LBL_SHOW_MAP', $MODULE_NAME)}</a>
 			</div>
 		 </div>
 	  </div>

@@ -13,7 +13,7 @@
     {include file="PicklistColorMap.tpl"|vtemplate_path:$MODULE}
     <div class="row">
         <div class="col-md-2">
-            {if !empty($LISTVIEW_ENTRIES)}<button class="select btn btn-default"><strong>{vtranslate('LBL_SELECT', $MODULE)}</strong></button>{/if}
+            {if !empty($LISTVIEW_ENTRIES)}<button class="select btn btn-default">{vtranslate('LBL_SELECT', $MODULE)}</button>{/if}
         </div>
     </div>
     <div class="row">
@@ -41,7 +41,7 @@
                 <input type="hidden" value="{Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($SEARCH_DETAILS))}" id="currentSearchParams" />
                 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
                 <div class="popupEntriesTableContainer">
-                    <table class="listview-table table-bordered listViewEntriesTable">
+                    <table class="listview-table listViewEntriesTable">
                         <thead>
                             <tr class="listViewHeaders">
                                 <th class="{$WIDTHTYPE}">
@@ -66,7 +66,7 @@
                         {if $MODULE_MODEL && $MODULE_MODEL->isQuickSearchEnabled()}
                             <tr class="searchRow">
                                 <td class="searchBtn">
-                                    <button class="btn btn-success" data-trigger="PopupListSearch">{vtranslate('LBL_SEARCH', $MODULE )}</button>
+                                    <button class="btn btn-submit" data-trigger="PopupListSearch">{vtranslate('LBL_SEARCH', $MODULE )}</button>
                                 </td>
                                 {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
                                     <td>
@@ -89,7 +89,7 @@
                                 </td>
                                 {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
                                     {assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
-                                    <td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}" title="{$RECORD_DATA[$LISTVIEW_HEADERNAME]}">
+                                    <td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}">
                                         {if $LISTVIEW_HEADER->isNameField() eq true or $LISTVIEW_HEADER->get('uitype') eq '4'}
                                             <a>{$LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME)}</a>
                                         {else}

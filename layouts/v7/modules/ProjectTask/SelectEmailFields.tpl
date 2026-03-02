@@ -20,10 +20,10 @@
                     <input type="hidden" name="viewname" value="{$VIEWNAME}" />
                     <input type="hidden" name="module" value="{$MODULE}"/>
                     <input type="hidden" name="view" value="ComposeEmail"/>
-                    <input type="hidden" name="search_key" value= "{$SEARCH_KEY}" />
+                    <input type="hidden" name="search_key" value="{if isset($SEARCH_KEY) && $SEARCH_KEY}{$SEARCH_KEY}{else}''{/if}"/>
                     <input type="hidden" name="operator" value="{$OPERATOR}" />
-                    <input type="hidden" name="search_value" value="{$ALPHABET_VALUE}" />
-                    {if $SEARCH_PARAMS}
+                    <input type="hidden" name="search_value" value="{if isset($ALPHABET_VALUE) && $ALPHABET_VALUE}{$ALPHABET_VALUE}{else}''{/if}" />
+                    {if isset($SEARCH_PARAMS)}
                         <input type="hidden" name="search_params" value='{ZEND_JSON::encode($SEARCH_PARAMS)}' />
                     {/if}
                     <input type="hidden" name="fieldModule" value={$SOURCE_MODULE} />
@@ -41,7 +41,7 @@
                                            <input type="hidden" name="emailSource" value="ListView" />
                                            {counter start=0 skip=1 assign="count"}
                                            {foreach item=EMAIL_FIELDS_INFO key=EMAIL_MODULE from=$EMAIL_FIELDS}
-                                                <h5>{vtranslate('SINGLE_'|cat:$EMAIL_MODULE, $EMAIL_MODULE)}</h5>
+                                                <h6>{vtranslate('SINGLE_'|cat:$EMAIL_MODULE, $EMAIL_MODULE)}</h6>
                                                 {foreach item=EMAIL_FIELD key=EMAIL_FIELD_NAME from=$EMAIL_FIELDS_INFO}
                                                      <label class="checkbox" style="padding-left: 7%;">
                                                           <input type="checkbox" class="emailField" name="selectedFields[{$count}]" data-moduleName="{$EMAIL_FIELD->getModule()->getName()}" value='{Vtiger_Functions::jsonEncode(['field' => $EMAIL_FIELD_NAME, 'field_id' => $EMAIL_FIELD->getId(), 'module_id' => $EMAIL_FIELD->getModule()->getId(), 'basefield' => $EMAIL_FIELD->get('baseRefField')])}' {if $EMAIL_FIELD->get('isPreferred')}checked="true"{/if}/>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="preferenceDiv" style="padding: 0px 0px 10px 35px;">
                     <label class="checkbox displayInlineBlock">
-                        <input type="checkbox" name="saveRecipientPrefs" id="saveRecipientPrefs" {if $RECIPIENT_PREF_ENABLED}checked="true"{/if}/>&nbsp;&nbsp;&nbsp;
+                        <input type="checkbox" name="saveRecipientPrefs" id="saveRecipientPrefs" {if isset($RECIPIENT_PREF_ENABLED) && $RECIPIENT_PREF_ENABLED}checked="true"{/if}/>&nbsp;&nbsp;&nbsp;
                         {vtranslate('LBL_REMEMBER_MY_PREF',$MODULE)}&nbsp;&nbsp;
                     </label>
                     <i class="fa fa-info-circle" title="{vtranslate('LBL_EDIT_EMAIL_PREFERENCE_TOOLTIP', $MODULE)}"></i>

@@ -1,14 +1,17 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 Reports_Edit_Js("Reports_Edit2_Js",{},{
 
 	step2Container : false,
 
 	//This will contain the reports multi select element
 	reportsColumnsList : false,
-
-	//Pivot Report
-	reportsRowList : false,
-	operationField : false,
-	//Pivot Report
 
 	//This will contain the selected fields element
 	selectedFields : false,
@@ -46,29 +49,13 @@ Reports_Edit_Js("Reports_Edit2_Js",{},{
 		return this.reportsColumnsList;
 	},
 
-	//Pivot Report
-	getReportsRowList : function() {
-		if(this.reportsRowList == false) {
-			this.reportsRowList = jQuery('#reportsRowList');
-		}
-		return this.reportsRowList;
-	},
-
-	getReportsOperationField : function() {
-		if(this.operationField == false) {
-			this.operationField = jQuery('#operationField');
-		}
-		return this.operationField;
-	},
-	//Pivot Report
-
 	/**
 	 * Function to get the selected fields
 	 * @return : jQuery object of selected fields
 	 */
 	getSelectedFields : function() {
 		if(this.selectedFields == false) {
-			this.selectedFields = jQuery('#seleted_fields');
+			this.selectedFields = jQuery('#selected_fields');
 		}
 		return this.selectedFields;
 	},
@@ -169,14 +156,6 @@ Reports_Edit_Js("Reports_Edit2_Js",{},{
 	registerSelect2ElementForReportColumns : function() {
 		var selectElement = this.getReportsColumnsList();
 		vtUtils.showSelect2ElementView(selectElement,{maximumSelectionSize: 25});
-
-		//Pivot Report
-		var selectElement1 = this.getReportsRowList();
-		vtUtils.showSelect2ElementView(selectElement1,{maximumSelectionSize: 25});
-
-		var selectElement2 = this.getReportsOperationField();
-		vtUtils.showSelect2ElementView(selectElement2,{maximumSelectionSize: 25});
-		//Pivot Report
 	},
 
 	/**

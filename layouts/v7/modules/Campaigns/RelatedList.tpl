@@ -34,11 +34,11 @@
 
 			<div class="relatedHeader">
 				<div class="btn-toolbar row">
-					<div class="col-lg-5 col-md-5 col-sm-5 btn-toolbar">
+					<div class="col-lg-5 col-md-12 col-sm-12 btn-toolbar">
 						{foreach item=RELATED_LINK from=$RELATED_LIST_LINKS['LISTVIEWBASIC']}
 							<div class="btn-group">
 								{assign var=DROPDOWNS value=$RELATED_LINK->get('linkdropdowns')}
-								{if count($DROPDOWNS) gt 0}
+								{if php7_count($DROPDOWNS) gt 0}
 									<div class="btn-group">
 										<a class="btn dropdown-toggle" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200" data-close-others="false" style="width:20px;height:18px;">
 											<img title="{$RELATED_LINK->getLabel()}" alt="{$RELATED_LINK->getLabel()}" src="{vimage_path("{$RELATED_LINK->getIcon()}")}">
@@ -52,7 +52,7 @@
 								{else}
 									{assign var=IS_SEND_EMAIL_BUTTON value={$RELATED_LINK->get('_sendEmail')}}
 									{assign var=IS_SELECT_BUTTON value={$RELATED_LINK->get('_selectRelation')}}
-									<button type="button" module="{$RELATED_MODULE_NAME}"  class="btn addButton btn-soft-secondary
+									<button type="button" module="{$RELATED_MODULE_NAME}"  class="btn addButton btn-default
 										{if $IS_SELECT_BUTTON eq true} selectRelation {/if} {if $IS_SEND_EMAIL_BUTTON eq true} sendEmail {/if}"
 										{if $IS_SELECT_BUTTON eq true} data-moduleName="{$RELATED_LINK->get('_module')->get('name')}"{/if}
 										{if ($RELATED_LINK->isPageLoadLink())}
@@ -67,9 +67,9 @@
 							</div>
 						{/foreach}&nbsp;
 					</div>
-					<div class='col-lg-4 col-md-4 col-sm-4'>
+					<div class='col-lg-4 col-md-6 col-sm-6'>
 						<span class="customFilterMainSpan">
-							{if $CUSTOM_VIEWS|@count gt 0}
+							{if $CUSTOM_VIEWS|php7_count gt 0}
 								<select id="recordsFilter" class="select2 col-lg-8" data-placeholder="{vtranslate('LBL_SELECT_TO_LOAD_LIST', $RELATED_MODULE_NAME)}">
 									<option></option>
 									{foreach key=GROUP_LABEL item=GROUP_CUSTOM_VIEWS from=$CUSTOM_VIEWS}
@@ -90,17 +90,17 @@
 					{assign var=CLASS_VIEW_PAGING_INPUT_SUBMIT value='relatedViewPagingInputSubmit'}
 					{assign var=CLASS_VIEW_BASIC_ACTION value='relatedViewBasicAction'}
 					{assign var=PAGING_MODEL value=$PAGING}
-					{assign var=RECORD_COUNT value=$RELATED_RECORDS|@count}
+					{assign var=RECORD_COUNT value=$RELATED_RECORDS|php7_count}
 					{assign var=PAGE_NUMBER value=$PAGING->get('page')}
 					{include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true}
 				</div>
 			</div>
 			<div class='col-lg-12 col-md-12 col-sm-12'>
 				{assign var=RELATED_MODULE_NAME value=$RELATED_MODULE->get('name')}
-				<div class="hide messageContainer" style = "height:30px;">
+				<div class="hide messageContainer">
 					<center><a id="selectAllMsgDiv" href="#">{vtranslate('LBL_SELECT_ALL',$MODULE)}&nbsp;{vtranslate($RELATED_MODULE_NAME ,$RELATED_MODULE_NAME)}&nbsp;(<span id="totalRecordsCount" value=""></span>)</a></center>
 				</div>
-				<div class="hide messageContainer" style = "height:30px;">
+				<div class="hide messageContainer">
 					<center><a id="deSelectAllMsgDiv" href="#">{vtranslate('LBL_DESELECT_ALL_RECORDS',$MODULE)}</a></center>
 				</div>
 			</div>
@@ -139,15 +139,19 @@
 							<tr class="searchRow">
 								<th></th>
 								<th class="inline-search-btn">
-									<button class="btn btn-soft-primary btn-sm" data-trigger="relatedListSearch">{vtranslate("LBL_SEARCH",$MODULE)}</button>
+									<button class="btn btn-submit btn-sm" data-trigger="relatedListSearch">{vtranslate("LBL_SEARCH",$MODULE)}</button>
 								</th>
 								{foreach item=HEADER_FIELD from=$RELATED_HEADERS}
 									<th>
 										{if $HEADER_FIELD->get('column') eq 'time_start' or $HEADER_FIELD->get('column') eq 'time_end' or $HEADER_FIELD->getFieldDataType() eq 'reference'}
 										{else}
 											{assign var=FIELD_UI_TYPE_MODEL value=$HEADER_FIELD->getUITypeModel()}
-											{include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$RELATED_MODULE_NAME) FIELD_MODEL= $HEADER_FIELD SEARCH_INFO=$SEARCH_DETAILS[$HEADER_FIELD->getName()] USER_MODEL=$USER_MODEL}
-											<input type="hidden" class="operatorValue" value="{$SEARCH_DETAILS[$HEADER_FIELD->getName()]['comparator']}">
+											{assign var=FIELD_SEARCH_INFO value=array("searchValue" => "", "comparator" => "")}
+											{if isset($SEARCH_DETAILS[$HEADER_FIELD->getName()])}
+												{assign var=FIELD_SEARCH_INFO value=$SEARCH_DETAILS[$HEADER_FIELD->getName()]}
+											{/if}
+											{include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$RELATED_MODULE_NAME) FIELD_MODEL= $HEADER_FIELD SEARCH_INFO= $FIELD_SEARCH_INFO USER_MODEL=$USER_MODEL}
+											<input type="hidden" class="operatorValue" value="{$FIELD_SEARCH_INFO['comparator']}">
 										{/if}
 									</th>
 								{/foreach}

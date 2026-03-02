@@ -1,3 +1,13 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.1
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
+
 PriceBooks_RelatedList_Js("Products_RelatedList_Js", {}, {
     /**
      * Function to get params for show event invocation
@@ -82,6 +92,8 @@ PriceBooks_RelatedList_Js("Products_RelatedList_Js", {}, {
         params['related_module'] = relatedModuleName;
         params['mode'] = 'updateQuantity';
         params['relatedRecords'] = JSON.stringify(idList);
+        params['record'] = sourceRecordId;
+        params['relatedModule'] = relatedModuleName;
         app.request.post({data: params}).then(function(responseData) {
             aDeferred.resolve(responseData);
         });
@@ -136,7 +148,7 @@ PriceBooks_RelatedList_Js("Products_RelatedList_Js", {}, {
 		var thisInstance = this;
 		var sourceModuleName = thisInstance.parentModuleName;
 		var relatedModuleName = thisInstance.relatedModulename;
-		
+
 		if (sourceModuleName == relatedModuleName) {
 			var bundleCostInfo = jQuery('.bundleCostInfo', thisInstance.relatedContentContainer);
 			return this._super().then(function() {
@@ -145,7 +157,7 @@ PriceBooks_RelatedList_Js("Products_RelatedList_Js", {}, {
 		}
 		return this._super();
 	},
-	
+
 	/**
 	 * Function to handle next page navigation
 	 */
@@ -161,7 +173,7 @@ PriceBooks_RelatedList_Js("Products_RelatedList_Js", {}, {
 		}
 		return this._super();
 	},
-	
+
 	/**
 	 * Function to handle page jump in related list
 	 */

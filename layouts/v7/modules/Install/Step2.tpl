@@ -32,7 +32,7 @@
 						BY DOWNLOADING THIS SOFTWARE YOU AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE AGREEMENT. 
 					</p>
 					<strong>
-						<p style="font-size:15px;font-family:Verdana;">Vtiger Public Licence</p>
+						<p style="font-size:15px;">Vtiger Public Licence</p>
 					</strong>
 					<br>The vtiger Public License Version 1.2 is based on the Mozilla Public License Version 1.1 with the additional terms in Exhibit B. The original Mozilla Public License 1.1 can be found at: http://www.mozilla.org/MPL/MPL-1.1.html
 					<br>

@@ -15,17 +15,20 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 			<link REL="SHORTCUT ICON" HREF="layouts/v7/skins/images/favicon.ico">
-			<link rel="stylesheet" href="libraries/bootstrap/css/bootstrap.css" type="text/css" media="screen" />
+			<link rel="stylesheet" href="libraries/bootstrap-legacy/css/bootstrap.min.css" type="text/css" media="screen" />
 			<link rel="stylesheet" href="resources/styles.css" type="text/css" media="screen" />
 			<link rel="stylesheet" href="libraries/jquery/select2/select2.css" />
 			<link rel="stylesheet" href="libraries/jquery/posabsolute-jQuery-Validation-Engine/css/validationEngine.jquery.css" />
 
 			<script type="text/javascript" src="libraries/jquery/jquery.min.js"></script>
-			<script type="text/javascript" src="libraries/bootstrap/js/bootstrap-tooltip.js"></script>
+			<script type="text/javascript" src="layouts/v7/lib/jquery/jquery-migrate-1.4.1.js"></script>
+			<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 			<script type="text/javascript" src="libraries/jquery/select2/select2.min.js"></script>
 			<script type="text/javascript" src="libraries/jquery/posabsolute-jQuery-Validation-Engine/js/jquery.validationEngine.js" ></script>
 			<script type="text/javascript" src="libraries/jquery/posabsolute-jQuery-Validation-Engine/js/jquery.validationEngine-en.js" ></script>
-
+			<link rel="stylesheet" type="text/css" href="layouts/v7/resources/root.css" />
+			<link rel="stylesheet" type="text/css" href="layouts/v7/resources/customcrm.css" />
+			<link rel="stylesheet" type="text/css" href="layouts/v7/resources/commoncrm.css" />
 			<script type="text/javascript">
 				{literal}
 				jQuery(function(){
@@ -49,7 +52,7 @@
 			</script>
 			<style type="text/css">
 				{literal}
-					body { background: #ffffff; background-size: 100%; font-size: 14px; }
+					body { background: #ffffff url('layouts/v7/skins/images/usersetupbg.png') no-repeat center top; background-size: 100%; font-size: 14px; }
 					.modal-backdrop { opacity: 0.35; }
 					.tooltip { z-index: 1055; }
 					input, select, textarea { font-size: 14px; }
@@ -446,7 +449,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button class="btn btn-soft-success" type="submit">{vtranslate('LBL_GET_STARTED', $MODULE)}</button>
+							<button class="btn btn-submit" type="submit">{vtranslate('LBL_GET_STARTED', $MODULE)}</button>
 						</div>
 					</div>
 				</form>

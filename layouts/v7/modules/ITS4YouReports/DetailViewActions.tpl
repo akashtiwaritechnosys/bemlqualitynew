@@ -26,11 +26,11 @@
                                 {/if}
                                 <button {if $LINK_URL} onclick='window.location.href = "{$LINK_URL}"' {/if} type="button"
                                                                                                             class="cursorPointer btn btn-default {$DETAILVIEW_LINK->get('customclass')}
-                                               {if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach' && ITS4YouReports_Functions_Helper::count($DASHBOARD_TABS) gt 1} dropdown-toggle{/if}"
+                                               {if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach' && ITS4YouReports_Functions_Helper::php7_count($DASHBOARD_TABS) gt 1} dropdown-toggle{/if}"
                                                                                                             title="{if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach'}
                                         {if $REPORT_MODEL->isPinnedToDashboard()}{vtranslate('LBL_UNPIN_CHART_FROM_DASHBOARD', $MODULE)}{else}{vtranslate('LBL_PIN_CHART_TO_DASHBOARD', $MODULE)}{/if}
-                                        {else}{$DETAILVIEW_LINK->get('linktitle')}{/if}" {if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach' && ITS4YouReports_Functions_Helper::count($DASHBOARD_TABS) gt 1 }data-toggle="dropdown"{/if}
-                                    {if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach'}data-dashboard-tab-count='{ITS4YouReports_Functions_Helper::count($DASHBOARD_TABS)}'{/if}
+                                        {else}{$DETAILVIEW_LINK->get('linktitle')}{/if}" {if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach' && ITS4YouReports_Functions_Helper::php7_count($DASHBOARD_TABS) gt 1 }data-toggle="dropdown"{/if}
+                                    {if $LINK_ICON_CLASS eq 'vtGlyph vticon-attach'}data-dashboard-tab-count='{ITS4YouReports_Functions_Helper::php7_count($DASHBOARD_TABS)}'{/if}
                                     style="
                                         {if 0 < $BTN_I}
                                             margin-left:5px;

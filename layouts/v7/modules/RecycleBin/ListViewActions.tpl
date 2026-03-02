@@ -10,9 +10,9 @@
 -->*}
 
 {strip}
-	<div id="listview-actions" style="padding-top: 50px;" class="listview-actions-container">
+	<div id="listview-actions" class="listview-actions-container">
 		<div class = "row">
-			<div class="btn-group col-md-4" role="group" aria-label="...">
+			<div class="btn-group col-md-5" role="group" aria-label="...">
 				<span class="recordDependentListActions" style="float: left;">
 					{assign var=LISTVIEW_ACTIONS value=array_reverse($LISTVIEW_MASSACTIONS)}
 					{foreach item="LISTVIEW_MASSACTION" from=$LISTVIEW_ACTIONS}
@@ -34,11 +34,11 @@
 					</span> 
 				{/foreach} 
 			</div>
-			<div class='col-md-5'>
-				<div class="hide messageContainer" style = "height:30px;">
+			<div class='col-md-4'>
+				<div class="hide messageContainer">
 					<center><a id="selectAllMsgDiv" href="#">{vtranslate('LBL_SELECT_ALL',$MODULE)}&nbsp;{vtranslate($MODULE ,$MODULE)}&nbsp;(<span id="totalRecordsCount" value=""></span>)</a></center>
 				</div>
-				<div class="hide messageContainer" style = "height:30px;">
+				<div class="hide messageContainer">
 					<center><a href="#" id="deSelectAllMsgDiv">{vtranslate('LBL_DESELECT_ALL_RECORDS',$MODULE)}</a></center>
 				</div>
 			</div>

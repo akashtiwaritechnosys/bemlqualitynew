@@ -14,8 +14,13 @@
 	{assign var=ASSIGNED_USER_ID value=$FIELD_MODEL->get('name')}
         {assign var="FIELD_INFO" value=$FIELD_MODEL->getFieldInfo()}
 	{assign var=ALL_ACTIVEUSER_LIST value=$FIELD_INFO['picklistvalues'][vtranslate('LBL_USERS')]}
-	{assign var=SEARCH_VALUES value=explode(',',$SEARCH_INFO['searchValue'])}
-	{assign var=SEARCH_VALUES value=array_map("trim",$SEARCH_VALUES)}
+
+	{if isset($SEARCH_INFO) && isset($SEARCH_INFO['searchValue'])}
+		{assign var=SEARCH_VALUES value=explode(',',$SEARCH_INFO['searchValue'])}
+		{assign var=SEARCH_VALUES value=array_map("trim",$SEARCH_VALUES)}
+	{else}
+		{assign var=SEARCH_VALUES value=array()}
+	{/if}
 
 	{if $FIELD_MODEL->get('uitype') eq '52' || $FIELD_MODEL->get('uitype') eq '77'}
 		{assign var=ALL_ACTIVEGROUP_LIST value=array()}
@@ -40,7 +45,7 @@
 				</option>
 			{/foreach}
 		</optgroup>
-		{if count($ALL_ACTIVEGROUP_LIST) gt 0}
+		{if php7_count($ALL_ACTIVEGROUP_LIST) gt 0}
 		<optgroup label="{vtranslate('LBL_GROUPS')}">
 			{foreach key=OWNER_ID item=OWNER_NAME from=$ALL_ACTIVEGROUP_LIST}
 				<option {if $OWNER_NAME|in_array:$TASK_FILTERS['assigned_user_id']}selected{/if} value="{$OWNER_NAME}" data-picklistvalue= '{$OWNER_NAME}' {if in_array(trim($OWNER_NAME),$SEARCH_VALUES)} selected {/if}

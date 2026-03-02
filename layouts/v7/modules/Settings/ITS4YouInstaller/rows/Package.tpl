@@ -9,7 +9,7 @@
 {assign var=MODULE_NAME value=$EXTENSION->get('name')}
 <tr>
     <td>
-        {vtranslate($EXTENSION->get('label'), $QUALIFIED_MODULE)}
+        <a {if $MODULE_MODEL && $MODULE_MODEL->isActive()}href="{$MODULE_MODEL->getDefaultUrl()}" target="_blank" {else} href="#{$MODULE_NAME}" {/if}>{vtranslate($EXTENSION->get('label'), $QUALIFIED_MODULE)}</a>
     </td>
     <td class="validateVersion">{$EXTENSION->getVersion()}</td>
     <td class="updateTime" title="{$EXTENSION->getUpdateTimeRaw()}">{$EXTENSION->getUpdateTime()}</td>
@@ -29,6 +29,7 @@
                     </button>
                 {elseif $EXTENSION->isUpgradableMulti()}
                     <input type="hidden" name="moduleAction" value="Upgrade"/>
+                    <input type="hidden" name="moduleMessage" value="{$EXTENSION->getUpdateMessage()}"/>
                     <button class="showChangeLog isUpdateBtn btn btn-success margin0px {if $IS_AUTH}authenticated {else} loginRequired{/if}">
                         {vtranslate('LBL_UPDATE', $QUALIFIED_MODULE)}
                     </button>
@@ -37,7 +38,7 @@
         </span>
         {if $MODULE_MODEL}
             {assign var=SETTINGS_LINKS value=$MODULE_MODEL->getSettingLinks()}
-            {if (count($SETTINGS_LINKS) > 0)}
+            {if (php7_count($SETTINGS_LINKS) > 0)}
                 <span class="btn-group pull-right {if !$MODULE_MODEL->isActive()}hide{/if}">
                     <button class="btn btn-default btn dropdown-toggle unpin hiden " data-toggle="dropdown">
                         {vtranslate('LBL_SETTINGS', $QUALIFIED_MODULE)}&nbsp;<i class="caret"></i>

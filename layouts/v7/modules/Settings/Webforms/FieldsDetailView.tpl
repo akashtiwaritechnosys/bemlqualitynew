@@ -13,14 +13,14 @@
 			&nbsp;
 		</div>
 	</div>
-	<div class="listViewEntriesDiv contents-bottomscroll">
+	<div class="listViewEntriesDiv contents-bottomscroll ticket-filed-info">
 		<div class="bottomscroll-div">
 			<div class="fieldBlockContainer">
 				<div class="fieldBlockHeader"> 
 					<h4>{vtranslate($SOURCE_MODULE, {$SOURCE_MODULE})} {vtranslate('LBL_FIELD_INFORMATION', {$MODULE_NAME})}</h4>
 				</div>
 				<hr>
-				<table class="table table-bordered">
+				<table class="table table-bordered table-formed">
 					<tr>
 						<td class="paddingLeft20"><b>{vtranslate('LBL_MANDATORY', {$MODULE_NAME})}</b></td>
 						<td><b>{vtranslate('LBL_HIDDEN', {$MODULE_NAME})}</b></td>
@@ -80,7 +80,7 @@
 			</div>
 		</div>
 	</div>
-	{if Vtiger_Functions::isDocumentsRelated($SOURCE_MODULE) && count($DOCUMENT_FILE_FIELDS)}
+	{if Vtiger_Functions::isDocumentsRelated($SOURCE_MODULE) && php7_count($DOCUMENT_FILE_FIELDS)}
 		<div class="listViewEntriesDiv contents-bottomscroll">
 			<div class="bottomscroll-div">
 				<div class="fieldBlockContainer">
@@ -89,7 +89,7 @@
 					</div>
 					<div>
 						<div class="col-lg-7 padding0">
-							<table class="table table-bordered">
+							<table class="table table-bordered table-formed">
 								<tr>
 									<td><b>{vtranslate('LBL_FIELD_LABEL', $MODULE_NAME)}</b></td>
 									<td><b>{vtranslate('LBL_MANDATORY', $MODULE_NAME)}</b></td>

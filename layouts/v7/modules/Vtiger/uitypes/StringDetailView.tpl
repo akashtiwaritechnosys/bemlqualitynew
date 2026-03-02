@@ -13,7 +13,7 @@
 {* TODO: Review the order of parameters - good to eliminate $RECORD->getId, $RECORD should be used *}
 {if $FIELD_MODEL->getFieldDataType() eq 'picklist' and $MODULE neq 'Users'}
     {assign var=PICKLIST_COLOR value=Settings_Picklist_Module_Model::getPicklistColorByValue($FIELD_MODEL->getName(), $FIELD_MODEL->get('fieldvalue'))}  
-    <span {if !empty($PICKLIST_COLOR)} class="picklist-color" style="background-color: {$PICKLIST_COLOR}; line-height:15px; color: {Settings_Picklist_Module_Model::getTextColor($PICKLIST_COLOR)};" {/if}>
+    <span {if !empty($PICKLIST_COLOR)} class="picklist-color" style="background-color: {$PICKLIST_COLOR}; line-height:15px; color: {Settings_Picklist_Module_Model::getTextColor($PICKLIST_COLOR)}; padding-left:0px; text-align:left;" {/if}>
         {$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'), $RECORD->getId(), $RECORD)}
     </span>
 {else if $FIELD_MODEL->getFieldDataType() eq 'multipicklist' and $MODULE neq 'Users'}
@@ -22,7 +22,7 @@
     {assign var=MULTI_PICKLIST_VALUES value=explode(',',$PICKLIST_DISPLAY_VALUE)}
     {foreach item=MULTI_PICKLIST_VALUE key=MULTI_PICKLIST_INDEX from=$MULTI_RAW_PICKLIST_VALUES}
         {assign var=PICKLIST_COLOR value=Settings_Picklist_Module_Model::getPicklistColorByValue($FIELD_MODEL->getName(), trim($MULTI_PICKLIST_VALUE))}
-        <span class="picklist-color" {if !empty($PICKLIST_COLOR)} style="background-color: {$PICKLIST_COLOR}; color: {Settings_Picklist_Module_Model::getTextColor($PICKLIST_COLOR)};" {/if}> {trim($MULTI_PICKLIST_VALUES[$MULTI_PICKLIST_INDEX])} </span>
+        <span class="picklist-color" {if !empty($PICKLIST_COLOR)} style="background-color: {$PICKLIST_COLOR}; color: {Settings_Picklist_Module_Model::getTextColor($PICKLIST_COLOR)}; padding-left:0px; text-align:left;" {/if}> {trim($MULTI_PICKLIST_VALUES[$MULTI_PICKLIST_INDEX])} </span>
         {if $MULTI_PICKLIST_VALUES[$MULTI_PICKLIST_INDEX+1] neq ''},{/if}
     {/foreach} 
 {else if $FIELD_MODEL->getFieldDataType() eq 'currency'}
@@ -35,7 +35,7 @@
         {assign var=CURRENCY_SYMBOL value=$CURRENCY_INFO['symbol']}
     {/if}
     {if $SYMBOL_PLACEMENT eq '$1.0'}
-        {$CURRENCY_SYMBOL}&nbsp;<span class="currencyValue">{$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'))}</span>
+        {(isset($CURRENCY_SYMBOL)) ? $CURRENCY_SYMBOL : ""}&nbsp;<span class="currencyValue">{$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'))}</span>
     {else}
         <span class="currencyValue">{$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'))}</span>&nbsp;{$CURRENCY_SYMBOL}
     {/if}

@@ -59,12 +59,12 @@
                 </div>
             </div>
             <div class='modal-footer overlayFooter'>
-                <center>
-                    <footer>
-                        <button class="btn btn-success saveButton" type="submit">Save</button>
+                <div class="footer-btns">
+                    
+                        <button class="btn btn-submit saveButton" type="submit">Save</button>
                         <a class="cancelLink" data-dismiss="modal" type="reset">Cancel</a>
-                    </footer>
-                </center>
+                    
+                </div>
             </div>
         </form>
     </div>

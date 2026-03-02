@@ -22,20 +22,27 @@
     </style>
     {assign var=NON_DELETABLE_VALUES value=$SELECTED_PICKLIST_FIELDMODEL->getNonEditablePicklistValues($SELECTED_PICKLIST_FIELDMODEL->getName())}
     <ul class="nav nav-tabs massEditTabs" style="margin-bottom: 0;">
-        <li class="active"><a href="#allValuesLayout" data-toggle="tab"><strong>{vtranslate('LBL_ALL_VALUES',$QUALIFIED_MODULE)}</strong></a></li>
-                    {if $SELECTED_PICKLIST_FIELDMODEL->isRoleBased()}
-            <li id="assignedToRoleTab"><a href="#AssignedToRoleLayout" data-toggle="tab"><strong>{vtranslate('LBL_VALUES_ASSIGNED_TO_A_ROLE',$QUALIFIED_MODULE)}</strong></a></li>
-                    {/if}
+        <li class="tab-btn active">
+            <a href="#allValuesLayout" data-toggle="tab">
+                {vtranslate('LBL_ALL_VALUES',$QUALIFIED_MODULE)}
+            </a>
+        </li>
+        {if $SELECTED_PICKLIST_FIELDMODEL->isRoleBased()}
+        <li class="tab-btn" id="assignedToRoleTab">
+            <a href="#AssignedToRoleLayout" data-toggle="tab">
+                {vtranslate('LBL_VALUES_ASSIGNED_TO_A_ROLE',$QUALIFIED_MODULE)}
+            </a>
+        </li>
+        {/if}
     </ul>
-    <div class="tab-content layoutContent padding20 themeTableColor overflowVisible">
-        <br>
+    <div class="tab-content layoutContent padding20 paddingLeft0 paddingRight0 themeTableColor overflowVisible">
+        
         <div class="tab-pane active" id="allValuesLayout">	
             <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-2"></div>
-                <div class="col-lg-8 col-md-8 col-sm-8">
-                    <table id="pickListValuesTable" class="table table-bordered" style="table-layout: fixed">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <table id="pickListValuesTable" class="table" style="table-layout: fixed">
                         <thead>
-                            <tr class="listViewHeaders bgColor">
+                            <tr class="listViewHeaders">
                                 <th>
                                     <span>{vtranslate($SELECTED_PICKLIST_FIELDMODEL->get('label'),$SELECTED_MODULE_NAME)}&nbsp;{vtranslate('LBL_ITEMS',$QUALIFIED_MODULE)}</span>
                                     <button class="btn pull-right btn-default marginLeftZero" id="addItem"><i class="fa fa-plus"></i>&nbsp;{vtranslate('LBL_ADD_VALUE',$QUALIFIED_MODULE)}</button><br><br>
@@ -43,7 +50,7 @@
                             </tr>
                         </thead>
                         <tbody>
-							 <tr><td><!-- Placeholder role to allow drag-and-drop for last elements --></td></tr>
+							<!-- <tr><td> Placeholder role to allow drag-and-drop for last elements </td></tr>-->
                         <input type="hidden" id="dragImagePath" value="{vimage_path('drag.png')}" />
                         {assign var=PICKLIST_VALUES value=$SELECTED_PICKLISTFIELD_ALL_VALUES}
                         {foreach key=PICKLIST_KEY item=PICKLIST_VALUE from=$PICKLIST_VALUES}
@@ -76,11 +83,10 @@
         <br>
         {if $SELECTED_PICKLIST_FIELDMODEL->isRoleBased()}
             <div class="tab-pane form-horizontal row" id="AssignedToRoleLayout">
-                <div class="col-lg-2 col-md-2 col-sm-2"></div>
-                <div class="col-lg-10 col-md-10 col-sm-10">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="form-group row">
-                        <label class="control-label col-lg-2 col-md-2 col-sm-2">{vtranslate('LBL_ROLE_NAME',$QUALIFIED_MODULE)}</label>
-                        <div class="controls col-lg-4 col-md-4 col-sm-4">
+                        <label class="control-label col-lg-12 col-md-12 col-sm-12">{vtranslate('LBL_ROLE_NAME',$QUALIFIED_MODULE)}</label>
+                        <div class="controls col-lg-5 col-md-5 col-sm-5">
                             <select id="rolesList" class="select2 inputElement" name="rolesSelected"  data-placeholder="{vtranslate('LBL_CHOOSE_ROLES',$QUALIFIED_MODULE)}">
                                 {foreach from=$ROLES_LIST item=ROLE}
                                     <option value="{$ROLE->get('roleid')}">{$ROLE->get('rolename')}</option>

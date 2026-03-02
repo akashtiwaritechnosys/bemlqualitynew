@@ -38,7 +38,7 @@
 			 {foreach item=CONDITION_INFO from=$ALL_CONDITION_CRITERIA['columns']}
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE CONDITION_INFO=$CONDITION_INFO MODULE=$MODULE}
 			{/foreach}
-			{if count($ALL_CONDITION_CRITERIA) eq 0}
+			{if php7_count($ALL_CONDITION_CRITERIA) eq 0}
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE MODULE=$MODULE CONDITION_INFO=array()}
 			{/if}
 			</div>
@@ -72,7 +72,7 @@
 			{foreach item=CONDITION_INFO from=$ANY_CONDITION_CRITERIA['columns']}
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE CONDITION_INFO=$CONDITION_INFO MODULE=$MODULE CONDITION="or"}
 			{/foreach}
-			{if count($ANY_CONDITION_CRITERIA) eq 0}
+			{if php7_count($ANY_CONDITION_CRITERIA) eq 0}
 				{include file='AdvanceFilterCondition.tpl'|@vtemplate_path:$MODULE RECORD_STRUCTURE=$RECORD_STRUCTURE MODULE=$MODULE CONDITION_INFO=array() CONDITION="or"}
 			{/if}
 			</div>

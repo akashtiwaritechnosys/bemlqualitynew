@@ -34,17 +34,17 @@
                     {/if}
 
             var pin = new Microsoft.Maps.Pushpin(loc);
-            if (0 < `{$PIN_DATA['3']|count_characters}` && 0 < `{$PIN_DATA['4']|count_characters}`) {
+            if (0 < `{$PIN_DATA['3']|php7_count_characters}` && 0 < `{$PIN_DATA['4']|php7_count_characters}`) {
                 pin.metadata = {
                     title: ``,
                     description: `{$PIN_DATA['3']}<br><br>{$PIN_DATA['4']}<br><i>{$PIN_DATA['2']}</i>`
                 };
-            } else if (0 < `{$PIN_DATA['3']|count_characters}`) {
+            } else if (0 < `{$PIN_DATA['3']|php7_count_characters}`) {
                 pin.metadata = {
                     title: ``,
                     description: `{$PIN_DATA['3']}<br><br><i>{$PIN_DATA['2']}</i>`
                 };
-            } else if (0 < `{$PIN_DATA['2']|count_characters}`) {
+            } else if (0 < `{$PIN_DATA['2']|php7_count_characters}`) {
                 pin.metadata = {
                     title: ``,
                     description: `<i>{$PIN_DATA['2']}</i>`

@@ -11,7 +11,7 @@
 {strip}
 	<div class="detailViewContainer full-height">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-scroll">
-			<div class="detailViewInfo" >
+			<div class="detailViewInfo detail-view-info" >
 				<form id="detailView" class="form-horizontal" method="POST">
 					<div class="clearfix">
 						<h4 class="pull-left">
@@ -41,27 +41,29 @@
 						</div>
 					</div>
 					<div class="form-group ">
-						<span class="fieldLabel col-lg-3 col-md-3 col-sm-3 ">
-							{vtranslate('LBL_GROUP_MEMBERS', $QUALIFIED_MODULE)}&nbsp;<span class="redColor">*</span>
-						</span>
+						<div class=" col-lg-12 col-md-12 col-sm-12 ">
+							<span class="fieldLabel">{vtranslate('LBL_GROUP_MEMBERS', $QUALIFIED_MODULE)}&nbsp;<span class="redColor">*</span></span>
+						</div>
 						<div class="fieldValue">
-							<span class="col-lg-6 col-md-6 col-sm-6 collectiveGroupMembers" style="width:auto;min-width:300px">
-								<ul class="nav">
-									{assign var="GROUPS" value=$RECORD_MODEL->getMembers()}
-									{foreach key=GROUP_LABEL item=GROUP_MEMBERS from=$GROUPS}
-										{if !empty($GROUP_MEMBERS)}
-											<li class="groupLabel">
-												{vtranslate($GROUP_LABEL,$QUALIFIED_MODULE)}
-											</li>
-											{foreach item=GROUP_MEMBER_INFO from=$GROUP_MEMBERS}
-												<li>
-													<a href="{$GROUP_MEMBER_INFO->getDetailViewUrl()}">{$GROUP_MEMBER_INFO->get('name')}</a>
+							<div class="col-lg-7 col-md-7 col-sm-7">
+								<div class="collectiveGroupMembers">
+									<ul class="nav">
+										{assign var="GROUPS" value=$RECORD_MODEL->getMembers()}
+										{foreach key=GROUP_LABEL item=GROUP_MEMBERS from=$GROUPS}
+											{if !empty($GROUP_MEMBERS)}
+												<li class="groupLabel">
+													{vtranslate($GROUP_LABEL,$QUALIFIED_MODULE)}
 												</li>
-											{/foreach}
-										{/if}
-									{/foreach}
-								</ul>
-							</span>
+												{foreach item=GROUP_MEMBER_INFO from=$GROUP_MEMBERS}
+													<li>
+														<a href="{$GROUP_MEMBER_INFO->getDetailViewUrl()}">{$GROUP_MEMBER_INFO->get('name')}</a>
+													</li>
+												{/foreach}
+											{/if}
+										{/foreach}
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</form>

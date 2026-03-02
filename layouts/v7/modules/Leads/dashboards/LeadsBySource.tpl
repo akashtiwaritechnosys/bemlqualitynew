@@ -9,15 +9,11 @@
   *
  ********************************************************************************/
 -->*}
-<script type="text/javascript">
-	Vtiger_Barchat_Widget_Js('Vtiger_LeadsBySource_Widget_Js',{},{});
-</script>
-
 <div class="dashboardWidgetHeader">
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
 </div>
-<div class="dashboardWidgetContent">
-	{include file="dashboards/DashBoardWidgetContents.tpl"|@vtemplate_path:$MODULE_NAME}
+<div id="LeadsBySource" class="dashboardWidgetContent">
+	{include file="dashboards/DashBoardWidgetContentsNewDashboard.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
@@ -52,7 +48,7 @@
                         <option value="{$CURRENT_USER_ID}">{vtranslate('LBL_MINE')}</option>
                         <option value="">{vtranslate('LBL_ALL', $MODULE_NAME)}</option>
                         {assign var=ALL_ACTIVEUSER_LIST value=$CURRENTUSER->getAccessibleUsers()}
-                        {if count($ALL_ACTIVEUSER_LIST) gt 1}
+                        {if php7_count($ALL_ACTIVEUSER_LIST) gt 1}
                             <optgroup label="{vtranslate('LBL_USERS')}">
                                 {foreach key=OWNER_ID item=OWNER_NAME from=$ALL_ACTIVEUSER_LIST}
                                     {if $OWNER_ID neq $CURRENT_USER_ID}

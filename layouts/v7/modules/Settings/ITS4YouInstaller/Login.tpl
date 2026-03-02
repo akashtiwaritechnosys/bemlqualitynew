@@ -74,10 +74,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <span class="control-label col-sm-3 fieldLabel">{vtranslate('LBL_KEY', $QUALIFIED_MODULE)}</span>
+                    <span class="control-label col-sm-3 fieldLabel">{vtranslate('LBL_PACKAGE_KEY', $QUALIFIED_MODULE)}</span>
                     <div class="controls col-sm-5">
                         <input type="text" id="password" name="password" data-rule-required="true"
-                               class="inputElement">
+                               class="inputElement" placeholder="******">
                     </div>
                 </div>
                 <div class="form-group">

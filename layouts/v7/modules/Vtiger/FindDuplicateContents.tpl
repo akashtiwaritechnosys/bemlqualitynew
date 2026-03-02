@@ -51,7 +51,7 @@
 					</tr>
 				</thead>
 				{foreach item=LISTVIEW_ENTRY key=GROUP_NAME from=$LISTVIEW_ENTRIES}
-					{assign var=groupCount value=$LISTVIEW_ENTRY|@sizeof}
+					{assign var=groupCount value=$LISTVIEW_ENTRY|@php7_sizeof}
 					{assign var=recordCount value=0}
 					{foreach item=RECORD from=$LISTVIEW_ENTRY name=listview}
 						<tr class="listViewEntries" data-id='{$RECORD.recordid}' id="{$MODULE}_listView_row_{$smarty.foreach.listview.index+1}">
@@ -78,7 +78,7 @@
 								</td>
 								{if $recordCount eq 0}
 									<td rowspan="{$groupCount}" style="vertical-align: middle;">
-										<center><input type="button" value="{vtranslate('Merge', $MODULE)}" name="merge" class="btn btn-soft-info" data-group="{$GROUP_NAME}"></center>
+										<center><input type="button" value="{vtranslate('Merge', $MODULE)}" name="merge" class="btn btn-submit" data-group="{$GROUP_NAME}"></center>
 									</td>
 								{/if}
 							{/if}
@@ -87,7 +87,7 @@
 					{/foreach}
 				{/foreach}
 			</table>
-			{if $recordCount eq 0}
+			{if isset($recordCount) && $recordCount eq 0}
 				<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 listViewContentDiv list-table-wrapper" id="listViewContents">
 					<table class="emptyRecordsDiv">
 						<tbody class="overflow-y">

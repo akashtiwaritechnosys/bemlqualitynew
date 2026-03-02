@@ -10,25 +10,20 @@ Reports_Edit3_Js("Reports_ChartEdit3_Js",{
 
 	registerFieldForChosen : function() {
 		vtUtils.showSelect2ElementView(jQuery('#groupbyfield'));
-		vtUtils.showSelect2ElementView(jQuery('#groupbyfield1'));//Pivot Report
 		vtUtils.showSelect2ElementView(jQuery('#datafields'));
 	},
 
 	initSelectValues : function() {
 		var groupByField = jQuery('#groupbyfield');
-		var groupByField1 = jQuery('#groupbyfield1');//Pivot Report
 		var dataFields = jQuery('#datafields');
 
 		var groupByFieldValue = jQuery('input[name=groupbyfield]').val();
-		var groupByFieldValue1 = jQuery('input[name=groupbyfield1]').val();//Pivot Report
 		var dataFieldsValue = jQuery('input[name=datafields]').val();
 
 		var groupByHTML = jQuery('#groupbyfield_element').clone().html();
-		var groupByHTML1 = jQuery('#groupbyfield_element1').clone().html();//Pivot Report
 		var dataFieldsHTML = jQuery('#datafields_element').clone().html();
 
 		groupByField.html(groupByHTML);
-		groupByField1.html(groupByHTML1);
 		dataFields.html(dataFieldsHTML);
 
 		if(dataFieldsValue)
@@ -37,7 +32,6 @@ Reports_Edit3_Js("Reports_ChartEdit3_Js",{
 		var selectedChartType = jQuery('input[name=charttype]').val();
 
 		groupByField.select2().select2("val", groupByFieldValue);
-		groupByField1.select2().select2("val", groupByFieldValue1);
 
 		if(selectedChartType == 'pieChart') {
 			if(!dataFieldsValue){
@@ -126,42 +120,19 @@ Reports_Edit3_Js("Reports_ChartEdit3_Js",{
 	registerSubmitEvent : function() {
 		var thisInstance = this;
 		jQuery('#generateReport').on('click', function(e) {
-			var reporttype = jQuery('input[name=type]').val();
-			if(reporttype == 'Pivot'){
-				var legend = jQuery('#groupbyfield').val();
-				var legend1 = jQuery('#groupbyfield1').val();
-				var sector = jQuery('#datafields').val();
-				var form = thisInstance.getContainer();
-				if(sector && legend && legend1) {
-					vtUtils.hideValidationMessage(jQuery('#s2id_groupbyfield'));
-					vtUtils.hideValidationMessage(jQuery('#s2id_groupbyfield1'));//Pivot Report
-					vtUtils.hideValidationMessage(jQuery('#s2id_datafields'));
-					form.submit();
-				} else if(!legend){
-					vtUtils.showValidationMessage(jQuery('#s2id_groupbyfield'), app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION'));
-					e.preventDefault();
-				} else if(!legend1){//Pivot Report
-					vtUtils.showValidationMessage(jQuery('#s2id_groupbyfield1'), app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION'));
-					e.preventDefault();
-				}else if(!sector){
-					vtUtils.showValidationMessage(jQuery('#s2id_datafields'), app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION'));
-					e.preventDefault();
-				}
-			}else{
-				var legend = jQuery('#groupbyfield').val();
-				var sector = jQuery('#datafields').val();
-				var form = thisInstance.getContainer();
-				if(sector && legend) {
-					vtUtils.hideValidationMessage(jQuery('#s2id_groupbyfield'));
-					vtUtils.hideValidationMessage(jQuery('#s2id_datafields'));
-					form.submit();
-				} else if(!legend){
-					vtUtils.showValidationMessage(jQuery('#s2id_groupbyfield'), app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION'));
-					e.preventDefault();
-				}else if(!sector){
-					vtUtils.showValidationMessage(jQuery('#s2id_datafields'), app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION'));
-					e.preventDefault();
-				}
+			var legend = jQuery('#groupbyfield').val();
+			var sector = jQuery('#datafields').val();
+			var form = thisInstance.getContainer();
+			if(sector && legend) {
+				vtUtils.hideValidationMessage(jQuery('#s2id_groupbyfield'));
+				vtUtils.hideValidationMessage(jQuery('#s2id_datafields'));
+				form.submit();
+			} else if(!legend){
+				vtUtils.showValidationMessage(jQuery('#s2id_groupbyfield'), app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION'));
+				e.preventDefault();
+			}else if(!sector){
+				vtUtils.showValidationMessage(jQuery('#s2id_datafields'), app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION'));
+				e.preventDefault();
 			}
 		});
 	},

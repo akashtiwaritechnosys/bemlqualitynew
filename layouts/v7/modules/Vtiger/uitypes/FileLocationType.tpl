@@ -11,9 +11,17 @@
 -->*}
 {strip}
 {assign var=FIELD_VALUES value=$FIELD_MODEL->getFileLocationType()}
-<select class="select2" name="{$FIELD_MODEL->getFieldName()}">
+{* The options displayed based on the file location type received on request *}
+<select class="select2" name="{$FIELD_MODEL->getFieldName()}" {if isset($FILE_LOCATION_TYPE) && ($FILE_LOCATION_TYPE eq 'I' || $FILE_LOCATION_TYPE eq 'E')} disabled {/if}>
 {foreach item=TYPE key=KEY from=$FIELD_VALUES}
-	<option value="{$KEY}" {if $FIELD_MODEL->get('fieldvalue') eq $KEY} selected {/if}>{vtranslate($TYPE, $MODULE)}</option>
+    {if isset($FILE_LOCATION_TYPE) && $FILE_LOCATION_TYPE eq 'I'}
+        {assign var=SELECTED value='I'}
+    {elseif isset($FILE_LOCATION_TYPE) && $FILE_LOCATION_TYPE eq 'E'}
+        {assign var=SELECTED value='E'}
+    {else}
+        {assign var=SELECTED value=$FIELD_MODEL->get('fieldvalue')}
+    {/if}
+    <option value="{$KEY}" {if $SELECTED eq $KEY} selected {/if}>{vtranslate($TYPE, $MODULE)}</option>
 {/foreach}
 </select>
 {/strip}

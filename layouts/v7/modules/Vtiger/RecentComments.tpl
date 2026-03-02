@@ -30,12 +30,12 @@
 							{if in_array($MODULE_NAME, $PRIVATE_COMMENT_MODULES)}
 								<div class="" style="margin: 7px 0;">
 									<label>
-										<input type="checkbox" id="is_private" style="margin:2px 0px -2px 0px">&nbsp;&nbsp;{vtranslate('LBL_INTERNAL_COMMENT')}
+										<input type="checkbox" id="is_private" style="margin:2px 0px -2px 0px" checked>&nbsp;&nbsp;{vtranslate('LBL_INTERNAL_COMMENT')}
 									</label>&nbsp;&nbsp;
 									<i class="fa fa-question-circle cursorPointer" data-toggle="tooltip" data-placement="top" data-original-title="{vtranslate('LBL_INTERNAL_COMMENT_INFO')}"></i>&nbsp;&nbsp;
 								</div>
 							{/if}
-							<button class="btn btn-soft-success btn-sm detailViewSaveComment" type="button" data-mode="add">{vtranslate('LBL_POST', $MODULE_NAME)}</button>
+							<button class="btn btn-submit btn-sm detailViewSaveComment" type="button" data-mode="add">{vtranslate('LBL_POST', $MODULE_NAME)}</button>
 						</div>
 					</div>
 					{if $FIELD_MODEL->getProfileReadWritePermission()}
@@ -67,7 +67,7 @@
 	<div class="commentsBody">
 		{if !empty($COMMENTS)}
 			<div class="recentCommentsBody container-fluid">
-				{assign var=COMMENTS_COUNT value=count($COMMENTS)}
+				{assign var=COMMENTS_COUNT value=php7_count($COMMENTS)}
 				{foreach key=index item=COMMENT from=$COMMENTS}
 					{assign var=CREATOR_NAME value={decode_html($COMMENT->getCommentedByName())}}
 					<div class="commentDetails">
@@ -84,7 +84,7 @@
 												{if !empty($IMAGE_PATH)}
 													<img src="{$IMAGE_PATH}" width="100%" height="100%" align="left">
 												{else}
-													<div class="name"><span><strong> {$CREATOR_NAME|mb_substr:0:2|escape:"html"} </strong></span></div>
+													<div class="name"><p> {$CREATOR_NAME|mb_substr:0:2|escape:"html"}</p></div>
 												{/if}
 											</div>
 										</div>
@@ -107,15 +107,25 @@
 												{/if}
 												<span class="commentTime text-muted cursorDefault">
 													<small title="{Vtiger_Util_Helper::formatDateTimeIntoDayString($COMMENT->getCommentedTime())}">{Vtiger_Util_Helper::formatDateDiffInStrings($COMMENT->getCommentedTime())}</small>
-												</span>
-
+												</span>&nbsp;&nbsp;
+												
+												{if in_array($MODULE_NAME, $PRIVATE_COMMENT_MODULES)}
+													<span>
+														{if $COMMENT->get('is_private')}
+															<i class="fa fa-lock" data-toggle="tooltip" data-placement="top" data-original-title="{vtranslate('LBL_INTERNAL_COMMENT_TOOTLTIP',$MODULE)}"></i>
+														{else}
+															<i class="fa fa-unlock" data-toggle="tooltip" data-placement="top" data-original-title="{vtranslate('LBL_EXTERNAL_COMMENT_TOOTLTIP',$MODULE)}"></i>
+														{/if}
+													</span>
+												{/if}
+												
 												<div class="commentInfoContentBlock">
 													{assign var=COMMENT_CONTENT value={nl2br($COMMENT->get('commentcontent'))}}
 													{if $COMMENT_CONTENT}
 														{assign var=DISPLAYNAME value={decode_html($COMMENT_CONTENT)}}
 														{assign var=MAX_LENGTH value=200}
 														<span class="commentInfoContent" data-maxlength="{$MAX_LENGTH}" style="display: block" data-fullComment="{$COMMENT_CONTENT|escape:"html"}" data-shortComment="{$DISPLAYNAME|mb_substr:0:200|escape:"html"}..." data-more='{vtranslate('LBL_SHOW_MORE',$MODULE)}' data-less='{vtranslate('LBL_SHOW',$MODULE)} {vtranslate('LBL_LESS',$MODULE)}'>
-															{if $DISPLAYNAME|count_characters:true gt $MAX_LENGTH}
+															{if $DISPLAYNAME|php7_count_characters:true gt $MAX_LENGTH}
 																{mb_substr(trim($DISPLAYNAME),0,$MAX_LENGTH)}...
 																<a class="pull-right toggleComment showMore" style="color: blue;"><small>{vtranslate('LBL_SHOW_MORE',$MODULE)}</small></a>
 															{else}
@@ -213,18 +223,18 @@
 			{if in_array($MODULE_NAME, $PRIVATE_COMMENT_MODULES)}
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" id="is_private">&nbsp;&nbsp;{vtranslate('LBL_INTERNAL_COMMENT')}&nbsp;&nbsp;
+						<input type="checkbox" id="is_private" checked>&nbsp;&nbsp;{vtranslate('LBL_INTERNAL_COMMENT')}&nbsp;&nbsp;
 					</label>
 				</div>
 			{/if}
-			<button class="btn btn-soft-blue btn-sm detailViewSaveComment" type="button" data-mode="add">{vtranslate('LBL_POST', $MODULE_NAME)}</button>
-			<a href="javascript:void(0);" class="cursorPointer closeCommentBlock cancelLink btn btn-soft-danger" type="reset">{vtranslate('LBL_CANCEL', $MODULE_NAME)}</a>
+			<button class="btn btn-submit btn-sm detailViewSaveComment" type="button" data-mode="add">{vtranslate('LBL_POST', $MODULE_NAME)}</button>
+			<a href="javascript:void(0);" class="cursorPointer closeCommentBlock cancelLink" type="reset">{vtranslate('LBL_CANCEL', $MODULE_NAME)}</a>
 		</div>
 	</div>
 
-	<div class="hide basicEditCommentBlock container-fluid" style="min-height: 150px;">
-		<div class="row commentArea" >
-			<input style="width:100%;height:30px;" type="text" name="reasonToEdit" placeholder="{vtranslate('LBL_REASON_FOR_CHANGING_COMMENT', $MODULE_NAME)}" class="input-block-level"/>
+	<div class="hide basicEditCommentBlock container-fluid">
+		<div class="row commentArea" style="padding-bottom: 10px" >
+			<input style="width:100%;height:30px;" type="text" name="reasonToEdit" placeholder="{vtranslate('LBL_REASON_FOR_CHANGING_COMMENT', $MODULE_NAME)}" class="input-block-level form-control"/>
 		</div>
 		<div class="row" style="padding-bottom: 10px;">
 			<div class="commentTextArea">
@@ -232,9 +242,11 @@
 			</div>
 		</div>
 		<input type="hidden" name="is_private">
-		<div class="pull-right row">
-			<button class="btn btn-soft-blue btn-sm detailViewSaveComment" type="button" data-mode="edit">{vtranslate('LBL_POST', $MODULE_NAME)}</button>
-			<a href="javascript:void(0);" class="cursorPointer closeCommentBlock cancelLink btn btn-soft-danger" type="reset">{vtranslate('LBL_CANCEL', $MODULE_NAME)}</a>
+		<div class="row" style="padding-bottom: 10px;">
+			<div class="pull-right">
+				<button class="btn btn-submit btn-sm detailViewSaveComment" type="button" data-mode="edit">{vtranslate('LBL_POST', $MODULE_NAME)}</button>
+				<a href="javascript:void(0);" class="cursorPointer closeCommentBlock cancelLink" type="reset">{vtranslate('LBL_CANCEL', $MODULE_NAME)}</a>
+			</div>
 		</div>
 	</div>
 </div>

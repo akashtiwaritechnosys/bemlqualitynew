@@ -21,13 +21,13 @@
 		<input type='hidden' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
 		<input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
 		<div class = "row">
-			<div class='col-md-5'>
+			<div class='col-lg-3 col-sm-6'>
 				<div class="foldersContainer hidden-xs pull-left">
-					<select class="select2" style="width: 300px;" id="moduleFilter">
+					<select class="select2" id="moduleFilter">
 						<option value="" data-count='{$MODULES_COUNT['All']}'>{vtranslate('LBL_ALL', $QUALIFIED_MODULE)}&nbsp;{vtranslate('LBL_WORKFLOWS')}
 						</option>
 						{foreach item=MODULE_MODEL key=TAB_ID from=$SUPPORTED_MODULE_MODELS}
-							<option {if $SOURCE_MODULE eq $MODULE_MODEL->getName()} selected="" {/if} value="{$MODULE_MODEL->getName()}" data-count='{if $MODULES_COUNT[$TAB_ID]}{$MODULES_COUNT[$TAB_ID]}{else}0{/if}'>
+							<option {if $SOURCE_MODULE eq $MODULE_MODEL->getName()} selected="" {/if} value="{$MODULE_MODEL->getName()}" data-count='{if isset($MODULES_COUNT[$TAB_ID]) && $MODULES_COUNT[$TAB_ID]}{$MODULES_COUNT[$TAB_ID]}{else}0{/if}'>
 								{if $MODULE_MODEL->getName() eq 'Calendar'}
 									{vtranslate('LBL_TASK', $MODULE_MODEL->getName())}&nbsp;{vtranslate('LBL_WORKFLOWS')}
 								{else}
@@ -38,13 +38,13 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-lg-5 col-sm-6">
 				<div class="search-link hidden-xs" style="margin-top: 0px;">
 					<span aria-hidden="true" class="fa fa-search"></span>
 					<input class="searchWorkflows" type="text" value="{decode_html($SEARCH_VALUE)|htmlentities}" placeholder="{vtranslate('LBL_WORKFLOW_SEARCH', $QUALIFIED_MODULE)}">
 				</div> 
 			</div>
-			<div class="col-md-3">
+			<div class="col-lg-3 col-sm-12 pagination">
 				{assign var=RECORD_COUNT value=$LISTVIEW_ENTRIES_COUNT}
 				{include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true}
 			</div>
@@ -88,11 +88,11 @@
 										{assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
 										{assign var=LAST_COLUMN value=$LISTVIEW_HEADER@last}
 										{if $LISTVIEW_HEADERNAME neq 'summary' && $LISTVIEW_HEADERNAME neq 'module_name'}
-											<td class="listViewEntryValue {$WIDTHTYPE}" width="{$WIDTH}%" nowrap>
+											<td class="listViewEntryValue {$WIDTHTYPE}" width="{(isset($WIDTH)) ? $WIDTH : ''}%" nowrap>
 												{if $LISTVIEW_HEADERNAME eq 'test'}
 													{assign var=WORKFLOW_CONDITION value=$LISTVIEW_ENTRY->getConditonDisplayValue()}
-													{assign var=ALL_CONDITIONS value=$WORKFLOW_CONDITION['All']}
-													{assign var=ANY_CONDITIONS value=$WORKFLOW_CONDITION['Any']}
+													{assign var=ALL_CONDITIONS value=(isset($WORKFLOW_CONDITION['All'])) ? $WORKFLOW_CONDITION['All'] : ''}
+													{assign var=ANY_CONDITIONS value=(isset($WORKFLOW_CONDITION['Any'])) ? $WORKFLOW_CONDITION['Any'] : ''}
 													<span><strong>{vtranslate('All')}&nbsp;:&nbsp;&nbsp;&nbsp;</strong></span>
 													{if is_array($ALL_CONDITIONS) && !empty($ALL_CONDITIONS)}
 														{foreach item=ALL_CONDITION from=$ALL_CONDITIONS name=allCounter}
@@ -125,14 +125,14 @@
 												{/if}
 											</td>
 										{elseif $LISTVIEW_HEADERNAME eq 'module_name' && empty($SOURCE_MODULE)}
-											<td class="listViewEntryValue {$WIDTHTYPE}" width="{$WIDTH}%" nowrap>
+											<td class="listViewEntryValue {$WIDTHTYPE}" width="{(isset($WIDTH)) ? $WIDTH : ''}%" nowrap>
 												{assign var="MODULE_ICON_NAME" value="{strtolower($LISTVIEW_ENTRY->get('raw_module_name'))}"}
 												{Vtiger_Module_Model::getModuleIconPath($LISTVIEW_ENTRY->get('raw_module_name'))}
 											</td>
 										{else}
 										{/if}
 									{/foreach}
-									<td class="listViewEntryValue {$WIDTHTYPE}" width="{$WIDTH}%" nowrap>
+									<td class="listViewEntryValue {$WIDTHTYPE}" width="{(isset($WIDTH)) ? $WIDTH : ''}%" nowrap>
 										{assign var=ACTIONS value=$LISTVIEW_ENTRY->getActionsDisplayValue()}
 										{if is_array($ACTIONS) && !empty($ACTIONS)}
 											{foreach item=ACTION_COUNT key=ACTION_NAME from=$ACTIONS}
@@ -144,7 +144,7 @@
 							{/foreach}
 							{if $LISTVIEW_ENTRIES_COUNT eq '0'}
 								<tr class="emptyRecordsDiv">
-									{assign var=COLSPAN_WIDTH value={count($LISTVIEW_HEADERS)+1}}
+									{assign var=COLSPAN_WIDTH value={php7_count($LISTVIEW_HEADERS)+1}}
 									<td colspan="{$COLSPAN_WIDTH}" style="vertical-align:inherit !important;">
 										<center>{vtranslate('LBL_NO')} {vtranslate($MODULE, $QUALIFIED_MODULE)} {vtranslate('LBL_FOUND')}</center>
 									</td>

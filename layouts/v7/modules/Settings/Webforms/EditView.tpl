@@ -9,14 +9,14 @@
       <div class="editViewPageDiv">
           <div class="col-lg-12 col-md-12 col-lg-pull-0">
          <form class="form-horizontal" id="EditView" name="edit" method="post" action="index.php" enctype="multipart/form-data">
-            <div class="editViewHeader">
+            {*<div class="editViewHeader create-webform">
                      {assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
                      {if $RECORD_ID neq ''}
                         <h3 class="editHeader" style="margin-top:5px;" title="{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} {$RECORD_STRUCTURE_MODEL->getRecordName()}">{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} - {$RECORD_STRUCTURE_MODEL->getRecordName()}</h3>
                      {else}
                         <h3 class="editHeader" style="margin-top:5px;">{vtranslate('LBL_CREATING_NEW', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)}</h3>
                      {/if}
-               </div>
+               </div> *}
             <div class="editViewBody">
                <div class="editViewContents">
                   {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
@@ -33,7 +33,7 @@
                   <input type="hidden" name="record" value="{$RECORD_ID}" />
                   <input type="hidden" name="defaultCallDuration" value="{$USER_MODEL->get('callduration')}" />
                   <input type="hidden" name="defaultOtherEventDuration" value="{$USER_MODEL->get('othereventduration')}" />
-                  {if $IS_RELATION_OPERATION }
+                  {if isset($IS_RELATION_OPERATION) && $IS_RELATION_OPERATION }
                      <input type="hidden" name="sourceModule" value="{$SOURCE_MODULE}" />
                      <input type="hidden" name="sourceRecord" value="{$SOURCE_RECORD}" />
                      <input type="hidden" name="relationOperation" value="{$IS_RELATION_OPERATION}" />
@@ -64,8 +64,10 @@
             <div class='modal-overlay-footer clearfix'>
                 <div class="row clearfix">
                     <div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                        <button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-                        <a class='cancelLink' href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                     <div class='footer-btns'>
+                           <button type='submit' class='btn btn-submit saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>
+                           <a class='cancelLink' href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                     </div>
                     </div>
                 </div>
             </div>

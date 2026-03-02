@@ -31,10 +31,10 @@
     {assign var="taxTotal" value="taxTotal"|cat:$row_no}
     {assign var="netPrice" value="netPrice"|cat:$row_no}
 	{assign var="picklistValuesConfigured" value="picklistValuesConfigured"|cat:$row_no}
-    {assign var="FINAL" value=$RELATED_PRODUCTS_OTHER1.1.final_details}
+    {assign var="FINAL" value=$RELATED_PRODUCTS_OTHER1.1.final_details|default:[]}
 
 	{assign var="productDeleted" value="productDeleted"|cat:$row_no}
-	{assign var="productId" value=$data[$hdnProductId]}
+	{assign var="productId" value=$data[$hdnProductId_other]|default:null}
 	{assign var="listPriceValues" value=Products_Record_Model::getListPriceValues($productId)}
 	{foreach item=LINEITEM_CUSTOM_FIELDNAME from=$LINEITEM_CUSTOM_FIELDNAMES_OTHER1}
 		{assign var={$LINEITEM_CUSTOM_FIELDNAME} value=$LINEITEM_CUSTOM_FIELDNAME|cat:$row_no}
@@ -52,7 +52,7 @@
 		&nbsp;<a><img src="{vimage_path('drag.png')}" border="0" title="{vtranslate('LBL_DRAG',$MODULE)}"/></a>
 		<input type="hidden" class="rowNumber" value="{$row_no}" />
 	</td> *}
-	<input type="hidden" id="fildNamesOfCustFieldsOther1" value={ZEND_JSON::encode($LINEITEM_CUSTOM_FIELDNAMES_OTHER1)}>
+	<input type="hidden" id="fildNamesOfCustFieldsOther1" value='{Vtiger_Util_Helper::toSafeHTML(Vtiger_Functions::jsonEncode($LINEITEM_CUSTOM_FIELDNAMES_OTHER1))}'>
 	{assign var="dateFormat" value=$USER_MODEL->get('date_format')}
 	{foreach key=LINEITEM_CUSTOM_FIELDKEY item=LINEITEM_CUSTOM_FIELD from=$LINEITEM_CUSTOM_FIELDS_OTHER1}
 		<td {if $tabletdhiderVal eq true} class="tabletdhider" {/if} data-td="{$LINEITEM_CUSTOM_FIELD['fieldname']}">
@@ -61,10 +61,10 @@
 				<div class="input-group inputElement" style="margin-bottom: 3px">
 					<input  id="{${$fieldName}}" name="{${$fieldName}}" type="text" class="dateField form-control" data-fieldname="{${$fieldName}}" data-fieldtype="date" data-date-format="{$dateFormat}"
 						value="{Vtiger_Functions::currentUserDisplayDate($data.${$fieldName})}"
-						{if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if}
-						{if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
-						{if count($FIELD_INFO['validator'])}
-							data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
+						{if !empty($SPECIAL_VALIDATOR)}data-validator='{Vtiger_Functions::jsonEncode($SPECIAL_VALIDATOR)}'{/if}
+						{if $FIELD_INFO && $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
+						{if $FIELD_INFO && php7_count($FIELD_INFO['validator'])}
+							data-specific-rules='{Vtiger_Functions::jsonEncode($FIELD_INFO["validator"])}'
 						{/if}  data-rule-date="true" />
 					<span class="input-group-addon"><i class="fa fa-calendar "></i></span>
 				</div>
@@ -99,7 +99,7 @@
 						<select data-rule-required=true style="min-width: 150px;" id="{${$fieldName}}" class="select2-container {if $row_no neq 0}select2{/if} inputElement picklistfield {if $fieldName eq 'masn_aggrregate'} disabledpicklistValue {/if} lineitempicklistfield" data-fieldname="{$fieldName}" data-rownum="{$row_no}" name="{${$fieldName}}" data-extraname="{$fieldName}" data-fieldtype="picklist">
 							<option value="">{vtranslate('LBL_SELECT_OPTION','Vtiger')}</option>
 							{foreach  key=PICKLIST_FIELDKEY item=PICKLIST_FIELD_ITEM from=$LINEITEM_CUSTOM_FIELD['picklistValues']}
-								<option {if trim(decode_html($data.${$fieldName})) eq $PICKLIST_FIELDKEY} selected {/if} value="{$PICKLIST_FIELDKEY}">{$PICKLIST_FIELDKEY}</option>
+								<option {if $data && trim(decode_html($data.${$fieldName})) eq $PICKLIST_FIELDKEY} selected {/if} value="{$PICKLIST_FIELDKEY}">{$PICKLIST_FIELDKEY}</option>
 							{/foreach}
 						</select>
 					{/if}
@@ -108,18 +108,18 @@
 				<div id="paymentContainer" style="margin : 0px;min-width: 100px" name="paymentContainer" class="paymentOptions">
 					{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$LINEITEM_CUSTOM_FIELD['picklistValues']}
 						<div id="payCC" class="floatBlock">
-						<label> <input data-extraname="{$fieldName}" id="{${$fieldName}}" data-rule-required="true" data-fieldname="{$fieldName}" name="{${$fieldName}}"  type="radio" value="{Vtiger_Util_Helper::toSafeHTML($PICKLIST_NAME)}"  {if trim(decode_html($data.${$fieldName})) eq $PICKLIST_NAME} checked="checked" {/if}>
+						<label> <input data-extraname="{$fieldName}" id="{${$fieldName}}" data-rule-required="true" data-fieldname="{$fieldName}" name="{${$fieldName}}"  type="radio" value="{Vtiger_Util_Helper::toSafeHTML($PICKLIST_NAME)}"  {if $data && trim(decode_html($data.${$fieldName})) eq $PICKLIST_NAME} checked="checked" {/if}>
 						&nbsp {$PICKLIST_VALUE}</label>
 						</div>
 					{/foreach}
 				</div>
 			{elseif $LINEITEM_CUSTOM_FIELD['uitype'] eq '56'}
 				<input class="inputElement" id="{${$fieldName}}" name="{${$fieldName}}" style="width:15px;height:15px;" data-fieldname="{${$fieldName}}" data-fieldtype="checkbox" type="checkbox"
-				{if $data.${$fieldName} eq true} checked {/if}
-				{if !empty($SPECIAL_VALIDATOR)}data-validator="{Zend_Json::encode($SPECIAL_VALIDATOR)}"{/if}
-				{if $FIELD_INFO["mandatory"] eq true} data-rule-required = "true" {/if}
-				{if count($FIELD_INFO['validator'])}
-					data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
+				{if $data && $data.${$fieldName} eq true} checked {/if}
+				{if !empty($SPECIAL_VALIDATOR)}data-validator="{Vtiger_Functions::jsonEncode($SPECIAL_VALIDATOR)}"{/if}
+				{if $FIELD_INFO && $FIELD_INFO["mandatory"] eq true} data-rule-required = "true" {/if}
+				{if $FIELD_INFO && php7_count($FIELD_INFO['validator'])}
+					data-specific-rules='{Vtiger_Functions::jsonEncode($FIELD_INFO["validator"])}'
 				{/if}/>
 			{/if}
 		</td>

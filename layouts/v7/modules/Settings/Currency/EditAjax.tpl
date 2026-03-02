@@ -20,8 +20,8 @@
         {else}
             {assign var="HEADER_TITLE" value={vtranslate('LBL_ADD_NEW_CURRENCY', $QUALIFIED_MODULE)}}
         {/if}
-        {include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
         <div class="modal-content">
+        {include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
             <form id="editCurrency" class="form-horizontal" method="POST">
                 <input type="hidden" name="record" value="{$CURRENCY_ID}" />
                 <div class="modal-body">
@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label fieldLabel col-sm-5">{vtranslate('LBL_STATUS', $QUALIFIED_MODULE)}</label>
-                            <div class="controls fieldValue col-xs-6">
+                            <div class="controls fieldValue col-xs-7">
                                 <label class="checkbox">
                                     <input type="hidden" name="currency_status" value="Inactive" />
                                     <input type="checkbox" name="currency_status" value="Active" class="currencyStatus alignBottom" 

@@ -16,7 +16,7 @@
                     </div>
                     {if $FILE_PREVIEW_NOT_SUPPORTED neq 'yes'}
                         <div class="col-lg-3">
-                            <a class="btn btn-soft-info btn-small pull-right" href="{$DOWNLOAD_URL}">{vtranslate('LBL_DOWNLOAD_FILE',$MODULE_NAME)}</a>
+                            <a class="btn btn-default btn-small pull-right" href="{$DOWNLOAD_URL}">{vtranslate('LBL_DOWNLOAD_FILE',$MODULE_NAME)}</a>
                         </div>
                     {/if}
                     <div class="col-lg-1">
@@ -24,21 +24,17 @@
                             <span aria-hidden="true" class='fa fa-close'></span></button>
                     </div>
                 </div>
-                <div class="modal-body row" style="height:550px;">
+                <div class="modal-body row">
                     {if $FILE_PREVIEW_NOT_SUPPORTED eq 'yes'}
                         <div class="well" style="height:100%;">
                             <center>
-                                <b>{vtranslate('LBL_PREVIEW_NOT_AVAILABLE',$MODULE_NAME)}</b>
-                                <br><br><br>
-                                <a class="btn btn-soft-secondary btn-large" href="{$DOWNLOAD_URL}">{vtranslate('LBL_DOWNLOAD_FILE',$MODULE_NAME)}</a>
-                                <br><br><br><br>
-                                <div class='span11 offset1 alert-info' style="padding:10px">
-                                    <span class='span offset1 alert-info'>
-                                        <i class="icon-info-sign"></i>
-                                        {vtranslate('LBL_PREVIEW_SUPPORTED_FILES',$MODULE_NAME)}
-                                    </span>
+                                <h6>{vtranslate('LBL_PREVIEW_NOT_AVAILABLE',$MODULE_NAME)}</h6>
+                                <a class="btn btn-default btn-large" href="{$DOWNLOAD_URL}">{vtranslate('LBL_DOWNLOAD_FILE',$MODULE_NAME)}</a>
+                                <div class='marginTop10px alert-info' style="padding:10px">
+                                    <i class="icon-info-sign"></i>
+                                    {vtranslate('LBL_PREVIEW_SUPPORTED_FILES',$MODULE_NAME)}
                                 </div>
-                                <br>
+                                
                             </center>
                         </div>
                     {else}

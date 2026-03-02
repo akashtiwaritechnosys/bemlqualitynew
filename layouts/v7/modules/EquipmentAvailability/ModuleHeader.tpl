@@ -78,7 +78,7 @@
 											</li>
 										{/if}
 									{/foreach}
-									{if $MODULE_SETTING_ACTIONS|@count gt 0}
+									{if $MODULE_SETTING_ACTIONS|php7_count gt 0}
 										<li>
 											<div class="settingsIcon">
 												<button type="button" class="btn btn-soft-dark dropdown-toggle module-btn" data-toggle="dropdown" aria-expanded="false" title="{vtranslate('LBL_SETTINGS', $MODULE)}">

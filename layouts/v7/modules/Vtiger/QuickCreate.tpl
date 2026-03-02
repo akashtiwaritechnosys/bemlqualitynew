@@ -42,7 +42,7 @@
                                 {foreach key=FIELD_NAME item=FIELD_MODEL from=$RECORD_STRUCTURE name=blockfields}
                                     {assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
                                     {assign var="referenceList" value=$FIELD_MODEL->getReferenceList()}
-                                    {assign var="referenceListCount" value=count($referenceList)}
+                                    {assign var="referenceListCount" value=php7_count($referenceList)}
                                     {if $FIELD_MODEL->get('uitype') eq "19"}
                                         {if $COUNTER eq '1'}
                                             <td></td><td></td></tr><tr>
@@ -67,17 +67,17 @@
                                                     <span class="pull-right">
                                                         <select style="width:150px;" class="select2 referenceModulesList {if $FIELD_MODEL->isMandatory() eq true}reference-mandatory{/if}">
                                                             {foreach key=index item=value from=$referenceList}
-                                                                <option value="{$value}" {if $value eq $REFERENCED_MODULE_NAME} selected {/if} >{vtranslate($value, $value)}</option>
+                                                                <option value="{$value}" {if isset($REFERENCED_MODULE_NAME) && $value eq $REFERENCED_MODULE_NAME} selected {/if} >{vtranslate($value, $value)}</option>
                                                             {/foreach}
                                                         </select>
                                                     </span>
                                                 {else}
-                                                    <label class="muted">{vtranslate($FIELD_MODEL->get('label'), $MODULE)}&nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}</label>
+                                                    <label class="muted">{vtranslate($FIELD_MODEL->get('label'), $MODULE)}{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}</label>
                                                 {/if}
                                             {else if $FIELD_MODEL->get('uitype') eq '83'}
 												{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE) COUNTER=$COUNTER MODULE=$MODULE PULL_RIGHT=true}
 												{if $TAXCLASS_DETAILS}
-                                                    {assign 'taxCount' count($TAXCLASS_DETAILS)%2}
+                                                    {assign var='taxCount' value=php7_count($TAXCLASS_DETAILS)%2}
 													{if $taxCount eq 0}
                                                         {if $COUNTER eq 2}
                                                             {assign var=COUNTER value=1}
@@ -92,7 +92,7 @@
                                             {if $isReferenceField neq "reference"}</label>{/if}
                                     </td>
                                     {if $FIELD_MODEL->get('uitype') neq '83'}
-                                        <td class="fieldValue col-lg-4" {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
+                                        <td class="fieldValue col-lg-3" {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
                                             {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
                                         </td>
                                     {/if}
@@ -102,17 +102,17 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <center>
+                   <div class='footer-btns'>
                         {if $BUTTON_NAME neq null}
                             {assign var=BUTTON_LABEL value=$BUTTON_NAME}
                         {else}
                             {assign var=BUTTON_LABEL value={vtranslate('LBL_SAVE', $MODULE)}}
                         {/if}
                         {assign var="EDIT_VIEW_URL" value=$MODULE_MODEL->getCreateRecordUrl()}
-                        <button class="btn btn-soft-secondary" id="goToFullForm" data-edit-view-url="{$EDIT_VIEW_URL}" type="button"><strong>{vtranslate('LBL_GO_TO_FULL_FORM', $MODULE)}</strong></button>
-                        <button {if $BUTTON_ID neq null} id="{$BUTTON_ID}" {/if} class="btn btn-soft-success" type="submit" name="saveButton"><strong>{$BUTTON_LABEL}</strong></button>
-                        <a href="#" class="cancelLink btn btn-soft-danger" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-                    </center>
+                        <button class="btn btn-default" id="goToFullForm" data-edit-view-url="{$EDIT_VIEW_URL}" type="button">{vtranslate('LBL_GO_TO_FULL_FORM', $MODULE)}</button>
+                        <button {if $BUTTON_ID neq null} id="{$BUTTON_ID}" {/if} class="btn btn-submit" type="submit" name="saveButton">{$BUTTON_LABEL}</button>
+                        <a href="#" class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                    </div>
                 </div>
             </form>
         </div>

@@ -11,22 +11,27 @@
 <div class="sidebar-widget-contents" name='calendarViewTypes'>
 	<div id="calendarview-feeds">
 		<ul class="list-group feedslist">
+			<li class="activitytype-indicator calendar-feed-indicator mass-edit-option" style="background-color:#2c3b49; color:#FFFFFF;">
+				<span>{vtranslate('LBL_MASS_SELECT')}</span>
+				<span class="activitytype-actions pull-right">
+					<input class="mass-select" type="checkbox">
+				</span>
+			</li>
 		{foreach item=VIEWINFO from=$VIEWTYPES['visible'] name=calendarview}
 			<li class="activitytype-indicator calendar-feed-indicator container-fluid" style="background-color: {$VIEWINFO['color']};">
-				<p>
+				<span>
 					{vtranslate($VIEWINFO['module'], $VIEWINFO['module'])} 
 					{if $VIEWINFO['conditions']['name'] neq ''} ({vtranslate($VIEWINFO['conditions']['name'],$MODULE)}) {/if}-
 					{vtranslate($VIEWINFO['fieldlabel'], $VIEWINFO['module'])}
-				</p>
-				<p class="activitytype-actions">
-				     <input class="toggleCalendarFeed cursorPointer" type="checkbox" data-calendar-sourcekey="{$VIEWINFO['module']}_{$VIEWINFO['fieldname']}{if $VIEWINFO['conditions']['name'] neq ''}_{$VIEWINFO['conditions']['name']}{/if}" data-calendar-feed="{$VIEWINFO['module']}" 
+				</span>
+				<span class="activitytype-actions pull-right">
+					<input class="toggleCalendarFeed cursorPointer" type="checkbox" data-calendar-sourcekey="{$VIEWINFO['module']}_{$VIEWINFO['fieldname']}{if $VIEWINFO['conditions']['name'] neq ''}_{$VIEWINFO['conditions']['name']}{/if}" data-calendar-feed="{$VIEWINFO['module']}" 
 						   data-calendar-feed-color="{$VIEWINFO['color']}" data-calendar-fieldlabel="{vtranslate($VIEWINFO['fieldlabel'], $VIEWINFO['module'])}" 
 						   data-calendar-fieldname="{$VIEWINFO['fieldname']}" title="{vtranslate($VIEWINFO['module'],$VIEWINFO['module'])}" data-calendar-type="{$VIEWINFO['type']}" 
-						   data-calendar-feed-textcolor="white" data-calendar-feed-conditions='{$VIEWINFO['conditions']['rules']}' />
-					&nbsp;&nbsp;
-					<i class="fa fa-pencil editCalendarFeedColor cursorPointer btn btn-soft-blue" title="Edit"></i>&nbsp;&nbsp;
-					<i class="fa fa-trash deleteCalendarFeed cursorPointer btn btn-soft-danger" title="Delete"></i>
-				</p>
+						   data-calendar-feed-textcolor="white" data-calendar-feed-conditions='{$VIEWINFO['conditions']['rules']}' />&nbsp;&nbsp;
+					<i class="fa fa-pencil editCalendarFeedColor cursorPointer"></i>&nbsp;&nbsp;
+					<i class="fa fa-trash deleteCalendarFeed cursorPointer"></i>
+				</span>
 			</li>
 		{/foreach}
 		</ul>
@@ -39,15 +44,15 @@
 		{*end*}
 		<ul class="hide dummy">
 			<li class="activitytype-indicator calendar-feed-indicator feed-indicator-template container-fluid">
-				<p></p>
-				<p class="activitytype-actions ">
+				<span></span>
+				<span class="activitytype-actions pull-right">
 					<input class="toggleCalendarFeed cursorPointer" type="checkbox" data-calendar-sourcekey="" data-calendar-feed="" 
 						   data-calendar-feed-color="" data-calendar-fieldlabel="" 
 						   data-calendar-fieldname="" title="" data-calendar-type=""
 						   data-calendar-feed-textcolor="white">&nbsp;&nbsp;
-					<i class="fa fa-pencil editCalendarFeedColor cursorPointer btn btn-soft-blue" title="Edit"></i>&nbsp;&nbsp;
-					<i class="fa fa-trash deleteCalendarFeed cursorPointer btn btn-soft-danger" title="Delete"></i>
-				</p>
+					<i class="fa fa-pencil editCalendarFeedColor cursorPointer"></i>&nbsp;&nbsp;
+					<i class="fa fa-trash deleteCalendarFeed cursorPointer"></i>
+				</span>
 			</li>
 		</ul>
 	</div>

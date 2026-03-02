@@ -17,7 +17,7 @@
             <div class="list-menu-content">
                 <div class="list-group">   
                     <ul class="lists-menu" style="list-style-type: none; padding-left: 0px;">
-                        {if $MODULE_LIST|@count gt 0}
+                        {if $MODULE_LIST|php7_count gt 0}
                             {foreach item=MODULEMODEL from=$MODULE_LIST}
                                 <li style="font-size:12px;" class='listViewFilter {if $MODULEMODEL->getName() eq $SOURCE_MODULE}active{/if} '>
                                     <a class="filterName" href="index.php?module=RecycleBin&view=List&sourceModule={$MODULEMODEL->getName()}" >{vtranslate($MODULEMODEL->getName(), $MODULEMODEL->getName())}</a>

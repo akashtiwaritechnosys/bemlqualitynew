@@ -123,7 +123,7 @@ $( document ).ready(function() {
         </div>
         <table id="data_table">
 			<tr>
-				<th class="NoBackGround" colspan="{$PickListValues|@count + 2}">
+				<th class="NoBackGround" colspan="{$PickListValues|php7_count + 2}">
 					<h5>{$REPORT_LABEL}</h1>
 				</th>
 			</tr>

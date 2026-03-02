@@ -6,7 +6,7 @@
  * All Rights Reserved.
  * ****************************************************************************** */*}
 {strip}
-	<div class="main-container clearfix">
+	<div class="clearfix">
 		<div class="ExtensionscontentsDiv contentsDiv">
 			<div class="col-sm-12 col-xs-12" id="importModules">
 				<div class="contents tabbable row">

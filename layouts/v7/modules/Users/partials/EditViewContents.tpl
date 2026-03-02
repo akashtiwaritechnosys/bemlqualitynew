@@ -13,13 +13,13 @@
 {if !empty($PICKIST_DEPENDENCY_DATASOURCE)}
     <input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
 {/if}
-<div name='editContent'>
+<div name='editContent' class="user-edit-container">
     {foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator}
 		{if $BLOCK_LABEL neq 'LBL_CALENDAR_SETTINGS'}
-         {if $BLOCK_FIELDS|@count gt 0}
+         {if $BLOCK_FIELDS|php7_count gt 0}
              <div class="fieldBlockContainer" data-block="{$BLOCK_LABEL}">
                  <div>
-                     <h4>{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
+                     <h5>{vtranslate($BLOCK_LABEL, $MODULE)}</h5>
                  </div>
                  <hr >
                  <table class="table table-borderless">
@@ -28,13 +28,13 @@
                      {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
                          {assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
                          {assign var="refrenceList" value=$FIELD_MODEL->getReferenceList()}
-                         {assign var="refrenceListCount" value=count($refrenceList)}
+                         {assign var="refrenceListCount" value=php7_count($refrenceList)}
                          {if $FIELD_MODEL->getName() eq 'theme' or $FIELD_MODEL->getName() eq 'rowheight'}
                             <input type="hidden" name="{$FIELD_MODEL->getName()}" value="{$FIELD_MODEL->get('fieldvalue')}"/> 
                             {continue}
                          {/if}
                          {if $FIELD_MODEL->isEditable() eq true}
-                             {if $FIELD_MODEL->get('uitype') eq "19"}
+                             {if $FIELD_MODEL->get('uitype') eq "19" || $FIELD_MODEL->get('label') eq 'Signature'}
                                  {if $COUNTER eq '1'}
                                      <td></td><td></td></tr><tr>
                                      {assign var=COUNTER value=0}
@@ -46,8 +46,10 @@
                              {else}
                                  {assign var=COUNTER value=$COUNTER+1}
                              {/if}
-                             <td class="fieldLabel alignMiddle">
+                            <td>
                             
+                             <div class="fieldLabel alignMiddle">
+                             <label>
                              {if $isReferenceField eq "reference"}
                                  {if $refrenceListCount > 1}
                                      <select style="width: 140px;" class="select2 referenceModulesList">
@@ -62,11 +64,16 @@
                                  {vtranslate($FIELD_MODEL->get('label'), $MODULE)}
                              {/if}
                              &nbsp; {if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
-                         </td>
-                         <td  {if in_array($FIELD_MODEL->get('uitype'),array('19')) || $FIELD_MODEL->get('label') eq 'Signature'} class="fieldValue fieldValueWidth80" colspan="3" {assign var=COUNTER value=$COUNTER+1} {else} class="fieldValue" {/if}>
-                             {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
-                         </td>
-                         </tr>
+                             </label>
+                             </div>
+                             <div>
+                                <div  {if in_array($FIELD_MODEL->get('uitype'),array('19')) || $FIELD_MODEL->get('label') eq 'Signature'} class="fieldValue" colspan="3" {assign var=COUNTER value=$COUNTER+1} {else} class="fieldValue" {/if}>
+                                    {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
+                                </div>
+                             </div>
+                            </td>
+                         
+                        
                      {/if}
                      {/foreach}
                      {*If their are odd number of fields in edit then border top is missing so adding the check*}
@@ -77,7 +84,7 @@
                      </tr>
                  </table>
              </div>
-             <br>
+           
          {/if}
 		{/if}
      {/foreach}

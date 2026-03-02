@@ -10,23 +10,23 @@
 {strip}
 	<html lang="en">
 		<head>
-			<title>Vtiger CRM Setup</title>
+			<title>CRM Setup</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 			<link REL="SHORTCUT ICON" HREF="layouts/v7/skins/images/favicon.ico">
-			<link rel="stylesheet" href="libraries/bootstrap/css/bootstrap.css" type="text/css" media="screen" />
-			<link rel="stylesheet" href="libraries/bootstrap/css/bootstrap-responsive.css" type="text/css" media="screen">
+			<link rel="stylesheet" href="libraries/bootstrap-legacy/css/bootstrap.min.css" type="text/css" media="screen" />
+			<link rel="stylesheet" href="libraries/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" />
 			<style type="text/css">
 				{literal}
 					body{
-						font-family: "Lucida Grande", Tahoma, Verdana;
+						
 						background: #F4FAFC;
 						color : #555;
 						font-size: 13px;
 						min-height: 98%;
 					}
 					p{
-						font-family: "Lucida Grande", Tahoma,Verdana;
+						
 						font-size: 14px;
 					}
 					.offset2{
@@ -263,19 +263,11 @@
 				{/literal}
 			</script>
 			<div class="container-fluid page-container">
-				<div class="row-fluid">
-					<div class="span6">
-						<div class="logo">
-							<img src="test/logo/vtiger-crm-logo.png" alt="Vtiger Logo"/>
-						</div>
-					</div>
-					<div class="span6"></div>
-				</div>
 				<div class="row-fluid main-container">
 					<div class="span12 inner-container">
 						<div class="row-fluid">
 							<div class="span8">
-								<h3 style="display: inline-block;float:left;"> What would you like to use Vtiger CRM for? </h3> 
+								<h3 style="display: inline-block;float:left;"> What would you like to use CRM for? </h3> 
 								<p style="display: inline-block;float:left;margin-top:4px;">&nbsp;&nbsp;(Select features you want to enable)</p>
 							</div>
 							<div class="span4">
@@ -293,7 +285,7 @@
 										<div class="module_list"><a> View Modules </a></div>
 										<div class="row-fluid">
 											<div class="{if $COUNTER eq 0} span2 {else} span3 {/if}">
-												<img src="layouts/v7/skins/images/{$PACKAGE_INFO.imageName}" alt="Vtiger Logo"/>
+												<img src="layouts/v7/skins/images/{$PACKAGE_INFO.imageName}" alt=""/>
 											</div>
 											<div class="{if $COUNTER eq 0} span10 {else} span9 {/if}">
 												<div class="group-heading">
@@ -354,7 +346,7 @@
 								</div>
 								<div class="span3">
 									<div class="button-container">
-										<button type="submit" class="btn btn-large btn-soft-secondary next" value="Next"> Next </button>
+										<button type="submit" class="btn btn-large btn-primary next" value="Next"> Next </button>
 									</div>
 								</div>
 							</div>

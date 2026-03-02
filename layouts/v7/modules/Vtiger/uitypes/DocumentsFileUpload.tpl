@@ -27,17 +27,17 @@
 		<input type="text" class="inputElement {if $FIELD_MODEL->isNameField()}nameField{/if}" name="{$FIELD_MODEL->getFieldName()}"
             value="{if $IS_EXTERNAL_LOCATION_TYPE}{$FIELD_VALUE}{/if}" {if !empty($SPECIAL_VALIDATOR)} data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}' {/if} 
             {if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
-            {if count($FIELD_INFO['validator'])} 
+            {if php7_count($FIELD_INFO['validator'])} 
                 data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
             {/if}
             />
 	{else}
         <div class="fileUploadBtn btn btn-primary">
-            <span><i class="fa fa-laptop"></i> {vtranslate('LBL_UPLOAD', $MODULE)}</span>
+            <span><i class="fa fa-upload"></i> {vtranslate('LBL_UPLOAD', $MODULE)}</span>
             <input type="file" class="inputElement {if $FIELD_MODEL->isNameField()}nameField{/if}" name="{$FIELD_MODEL->getFieldName()}"
                 value="{if $IS_INTERNAL_LOCATION_TYPE} {$FIELD_VALUE} {/if}" {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if} {if $IS_INTERNAL_LOCATION_TYPE && !empty($FIELD_VALUE)} style="width:86px;" {/if} 
                 {if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
-                {if count($FIELD_INFO['validator'])} 
+                {if php7_count($FIELD_INFO['validator'])} 
                     data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
                 {/if}
                 />

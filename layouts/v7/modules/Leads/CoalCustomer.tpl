@@ -147,7 +147,7 @@
                 {foreach item=INNER_VALUE key=INNER_KEY from=$NAME_FIELD name=foo}
                     <tr>
                         {if $smarty.foreach.foo.first}
-                            <th colspan="{(($PickListValues|@count) * 3)  + 2}" style="font-weight: 900" class="NoBackGround">
+                            <th colspan="{(($PickListValues|php7_count) * 3)  + 2}" style="font-weight: 900" class="NoBackGround">
                                 {$KEY_FIELD}
                             </th>
                         {/if}

@@ -30,7 +30,7 @@
 				{include file="modules/Vtiger/partials/SidebarEssentials.tpl"}
 			</div>
 		</div>
-		<div class="app-menu hide abc" id="app-menu">
+		<div class="app-menu hide" id="app-menu">
 			<div class="container-fluid">
 				<div class="row moduleList">
 					{assign var=HOME_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Home')}

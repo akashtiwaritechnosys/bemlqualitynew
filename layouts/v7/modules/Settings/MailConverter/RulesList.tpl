@@ -9,15 +9,14 @@
 
 {strip}
 	<div class="listViewContentDiv col-lg-12">
-		<h4>{vtranslate($MODULE, $QUALIFIED_MODULE)}</h4>
-		<hr>
+		{*<h4 class='mail-converter'>{vtranslate($MODULE, $QUALIFIED_MODULE)}</h4>*}
 		{if !$RECORD_EXISTS}
 			<div class="mailConveterDesc">
-				<center><br><br>
-					<div>{vtranslate('LBL_MAILCONVERTER_DESCRIPTION', $QUALIFIED_MODULE)}</div>
-					<img src="{vimage_path('MailConverter.png')}" alt="Mail Converter"><br><br>
-					<a onclick="window.location.href='{$MODULE_MODEL->getCreateRecordUrl()}'" style="color: #15c !important;"><u class="cursorPointer" style="font-size:12pt;">{vtranslate('LBL_CREATE_MAILBOX_NOW', $QUALIFIED_MODULE)}</u></a>
-					<br><br>
+				<center>
+					<div><p>{vtranslate('LBL_MAILCONVERTER_DESCRIPTION', $QUALIFIED_MODULE)}</p></div>
+					<div><img src="{vimage_path('MailConverter.png')}" alt="Mail Converter" style="width:70%" ></div>
+					<div><a class="btn marginTop15px" onclick="window.location.href='{$MODULE_MODEL->getCreateRecordUrl()}'">{vtranslate('LBL_CREATE_MAILBOX_NOW', $QUALIFIED_MODULE)}</a></div>
+					
 				</center>
 			</div>
 		{else}
@@ -72,7 +71,7 @@
 			<div id="mailConverterBody" class="col-lg-12">
 				<br>
 				<div id="rulesList">
-					{if count($RULE_MODELS_LIST)}
+					{if php7_count($RULE_MODELS_LIST)}
 						{assign var=RULE_COUNT value=1}
 						{assign var=FIELDS value=$MODULE_MODEL->getSetupRuleFields()}
 						{foreach from=$RULE_MODELS_LIST item=RULE_MODEL}

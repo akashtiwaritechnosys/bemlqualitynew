@@ -50,16 +50,16 @@
             <div class = "col-lg-3 col-md-3 col-sm-3">
                 {foreach item=DETAIL_VIEW_BASIC_LINK from=$DETAILVIEW_LINKS['DETAILVIEWBASIC']}
                     {if $MODULE_NAME eq 'Documents' && $DETAIL_VIEW_BASIC_LINK->getLabel() eq 'LBL_VIEW_FILE'}
-                        <button class="btn btn-soft-secondary" id="{$MODULE_NAME}_detailView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel())}"
+                        <button class="btn btn-submit" id="{$MODULE_NAME}_detailView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel())}"
                                 onclick="{$DETAIL_VIEW_BASIC_LINK->getUrl()}"
                                 data-filelocationtype="{$DETAIL_VIEW_BASIC_LINK->geszzt('filelocationtype')}"
                                 data-filename="{$DETAIL_VIEW_BASIC_LINK->get('filename')}">{vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE_NAME)}
                         </button>
                     {/if}
                 {/foreach}
-                <button class="btn btn-soft-secondary moreDetailsButton" value = "{$RECORD->getDetailViewUrl()}">{vtranslate('LBL_DETAILS',$MODULE_NAME)}</button>
-                <button class="btn btn-soft-primary editRelatedRecord" value = "{$RECORD->getEditViewUrl()}">{vtranslate('LBL_EDIT',$MODULE_NAME)}</button>
-                <button type="button" class="close btn btn-soft-danger" aria-label="Close" data-dismiss="modal">
+                <button class="btn btn-submit moreDetailsButton" value = "{$RECORD->getDetailViewUrl()}">{vtranslate('LBL_DETAILS',$MODULE_NAME)}</button>
+                <button class="btn btn-submit editRelatedRecord" value = "{$RECORD->getEditViewUrl()}">{vtranslate('LBL_EDIT',$MODULE_NAME)}</button>
+                <button type="button" class="close" aria-label="Close" data-dismiss="modal">
                 <span aria-hidden="true" class='fa fa-close'></span>
                 </button>
             </div>

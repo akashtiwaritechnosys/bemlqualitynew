@@ -15,18 +15,18 @@
             <div class="quickPreviewModuleHeader row">
                 <div class = "col-lg-10">
                     <div class="row qp-heading">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-lg-5 col-md-6 col-sm-6">
                             <div class="record-header clearfix">
                                 <div class="hidden-sm hidden-xs recordImage">
                                     <div class="name"><span class='fa fa-bar-chart'></span></div>
                                 </div>
                                 <div class="recordBasicInfo">
                                     <div class="info-row">
-                                        <h4>
-                                            <span class="recordLabel pushDown" title="">
+                                        <div>
+                                            <h4 class="recordLabel pushDown" title="">
                                                 {$REPORT_MODEL->get('reportname')}
-                                            </span>
-                                        </h4>
+                                            </h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

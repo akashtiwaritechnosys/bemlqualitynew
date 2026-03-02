@@ -13,18 +13,11 @@
 <div class="dashboardWidgetHeader">
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
-<div class="dashboardWidgetContent">
-	{include file="dashboards/DashBoardWidgetContents.tpl"|@vtemplate_path:$MODULE_NAME}
+<div id="FunnelAmount" class="dashboardWidgetContent">
+	{include file="dashboards/DashBoardWidgetContentsNewDashboard.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 <div class="widgeticons dashBoardWidgetFooter">
     <div class="footerIcons pull-right">
         {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME}
     </div>
 </div>
-
-
-{literal}
-<script type="text/javascript">
-	Vtiger_Barchat_Widget_Js('Vtiger_FunnelAmount_Widget_Js',{},{});
-</script>
-{/literal}

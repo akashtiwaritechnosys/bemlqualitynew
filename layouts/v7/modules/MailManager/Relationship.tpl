@@ -7,7 +7,7 @@
  * All Rights Reserved.
  ************************************************************************************}
 {strip}
-    {if $LINKEDTO}
+    {if isset($LINKEDTO) && $LINKEDTO}
         <div class='col-lg-12 padding0px'>
             <div class="col-lg-7 padding0px recordScroll" >
                 <span class="col-lg-12 padding0px">
@@ -20,7 +20,7 @@
                 </span>
             </div>
             <div class="pull-left col-lg-5 ">
-                {if $LINK_TO_AVAILABLE_ACTIONS|count neq 0}
+                {if $LINK_TO_AVAILABLE_ACTIONS|php7_count neq 0}
                     <select name="_mlinktotype"  id="_mlinktotype" data-action='associate'
                             style="background: #FFFFFF url('layouts/v7/skins/images/arrowdown.png') no-repeat 95% 40%;">
                         <option value="">{vtranslate('LBL_ACTIONS',$MODULE)}</option>
@@ -66,7 +66,7 @@
             </div>
             <div class="pull-left col-lg-5 ">
                 {if $LOOKRECATLEASTONE}
-                    {if $LINK_TO_AVAILABLE_ACTIONS|count neq 0}
+                    {if $LINK_TO_AVAILABLE_ACTIONS|php7_count neq 0}
                         <select name="_mlinktotype"  id="_mlinktotype" data-action='associate'
                                 style="background: #FFFFFF url('layouts/v7/skins/images/arrowdown.png') no-repeat 95% 40%;">
                             <option value="">{vtranslate('LBL_ACTIONS',$MODULE)}</option>
@@ -81,7 +81,7 @@
                         </select>
                     {/if}
                 {else}
-                    {if $ALLOWED_MODULES|count neq 0}
+                    {if $ALLOWED_MODULES|php7_count neq 0}
                         <select name="_mlinktotype"  id="_mlinktotype" data-action='create'
                                 style="background: #FFFFFF url('layouts/v7/skins/images/arrowdown.png') no-repeat 95% 40%;">
                             <option value="">{vtranslate('LBL_ACTIONS','MailManager')}</option>
@@ -99,11 +99,11 @@
             </div>
         </div>
     {else}
-        {if $LINKEDTO eq ""}
+        {if isset($LINKEDTO) && $LINKEDTO eq ""}
             <div class="col-lg-12 padding0px">
                 <div class="col-lg-7 padding0px recordScroll" >&nbsp;</div>
                 <div class="pull-left col-lg-5">
-                    {if $ALLOWED_MODULES|count neq 0}
+                    {if $ALLOWED_MODULES|php7_count neq 0}
                         <select name="_mlinktotype"  id="_mlinktotype" data-action='create'
                                 style="background: #FFFFFF url('layouts/v7/skins/images/arrowdown.png') no-repeat 95% 40%;">
                             <option value="">{vtranslate('LBL_ACTIONS','MailManager')}</option>

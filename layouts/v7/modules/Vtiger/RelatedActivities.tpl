@@ -20,12 +20,12 @@
 			</button>
 			</div>*}
 			{assign var=CALENDAR_MODEL value = Vtiger_Module_Model::getInstance('Calendar')}
-			<div class="pull-right" style="margin-top: -5px;">
+			<div class="pull-left" style="display:flex; gap:10px;">
 				{if $CALENDAR_MODEL->isPermitted('CreateView')}
-					<button class="btn addButton btn-sm btn-soft-info createActivity toDotask textOverflowEllipsis max-width-100" title="{vtranslate('LBL_ADD_TASK',$MODULE_NAME)}" type="button" href="javascript:void(0)" data-url="sourceModule={$RECORD->getModuleName()}&sourceRecord={$RECORD->getId()}&relationOperation=true" >
+					<button class="btn addButton btn-sm btn-default createActivity toDotask textOverflowEllipsis max-width-100" title="{vtranslate('LBL_ADD_TASK',$MODULE_NAME)}" type="button" href="javascript:void(0)" data-url="sourceModule={$RECORD->getModuleName()}&sourceRecord={$RECORD->getId()}&relationOperation=true" >
 						<i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD_TASK',$MODULE_NAME)}
-					</button>&nbsp;&nbsp;
-					<button class="btn addButton btn-sm btn-soft-blue createActivity textOverflowEllipsis max-width-100" title="{vtranslate('LBL_ADD_EVENT',$MODULE_NAME)}" data-name="Events"
+					</button>
+					<button class="btn addButton btn-sm btn-default createActivity textOverflowEllipsis max-width-100" title="{vtranslate('LBL_ADD_EVENT',$MODULE_NAME)}" data-name="Events"
 							data-url="index.php?module=Events&view=QuickCreateAjax" href="javascript:void(0)" type="button">
 						<i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD_EVENT',$MODULE_NAME)}
 					</button>
@@ -34,7 +34,7 @@
 			{assign var=SOURCE_MODEL value=$RECORD}
 		</div>
 		<div class="widget_contents">
-			{if count($ACTIVITIES) neq '0'}
+			{if php7_count($ACTIVITIES) neq '0'}
 				{foreach item=RECORD key=KEY from=$ACTIVITIES}
 					{assign var=START_DATE value=$RECORD->get('date_start')}
 					{assign var=START_TIME value=$RECORD->get('time_start')}
@@ -45,20 +45,20 @@
 						<input type="hidden" class="activityId" value="{$RECORD->get('activityid')}"/>
 						<div class='media'>
 							<div class='row'>
-								<div class='media-left module-icon col-lg-1 col-md-1 col-sm-1 textAlignCenter'>
+								<div class='module-icon col-lg-1 col-md-1 col-sm-1 textAlignCenter'>
 									<span class='vicon-{strtolower($RECORD->get('activitytype'))}'></span>
 								</div>
-								<div class='media-body col-lg-7 col-md-7 col-sm-7'>
+								<div class='col-lg-7 col-md-7 col-sm-7'>
 									<div class="summaryViewEntries">
-										{if $DETAILVIEW_PERMITTED == 'yes'}<a href="{$RECORD->getDetailViewUrl()}" title="{$RECORD->get('subject')}">{$RECORD->get('subject')}</a>{else}{$RECORD->get('subject')}{/if}&nbsp;&nbsp;
+										{if $DETAILVIEW_PERMITTED == 'yes'}<a href="{$RECORD->getDetailViewUrl()}" title="{$RECORD->get('subject')}"><span class="marginRight10px">{$RECORD->get('subject')}</span></a>{else}{$RECORD->get('subject')}{/if}
 										{if $EDITVIEW_PERMITTED == 'yes'}<a href="{$RECORD->getEditViewUrl()}&sourceModule={$SOURCE_MODEL->getModuleName()}&sourceRecord={$SOURCE_MODEL->getId()}&relationOperation=true" class="fieldValue"><i class="summaryViewEdit fa fa-pencil" title="{vtranslate('LBL_EDIT',$MODULE_NAME)}"></i></a>{/if}&nbsp;
 										{if $DELETE_PERMITTED == 'yes'}<a onclick="Vtiger_Detail_Js.deleteRelatedActivity(event);" data-id="{$RECORD->getId()}" data-recurring-enabled="{$RECORD->isRecurringEnabled()}" class="fieldValue"><i class="summaryViewEdit fa fa-trash " title="{vtranslate('LBL_DELETE',$MODULE_NAME)}"></i></a>{/if}
 									</div>
-								<span><strong title="{Vtiger_Util_Helper::formatDateTimeIntoDayString("$START_DATE $START_TIME")}">{Vtiger_Util_Helper::formatDateIntoStrings($START_DATE, $START_TIME)}</strong></span>
+								<div><span title="{Vtiger_Util_Helper::formatDateTimeIntoDayString("$START_DATE $START_TIME")}">{Vtiger_Util_Helper::formatDateIntoStrings($START_DATE, $START_TIME)}</span></div>
 							</div>
 
 							<div class='col-lg-4 col-md-4 col-sm-4 activityStatus' style='line-height: 0px;padding-right:30px;'>
-								<div class="row">
+								<div class="">
 									{if $RECORD->get('activitytype') eq 'Task'}
 										{assign var=MODULE_NAME value=$RECORD->getModuleName()}
 										<input type="hidden" class="activityModule" value="{$RECORD->getModuleName()}"/>
@@ -75,7 +75,7 @@
 														}
 												{/foreach}
 											</style>
-											<strong><span class="value picklist-color picklist-{$FIELD_MODEL->getId()}-{Vtiger_Util_Helper::convertSpaceToHyphen($RECORD->get('status'))}">{vtranslate($RECORD->get('status'),$MODULE_NAME)}</span></strong>&nbsp&nbsp;
+											<span class="value picklist-color picklist-{$FIELD_MODEL->getId()}-{Vtiger_Util_Helper::convertSpaceToHyphen($RECORD->get('status'))}" style="padding-left:0px">{vtranslate($RECORD->get('status'),$MODULE_NAME)}</span>
 											{if $EDITVIEW_PERMITTED == 'yes'}
 												<span class="editStatus cursorPointer"><i class="fa fa-pencil" title="{vtranslate('LBL_EDIT',$MODULE_NAME)}"></i></span>
 												<span class="edit hide">
@@ -113,8 +113,8 @@
 														<input type="hidden" class="fieldname" value='{$FIELD_MODEL->get('name')}' data-prev-value='{$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'))}' />
 													{/if}
 												</span>
-											</div>
-										{/if}
+                                                                                        {/if}
+                                                                                    </div>
 									{/if}
 								</div>
 							</div>

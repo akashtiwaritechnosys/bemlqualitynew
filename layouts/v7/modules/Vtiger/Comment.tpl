@@ -7,6 +7,8 @@
  * All Rights Reserved.
  ************************************************************************************}
 {strip}
+	{assign var="PRIVATE_COMMENT_MODULES" value=Vtiger_Functions::getPrivateCommentModules()}
+	
 	<div class="commentDiv {if $COMMENT->get('is_private')}privateComment{/if}">
 		<div class="singleComment">
 			<input type="hidden" name="is_private" value="{$COMMENT->get('is_private')}">
@@ -19,13 +21,13 @@
 					<div class="col-lg-12">
 						<div class="media">
 							<div class="media-left title" id="{$COMMENT->getId()}">
-								{assign var=CREATOR_NAME value=$COMMENT->getCommentedByName()}
+								{assign var=CREATOR_NAME value={decode_html($COMMENT->getCommentedByName())}}
 								<div class="col-lg-2 recordImage commentInfoHeader" style ="width:50px; height:50px; font-size: 30px;" data-commentid="{$COMMENT->getId()}" data-parentcommentid="{$COMMENT->get('parent_comments')}" data-relatedto = "{$COMMENT->get('related_to')}">
 									{assign var=IMAGE_PATH value=$COMMENT->getImagePath()}
 									{if !empty($IMAGE_PATH)}
 										<img src="{$IMAGE_PATH}" width="100%" height="100%" align="left">
 									{else}
-										<div class="name"><span><strong> {$CREATOR_NAME|substr:0:2} </strong></span></div>
+										<div class="name"><p> {$CREATOR_NAME|substr:0:2} </p></div>
 									{/if}
 								</div>
 							</div>
@@ -34,7 +36,7 @@
 									<span class="creatorName" style="color:blue">
 										{$CREATOR_NAME}
 									</span>&nbsp;&nbsp;
-									{if $ROLLUP_STATUS and $COMMENT->get('module') ne $MODULE_NAME}
+									{if isset ($ROLLUP_STATUS) && $ROLLUP_STATUS and $COMMENT->get('module') ne $MODULE_NAME}
 										{assign var=SINGULR_MODULE value='SINGLE_'|cat:$COMMENT->get('module')}
 										{assign var=ENTITY_NAME value=getEntityName($COMMENT->get('module'), array($COMMENT->get('related_to')))}
 										<span class="text-muted">
@@ -47,7 +49,18 @@
 									{/if}
 									<span class="commentTime text-muted cursorDefault">
 										<small title="{Vtiger_Util_Helper::formatDateTimeIntoDayString($COMMENT->getCommentedTime())}">{Vtiger_Util_Helper::formatDateDiffInStrings($COMMENT->getCommentedTime())}</small>
-									</span>
+									</span>&nbsp;&nbsp;
+									
+									{if in_array($MODULE_NAME, $PRIVATE_COMMENT_MODULES)}
+										<span>
+											{if $COMMENT->get('is_private')}
+												<i class="fa fa-lock" data-toggle="tooltip" data-placement="top" data-original-title="{vtranslate('LBL_INTERNAL_COMMENT_TOOTLTIP',$MODULE)}"></i>
+											{else}
+												<i class="fa fa-unlock" data-toggle="tooltip" data-placement="top" data-original-title="{vtranslate('LBL_EXTERNAL_COMMENT_TOOTLTIP',$MODULE)}"></i>
+											{/if}
+										</span>
+									{/if}
+									
 									<div class="commentInfoContentBlock">
 										<span class="commentInfoContent">
 											{nl2br($COMMENT->get('commentcontent'))}
@@ -56,12 +69,12 @@
 									<br>
 									<div class="commentActionsContainer">
 										<span class="commentActions">
-											{if $CHILDS_ROOT_PARENT_MODEL}
+											{if isset ($CHILDS_ROOT_PARENT_MODEL) && $CHILDS_ROOT_PARENT_MODEL}
 												{assign var=CHILDS_ROOT_PARENT_ID value=$CHILDS_ROOT_PARENT_MODEL->getId()}
 											{/if}
 
 											{if $COMMENTS_MODULE_MODEL->isPermitted('EditView')}
-												{if $CHILDS_ROOT_PARENT_MODEL}
+												{if isset ($CHILDS_ROOT_PARENT_MODEL) && $CHILDS_ROOT_PARENT_MODEL}
 													{assign var=CHILDS_ROOT_PARENT_ID value=$CHILDS_ROOT_PARENT_MODEL->getId()}
 												{/if}
 												<a href="javascript:void(0);" class="cursorPointer replyComment feedback" style="color: blue;">
@@ -76,7 +89,7 @@
 											{/if}
 
 											{assign var=CHILD_COMMENTS_COUNT value=$COMMENT->getChildCommentsCount()}
-											{if $CHILD_COMMENTS_MODEL neq null and ($CHILDS_ROOT_PARENT_ID neq $PARENT_COMMENT_ID)}
+											{if $CHILD_COMMENTS_MODEL neq null and (isset($CHILDS_ROOT_PARENT_ID)&& $CHILDS_ROOT_PARENT_ID neq $PARENT_COMMENT_ID)}
 												{if $COMMENTS_MODULE_MODEL->isPermitted('EditView')}&nbsp;&nbsp;&nbsp;{/if}
 												<span class="viewThreadBlock" data-child-comments-count="{$CHILD_COMMENTS_COUNT}">
 													<a href="javascript:void(0)" class="cursorPointer viewThread" style="color: blue;">
@@ -88,7 +101,7 @@
 														<span class="childCommentsCount">{$CHILD_COMMENTS_COUNT}</span>&nbsp;{if $CHILD_COMMENTS_COUNT eq 1}{vtranslate('LBL_REPLY',$MODULE_NAME)}{else}{vtranslate('LBL_REPLIES',$MODULE_NAME)}{/if}&nbsp;
 													</a>
 												</span>
-											{elseif $CHILD_COMMENTS_MODEL neq null and ($CHILDS_ROOT_PARENT_ID eq $PARENT_COMMENT_ID)}
+											{elseif $CHILD_COMMENTS_MODEL neq null and (isset($CHILDS_ROOT_PARENT_ID)&& $CHILDS_ROOT_PARENT_ID eq $PARENT_COMMENT_ID)}
 												{if $COMMENTS_MODULE_MODEL->isPermitted('EditView')}&nbsp;&nbsp;&nbsp;{/if}
 												<span class="viewThreadBlock" data-child-comments-count="{$CHILD_COMMENTS_COUNT}" style="display:none;">
 													<a href="javascript:void(0)" class="cursorPointer viewThread" style="color: blue;">

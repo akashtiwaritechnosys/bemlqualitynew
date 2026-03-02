@@ -1,3 +1,11 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
 
 Vtiger.Class("Vtiger_DashBoard_Js",{
 
@@ -24,6 +32,121 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 	},
 
 	addMiniListWidget: function(element, url) {
+		// 1. Show popup window for selection (module, filter, fields)
+		// 2. Compute the dynamic mini-list widget url
+		// 3. Add widget with URL to the page.
+
+		element = jQuery(element);
+
+		app.request.post({"url":"index.php?module=Home&view=MiniListWizard&step=step1"}).then(function(err,res){
+			var callback = function(data){
+				var wizardContainer = jQuery(data);
+				var form = jQuery('form', wizardContainer);
+
+				var moduleNameSelectDOM = jQuery('select[name="module"]', wizardContainer);
+				var filteridSelectDOM = jQuery('select[name="filterid"]', wizardContainer);
+				var fieldsSelectDOM = jQuery('select[name="fields"]', wizardContainer);
+
+				var moduleNameSelect2 = vtUtils.showSelect2ElementView(moduleNameSelectDOM, {
+					placeholder: app.vtranslate('JS_SELECT_MODULE')
+				});
+				var filteridSelect2 = vtUtils.showSelect2ElementView(filteridSelectDOM,{
+					placeholder: app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION')
+				});
+				var fieldsSelect2 = vtUtils.showSelect2ElementView(fieldsSelectDOM, {
+					placeholder: app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION'),
+					closeOnSelect: true,
+					maximumSelectionSize: 2
+				});
+				var footer = jQuery('.modal-footer', wizardContainer);
+
+				filteridSelectDOM.closest('tr').hide();
+				fieldsSelectDOM.closest('tr').hide();
+				footer.hide();
+
+				moduleNameSelect2.change(function(){
+					if (!moduleNameSelect2.val()) return;
+
+					var moduleNameSelect2Params = {
+						module: 'Home',
+						view: 'MiniListWizard',
+						step: 'step2',
+						selectedModule: moduleNameSelect2.val()
+					};
+
+					app.request.post({"data":moduleNameSelect2Params}).then(function(err,res) {
+						filteridSelectDOM.empty().html(res).trigger('change');
+						filteridSelect2.closest('tr').show();
+						fieldsSelect2.closest('tr').hide();
+						footer.hide();
+					})
+				});
+				filteridSelect2.change(function(){
+					if (!filteridSelect2.val()) return;
+
+					var selectedModule = moduleNameSelect2.val();
+					var filteridSelect2Params = {
+						module: 'Home',
+						view: 'MiniListWizard',
+						step: 'step3',
+						selectedModule: selectedModule,
+						filterid: filteridSelect2.val()
+					};
+
+					app.request.post({"data":filteridSelect2Params}).then(function(err,res){
+						fieldsSelectDOM.empty().html(res).trigger('change');
+						var translatedModuleNames = JSON.parse(jQuery("#minilistWizardContainer").find("#translatedModuleNames").val());
+						var fieldsLabelText = app.vtranslate('JS_EDIT_FIELDS', translatedModuleNames[selectedModule], translatedModuleNames[selectedModule]);
+						fieldsSelect2.closest('tr').find('.fieldLabel label').text(fieldsLabelText);
+						fieldsSelect2.closest('tr').show();
+					});
+				});
+				fieldsSelect2.change(function() {
+					if (!fieldsSelect2.val()) {
+						footer.hide();
+					} else {
+						footer.show();
+					}
+				});
+
+				form.submit(function(e){
+					e.preventDefault();
+					//To disable savebutton after one submit to prevent multiple submits
+					jQuery("[name='saveButton']").attr('disabled','disabled');
+					var selectedModule = moduleNameSelect2.val();
+					var selectedFilterId= filteridSelect2.val();
+					var selectedFields = fieldsSelect2.val();
+					if (typeof selectedFields != 'object') selectedFields = [selectedFields];
+
+					// TODO mandatory field validation
+
+					finializeAdd(selectedModule, selectedFilterId, selectedFields);
+				});
+			}
+			app.helper.showModal(res,{"cb":callback});
+		});
+
+		function finializeAdd(moduleName, filterid, fields) {
+			var data = {
+				module: moduleName
+			}
+			if (typeof fields != 'object') fields = [fields];
+			data['fields'] = fields;
+
+			url += '&filterid='+filterid+'&data=' + JSON.stringify(data);
+			var linkId = element.data('linkid');
+			var name = element.data('name');
+			var widgetContainer = jQuery('<li class="new dashboardWidget loadcompleted" id="'+ linkId +"-" + filterid +'" data-name="'+name+'" data-mode="open"></li>');
+			widgetContainer.data('url', url);
+			var width = element.data('width');
+			var height = element.data('height');
+			Vtiger_DashBoard_Js.gridster.add_widget(widgetContainer, width, height);
+			Vtiger_DashBoard_Js.currentInstance.loadWidget(widgetContainer);
+			app.helper.hideModal();
+		}
+	},
+
+	addCardWidget : function(element, url) {
 		// 1. Show popup window for selection (module, filter, fields)
 		// 2. Compute the dynamic mini-list widget url
 		// 3. Add widget with URL to the page.
@@ -248,12 +371,15 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 
 		if (_device_width < 480) {
 			gridWidth = 1;
-		} else if (_device_width >= 480 && _device_width < 768) {
+		} else if (_device_width >= 480 && _device_width < 767) {
 			gridWidth = 1;
 		} else if (_device_width >= 768 && _device_width < 992) {
-			gridWidth = 2;
-		} else if (_device_width >= 992 && _device_width < 1440) {
+			gridWidth = 1;
+		} else if (_device_width >= 992 && _device_width < 1024) {
 			gridWidth = 3;
+		}
+		 else if (_device_width >= 1025 && _device_width < 1440) {
+			gridWidth = 4;
 		} else {
 			gridWidth = 4;
 		}
@@ -716,8 +842,8 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 										var tabEle = '<li class="dashboardTab" data-tabid="'+tabid+'" data-tabname="'+tabname+'">';
 										tabEle += '<a data-toggle="tab" href="#tab_'+tabid+'">\n\
 														<div>\n\
-															<span class="name textOverflowEllipsis" value="'+tabname+'" style="width:10%">\n\
-															<strong>'+tabname+'</strong>\n\
+															<span class="name textOverflowEllipsis" style="width:10%">\n\
+															<strong></strong>\n\
 															</span>\n\
 															<span class="editTabName hide"><input type="text" name="tabName"></span>\n\
 															<i class="fa fa-close deleteTab"></i>\n\
@@ -995,4 +1121,21 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		});
 		app.event.trigger("post.DashBoardTab.load");
 	}
+
+	
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+	var element = document.querySelector("ul.test");
+	if (element) {
+	  element.style.width = "";
+	  element.style.height = "";
+	  element.style.position = "";
+	}
+  });
+
+  window.addEventListener('load', () => {
+    const content = document.querySelector('.main-dashboard-content');
+    content.style.height = content.scrollHeight + 'px';
+  });

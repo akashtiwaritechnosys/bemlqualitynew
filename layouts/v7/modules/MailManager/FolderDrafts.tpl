@@ -19,10 +19,10 @@
         <span class="col-lg-5 padding0px">
             <span class="pull-right">
                 {if $FOLDER->mails()}<span>{$FOLDER->pageInfo()}&nbsp;&nbsp;</span>{/if}
-                <button type="button" id="PreviousPageButton" class="btn btn-soft-secondary marginRight0px" {if $FOLDER->hasPrevPage()}data-page='{$FOLDER->pageCurrent(-1)}'{else}disabled="disabled"{/if}>
+                <button type="button" id="PreviousPageButton" class="btn btn-default marginRight0px" {if $FOLDER->hasPrevPage()}data-page='{$FOLDER->pageCurrent(-1)}'{else}disabled="disabled"{/if}>
                     <i class="fa fa-caret-left"></i>
                 </button>
-                <button type="button" id="NextPageButton" class="btn btn-soft-secondary" {if $FOLDER->hasNextPage()} data-page='{$FOLDER->pageCurrent(1)}'{else}disabled="disabled"{/if}>
+                <button type="button" id="NextPageButton" class="btn btn-default" {if $FOLDER->hasNextPage()} data-page='{$FOLDER->pageCurrent(1)}'{else}disabled="disabled"{/if}>
                     <i class="fa fa-caret-right"></i>
                 </button>
             </span>

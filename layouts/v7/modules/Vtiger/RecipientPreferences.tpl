@@ -36,10 +36,10 @@
 						</div>
 					</div>
 					<div class='modal-footer'>
-						<center>
-							<button class="btn btn-soft-success savePreference" type="submit" name="savePreference"><strong>{vtranslate('LBL_SAVE', $MODULE)}</strong></button>
-							<a class="cancelLink btn btn-soft-danger" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-						</center>
+						<div class='footer-btns'>
+							<button class="btn btn-submit savePreference" type="submit" name="savePreference">{vtranslate('LBL_SAVE', $MODULE)}</button>
+							<a class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+						</div>
 					</div>
 				</form>
 			</div>

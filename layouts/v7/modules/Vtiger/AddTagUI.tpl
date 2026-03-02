@@ -40,16 +40,19 @@
                                         <div class="dropdown-menu currentTagMenu">
                                             <div class="scrollable" style="max-height:300px">
                                                 <ul style="padding-left:0px;">
-                                                {foreach item=TAG_MODEL from=$ALL_USER_TAGS}
-                                                    {if array_key_exists($TAG_MODEL->getId(), $TAGS_LIST)}
-                                                        {continue}
-                                                    {/if} 
-                                                    <li class="tag-item list-group-item">
-                                                        <a style="margin-left:0px;">
-                                                            {include file="Tag.tpl"|vtemplate_path:$MODULE NO_DELETE=true NO_EDIT=true}
-                                                        </a>
-                                                    </li>
-                                                {/foreach}
+                                                {if isset($ALL_USER_TAGS)}
+                                                    {foreach item=TAG_MODEL from=$ALL_USER_TAGS}
+                                                        {if array_key_exists($TAG_MODEL->getId(), $TAGS_LIST)}
+                                                            {continue}
+                                                        {/if} 
+                                                        <li class="tag-item list-group-item">
+                                                            <a style="margin-left:0px;">
+                                                                {include file="Tag.tpl"|vtemplate_path:$MODULE NO_DELETE=true NO_EDIT=true}
+                                                            </a>
+                                                        </li>
+                                                    {/foreach}
+                                                {/if}
+                                           
                                                 <li class="dummyExistingTagElement tag-item list-group-item hide">
                                                     <a style="margin-left:0px;">
                                                         {assign var=TAG_MODEL value=Vtiger_Tag_Model::getCleanInstance()}
@@ -93,9 +96,9 @@
                                     <div class=" vt-default-callout vt-info-callout tagInfoblock">
                                         <h5 class="vt-callout-header">
                                         <span class="fa fa-info-circle"></span>&nbsp; Info </h5>
-                                        <div>{vtranslate('LBL_TAG_SEPARATOR_DESC', $MODULE)}</div><br>
-                                        <div>{vtranslate('LBL_SHARED_TAGS_ACCESS',$QUALIFIED_MODULE)}</div><br>
-                                        <div>{vtranslate('LBL_GOTO_TAGS', $MODULE)}</div>
+                                        <p>{vtranslate('LBL_TAG_SEPARATOR_DESC', $MODULE)}</p>
+                                        <p>{vtranslate('LBL_SHARED_TAGS_ACCESS',$QUALIFIED_MODULE)}</p>
+                                        <p>{vtranslate('LBL_GOTO_TAGS', $MODULE)}</p>
                                     </div>
                                 </div>
                             </div>

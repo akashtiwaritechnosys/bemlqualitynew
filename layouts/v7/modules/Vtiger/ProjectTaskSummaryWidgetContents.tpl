@@ -21,7 +21,7 @@
 	{/foreach}
 	{foreach item=RELATED_RECORD from=$RELATED_RECORDS}
 		{assign var=PERMISSIONS value=Users_Privileges_Model::isPermitted($RELATED_MODULE, 'EditView', $RELATED_RECORD->get('id'))}
-		<div class="recentActivitiesContainer">
+		<div class="recentActivitiesContainer widget-contents-listtwo">
 			<ul class="unstyled">
 				<li>
 					<div>
@@ -34,11 +34,13 @@
 							{assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance('ProjectTask')}
 							{assign var=FIELD_MODEL value=$RELATED_MODULE_MODEL->getField('projecttaskprogress')}
 							{if $FIELD_MODEL->isViewableInDetailView()}
-							<div class="col-lg-6">
+							<div class="col-lg-12">
 								<div class="row">
-									<span class="col-lg-6">{$TASK_PROGRESS_HEADER} :</span>
+									<div class="col-lg-6">
+										<p >{$TASK_PROGRESS_HEADER} :</p>
+									</div>
 									{if $PERMISSIONS && $FIELD_MODEL->isEditable()}
-										<span class="col-lg-6">
+										<div class="col-lg-6">
 											<div class="dropdown pull-left">
 												<a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="fieldValue">{$RELATED_RECORD->getDisplayValue('projecttaskprogress')}</span>&nbsp;<b class="caret"></b></a>
 												<ul class="dropdown-menu widgetsList" data-recordid="{$RELATED_RECORD->getId()}" data-fieldname="projecttaskprogress" 
@@ -50,7 +52,7 @@
 													{/foreach}
 												</ul>
 											</div>
-										</span>
+										</div>
 									{else}
 										<span class="col-lg-7"><strong>&nbsp;{$RELATED_RECORD->getDisplayValue('projecttaskprogress')}</strong></span>
 									{/if}
@@ -59,9 +61,9 @@
 							{/if}
 							{assign var=FIELD_MODEL value=$RELATED_MODULE_MODEL->getField('projecttaskstatus')}
 							{if $FIELD_MODEL->isViewableInDetailView()}
-							<div class="col-lg-6">
+							<div class="col-lg-12">
 								<div class="row">
-									<span class="col-lg-6">{$TASK_STATUS_HEADER} :</span>
+									<div class="col-lg-6"><p>{$TASK_STATUS_HEADER} :</p></div>
 									{if $PERMISSIONS && $FIELD_MODEL->isEditable()}
 										<span class="col-lg-6 nav nav-pills">
 											<div class="dropdown pull-left">
@@ -88,7 +90,7 @@
 			</ul>
 		</div>
 	{/foreach}
-	{assign var=NUMBER_OF_RECORDS value=count($RELATED_RECORDS)}
+	{assign var=NUMBER_OF_RECORDS value=php7_count($RELATED_RECORDS)}
 	{if $NUMBER_OF_RECORDS eq 5}
 		<div class="">
 			<div class="pull-right">

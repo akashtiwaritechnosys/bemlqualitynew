@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2026-02-27 09:45:35
+<?php /* Smarty version Smarty-3.1.7, created on 2026-03-02 07:47:44
          compiled from "C:\wamp64\www\bemlqualitynew\includes\runtime/../../layouts/v7\modules\Vtiger\AddTagUI.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:27671703269a167bf7fffc5-06706829%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:44178111569a540a07c28b3-80150118%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '7039090118fa30d97ea3c7d9728d04e5327571f3' => 
     array (
       0 => 'C:\\wamp64\\www\\bemlqualitynew\\includes\\runtime/../../layouts/v7\\modules\\Vtiger\\AddTagUI.tpl',
-      1 => 1733391286,
+      1 => 1764246736,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '27671703269a167bf7fffc5-06706829',
+  'nocache_hash' => '44178111569a540a07c28b3-80150118',
   'function' => 
   array (
   ),
@@ -26,9 +26,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_69a167bf8b8e2',
+  'unifunc' => 'content_69a540a092228',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_69a167bf8b8e2')) {function content_69a167bf8b8e2($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_69a540a092228')) {function content_69a540a092228($_smarty_tpl) {?>
 <div class="showAllTagContainer hide"><div class="modal-dialog modal-lg"><div class="modal-content"><form class="detailShowAllModal"><?php ob_start();?><?php echo vtranslate('LBL_ADD_OR_SELECT_TAG',$_smarty_tpl->tpl_vars['MODULE']->value,$_smarty_tpl->tpl_vars['RECORD_NAME']->value);?>
 <?php $_tmp1=ob_get_clean();?><?php $_smarty_tpl->tpl_vars["TITLE"] = new Smarty_variable($_tmp1, null, 0);?><?php echo $_smarty_tpl->getSubTemplate (vtemplate_path("ModalHeader.tpl",$_smarty_tpl->tpl_vars['MODULE']->value), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 <div class="modal-body"><div class="row"><div class="col-lg-6 selectTagContainer"><div class="form-group"><label class="control-label"><?php echo vtranslate('LBL_CURRENT_TAGS',$_smarty_tpl->tpl_vars['MODULE']->value);?>
@@ -40,20 +40,20 @@ $_smarty_tpl->tpl_vars['TAG_MODEL']->_loop = true;
 ?><?php echo $_smarty_tpl->getSubTemplate (vtemplate_path("Tag.tpl",$_smarty_tpl->tpl_vars['MODULE']->value), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 <?php } ?></div></div></div><div class="form-group"><label class="control-label"><?php echo vtranslate('LBL_SELECT_FROM_AVAIL_TAG',$_smarty_tpl->tpl_vars['MODULE']->value);?>
 </label><div class="dropdown"><input class="form-control currentTagSelector dropdown-toggle" data-toggle="dropdown" placeholder="<?php echo vtranslate('LBL_SELECT_EXISTING_TAG',$_smarty_tpl->tpl_vars['MODULE']->value);?>
-" /><div class="dropdown-menu currentTagMenu"><div class="scrollable" style="max-height:300px"><ul style="padding-left:0px;"><?php  $_smarty_tpl->tpl_vars['TAG_MODEL'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['TAG_MODEL']->_loop = false;
+" /><div class="dropdown-menu currentTagMenu"><div class="scrollable" style="max-height:300px"><ul style="padding-left:0px;"><?php if (isset($_smarty_tpl->tpl_vars['ALL_USER_TAGS']->value)){?><?php  $_smarty_tpl->tpl_vars['TAG_MODEL'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['TAG_MODEL']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['ALL_USER_TAGS']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['TAG_MODEL']->key => $_smarty_tpl->tpl_vars['TAG_MODEL']->value){
 $_smarty_tpl->tpl_vars['TAG_MODEL']->_loop = true;
 ?><?php if (array_key_exists($_smarty_tpl->tpl_vars['TAG_MODEL']->value->getId(),$_smarty_tpl->tpl_vars['TAGS_LIST']->value)){?><?php continue 1?><?php }?><li class="tag-item list-group-item"><a style="margin-left:0px;"><?php echo $_smarty_tpl->getSubTemplate (vtemplate_path("Tag.tpl",$_smarty_tpl->tpl_vars['MODULE']->value), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('NO_DELETE'=>true,'NO_EDIT'=>true), 0);?>
-</a></li><?php } ?><li class="dummyExistingTagElement tag-item list-group-item hide"><a style="margin-left:0px;"><?php $_smarty_tpl->tpl_vars['TAG_MODEL'] = new Smarty_variable(Vtiger_Tag_Model::getCleanInstance(), null, 0);?><?php echo $_smarty_tpl->getSubTemplate (vtemplate_path("Tag.tpl",$_smarty_tpl->tpl_vars['MODULE']->value), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('NO_DELETE'=>true,'NO_EDIT'=>true), 0);?>
+</a></li><?php } ?><?php }?><li class="dummyExistingTagElement tag-item list-group-item hide"><a style="margin-left:0px;"><?php $_smarty_tpl->tpl_vars['TAG_MODEL'] = new Smarty_variable(Vtiger_Tag_Model::getCleanInstance(), null, 0);?><?php echo $_smarty_tpl->getSubTemplate (vtemplate_path("Tag.tpl",$_smarty_tpl->tpl_vars['MODULE']->value), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('NO_DELETE'=>true,'NO_EDIT'=>true), 0);?>
 </a></li><li class="tag-item list-group-item"><span class="noTagExistsPlaceHolder" style="padding:3px;color:#999"><?php echo vtranslate('LBL_NO_TAG_EXISTS',$_smarty_tpl->tpl_vars['MODULE']->value);?>
 </span></li></ul></div></div></div></div></div><div class=" col-lg-6 selectTagContainerborder"><div class="form-group"><label class="control-label"><?php echo vtranslate('LBL_CREATE_NEW_TAG',$_smarty_tpl->tpl_vars['MODULE']->value);?>
 </label><div><input name="createNewTag" value="" class="form-control" placeholder="<?php echo vtranslate('LBL_ENTER_TAG_NAME',$_smarty_tpl->tpl_vars['MODULE']->value);?>
 "/></div></div><div class="form-group"><div><div class="checkbox"><label><input type="hidden" name="visibility" value="<?php echo Vtiger_Tag_Model::PRIVATE_TYPE;?>
 "/><input type="checkbox" name="visibility" value="<?php echo Vtiger_Tag_Model::PUBLIC_TYPE;?>
 " />&nbsp; <?php echo vtranslate('LBL_SHARE_TAGS',$_smarty_tpl->tpl_vars['MODULE']->value);?>
-</label></div><div class="pull-right"></div></div></div><div class="form-group"><div class=" vt-default-callout vt-info-callout tagInfoblock"><h5 class="vt-callout-header"><span class="fa fa-info-circle"></span>&nbsp; Info </h5><div><?php echo vtranslate('LBL_TAG_SEPARATOR_DESC',$_smarty_tpl->tpl_vars['MODULE']->value);?>
-</div><br><div><?php echo vtranslate('LBL_SHARED_TAGS_ACCESS',$_smarty_tpl->tpl_vars['QUALIFIED_MODULE']->value);?>
-</div><br><div><?php echo vtranslate('LBL_GOTO_TAGS',$_smarty_tpl->tpl_vars['MODULE']->value);?>
-</div></div></div></div></div></div><?php echo $_smarty_tpl->getSubTemplate (vtemplate_path("ModalFooter.tpl",$_smarty_tpl->tpl_vars['MODULE']->value), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+</label></div><div class="pull-right"></div></div></div><div class="form-group"><div class=" vt-default-callout vt-info-callout tagInfoblock"><h5 class="vt-callout-header"><span class="fa fa-info-circle"></span>&nbsp; Info </h5><p><?php echo vtranslate('LBL_TAG_SEPARATOR_DESC',$_smarty_tpl->tpl_vars['MODULE']->value);?>
+</p><p><?php echo vtranslate('LBL_SHARED_TAGS_ACCESS',$_smarty_tpl->tpl_vars['QUALIFIED_MODULE']->value);?>
+</p><p><?php echo vtranslate('LBL_GOTO_TAGS',$_smarty_tpl->tpl_vars['MODULE']->value);?>
+</p></div></div></div></div></div><?php echo $_smarty_tpl->getSubTemplate (vtemplate_path("ModalFooter.tpl",$_smarty_tpl->tpl_vars['MODULE']->value), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 </form></div></div></div><?php }} ?>

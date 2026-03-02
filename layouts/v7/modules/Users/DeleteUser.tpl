@@ -11,9 +11,9 @@
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
 {strip}
     <div class="modal-dialog modelContainer">
+        <div class="modal-content">
         {assign var=HEADER_TITLE value={vtranslate('Transfer records to user', $MODULE)}}
         {include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
-        <div class="modal-content">
         <form class="form-horizontal" id="deleteUser" name="deleteUser" method="post" action="index.php">
             <input type="hidden" name="module" value="{$MODULE}" />
             <input type="hidden" name="userid" value="{$USERID}" />
@@ -35,7 +35,7 @@
                        </div>
                     </div>
                                 
-                    {* {if !$PERMANENT}        
+                    {if !isset($PERMANENT)|| !$PERMANENT }        
                         <div class="form-group">
                             <label class="control-label fieldLabel col-sm-4"></label>
                                 <div class="controls fieldValue col-sm-8">
@@ -44,7 +44,7 @@
                                     &nbsp;&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip"  data-placement="right" title="{vtranslate('LBL_DELETE_USER_PERMANENTLY_INFO',$MODULE)}"></i>
                                 </div>
                         </div>
-                    {/if} *}
+                    {/if}
                 </div>
             </div>
             {include file='ModalFooter.tpl'|@vtemplate_path:$MODULE}

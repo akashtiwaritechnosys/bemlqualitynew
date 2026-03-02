@@ -14,7 +14,7 @@
 		<div class="tab-content overflowVisible">
 			{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
 			<div class="col-lg-4 marginLeftZero textOverflowEllipsis">
-				<div class="marginBottom10px">
+				<div class="marginBottom10px marginTop10px">
 					<button type="button" class="btn btn-default addRegion addButton module-buttons" data-url="?module=Vtiger&parent=Settings&view=TaxAjax&mode=editTaxRegion" data-type="1">
                         <i class="fa fa-plus"></i>&nbsp;&nbsp;{vtranslate('LBL_ADD_NEW_REGION', $QUALIFIED_MODULE)}</button>
 				</div>
@@ -41,12 +41,12 @@
 					{/foreach}
 				</table>
 			</div>
-			<div class="col-lg-2">&nbsp;</div>
-			<div class="col-lg-7">
-				<br><br><br>
-				<div class="">
+			
+			<div class="col-lg-12">
+				
+				<div class="row tax-region-note">
 					<div class="col-lg-1"><i class="fa fa-info-circle"></i></div>
-					<div class="col-lg-11">{vtranslate('LBL_TAX_REGION_DESC', $QUALIFIED_MODULE)}</div>
+					<div class="col-lg-11"><p>{vtranslate('LBL_TAX_REGION_DESC', $QUALIFIED_MODULE)}</p></div>
 				</div>
 			</div>
 		</div>

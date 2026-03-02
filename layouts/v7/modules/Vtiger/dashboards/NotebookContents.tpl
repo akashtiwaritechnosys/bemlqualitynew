@@ -16,7 +16,7 @@
 				</span>
 				<span class="col-lg-2">
 					<span class="pull-right">
-						<button class="btn btn-soft-blue btn-sm pull-right dashboard_notebookWidget_edit">
+						<button class="btn btn-default btn-sm pull-right dashboard_notebookWidget_edit">
 							<strong>{vtranslate('LBL_EDIT', $MODULE)}</strong>
 						</button>
 					</span>
@@ -36,7 +36,7 @@
 				</span>
 				<span class="col-lg-2">
 					<span class="pull-right">
-						<button class="btn btn-mini btn-soft-blue pull-right dashboard_notebookWidget_save">
+						<button class="btn btn-mini btn-submit pull-right dashboard_notebookWidget_save">
 							<strong>{vtranslate('LBL_SAVE', $MODULE)}</strong>
 						</button>
 					</span>

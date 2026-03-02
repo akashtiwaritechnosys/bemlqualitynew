@@ -139,7 +139,7 @@
                 {foreach item=INNER_VALUE key=INNER_KEY from=$NAME_FIELD name=foo}
                     <tr>
                         {if $smarty.foreach.foo.first}
-                            <th rowspan="{$NAME_FIELD|@count}" class="NoBackGround">{$KEY_FIELD}</th>
+                            <th rowspan="{$NAME_FIELD|php7_count}" class="NoBackGround">{$KEY_FIELD}</th>
                         {/if}
                         {foreach item=INNER_VALUE1 key=INNER_KEY1 from=$INNER_VALUE name=foo1}
                             {if $INNER_KEY1 eq 'Sub Total' or $INNER_KEY1 eq 'Grand Total'}

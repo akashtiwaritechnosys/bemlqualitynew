@@ -1,3 +1,12 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
 jQuery.Class("Emails_MassEdit_Js",{},{
 
 	init: function () {
@@ -463,7 +472,7 @@ jQuery.Class("Emails_MassEdit_Js",{},{
 	addToEmails : function(mailInfo){
 		var toEmails = this.getMassEmailForm().find('[name="to"]');
 		var value = JSON.parse(toEmails.val());
-		if(value == ""){
+		if(!value || value == ""){
 			value = new Array();
 		}
 		value.push(mailInfo.emailid);
@@ -610,7 +619,7 @@ jQuery.Class("Emails_MassEdit_Js",{},{
 		if(totalAttachmentsSize > maxUploadSize){
 			app.helper.showAlertBox({message:app.vtranslate('JS_MAX_FILE_UPLOAD_EXCEEDS')});
 			this.removeAttachmentFileSizeByElement(jQuery(element));
-			master_element.list.find('.MultiFile-label:last').find('.MultiFile-remove').trigger('click');
+			master_element.list.find('.MultiFile-label:last-child .MultiFile-remove').trigger('click');
 		}else if((mode != "") && (existingAttachment != "")){
 			var pattern = /\\/;
 			var fileuploaded = value;
@@ -619,7 +628,7 @@ jQuery.Class("Emails_MassEdit_Js",{},{
 					var errorMsg = app.vtranslate("JS_THIS_FILE_HAS_ALREADY_BEEN_SELECTED")+fileuploaded;
 					app.helper.showAlertBox({message:app.vtranslate(errorMsg)});
 					thisInstance.removeAttachmentFileSizeByElement(jQuery(element),value);
-					master_element.list.find('.MultiFile-label:last').find('.MultiFile-remove').trigger('click');
+					master_element.list.find('.MultiFile-label:last-child .MultiFile-remove').trigger('click');
 					return false;
 				}
 			})

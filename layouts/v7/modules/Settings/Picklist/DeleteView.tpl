@@ -23,20 +23,20 @@
                 <input type="hidden" name="picklistName" value="{$FIELD_MODEL->get('name')}" />
                 <div class="modal-body tabbable">
                     <div class="form-group">
-                        <div class="control-label col-sm-3 col-xs-3">{vtranslate('LBL_ITEMS_TO_DELETE',$QUALIFIED_MODULE)}</div>
-                        <div class="controls col-sm-4 col-xs-4">
+                        <div class="control-label col-sm-3 col-xs-3"><label>{vtranslate('LBL_ITEMS_TO_DELETE',$QUALIFIED_MODULE)}</label></div>
+                        <div class="controls col-sm-6 col-xs-6">
                             <select class="select2 form-control" multiple="" id="deleteValue" name="delete_value[]" >
                                 {foreach from=$SELECTED_PICKLISTFIELD_EDITABLE_VALUES key=PICKLIST_VALUE_KEY item=PICKLIST_VALUE}
                                     <option {if in_array($PICKLIST_VALUE,$FIELD_VALUES)} selected="" {/if} value="{$PICKLIST_VALUE_KEY}">{vtranslate($PICKLIST_VALUE,$SOURCE_MODULE)}</option>
                                 {/foreach}
                             </select>
-                            <input id="pickListValuesCount" type="hidden" value="{count($SELECTED_PICKLISTFIELD_EDITABLE_VALUES)+count($SELECTED_PICKLISTFIELD_NON_EDITABLE_VALUES)}"/>
+                            <input id="pickListValuesCount" type="hidden" value="{php7_count($SELECTED_PICKLISTFIELD_EDITABLE_VALUES)+php7_count($SELECTED_PICKLISTFIELD_NON_EDITABLE_VALUES)}"/>
                         </div>
                     </div>
                     <br>
                     <div class="form-group">
-                        <div class="control-label col-sm-3 col-xs-3">{vtranslate('LBL_REPLACE_IT_WITH',$QUALIFIED_MODULE)}</div>
-                        <div class="controls  col-sm-4 col-xs-4">
+                        <div class="control-label col-sm-3 col-xs-3"><label>{vtranslate('LBL_REPLACE_IT_WITH',$QUALIFIED_MODULE)}</label></div>
+                        <div class="controls  col-sm-6 col-xs-6">
                             <select id="replaceValue" name="replace_value" class="select2 form-control" data-validation-engine="validate[required]">
                                 {foreach from=$SELECTED_PICKLISTFIELD_EDITABLE_VALUES key=PICKLIST_VALUE_KEY item=PICKLIST_VALUE}
                                     {if !(in_array($PICKLIST_VALUE, $FIELD_VALUES))}
@@ -54,7 +54,7 @@
                     {if $SELECTED_PICKLISTFIELD_NON_EDITABLE_VALUES}
                         <br>
                         <div class="form-group">
-                            <div class="control-label col-sm-3 col-xs-3">{vtranslate('LBL_NON_EDITABLE_PICKLIST_VALUES',$QUALIFIED_MODULE)}</div>
+                            <div class="control-label col-sm-3 col-xs-3"><label>{vtranslate('LBL_NON_EDITABLE_PICKLIST_VALUES',$QUALIFIED_MODULE)}</label></div>
                             <div class="controls col-sm-4 col-xs-4 nonEditableValuesDiv">
                                 <ul class="nonEditablePicklistValues" style="list-style-type: none;">
                                 {foreach from=$SELECTED_PICKLISTFIELD_NON_EDITABLE_VALUES key=NON_EDITABLE_VALUE_KEY item=NON_EDITABLE_VALUE}
@@ -66,10 +66,10 @@
                     {/if}
                 </div>
                 <div class="modal-footer">
-                    <center>
-                        <button class="btn btn-danger" type="submit" name="saveButton"><strong>{vtranslate('LBL_DELETE', $MODULE)}</strong></button>
+                    <div class="footer-btns">
+                        <button class="btn btn-danger" type="submit" name="saveButton">{vtranslate('LBL_DELETE', $MODULE)}</button>
                         <a href="#" class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-                    </center>
+                    </div>
                 </div>
             </form>
         </div>

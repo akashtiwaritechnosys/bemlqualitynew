@@ -10,9 +10,10 @@
 {strip}
     <div class="uninstallContainer" id="Uninstall_{$MODULE}_Container" style="padding: 15px; background: #fff;">
         <form name="profiles_privilegies" action="index.php" method="post" class="form-horizontal">
-            <input type="hidden" name="module" value="{$MODULE}" />
-            <input type="hidden" name="view" value="" />
+            <input type="hidden" name="module" value="ITS4YouInstaller" />
+            <input type="hidden" name="view" value="Uninstall" />
             <input type="hidden" name="license_key_val" id="license_key_val" value="{$LICENSE}" />
+            <input type="hidden" id="sourceModule" name="source_module" value="{$MODULE}">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <h3>{vtranslate($MODULE, $MODULE)} {vtranslate('LBL_UNINSTALL',$QUALIFIED_MODULE)}</h3>
@@ -39,14 +40,14 @@
                             </td>
                             <td>{vtranslate($MODULE, $MODULE)}</td>
                         </tr>
-                        {if class_exists('ITS4YouInstaller_Version_Helper')}
+                        {if $VERSION}
                             <tr>
                                 <td>
                                     <label class="muted pull-right marginRight10px">
                                         {vtranslate('LBL_MODULE', $MODULE)} {vtranslate('LBL_VERSION', $MODULE)}
                                     </label>
                                 </td>
-                                <td>{ITS4YouInstaller_Version_Helper::getVersion()}</td>
+                                <td>{$VERSION}</td>
                             </tr>
                         {/if}
                         <tr>

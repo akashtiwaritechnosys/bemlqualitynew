@@ -17,15 +17,15 @@
                 <input type="hidden" name="date_filters" data-value='{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($DATE_FILTERS))}' />
                 {include file="DetailViewActions.tpl"|vtemplate_path:$MODULE}
                 <br>
-                <div class='modify_btn_sec'>
-                    {assign var=filterConditionNotExists value=(count($SELECTED_ADVANCED_FILTER_FIELDS[1]['columns']) eq 0 and count($SELECTED_ADVANCED_FILTER_FIELDS[2]['columns']) eq 0)}
-                    <button class="btn btn-soft-blue" name="modify_condition" data-val="{$filterConditionNotExists}">
+                <div class=''>
+                    {assign var=filterConditionNotExists value=(php7_count($SELECTED_ADVANCED_FILTER_FIELDS[1]['columns']) eq 0 and php7_count($SELECTED_ADVANCED_FILTER_FIELDS[2]['columns']) eq 0)}
+                    <button class="btn btn-default" name="modify_condition" data-val="{$filterConditionNotExists}">
                         <strong>{vtranslate('LBL_MODIFY_CONDITION', $MODULE)}</strong>&nbsp;&nbsp;
                         <i class="fa {if $filterConditionNotExists eq true} fa-chevron-right {else} fa-chevron-down {/if}"></i>
                     </button>
                 </div>
                 <br>
-                <div id="filterContainer" class="filterElements filterConditionsDiv modify_btn_sec_div {if $filterConditionNotExists eq true} hide {/if}">
+                <div id="filterContainer" class="filterElements filterConditionsDiv {if $filterConditionNotExists eq true} hide {/if}">
                     <input type="hidden" id="recordId" value="{$RECORD_ID}" />
                     {assign var=RECORD_STRUCTURE value=array()}
                     {assign var=PRIMARY_MODULE_LABEL value=vtranslate($PRIMARY_MODULE, $PRIMARY_MODULE)}
@@ -51,11 +51,11 @@
                     </div>
                     <div class="row">
                         <div class="textAlignCenter hide reportActionButtons">
-                            <button class="btn btn-soft-blue generateReport" data-mode="generate" value="{vtranslate('LBL_GENERATE_NOW',$MODULE)}"/>
+                            <button class="btn btn-default generateReport" data-mode="generate" value="{vtranslate('LBL_GENERATE_NOW',$MODULE)}"/>
                                 <strong>{vtranslate('LBL_GENERATE_NOW',$MODULE)}</strong>
                             </button>&nbsp;
                             {if $REPORT_MODEL->isEditableBySharing()}
-                                <button class="btn btn-soft-success generateReport" data-mode="save" value="{vtranslate('LBL_SAVE',$MODULE)}"/>
+                                <button class="btn btn-submit generateReport" data-mode="save" value="{vtranslate('LBL_SAVE',$MODULE)}"/>
                                     <strong>{vtranslate('LBL_SAVE',$MODULE)}</strong>
                                 </button>
                             {/if}
@@ -65,5 +65,5 @@
                 </div>
             </form>
         </div>
-        <div id="reportContentsDiv" class="reportContentsDiv_table">
+        <div id="reportContentsDiv">
 {/strip}

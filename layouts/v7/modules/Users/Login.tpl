@@ -1,4 +1,4 @@
-﻿{*+********************************************************************************
+﻿{*+**********************************************************************************
 * The contents of this file are subject to the vtiger CRM Public License Version 1.1
 * ("License"); You may not use this file except in compliance with the License
 * The Original Code is: vtiger CRM Open Source
@@ -9,133 +9,51 @@
 {* modules/Users/views/Login.php *}
 
 {strip}
+
 	<style>
 		body {
-			background: url(layouts/v7/resources/Images/bg-pattern.png);
-			/*background-color: #dcd5d7;*/
-			/*background-color: #4a81d4;*/
+			background: url(layouts/v7/resources/Images/login-body.jpg);
+			// background: url("");
 			background-position: center;
 			background-size: cover;
 			width: 100%;
 			background-repeat: no-repeat;
-			font-family: Rubik, sans-serif;
-			color: #6c757d;
+			position: relative;
 		}
 
-		hr {
-			margin-top: 15px;
-			background-color: #7C7C7C;
-			height: 2px;
-			border-width: 0;
-		}
-
-		h3,
-		h4 {
-			margin-top: 0px;
-		}
-
-		hgroup {
-			text-align: center;
-			margin-top: 4em;
-		}
-
-		input {
-			font-size: 16px;
-			padding: 10px 10px 10px 0px;
-			-webkit-appearance: none;
-			display: block;
-			color: #636363;
+		body::before {
+			content: '';
+			background: rgb(229 229 229 / 60%);
 			width: 100%;
-			border: none;
-			border-radius: 0;
-			border-bottom: 1px solid #757575;
-		}
-
-		input:focus {
-			outline: none;
-		}
-
-		label {
-			/*font-size: 16px;*/
-			font-weight: normal;
-			/*position: absolute;*/
-			pointer-events: none;
-			left: 0px;
-			top: 10px;
-			transition: all 0.2s ease;
-		}
-
-		input:focus label,
-		input.used label {
-			top: -20px;
-			transform: scale(.75);
-			left: -12px;
-			font-size: 18px;
-		}
-
-		input:focus .bar:before,
-		input:focus .bar:after {
-			width: 50%;
+			height: 100vh;
+			position: absolute;
+			top: 0;
 		}
 
 		#page {
-			padding-top: 85px;
+			padding-top: 0px;
+			padding-bottom: 0px;
 		}
 
-		.widgetHeight {
-			/*height: 360px;*/
-			height: 500px;
-			margin-top: 20px !important;
-		}
-
-		.loginDiv {
-			max-width: 430px;
-			margin: 0 auto;
-			border-radius: 4px;
-			box-shadow: 0 0 10px gray;
-			background-color: #FFFFFF;
-		}
-
-		.marketingDiv {
-			color: #303030;
-		}
-
-		.separatorDiv {
-			background-color: #7C7C7C;
-			width: 2px;
-			height: 460px;
-			margin-left: 20px;
-		}
-
-		.user-logo {
-			/*height: 90px;*/
-			margin: 0 auto;
-			/*padding-top: 40px;*/
-			/*padding-bottom: 20px;*/
+		.main-dashboard-content {
+			width: 70% !important;
+			padding: 0 !important;
+			position: relative !important;
+			right: 0 !important;
+			margin: auto;
+			border-radius: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			min-height: 100vh;
+			flex-direction: column;
+			max-width: 1000px;
 		}
 
 		.blockLink {
-			border: 1px solid #303030;
+			border: 1px solid var(--border-light-color);
 			padding: 3px 5px;
-		}
-
-		.group {
-			position: relative;
-			margin: 20px 20px 40px;
-		}
-
-		.failureMessage {
-			color: red;
-			display: block;
-			text-align: center;
-			padding: 0px 0px 10px;
-		}
-
-		.successMessage {
-			color: green;
-			display: block;
-			text-align: center;
-			padding: 0px 0px 10px;
 		}
 
 		.inActiveImgDiv {
@@ -149,62 +67,78 @@
 		}
 
 		.footer {
-			background-color: #fbfbfb;
+			background-color: var(--white-color);
 			height: 26px;
 		}
 
-		.bar {
-			position: relative;
-			display: block;
+		.mCSB_container {
+			height: inherit;
+		}
+
+		.widgetHeight {
+			text-align: center;
+		}
+
+		/* ============== login page starts here ================= */
+		.dashBoardContainer,
+		.loginPageContainer {
+			min-height: calc(100vh - 110px);
+		}
+
+
+		.login-container {
+			display: flex;
+			max-width: 100%;
 			width: 100%;
+			background: var(--white-color);
+			border-radius: 10px;
+			box-shadow: #7367f0 0px 5px 15px;
+			overflow: hidden;
 		}
 
-		.bar:before,
-		.bar:after {
-			content: '';
-			width: 0;
-			bottom: 1px;
-			position: absolute;
-			height: 1px;
-			background: #35aa47;
-			transition: all 0.2s ease;
+		.login-form-container {
+			flex: 1;
+			padding: 20px;
+			/* display: flex;
+  flex-direction: column;
+  justify-content: center; */
 		}
 
-		.bar:before {
-			left: 50%;
-		}
-
-		.bar:after {
-			right: 50%;
+		select {
+			font-size: 16px;
 		}
 
 		.button {
 			position: relative;
 			display: inline-block;
-			padding: 9px;
-			margin: .3em 0 1em 0;
+			padding: 12px 9px;
+			margin: 0.3em 0 1em 0;
 			width: 100%;
 			vertical-align: middle;
-			color: #fff;
 			font-size: 16px;
 			line-height: 20px;
 			-webkit-font-smoothing: antialiased;
 			text-align: center;
 			letter-spacing: 1px;
-			background: transparent;
-			border: 0;
 			cursor: pointer;
-			transition: all 0.15s ease;
+			transition: all 0.4s ease;
 		}
 
 		.button:focus {
 			outline: 0;
 		}
 
-		.buttonBlue {
-			/*background-image: linear-gradient(to bottom, #35aa47 0px, #35aa47 100%)*/
-			background-color: #5671f0;
-			/*border-color: #5671f0;*/
+		.button:hover {
+			transform: translateY(-5px);
+		}
+
+		.forgotPasswordLink {
+			color: var(--text-dark-color);
+			font-size: 14px;
+
+			&:hover {
+				color: var(--primary-color);
+			}
 		}
 
 		.ripples {
@@ -217,7 +151,7 @@
 			background: transparent;
 		}
 
-		/*Animations*/
+		/* //Animations */
 		@keyframes inputHighlighter {
 			from {
 				background: #4a89dc;
@@ -245,420 +179,309 @@
 			}
 		}
 
-		/*login_css*/
-		.bg-pattern {
-			background: url(layouts/v7/resources/Images/bg-pattern-2.png);
-			background-size: cover;
+		.user-logo {
+			width: 190px;
+			margin: 12px auto;
+			margin-bottom: 35px;
 		}
 
-		.p-4 {
-			padding: 6.25rem 4.25rem !important;
+		.group {
+			position: relative;
+			margin: 20px 0px 30px;
 		}
 
-		.mb-4 {
-			margin-bottom: 5.25rem !important;
-		}
-
-		.mt-3 {
-			margin-top: 2.5rem !important
-		}
-
-		.auto_text {
+		.failureMessage {
+			color: var(--red-text-color);
+			display: block;
 			text-align: center;
-			width: 75%;
-			margin: auto;
+			padding: 10px 0;
+			font-size: 14px;
+			margin-bottom: 35px;
+			border-radius: 6px;
+			background-color: var(--red-light-bg-color);
 		}
 
-		.text-muted {
-			color: #98a6ad !important;
-		}
-
-		#loginFormDiv .login_form .input-group-btn {
-			vertical-align: bottom;
-		}
-
-		#loginFormDiv .submit_btn button {
-			margin-top: 25px;
-			font-size: 13px;
-			line-height: 20px;
-			font-weight: 400;
-			letter-spacing: normal;
-		}
-
-		#loginFormDiv .submit_btn .btn-primary:hover {
-			border: none;
-		}
-
-		#loginFormDiv input {
-			border-top-color: #d9d9d9;
-			border-radius: .25rem;
-		}
-
-		#loginFormDiv input:focus {
-			box-shadow: none;
-			border-color: #d9d9d9;
-		}
-
-		#loginFormDiv .input-group input {
-			border-radius: 0.25rem 0rem 0rem 0.25rem !important;
-		}
-		#loginFormDiv .login_form .input-group-btn .btn-eye svg {
-			width: 15px;
-			vertical-align: middle;
-		}
-		#loginFormDiv .input-group .input-group-btn .btn-eye {
-			border-radius: 0rem 0.25rem 0.25rem 0rem !important;
-			padding: 2px 10px;
-		}
-
-		.text-white-50 {
-			color: rgba(255, 255, 255, .5) !important;
-		}
-
-		.forgot_pwd {
+		.successMessage {
+			color: var(--text-dark-color);
+			display: block;
 			text-align: center;
-			margin-top: 20px;
+			padding: 10px 0;
+			font-size: 14px;
+			margin-bottom: 30px;
+			border-radius: 6px;
+			background-color: var(--bg-success);
 		}
 
-		.copy_right {
+		.form-title {
+			color: var(--text-dark-color);
+		}
+
+		.form-subtitle {
+			color: var(--text-light-color);
+			margin-bottom: 30px;
+		}
+
+		.input-group {
+			margin-bottom: 25px;
+			position: relative;
+			float: none;
+			min-width: 388px;
+		}
+
+		.form-input {
 			width: 100%;
-			bottom: 15px;
+			padding: 16px 15px;
+			border: 1px solid var(--border-light-color);
+			border-radius: 5px;
+			font-size: 15px;
+			-webkit-appearance: none;
+			display: block;
+			transition: all 0.3s ease;
+			background-color: var(--white-color) !important;
+		}
+
+		.input-label {
 			position: absolute;
+			left: 12px;
+			top: 13px;
+			color: var(--dark-gray);
+			transition: all 0.2s ease;
+			pointer-events: none;
+			background: var(--white-color);
+			padding: 2px 7px;
+			border-radius: 3px;
+			background: transparent;
+			font-size: 14px;
+		}
+
+		.form-input:focus+.input-label,
+		.form-input:not(:placeholder-shown)+.input-label {
+			top: -16px;
+			left: 2px;
+			color: var(--primary-color);
+			background: var(--white-color);
+			border-color: var(--primary-color);
+			outline: none;
+			box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+		}
+
+		.form-input:focus {
+			border-color: var(--primary-color);
+			outline: none;
+			box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+		}
+
+		.login-hero {
+			flex: 1;
+			background: linear-gradient(135deg, var(--primary-color) 46.5%, #4e4e4e 45%);
+			color: var(--white-color);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 20px;
 			text-align: center;
 		}
 
-		#loginFormDiv .form-group {
-			margin-bottom: 20px;
-		}
-		.carousel{
-			background-color: #fff;
-			background-image: none;
-		}
-		.carousel-inner .item img {
-			width: 100%;
-			height: 100%;
-		}
-		input::-webkit-outer-spin-button,
-		input::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
+		.hero-title {
+			margin-bottom: 15px;
 		}
 
-		/* Firefox */
-		input[type=number] {
-		-moz-appearance: textfield;
+		.hero-subtitle {
+			margin-bottom: 30px;
+			max-width: 350px;
+			color: var(--white-color-3);
 		}
+
+		.hero-image {
+			width: 100%;
+			max-width: 300px;
+		}
+
+		.password-group .toggle-password {
+			position: absolute;
+			right: 12px;
+			top: 50%;
+			transform: translateY(-50%);
+			cursor: pointer;
+			color: var(--dark-gray);
+			font-size: 16px;
+			transition: color 0.3s ease;
+			display: none;
+		}
+
+		.password-group .toggle-password:hover {
+			color: var(--primary-color);
+		}
+
+		#policyCheckboxContainer {
+			display: none;
+		}
+
+		/* login page ends here  */
 	</style>
 
 	<span class="app-nav"></span>
-	<div class="container-fluid loginPageContainer">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 login_title">
-			<h1 class="text-center">Welcome To BEML CCHS Portal</h1>
+	<div class="login-container">
+		<div class="login-hero hidden-xs hidden-sm hidden-md">
+			<h3 class="hero-title">CRM Doctor</h3>
+			<p class="hero-subtitle">Streamline your customer relationships and boost your business productivity with our
+				powerful CRM solution.</p>
+			<img src="layouts/v7/resources/Images/login-hero.svg" alt="CRM Illustration" class="hero-image">
+
 		</div>
 
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 login_beml">
-			<div class="loginDiv widgetHeight ">
-				<div class="bg-pattern">
-					<div class="p-4 ">
-						<img src="test/logo/logo_beml1.png" class="img-responsive user-logo">
-						<p class="text-muted mb-4 mt-3 auto_text">Welcome to Customer Complaint Handling Solutions Portal </p>
-						<div>
-							<span class="{if !$ERROR}hide{/if} failureMessage" id="validationMessage">{$MESSAGE}</span>
-							<span class="{if !$MAIL_STATUS}hide{/if} successMessage">{$MESSAGE}</span>
-						</div>
+		<div class="login-form-container">
+			<div class="loginDiv widgetHeight">
+				<img class="img-responsive user-logo" src="layouts/v7/resources/Images/crm-logo.png">
 
-						<div id="loginFormDiv">
-							<form method="POST" action="index.php" class="login_form">
-								<input type="hidden" name="module" value="Users" />
-								<input type="hidden" name="action" value="Login" />
-								<div class="form-group">
-									<label for="username">Badge Number</label>
-									<input class="form-control" id="usernameLogin" type="text" name="username" placeholder="Badge Number">
-									<span class="failureMessage hide" id="validationMessageBadge"></span>
-								</div>
-								<div class="form-group">
-									<label for="pwd">Password</label>
-									<div id="forgotPasswordDiv1" class="input-group">
-										<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-										<div class="input-group-btn">
-											<div id="togglepassText" class="btn btn-soft-secondary btn-eye">
-												<i data-feather="eye"></i>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="form-group submit_btn">
-									<button type="submit" class="button buttonBlue crm_btn btn btn-primary">Login</button><br>
-								</div>
-								<div class="text-center">
-									<p><a id="linkforgotPasswordDiv">Forgot Password?</a></p>
-									<p><a href="index.php?module=Users&parent=Settings&view=SignUp">Register Now </a></p>
-								</div>
-							</form>
-
-							<!-- <form class="form-horizontal" method="POST" action="index.php">
-    <input type="hidden" name="module" value="Users"/>
-    <input type="hidden" name="action" value="Login"/>
-    <div class="group">
-    <input id="username" type="text" name="username" placeholder="Username">
-    <span class="bar"></span>
-    <label>Username</label>
-    </div>
-    <div class="group">
-    <input id="password" type="password" name="password" placeholder="Password">
-    <span class="bar"></span>
-    <label>Password</label>
-    </div>
-    <div class="group">
-    <button type="submit" class="button buttonBlue crm_btn">Sign in</button><br>
-    <a class="forgotPasswordLink" style="color: #15c;display:none">forgot password?</a>
-    </div>
-    </form>
-    -->
-						</div>
-						<div id="forgotPasswordDiv" class="hide">
-							<form class="form-horizontal" id="forgotPasswordDivFormhol">
-								<div class="group">
-									<input  type="number"  id="fusername" name="username" placeholder="Badge Number">
-									<span class="bar"></span>
-									<label>Badge Number</label>
-								</div>
-								<div class="group">
-									<input id="email" type="email" name="emailId" placeholder="Email">
-									<span class="bar"></span>
-									<label>Email</label>
-								</div>
-								<div class="group">
-									<button type="submit" class="button buttonBlue forgot-submit-btn">Submit</button><br>
-									<span>Please enter details and submit<a class="forgotPasswordLink pull-right" style="color: #15c;">Back</a></span>
-								</div>
-							</form>
-						</div>
-					</div>
+				<h4 class="form-title">Welcome Back</h4>
+				<p class="form-subtitle">Please enter your credentials to signin</p>
+				<div>
+					<span class="{if !$ERROR}hide{/if} failureMessage" id="validationMessage">{$MESSAGE}</span>
+					<span class="{if !$MAIL_STATUS}hide{/if} successMessage">{$MESSAGE}</span>
 				</div>
 
-			</div>
-			<div class="forgot_pwd">
-				<a style="display:none" href="forgotPasswordDiv" class="forgotPasswordLink text-white-50" style="color: #15c;">Forgot password?</a>
-			</div>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div id="loginFormDiv">
+					<form class="form-horizontal" method="POST" action="index.php">
+						<input type="hidden" name="module" value="Users" />
+						<input type="hidden" name="action" value="Login" />
+						<input type="hidden" name="fingerprint" id="fingerprint" value="default-mock-id" />
+						{literal}
+							<script>
+								// Fallback if load fails
+								window.FingerprintJS = window.FingerprintJS || {
+									load: function() {
+										return Promise.resolve({
+											get: function() { return Promise.resolve({visitorId: 'default-mock-id'}); }
+										});
+									}
+								};
+							</script>
+						{/literal}
+						<script src="https://fpjscdn.net/v3/4P1l75tM0vOaEqn8h2o9"></script>
+						<div class="group">
+							<input id="username" class="form-input" type="text" name="username" placeholder="">
+							<label class="input-label">Username</label>
+						</div>
+						<div class="group password-group">
+							<input id="password" class="form-input" type="password" name="password" placeholder="">
+							<label class="input-label">Password</label>
+							<span class="toggle-password" id="togglePassword"><i class="fa fa-eye"></i></span>
+						</div>
 
-			<div id="bemlCarousel" class="carousel slide" data-ride="carousel">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#bemlCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#bemlCarousel" data-slide-to="1"></li>
-{*					<li data-target="#bemlCarousel" data-slide-to="2"></li>*}
-{*					<li data-target="#bemlCarousel" data-slide-to="3"></li>*}
-				</ol>
+						{assign var="CUSTOM_SKINS" value=Vtiger_Theme::getAllSkins()}
+						{if !empty($CUSTOM_SKINS)}
+							<div class="group" style="margin-bottom: 10px;">
+								<select id="skin" name="skin" placeholder="Skin"
+									style="text-transform: capitalize; width:100%;height:30px;">
+									<option value="">Default Skin</option>
+									{foreach item=CUSTOM_SKIN from=$CUSTOM_SKINS}
+										<option value="{$CUSTOM_SKIN}">{$CUSTOM_SKIN}</option>
+									{/foreach}
+								</select>
+							</div>
+						{/if}
 
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-					<div class="item active">
-						<img src="test/logo/slider/BEML_CRM_SLIDES_SR.jpg" alt="Los Angeles">
-					</div>
-					<div class="item">
-						<img src="test/logo/slider/BEML_CRM_CCH.jpg" alt="Los Angeles">
-					</div>
+						<!-- Place this after the password field, before the login button -->
+						<div class="form-group policy-checkbox-container" id="policyCheckboxContainer">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="policyCheckbox" name="policy_accepted" value="1">
+									<span> I agree to the <a href="#" onclick="showPolicyPopup(); return false;">Terms and
+											Conditions</a></span>
+								</label>
+							</div>
+						</div>
 
-{*					<div class="item">*}
-{*						<img src="https://3.7.71.53/beml/test/logo/slider/BEML_CRM_SLIDES_PROCESS.jpg" alt="Los Angeles">*}
-{*					</div>*}
+						<div class="">
+							<button type="submit" class="btn button">Sign in</button>
+							<a class="forgotPasswordLink">forgot password?</a>
+						</div>
+					</form>
+				</div>
 
-{*					<div class="item">*}
-{*						<img src="https://3.7.71.53/beml/test/logo/slider/BEML_ANY TERRAIN.jpg" alt="Los Angeles">*}
-{*					</div>*}
+				<div id="forgotPasswordDiv" class="hide">
+					<form class="form-horizontal" id="forgotPasswordDivFormhol" action="forgotPassword.php" method="POST">
+						<div class="group">
+							<input id="fusername" class="form-input" type="text" name="username" placeholder="">
+							<label class="input-label">Username</label>
+						</div>
+						<div class="group">
+							<input id="email" class="form-input" type="email" name="emailId" placeholder="">
+							<label class="input-label">Email</label>
+						</div>
+						<div class="">
+							<button type="submit" class="btn button forgot-submit-btn">Submit</button>
+							<span>Please enter details and submit<a class="forgotPasswordLink pull-right">Back to
+									signin</a></span>
+						</div>
+					</form>
 				</div>
 			</div>
-
 		</div>
 
-		<div style="display:none" class="col-lg-1 hidden-xs hidden-sm hidden-md">
+		{* <div class="col-lg-1 hidden-xs hidden-sm hidden-md">
 			<div class="separatorDiv"></div>
-		</div>
+		</div> *}
 
-		<div class="col-lg-5 hidden-xs hidden-sm hidden-md">
-			<div style="display:none" class="marketingDiv widgetHeight">
-				{if $JSON_DATA}
-					<div class="scrollContainer">
-						{assign var=ALL_BLOCKS_COUNT value=0}
-						{foreach key=BLOCK_NAME item=BLOCKS_DATA from=$JSON_DATA}
-							{if $BLOCKS_DATA}
-								<div>
-									<h4>{$BLOCKS_DATA[0].heading}</h4>
-									<ul class="bxslider">
-										{foreach item=BLOCK_DATA from=$BLOCKS_DATA}
-											<li class="slide">
-												{assign var=ALL_BLOCKS_COUNT value=$ALL_BLOCKS_COUNT+1}
-												{if $BLOCK_DATA.image}
-												<div class="col-lg-3" style="min-height: 100px;"><img src="{$BLOCK_DATA.image}" style="width: 100%;height: 100%;margin-top: 10px;" /></div>
-												<div class="col-lg-9">
-													{else}
-													<div class="col-lg-12">
-														{/if}
-														<div title="{$BLOCK_DATA.summary}">
-															<h3><b>{$BLOCK_DATA.displayTitle}</b></h3>
-															{$BLOCK_DATA.displaySummary}<br><br>
-															<a href="{$BLOCK_DATA.url}" target="_blank"><u>{$BLOCK_DATA.urlalt}</u></a>
-														</div>
-														{if $BLOCK_DATA.image}
-													</div>
-													{else}
-												</div>
-												{/if}
-											</li>
-										{/foreach}
-									</ul>
-								</div>
-								{if $ALL_BLOCKS_COUNT neq $DATA_COUNT}
-									<br>
-									<hr>
-								{/if}
-							{/if}
-						{/foreach}
-					</div>
-				{else}
-					<div class="inActiveImgDiv">
-						<div>
-							<h4>Get more out of Vtiger with extensions from</h4>
-							<h4>Vtiger Marketplace</h4>
-						</div>
-						<a href="https://marketplace.vtiger.com/app/listings" target="_blank" style="margin-right: 25px;"><img src="layouts/v7/resources/Images/extensionstore.png" style="width: 85%; height: 100%; margin-top: 25px;" /></a>
-					</div>
-				{/if}
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="ShowSucess" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Email Sent</h4>
-				</div>
-				<div class="modal-body">
-					<p> Password Reset Link Has Been Sent To Registered Email </p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="Redidirect" class="btn btn-default" data-dismiss="modal">Ok</button>
-				</div>
-			</div>
-		</div>
-  	</div>
-	<div class="copy_right">
-		<a href="#" class="text-white-50" style="color: #15c;">2021 © BizCRM theme by Biztechnosys</a>
-	</div>
-	<script>
-		jQuery(document).ready(function() {
-			const $input = document.querySelector("#usernameLogin");
-			$input.addEventListener("keypress",function(e){
-				const value=Array.from((e.target.value)+String.fromCharCode(e.charCode));
-				const numbers = /[0-9\/]+/;
-				const masterAdmin=Array.from('masteradmin');
-				let isMasterAdmin=true;
-				let admin=Array.from("admin");
-				let isAdmin=true;
-				let errorMessagesBadge;
-				for(let i=0;i<value.length;i++){
-					if(masterAdmin[i]!=value[i]){
-						isMasterAdmin=false;
+
+
+		<script>
+			jQuery(document).ready(function() {
+				var validationMessage = jQuery('#validationMessage');
+				var forgotPasswordDiv = jQuery('#forgotPasswordDiv');
+
+				var loginFormDiv = jQuery('#loginFormDiv');
+				loginFormDiv.find('#password').focus();
+
+				loginFormDiv.find('a').click(function() {
+					loginFormDiv.toggleClass('hide');
+					forgotPasswordDiv.toggleClass('hide');
+					validationMessage.addClass('hide');
+				});
+
+				forgotPasswordDiv.find('a').click(function() {
+					loginFormDiv.toggleClass('hide');
+					forgotPasswordDiv.toggleClass('hide');
+					validationMessage.addClass('hide');
+				});
+
+				loginFormDiv.find('button').on('click', function() {
+					var username = loginFormDiv.find('#username').val();
+					var password = jQuery('#password').val();
+					var result = true;
+					var errorMessage = '';
+					if (username === '') {
+						errorMessage = 'Please enter valid username';
+						result = false;
+					} else if (password === '') {
+						errorMessage = 'Please enter valid password';
+						result = false;
 					}
-					if(admin[i]!=value[i]){
-						isAdmin=false;
+
+					// Check policy checkbox if visible
+					if (jQuery('#policyCheckboxContainer').is(':visible')) {
+						if (!jQuery('#policyCheckbox').is(':checked')) {
+							alert('Please check the policy checkbox to proceed.');
+							errorMessage = 'Please check the policy checkbox to proceed.';
+							result = false;
+						}
 					}
-				}
-				if(!isMasterAdmin && !isAdmin){
-					if(!numbers.test(e.key))  	{
-						errorMessagesBadge="Enter Numeric Value";
-						e.preventDefault();
+
+					if (errorMessage) {
+						validationMessage.removeClass('hide').text(errorMessage);
 					}
-					if(value.length>5){
-						errorMessagesBadge="Only allowed five characters";
-						e.preventDefault();
-					}
-				}else if(isMasterAdmin && !isAdmin){
-					if(masterAdmin.length<value.length){
-						errorMessagesBadge="Enter the Valid text";
-						e.preventDefault();
-					}
-					if(numbers.test(e.key)){
-						errorMessagesBadge="Enter the Valid text";
-						e.preventDefault();
-					}
-				}else if(!isMasterAdmin && isAdmin){
-					if(admin.length<value.length){
-						errorMessagesBadge="Enter the Valid text";
-						e.preventDefault();
-					}
-					if(numbers.test(e.key)){
-						errorMessagesBadge="Enter the Valid text";
-						e.preventDefault();
-					}
-				}
-				if(errorMessagesBadge!=undefined){
-					const errorId = document.querySelector("#validationMessageBadge");
-					errorId.classList.remove("hide");
-					errorId.innerText=errorMessagesBadge;
-				}else{
-					const errorId = document.querySelector("#validationMessageBadge");
-					errorId.classList.add("hide");
-				}
-			});
+					return result;
+				});
 
-			var validationMessage = jQuery('#validationMessage');
-			var forgotPasswordDiv = jQuery('#forgotPasswordDiv');
+				forgotPasswordDiv.find('button').on('click', function() {
+					var username = jQuery('#forgotPasswordDiv #fusername').val();
+					var email = jQuery('#email').val();
 
-			var loginFormDiv = jQuery('#loginFormDiv');
-			loginFormDiv.find('#password').focus();
-
-			loginFormDiv.find('#linkforgotPasswordDiv').click(function() {
-				loginFormDiv.toggleClass('hide');
-				forgotPasswordDiv.toggleClass('hide');
-				validationMessage.addClass('hide');
-			});
-
-			var showPasswordDiv = jQuery('#forgotPasswordDiv1');
-			showPasswordDiv.find('#togglepassText').click(function() {
-				let type = document.getElementById('password').type;
-				if(type == 'password'){
-					document.getElementById('password').type = 'text';
-				} else {
-					document.getElementById('password').type = 'password';
-				}
-			});
-
-			forgotPasswordDiv.find('a').click(function() {
-				loginFormDiv.toggleClass('hide');
-				forgotPasswordDiv.toggleClass('hide');
-				validationMessage.addClass('hide');
-			});
-
-			loginFormDiv.find('button').on('click', function() {
-				var username = loginFormDiv.find('#usernameLogin').val();
-				var password = jQuery('#password').val();
-				var result = true;
-				var errorMessage = '';
-				if (username === '') {
-					errorMessage = 'Please enter valid username';
-					result = false;
-				} else if (password === '') {
-					errorMessage = 'Please enter valid password';
-					result = false;
-				}
-				if (errorMessage) {
-					validationMessage.removeClass('hide').text(errorMessage);
-				}
-				return result;
-			});
-
-			forgotPasswordDiv.find('button').on('click', function() {
-				var username = jQuery('#forgotPasswordDiv #fusername').val();
-				var email = jQuery('#email').val();
-
-				var email1 = email.replace(/^\s+/, '').replace(/\s+$/, '');
-				var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
-				var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+					var email1 = email.replace(/^\s+/, '').replace(/\s+$/, '');
+					var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+					var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
 
 				var result = true;
 				var errorMessage = '';
@@ -701,25 +524,95 @@
 				pause: 4000,
 				nextText: "",
 				prevText: "",
-				autoHover: true
-			});
-			jQuery('.bx-prev, .bx-next, .bx-pager-item').live('click', function() {
-				slider.startAuto();
-			});
-			jQuery('.bx-wrapper .bx-viewport').css('background-color', 'transparent');
-			jQuery('.bx-wrapper .bxslider li').css('text-align', 'left');
-			jQuery('.bx-wrapper .bx-pager').css('bottom', '-15px');
+					autoHover: true
+				});
+				jQuery('.bx-prev, .bx-next, .bx-pager-item').live('click', function() { slider.startAuto(); });
+				jQuery('.bx-wrapper .bx-viewport').css('background-color', 'transparent');
+				jQuery('.bx-wrapper .bxslider li').css('text-align', 'left');
+				jQuery('.bx-wrapper .bx-pager').css('bottom', '-40px');
 
-			var params = {
-				theme: 'dark-thick',
-				setHeight: '100%',
-				advanced: {
-					autoExpandHorizontalScroll: true,
-					setTop: 0
+				var params = {
+					theme: 'dark-thick',
+					setHeight: '100%',
+					advanced: {
+						autoExpandHorizontalScroll: true,
+						setTop: 0
+					}
+				};
+				jQuery('.scrollContainer').mCustomScrollbar(params);
+			});
+
+
+			jQuery('#username').on('input', function() {
+				checkPolicyStatus();
+			});
+
+			function checkPolicyStatus() {
+				var usernameValue = jQuery('#loginFormDiv #username').val().trim();
+				console.log(usernameValue);
+
+				if (usernameValue.length > 0) {
+					jQuery.ajax({
+						url: 'get_check_policy_status.php',
+						type: 'POST',
+						data: { username: usernameValue },
+						dataType: 'json',
+						success: function(response) {
+							if (response.success == true && response.result) {
+								if (response.result.show_policy == true) {
+									jQuery('#policyCheckboxContainer').hide();
+								} else {
+									jQuery('#policyCheckboxContainer').show();
+								}
+							} else {
+								jQuery('#policyCheckboxContainer').show();
+							}
+						},
+						error: function(xhr, status, error) {
+							console.error('Policy check error:', error);
+							jQuery('#policyCheckboxContainer').show();
+						}
+					});
+				} else {
+					jQuery('#policyCheckboxContainer').hide();
 				}
-			};
-			jQuery('.scrollContainer').mCustomScrollbar(params);
-		});
-	</script>
+			}
+
+			// function showPolicyPopup() {
+			//     alert('Terms and Conditions popup');
+			// }
+
+			function showPolicyPopup() {
+				window.open(
+					'https://green-lobster-463551.hostingersite.com/terms-and-conditions',
+					'_blank'
+				);
+			}
+
+			jQuery(document).ready(function() {
+				var passwordInput = jQuery('#password');
+				var toggleIcon = jQuery('#togglePassword');
+
+				// Show Eye icon only when typing
+				passwordInput.on('input', function() {
+					if (passwordInput.val().length > 0) {
+						toggleIcon.show();
+					} else {
+						toggleIcon.hide();
+					}
+				});
+
+				// Press & Hold to show password
+				toggleIcon
+					.on('mousedown touchstart', function() {
+						passwordInput.attr('type', 'text');
+						toggleIcon.find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+					})
+					.on('mouseup mouseleave touchend', function() {
+						passwordInput.attr('type', 'password');
+						toggleIcon.find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+					});
+			});
+		</script>
 	</div>
 {/strip}

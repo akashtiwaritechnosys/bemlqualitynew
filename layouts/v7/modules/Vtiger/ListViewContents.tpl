@@ -11,15 +11,19 @@
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
 {include file="PicklistColorMap.tpl"|vtemplate_path:$MODULE}
 
-<div class="col-sm-12 col-xs-12 table_UI">
+{if !isset($SELECTED_MENU_CATEGORY)}
+	{assign var=SELECTED_MENU_CATEGORY value=""}
+{/if}
+
+<div class="col-sm-12 col-xs-12 padding-right-zero padding-right">
 	{if $MODULE neq 'EmailTemplates' && $SEARCH_MODE_RESULTS neq true}
 		{assign var=LEFTPANELHIDE value=$CURRENT_USER_MODEL->get('leftpanelhide')}
-		<div class="essentials-toggle btn btn-soft-dark" title="{vtranslate('LBL_LEFT_PANEL_SHOW_HIDE', 'Vtiger')}">
+		<div class="essentials-toggle" title="{vtranslate('LBL_LEFT_PANEL_SHOW_HIDE', 'Vtiger')}">
 			<span class="essentials-toggle-marker fa {if $LEFTPANELHIDE eq '1'}fa-chevron-right{else}fa-chevron-left{/if} cursorPointer"></span>
 		</div>
 	{/if}
 	<input type="hidden" name="view" id="view" value="{$VIEW}" />
-	<input type="hidden" name="cvid" value="{$VIEWID}" />
+	<input type="hidden" name="cvid" value="{(isset($VIEWID)) ? $VIEWID : ''}" />
 	<input type="hidden" name="pageStartRange" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
 	<input type="hidden" name="pageEndRange" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
 	<input type="hidden" name="previousPageExist" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" />
@@ -29,14 +33,14 @@
 	<input type="hidden" name="totalCount" id="totalCount" value="{$LISTVIEW_COUNT}" />
 	<input type='hidden' name="pageNumber" value="{$PAGE_NUMBER}" id='pageNumber'>
 	<input type='hidden' name="pageLimit" value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
-	<input type="hidden" name="noOfEntries" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
-	<input type="hidden" name="currentSearchParams" value="{Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($SEARCH_DETAILS))}" id="currentSearchParams" />
-        <input type="hidden" name="currentTagParams" value="{Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($TAG_DETAILS))}" id="currentTagParams" />
-	<input type="hidden" name="noFilterCache" value="{$NO_SEARCH_PARAMS_CACHE}" id="noFilterCache" >
-	<input type="hidden" name="orderBy" value="{$ORDER_BY}" id="orderBy">
-	<input type="hidden" name="sortOrder" value="{$SORT_ORDER}" id="sortOrder">
-	<input type="hidden" name="list_headers" value='{$LIST_HEADER_FIELDS}'/>
-	<input type="hidden" name="tag" value="{$CURRENT_TAG}" />
+	<input type="hidden" name="noOfEntries" value="{(isset($LISTVIEW_ENTRIES_COUNT)) ? $LISTVIEW_ENTRIES_COUNT : ''}" id="noOfEntries">
+	<input type="hidden" name="currentSearchParams" value="{(isset($SEARCH_DETAILS)) ? Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($SEARCH_DETAILS)) : ''}" id="currentSearchParams" />
+        <input type="hidden" name="currentTagParams" value="{(isset($TAG_DETAILS)) ? Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($TAG_DETAILS)) : ''}" id="currentTagParams" />
+	<input type="hidden" name="noFilterCache" value="{(isset($NO_SEARCH_PARAMS_CACHE)) ? $NO_SEARCH_PARAMS_CACHE : ''}" id="noFilterCache" >
+	<input type="hidden" name="orderBy" value="{(isset($ORDER_BY)) ? $ORDER_BY : ''}" id="orderBy">
+	<input type="hidden" name="sortOrder" value="{(isset($SORT_ORDER)) ? $SORT_ORDER : ''}" id="sortOrder">
+	<input type="hidden" name="list_headers" value='{(isset($LIST_HEADER_FIELDS)) ? $LIST_HEADER_FIELDS : ""}'/>
+	<input type="hidden" name="tag" value="{(isset($CURRENT_TAG)) ? $CURRENT_TAG : ''}" />
 	<input type="hidden" name="folder_id" value="{$FOLDER_ID}" />
 	<input type="hidden" name="folder_value" value="{$FOLDER_VALUE}" />
 	<input type="hidden" name="viewType" value="{$VIEWTYPE}" />
@@ -51,7 +55,7 @@
 
 	<div id="table-content" class="table-container">
 		<form name='list' id='listedit' action='' onsubmit="return false;">
-			<table id="listview-table" class="table {if $LISTVIEW_ENTRIES_COUNT eq '0'}listview-table-norecords {/if} listview-table ">
+			<table id="listview-table" class="table {if isset($LISTVIEW_ENTRIES_COUNT) && $LISTVIEW_ENTRIES_COUNT eq '0'}listview-table-norecords {/if} listview-table ">
 				<thead>
 					<tr class="listViewContentHeader">
 						<th>
@@ -65,12 +69,12 @@
 						{if $MODULE_MODEL->isFilterColumnEnabled()}
 							<div id="listColumnFilterContainer">
 								<div class="listColumnFilter {if $CURRENT_CV_MODEL and !($CURRENT_CV_MODEL->isCvEditable())}disabled{/if}"  
-									 {if $CURRENT_CV_MODEL->isCvEditable()}
+									 {if $CURRENT_CV_MODEL and $CURRENT_CV_MODEL->isCvEditable()}
 										 title="{vtranslate('LBL_CLICK_HERE_TO_MANAGE_LIST_COLUMNS',$MODULE)}"
 									 {else}
-										 {if $CURRENT_CV_MODEL->get('viewname') eq 'All' and !$CURRENT_USER_MODEL->isAdminUser()} 
+										 {if $CURRENT_CV_MODEL and $CURRENT_CV_MODEL->get('viewname') eq 'All' and !$CURRENT_USER_MODEL->isAdminUser()} 
 											 title="{vtranslate('LBL_SHARED_LIST_NON_ADMIN_MESSAGE',$MODULE)}"
-										 {elseif !$CURRENT_CV_MODEL->isMine()}
+										 {elseif $CURRENT_CV_MODEL and !$CURRENT_CV_MODEL->isMine()}
 											 {assign var=CURRENT_CV_USER_ID value=$CURRENT_CV_MODEL->get('userid')}
 											 {if !Vtiger_Functions::isUserExist($CURRENT_CV_USER_ID)}
 												 {assign var=CURRENT_CV_USER_ID value=Users::getActiveAdminId()}
@@ -95,20 +99,20 @@
 					{else}
 						{assign var=NO_SORTING value=0}
 					{/if}
-					<th {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if}>
+					<th {if isset($COLUMN_NAME) && $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if}>
 						<a href="#" class="{if $NO_SORTING}noSorting{else}listViewContentHeaderValues{/if}" {if !$NO_SORTING}data-nextsortorderval="{if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')}{$NEXT_SORT_ORDER}{else}ASC{/if}" data-columnname="{$LISTVIEW_HEADER->get('name')}"{/if} data-field-id='{$LISTVIEW_HEADER->getId()}'>
-							&nbsp;{vtranslate($LISTVIEW_HEADER->get('label'), $LISTVIEW_HEADER->getModuleName())}&nbsp;
 							{if !$NO_SORTING}
 								{if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')}
-									{if $FASORT_IMAGE eq 'fa-sort-desc'}<i class="fa fa-arrow-up"></i>{else} <i class="fa fa-arrow-down"></i> {/if} 
+									<i class="fa fa-sort {$FASORT_IMAGE}"></i>
 								{else}
-									&#8645;
+									<i class="fa fa-sort customsort"></i>
 								{/if}
 							{/if}
+							&nbsp;{vtranslate($LISTVIEW_HEADER->get('label'), $LISTVIEW_HEADER->getModuleName())}&nbsp;
 						</a>
-						{if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')}
+						{if isset($COLUMN_NAME) && $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')}
 							<a href="#" class="removeSorting"><i class="fa fa-remove"></i></a>
-						{/if}
+							{/if}
 					</th>
 				{/foreach}
 				</tr>
@@ -117,18 +121,22 @@
                                     <tr class="searchRow listViewSearchContainer">
                                         <th class="inline-search-btn">
                                             <div class="table-actions">
-                                                <button class="btn btn-soft-primary btn-sm {if count($SEARCH_DETAILS) gt 0}hide{/if}" data-trigger="listSearch">
+                                                <button class="btn btn-submit btn-sm {if php7_count($SEARCH_DETAILS) gt 0}hide{/if}" data-trigger="listSearch">
                                                     <i class="fa fa-search"></i> &nbsp;
                                                     <span class="s2-btn-text">{vtranslate("LBL_SEARCH",$MODULE)}</span>
                                                 </button>
-                                                <button class="searchAndClearButton t-btn-sm btn btn-soft-danger {if count($SEARCH_DETAILS) eq 0}hide{/if}" data-trigger="clearListSearch"><i class="fa fa-close"></i>&nbsp;{vtranslate("LBL_CLEAR",$MODULE)}</button>
+                                                <button class="searchAndClearButton t-btn-sm btn btn-danger {if php7_count($SEARCH_DETAILS) eq 0}hide{/if}" data-trigger="clearListSearch"><i class="fa fa-close"></i>&nbsp;{vtranslate("LBL_CLEAR",$MODULE)}</button>
                                             </div>
                                         </th>
                                     {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
 						<th>
 							{assign var=FIELD_UI_TYPE_MODEL value=$LISTVIEW_HEADER->getUITypeModel()}
-							{include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$MODULE) FIELD_MODEL= $LISTVIEW_HEADER SEARCH_INFO=$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()] USER_MODEL=$CURRENT_USER_MODEL}
-							<input type="hidden" class="operatorValue" value="{$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()]['comparator']}">
+							{assign var=SEARCH_INFO_DETAILS_FOR_FIELD value=[ 'searchValue' => '', 'comparator' => '' ]}
+							{if isset($SEARCH_DETAILS[$LISTVIEW_HEADER->getName()])}
+								{assign var=SEARCH_INFO_DETAILS_FOR_FIELD value=$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()]}
+							{/if}
+							{include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$MODULE) FIELD_MODEL= $LISTVIEW_HEADER SEARCH_INFO=$SEARCH_INFO_DETAILS_FOR_FIELD USER_MODEL=$CURRENT_USER_MODEL}
+							<input type="hidden" class="operatorValue" value="{$SEARCH_INFO_DETAILS_FOR_FIELD['comparator']}">
 						</th>
 					{/foreach}
 					</tr>
@@ -180,8 +188,6 @@
 											{if $LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME) neq NULL}
 												{CurrencyField::appendCurrencySymbol($LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME), $CURRENCY_SYMBOL)}
 											{/if}
-										{else if $LISTVIEW_HEADER->getFieldDataType() eq 'phone'}
-											<span class="whatsApp" pill style="background-color: rgb(78 78 204);color: rgb(255 255 255);padding: 3px;border-radius: 25px;" variant="dark">{$LISTVIEW_ENTRY_VALUE} </span>
 										{else if $LISTVIEW_HEADER->getFieldDataType() eq 'picklist'}
 											{if $LISTVIEW_ENTRY->get('activitytype') eq 'Task'}
 												{assign var=PICKLIST_FIELD_ID value={$LISTVIEW_HEADER->getId()}}
@@ -228,9 +234,9 @@
 					{/foreach}
 					</tr>
 				{/foreach}
-				{if $LISTVIEW_ENTRIES_COUNT eq '0'}
+				{if isset($LISTVIEW_ENTRIES_COUNT) && $LISTVIEW_ENTRIES_COUNT eq '0'}
 					<tr class="emptyRecordsDiv">
-						{assign var=COLSPAN_WIDTH value={count($LISTVIEW_HEADERS)}+1}
+						{assign var=COLSPAN_WIDTH value={php7_count($LISTVIEW_HEADERS)}+1}
 						<td colspan="{$COLSPAN_WIDTH}">
 							<div class="emptyRecordsContent">
 								{assign var=SINGLE_MODULE value="SINGLE_$MODULE"}

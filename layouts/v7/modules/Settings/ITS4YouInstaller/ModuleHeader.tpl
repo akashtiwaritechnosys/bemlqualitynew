@@ -11,13 +11,13 @@
 			<div class="col-lg-4 col-md-4">
 				<h4 title="{strtoupper(vtranslate($MODULE, $MODULE))}" class="module-title pull-left text-uppercase"> {strtoupper(vtranslate($MODULE, $MODULE))} </h4>
 			</div>
-			<div class="col-lg-8 col-md-8">
+			<div class="col-lg-8 col-md-8 itsforyou-installer">
 				<div class="navbar-right">
 					<ul class="nav navbar-nav">
 						<li>
 							{if $REQUIREMENTS}
 								<a href="{$MODULE_MODEL->getRequirementsUrl()}">
-									<div class="btn btn-{$REQUIREMENTS->getButtonType()}">
+									<div class="requirements-alert btn btn-{$REQUIREMENTS->getButtonType()}" style="padding: 7px 11px;">
 										{vtranslate('LBL_SYSTEM_REQUIREMENTS', $MODULE)}
 									</div>
 								</a>

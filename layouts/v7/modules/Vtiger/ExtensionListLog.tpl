@@ -10,12 +10,12 @@
     <div class="row">
         {if !$MODAL}
             <div class="col-sm-6 col-xs-6">
-                <h3 class="module-title pull-left"> {vtranslate($MODULE,$MODULE)} - {vtranslate('LBL_SYNC_LOG', $MODULE)} </h3>
+                <h4 class="module-title pull-left"> {vtranslate($MODULE,$MODULE)} - {vtranslate('LBL_SYNC_LOG', $MODULE)} </h4>
             </div>
             <div class="col-sm-6 col-xs-6">
                 <div class="pull-right">
                     <span class="module-title">
-                        <h3><a data-url="{$MODULE_MODEL->getExtensionSettingsUrl($SOURCE_MODULE)}" class="btn addButton btn-soft-dark settingsPage" type="button" id="Contacts_basicAction_LBL_Sync_Settings"><span aria-hidden="true" class="fa fa-cog"></span> {vtranslate('LBL_SYNC_SETTINGS', $MODULE)}</a></h3>
+                        <h4><a data-url="{$MODULE_MODEL->getExtensionSettingsUrl($SOURCE_MODULE)}" class="btn addButton btn-default settingsPage" type="button" id="Contacts_basicAction_LBL_Sync_Settings"><span aria-hidden="true" class="fa fa-cog"></span> {vtranslate('LBL_SYNC_SETTINGS', $MODULE)}</a></h4>
                     </span>
                 </div>
             </div>
@@ -26,7 +26,7 @@
         {if !$MODAL}
             <div class="col-sm-6 col-xs-6">
                 {if $IS_SYNC_READY}
-                    <button class="btn addButton btn-soft-blue syncNow" type="button" id="Contacts_basicAction_LBL_Sync_Settings"><span aria-hidden="true" class="fa fa-refresh"></span><strong>&nbsp; {vtranslate('LBL_SYNC_NOW', $MODULE)} </strong></button>
+                    <button class="btn addButton btn-submit syncNow" type="button" id="Contacts_basicAction_LBL_Sync_Settings"><span aria-hidden="true" class="fa fa-refresh"></span>&nbsp; {vtranslate('LBL_SYNC_NOW', $MODULE)} </button>
                         {/if}
             </div>
         {/if}

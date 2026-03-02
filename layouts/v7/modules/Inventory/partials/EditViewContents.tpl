@@ -13,7 +13,7 @@
 {if !empty($PICKIST_DEPENDENCY_DATASOURCE)}
     <input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
 {/if}
-<div name='editContent' style="padding-top: 30px;">
+<div name='editContent'>
 	{if $DUPLICATE_RECORDS}
 		<div class="fieldBlockContainer duplicationMessageContainer">
 			<div class="duplicationMessageHeader"><b>{vtranslate('LBL_DUPLICATES_DETECTED', $MODULE)}</b></div>
@@ -22,7 +22,7 @@
 	{/if}
     {foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator}
         {if $BLOCK_LABEL eq 'LBL_ITEM_DETAILS'}{continue}{/if}
-         {if $BLOCK_FIELDS|@count gt 0}
+         {if $BLOCK_FIELDS|php7_count gt 0}
              <div class='fieldBlockContainer' data-block="{$BLOCK_LABEL}">
                      <h4 class='fieldBlockHeader'>{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
                  <hr>
@@ -104,7 +104,7 @@
                      {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
                          {assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
                          {assign var="refrenceList" value=$FIELD_MODEL->getReferenceList()}
-                         {assign var="refrenceListCount" value=count($refrenceList)}
+                         {assign var="refrenceListCount" value=php7_count($refrenceList)}
                          {if $FIELD_MODEL->isEditable() eq true}
                              {if $FIELD_MODEL->get('uitype') eq "19"}
                                  {if $COUNTER eq '1'}
@@ -119,7 +119,7 @@
                                  {assign var=COUNTER value=$COUNTER+1}
                              {/if}
                              <td class="fieldLabel alignMiddle">
-                             {if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
+                             <label>
                              {if $isReferenceField eq "reference"}
                                  {if $refrenceListCount > 1}
                                      {assign var="REFERENCED_MODULE_ID" value=$FIELD_MODEL->get('fieldvalue')}
@@ -138,7 +138,8 @@
                              {else}
                                  {vtranslate($FIELD_MODEL->get('label'), $MODULE)}
                              {/if}
-                             &nbsp;&nbsp;
+                            {if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
+                             </label>
                          </td>
                          <td {if in_array($FIELD_MODEL->get('uitype'),array('19','69')) || $FIELD_NAME eq 'description'} class="fieldValue fieldValueWidth80" colspan="3" {assign var=COUNTER value=$COUNTER+1} {else} class="fieldValue" {/if}>
                              {if $FIELD_MODEL->getFieldDataType() eq 'image' || $FIELD_MODEL->getFieldDataType() eq 'file'}

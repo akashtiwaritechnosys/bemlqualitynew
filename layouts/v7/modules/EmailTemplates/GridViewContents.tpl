@@ -22,12 +22,12 @@
 	<input type='hidden' name="pageNumber" value="{$PAGE_NUMBER}" id='pageNumber'>
 	<input type='hidden' name="pageLimit" value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
 	<input type="hidden" name="noOfEntries" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
-	<input type="hidden" name="currentSearchParams" value="{Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($SEARCH_DETAILS))}" id="currentSearchParams" />
-	<input type="hidden" name="noFilterCache" value="{$NO_SEARCH_PARAMS_CACHE}" id="noFilterCache" >
+	<input type="hidden" name="currentSearchParams" value="{(isset($SEARCH_DETAILS)) ? Vtiger_Util_Helper::toSafeHTML(Zend_JSON::encode($SEARCH_DETAILS)) : ''}" id="currentSearchParams" />
+	<input type="hidden" name="noFilterCache" value="{(isset($NO_SEARCH_PARAMS_CACHE)) ? $NO_SEARCH_PARAMS_CACHE : ''}" id="noFilterCache" >
 	<input type="hidden" name="orderBy" value="{$ORDER_BY}" id="orderBy">
 	<input type="hidden" name="sortOrder" value="{$SORT_ORDER}" id="sortOrder">
-	<input type="hidden" name="list_headers" value='{$LIST_HEADER_FIELDS}'/>
-	<input type="hidden" name="tag" value="{$CURRENT_TAG}" />
+	<input type="hidden" name="list_headers" value='{(isset($LIST_HEADER_FIELDS)) ? $LIST_HEADER_FIELDS :""}'/>
+	<input type="hidden" name="tag" value="{(isset($CURRENT_TAG)) ? $CURRENT_TAG : ''}" />
 	<input type="hidden" name="folder_id" value="{$FOLDER_ID}" />
 	<input type="hidden" name="folder_value" value="{$FOLDER_VALUE}" />
         <input type="hidden" name="viewType" value="{$VIEWTYPE}" />
@@ -36,22 +36,22 @@
 	{/if}
 
 	<div class="table-container" style="padding:5px;border: 0px;">
-            <ul class="thumbnails">
+            <ul class="thumbnails" style="display:flex; flex-wrap:wrap;">
             {foreach item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES name=listview}
                 {assign var="IS_EDITABLE" value=$LISTVIEW_ENTRY->get('systemtemplate')}
                 {assign var="TEMPLATE_PATH" value=$LISTVIEW_ENTRY->get('templatepath')}
                 {assign var="TEMPLATE_NAME" value=$LISTVIEW_ENTRY->get('templatename')}
                 {assign var="TEMPLATE_ID" value=$LISTVIEW_ENTRY->get('templateid')}
                  <li class="positionRel textCenter">
-                    <div class="templateName" title="{$TEMPLATE_NAME}" style="position: relative;margin-bottom: 5px;overflow: hidden;"><p class="ellipsis">{$TEMPLATE_NAME}</p></div>
-                    <div class="thumbnail cursorPointer positionRel" data-value="{$TEMPLATE_ID}" data-label="{$TEMPLATE_NAME}" style='border: 1px solid #ddd;'>
+                    <div class="templateName" title="{$TEMPLATE_NAME}"><p class="ellipsis">{$TEMPLATE_NAME}</p></div>
+                    <div class="thumbnail cursorPointer positionRel" data-value="{$TEMPLATE_ID}" data-label="{$TEMPLATE_NAME}">
                             <div class="imageDiv">
-                                <img src="test/template_imgfiles/{if !empty($TEMPLATE_PATH)}{$TEMPLATE_PATH}{else}default.png{/if}"  data-value="{$TEMPLATE_ID}" style="width:216px;height:277px;"/>
+                                <img src="test/template_imgfiles/{if !empty($TEMPLATE_PATH)}{$TEMPLATE_PATH}{else}default.png{/if}"  data-value="{$TEMPLATE_ID}" style="width:100%;height:277px;"/>
                             <div class="hide" style="display: block; width: 100%;position: absolute;bottom:0;">
-                                <button class="btn btn-soft-secondary previewTemplate" style="width:49%;" data-value="{$TEMPLATE_ID}" data-mode="templates" data-label="{$TEMPLATE_NAME}">
+                                <button class="btn btn-default previewTemplate" style="width:49%; margin:0px;" data-value="{$TEMPLATE_ID}" data-mode="templates" data-label="{$TEMPLATE_NAME}">
                                     <i class="fa fa-eye cursorPointer" title="Preview"></i>&nbsp;Preview
                                 </button>
-                                <button class="btn btn-soft-secondary editTemplate" style="width:49%;" data-value="{$TEMPLATE_ID}" data-mode="templates" data-label="{$TEMPLATE_NAME}">
+                                <button class="btn btn-default editTemplate" style="width:49%; margin:0px;" data-value="{$TEMPLATE_ID}" data-mode="templates" data-label="{$TEMPLATE_NAME}">
                                     <i class="fa fa-check-circle cursorPointer" title="Edit template" ></i>&nbsp;Select
                                 </button>
                             </div>

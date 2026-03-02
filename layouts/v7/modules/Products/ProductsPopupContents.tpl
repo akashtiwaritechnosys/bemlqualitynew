@@ -33,7 +33,7 @@
             <input type="hidden" value="{$SORT_ORDER}" id="sortOrder">
             <input type="hidden" value="Products_ProductRelatedProductBundles_Js" id="popUpClassName"/>
             <div class="popupEntriesTableContainer">
-                <table class="listview-table table-bordered listViewEntriesTable">
+                <table class="listview-table listViewEntriesTable">
                     <thead>
                         <tr class="listViewHeaders">
                                 <th>
@@ -55,7 +55,7 @@
                         {if $MODULE_MODEL && $MODULE_MODEL->isQuickSearchEnabled()}
                             <tr class="searchRow">
                                     <th class="textAlignCenter searchBtn">
-                                        <button class="btn btn-success pull-right pull-right" data-trigger="PopupListSearch">{vtranslate('LBL_SEARCH', $MODULE )}</button>
+                                        <button class="btn btn-submit pull-right pull-right" data-trigger="PopupListSearch">{vtranslate('LBL_SEARCH', $MODULE )}</button>
                                     </th>
                                 {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
                                     <th>
@@ -80,7 +80,7 @@
                                 {assign var="ROW_NUMBER" value={$smarty.foreach.listViewEntry.index}}
                                 {assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
                                 {assign var=LISTVIEW_ENTRY_VALUE value=$LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME)}
-                                <td class="listViewEntryValue textOverflowEllipsis" title="{$RECORD_DATA[$LISTVIEW_HEADERNAME]}">
+                                <td class="listViewEntryValue textOverflowEllipsis">
                                     {if $LISTVIEW_HEADER->isNameField() eq true or $LISTVIEW_HEADER->get('uitype') eq '4'}
                                         <a>{$LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME)}</a>
                                     {else if $LISTVIEW_HEADER->get('uitype') eq '72'}

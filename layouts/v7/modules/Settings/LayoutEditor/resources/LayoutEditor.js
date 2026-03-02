@@ -1,3 +1,12 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+
 Vtiger.Class('Settings_LayoutEditor_Js', {
 }, {
 	updatedBlockSequence: {},
@@ -495,15 +504,19 @@ Vtiger.Class('Settings_LayoutEditor_Js', {
 					data.find('input[name="quickcreate"]').prop('checked', true).attr('readonly', 'readonly');
 					data.find('input[name="quickcreate"]').removeClass('cursorPointer').addClass('cursorPointerNotAllowed');
 				}
-				data.find('input[name="presence"]').attr('checked', true).attr('readonly', 'readonly');
-				data.find('#fieldPresence').bootstrapSwitch('toggleReadonly', true);
+				if(data.find('#fieldPresence').attr('optionDisabled') != 'true'){
+					data.find('input[name="presence"]').attr('checked', true).attr('readonly', 'readonly');
+					data.find('#fieldPresence').bootstrapSwitch('toggleReadonly', true);
+				}
 			} else {
 				if (data.find('input[name="isquickcreatesupported"]').val()) {
 					data.find('input[name="quickcreate"]').removeAttr('readonly');
 					data.find('input[name="quickcreate"]').removeClass('cursorPointerNotAllowed').addClass('cursorPointer');
 				}
-				data.find('input[name="presence"]').removeAttr('readonly');
-				data.find('#fieldPresence').bootstrapSwitch('toggleReadonly');
+				if(data.find('#fieldPresence').attr('optionDisabled') != 'true'){
+					data.find('input[name="presence"]').removeAttr('readonly');
+					data.find('#fieldPresence').bootstrapSwitch('toggleReadonly');
+				}
 			}
 		})
 		data.find('input[type="checkbox"]').on('click', function (e) {
@@ -940,7 +953,7 @@ Vtiger.Class('Settings_LayoutEditor_Js', {
 
 				data.name = nameAttr;
 				data.value = defaultValueUi.val();
-				if (currentTarget.val() == "MultiSelectCombo") {
+				if (currentTarget.val() == "MultiSelectCombo" || currentTarget.val() == "MultiCheckbox") {
 					if (data.value != null && data.value.length > 0) {
 						data.value = data.value.join('|##|');
 					}
@@ -954,6 +967,7 @@ Vtiger.Class('Settings_LayoutEditor_Js', {
 					case 'TextArea'	:	type = 'Text';		break;
 
 					case 'MultiSelectCombo':type = 'Multipicklist';break;
+					case 'MultiCheckbox':	type = 'MultiCheckbox';break;
 				}
 				data.type = type;
 
