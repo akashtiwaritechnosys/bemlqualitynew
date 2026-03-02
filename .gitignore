@@ -1,0 +1,15 @@
+# ============================================
+# Vtiger CRM Git Ignore File
+# ============================================
+
+# --- Vtiger sensitive / auto-generated files ---
+config.inc.php
+
+# --- Cache directories ---
+cache/
+logs/
+test/*
+storage/
+user_privileges/
+template_c/
+templates_c/

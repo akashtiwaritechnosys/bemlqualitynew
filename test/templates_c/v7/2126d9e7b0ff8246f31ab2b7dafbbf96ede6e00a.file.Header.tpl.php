@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2026-02-27 09:40:31
+<?php /* Smarty version Smarty-3.1.7, created on 2026-03-02 09:25:56
          compiled from "C:\wamp64\www\bemlqualitynew\includes\runtime/../../layouts/v7\modules\Vtiger\Header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:66362716269a1668f5669c2-42800089%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2126d9e7b0ff8246f31ab2b7dafbbf96ede6e00a' => 
     array (
       0 => 'C:\\wamp64\\www\\bemlqualitynew\\includes\\runtime/../../layouts/v7\\modules\\Vtiger\\Header.tpl',
-      1 => 1750856102,
+      1 => 1772443545,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_69a1668fe2a02',
   'variables' => 
   array (
     'PAGETITLE' => 0,
@@ -35,8 +37,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'LANGUAGE' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_69a1668fe2a02',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_69a1668fe2a02')) {function content_69a1668fe2a02($_smarty_tpl) {?>
 <!DOCTYPE html><html><head><title><?php echo vtranslate($_smarty_tpl->tpl_vars['PAGETITLE']->value,$_smarty_tpl->tpl_vars['QUALIFIED_MODULE']->value);?>

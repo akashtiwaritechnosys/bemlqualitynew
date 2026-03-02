@@ -23859,3 +23859,1074 @@ Fri Feb 27 11:26:55 2026,845 [24852] DEBUG VT - Prepared sql query being execute
 Fri Feb 27 11:26:55 2026,845 [24852] DEBUG VT - Prepared sql query parameters : [,49]
 Fri Feb 27 11:26:55 2026,847 [24852] DEBUG VT - Prepared sql query being executed : SELECT vtiger_profile2field.visible,vtiger_field.fieldid FROM vtiger_field INNER JOIN vtiger_profile2field ON vtiger_profile2field.fieldid=vtiger_field.fieldid INNER JOIN vtiger_def_org_field ON vtiger_def_org_field.fieldid=vtiger_field.fieldid WHERE vtiger_field.tabid=? AND vtiger_profile2field.visible=0 AND vtiger_def_org_field.visible=0  AND vtiger_profile2field.profileid in (?) AND vtiger_field.presence in (0,2) GROUP BY vtiger_field.fieldid
 Fri Feb 27 11:26:55 2026,847 [24852] DEBUG VT - Prepared sql query parameters : [,49]
+Mon Mar  2 09:25:54 2026,810 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:25:54 2026,850 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:25:54 2026,851 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:25:54 2026,851 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:25:54 2026,851 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:25:54 2026,856 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:25:54 2026,856 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:25:54 2026,865 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:25:54 2026,865 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:25:54 2026,865 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:25:54 2026,865 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:25:54 2026,866 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:25:54 2026,867 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:25:54 2026,878 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:25:54 2026,886 [8100] DEBUG VT -  session finger print (bfe576253ef5c5d3867f3ded7d75267f14f907d1c7a00dfc25830ea8b5a79f93) method ...
+Mon Mar  2 09:25:54 2026,886 [8100] DEBUG VT -  session finger print (0b83982282d6134cf94f400a2a138c3699292dfa27884b1bed82479e9dc8c9d9) method ...
+Mon Mar  2 09:25:54 2026,913 [8100] DEBUG VT - Entering isPermitted(Home,DetailView,) method ...
+Mon Mar  2 09:25:54 2026,914 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:25:54 2026,916 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:25:54 2026,916 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:25:54 2026,917 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:25:54 2026,918 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:25:54 2026,918 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:25:54 2026,918 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:25:54 2026,919 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:25:54 2026,919 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:25:54 2026,927 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype IN (?)  and tabid IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:25:54 2026,927 [8100] DEBUG VT - Prepared sql query parameters : [HEADERSCRIPT,1,3,4,6,8,9,10,13,14,15,18,22,23,25,40,41,42,46,50,51,52,64,65,66,67,69,70,71,72,73,74,75,76,77,78,81,83,84,85,86,87,88,0]
+Mon Mar  2 09:25:54 2026,963 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype IN (?)  and tabid IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:25:54 2026,963 [8100] DEBUG VT - Prepared sql query parameters : [HEADERCSS,1,3,4,6,8,9,10,13,14,15,18,22,23,25,40,41,42,46,50,51,52,64,65,66,67,69,70,71,72,73,74,75,76,77,78,81,83,84,85,86,87,88,0]
+Mon Mar  2 09:25:54 2026,969 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_currency_info
+Mon Mar  2 09:25:54 2026,971 [8100] DEBUG VT - Prepared sql query being executed : SELECT modulename,tablename,entityidfield,fieldname FROM vtiger_entityname
+Mon Mar  2 09:25:54 2026,981 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab WHERE presence IN (?,?)
+Mon Mar  2 09:25:54 2026,981 [8100] DEBUG VT - Prepared sql query parameters : [0,2]
+Mon Mar  2 09:25:55 2026,001 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:25:55 2026,055 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:25:55 2026,060 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:25:55 2026,088 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_organizationdetails WHERE organization_id=?
+Mon Mar  2 09:25:55 2026,088 [8100] DEBUG VT - Prepared sql query parameters : [1]
+Mon Mar  2 09:25:55 2026,092 [8100] DEBUG VT - Entering getDisplayDate(2026-3-2) method ...
+Mon Mar  2 09:25:55 2026,093 [8100] DEBUG VT - Exiting getDisplayDate method ...
+Mon Mar  2 09:25:55 2026,097 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_app2tab WHERE visible = ? ORDER BY appname,sequence
+Mon Mar  2 09:25:55 2026,098 [8100] DEBUG VT - Prepared sql query parameters : [1]
+Mon Mar  2 09:25:55 2026,183 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype IN (?)  and tabid IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:25:55 2026,183 [8100] DEBUG VT - Prepared sql query parameters : [HEADERLINK,1,3,4,6,8,9,10,13,14,15,18,22,23,25,40,41,42,46,50,51,52,64,65,66,67,69,70,71,72,73,74,75,76,77,78,81,83,84,85,86,87,88,0]
+Mon Mar  2 09:25:55 2026,188 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_actionmapping
+Mon Mar  2 09:25:55 2026,202 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE (tabid=? OR tabid=0) AND linktype IN (?,?)
+Mon Mar  2 09:25:55 2026,203 [8100] DEBUG VT - Prepared sql query parameters : [3,SIDEBARLINK,SIDEBARWIDGET]
+Mon Mar  2 09:25:55 2026,205 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_field WHERE tabid=? ORDER BY sequence
+Mon Mar  2 09:25:55 2026,205 [8100] DEBUG VT - Prepared sql query parameters : [3]
+Mon Mar  2 09:25:55 2026,208 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE userid=? ORDER BY sequence ASC 
+Mon Mar  2 09:25:55 2026,209 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:25:55 2026,213 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+    [appname] => 
+    [modulename] => 
+)
+
+Mon Mar  2 09:25:55 2026,213 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_dashboard_tabs WHERE id=? 
+Mon Mar  2 09:25:55 2026,214 [8100] DEBUG VT - Prepared sql query parameters : [273]
+Mon Mar  2 09:25:55 2026,215 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [isdefault] => 1
+    [sequence] => 1
+    [appname] => 
+    [modulename] => 
+    [userid] => 1082
+)
+
+Mon Mar  2 09:25:55 2026,215 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype = ? AND tabid IN (?) AND linkid NOT IN (SELECT linkid FROM vtiger_module_dashboard_widgets WHERE userid = ? and dashboardtabid=? ) UNION SELECT * FROM vtiger_links WHERE linklabel in (?,?)
+Mon Mar  2 09:25:55 2026,216 [8100] DEBUG VT - Prepared sql query parameters : [DASHBOARDWIDGET,3,1082,273,Mini List,Notebook]
+Mon Mar  2 09:25:55 2026,227 [8100] DEBUG VT - Prepared sql query being executed : select visible from vtiger_homestuff where userid=? and stufftype='Tag Cloud'
+Mon Mar  2 09:25:55 2026,228 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:25:56 2026,851 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_attachments.attachmentsid, vtiger_attachments.path, vtiger_attachments.name FROM vtiger_attachments
+                                  LEFT JOIN vtiger_salesmanattachmentsrel ON vtiger_salesmanattachmentsrel.attachmentsid = vtiger_attachments.attachmentsid
+                                  WHERE vtiger_salesmanattachmentsrel.smid=?
+Mon Mar  2 09:25:56 2026,851 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:25:56 2026,852 [8100] DEBUG VT - Prepared sql query being executed : SELECT rolename from vtiger_role WHERE roleid = ?
+Mon Mar  2 09:25:56 2026,853 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:25:58 2026,167 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_app2tab WHERE visible = ? ORDER BY appname,sequence
+Mon Mar  2 09:25:58 2026,168 [8100] DEBUG VT - Prepared sql query parameters : [1]
+Mon Mar  2 09:25:58 2026,288 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE userid=? ORDER BY sequence ASC 
+Mon Mar  2 09:25:58 2026,288 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:25:58 2026,290 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+    [appname] => 
+    [modulename] => 
+)
+
+Mon Mar  2 09:25:58 2026,291 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_links.*, vtiger_module_dashboard_widgets.userid, vtiger_module_dashboard_widgets.filterid, vtiger_module_dashboard_widgets.data, vtiger_module_dashboard_widgets.id as widgetid, vtiger_module_dashboard_widgets.position as position, vtiger_module_dashboard_widgets.size as size, vtiger_links.linkid as id FROM vtiger_links  INNER JOIN vtiger_module_dashboard_widgets ON vtiger_links.linkid=vtiger_module_dashboard_widgets.linkid WHERE vtiger_module_dashboard_widgets.userid = ? AND linktype = ? AND tabid = ? AND dashboardtabid = ?
+Mon Mar  2 09:25:58 2026,291 [8100] DEBUG VT - Prepared sql query parameters : [1082,DASHBOARDWIDGET,3,273]
+Mon Mar  2 09:25:58 2026,296 [8100] DEBUG VT - Prepared sql query being executed : SELECT reportid FROM vtiger_module_dashboard_widgets WHERE userid = ? AND linkid= ? AND reportid IS NOT NULL AND dashboardtabid = ?
+Mon Mar  2 09:25:58 2026,296 [8100] DEBUG VT - Prepared sql query parameters : [1082,0,273]
+Mon Mar  2 09:26:03 2026,130 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:03 2026,254 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_attachments.* FROM vtiger_attachments
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_attachments.attachmentsid
+					WHERE vtiger_attachments.attachmentsid=? LIMIT 1
+Mon Mar  2 09:26:03 2026,255 [8100] DEBUG VT - Prepared sql query parameters : [9799941]
+Mon Mar  2 09:26:03 2026,913 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:03 2026,948 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:26:03 2026,948 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:03 2026,948 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:03 2026,948 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:26:03 2026,953 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:03 2026,953 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:26:03 2026,961 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:03 2026,962 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:26:03 2026,962 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:03 2026,962 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:03 2026,962 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:03 2026,963 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:26:03 2026,974 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:04 2026,829 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:04 2026,856 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:26:04 2026,857 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:04 2026,857 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:04 2026,859 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:04 2026,859 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:26:04 2026,864 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:04 2026,864 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:26:04 2026,874 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:04 2026,874 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:26:04 2026,875 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:04 2026,875 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:04 2026,875 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:04 2026,876 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:26:04 2026,889 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:04 2026,902 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:26:04 2026,902 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:26:04 2026,903 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:26:04 2026,903 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:26:04 2026,903 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:26:04 2026,904 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:26:04 2026,904 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:26:04 2026,904 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:04 2026,914 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:26:04 2026,914 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"2","col":"2"},1082,57]
+Mon Mar  2 09:26:04 2026,918 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:26:04 2026,918 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"1","col":"3"},1082,66]
+Mon Mar  2 09:26:04 2026,921 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:26:04 2026,922 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"1","col":"1"},1082,67]
+Mon Mar  2 09:26:04 2026,925 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:26:04 2026,926 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"2","col":"1"},1082,68]
+Mon Mar  2 09:26:04 2026,927 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:04 2026,931 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:26:04 2026,931 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:04 2026,931 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:04 2026,932 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:26:04 2026,936 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:04 2026,936 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:26:04 2026,944 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:04 2026,945 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:26:04 2026,945 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:04 2026,945 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:04 2026,945 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:04 2026,947 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:26:04 2026,958 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:04 2026,992 [8100] DEBUG VT - Entering isPermitted(HelpDesk,DetailView,) method ...
+Mon Mar  2 09:26:04 2026,993 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:26:04 2026,993 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:26:04 2026,994 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:26:04 2026,994 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:26:04 2026,994 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:26:04 2026,994 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:26:04 2026,995 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:04 2026,997 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:26:04 2026,997 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:26:04 2026,997 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:26:04 2026,998 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:26:04 2026,998 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:26:04 2026,998 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:26:05 2026,006 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:26:05 2026,012 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:05 2026,020 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault FROM vtiger_dashboard_tabs WHERE userid=? AND isdefault =?
+Mon Mar  2 09:26:05 2026,020 [8100] DEBUG VT - Prepared sql query parameters : [1082,1]
+Mon Mar  2 09:26:05 2026,022 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+)
+
+Mon Mar  2 09:26:05 2026,025 [8100] DEBUG VT - Prepared sql query being executed : SELECT id FROM vtiger_module_dashboard_widgets WHERE linkid = ? AND userid = ? AND dashboardtabid=?
+Mon Mar  2 09:26:05 2026,025 [8100] DEBUG VT - Prepared sql query parameters : [67,1082,273]
+Mon Mar  2 09:26:05 2026,031 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_def_org_share INNER JOIN vtiger_tab ON vtiger_tab.tabid = vtiger_def_org_share.tabid WHERE name=?
+Mon Mar  2 09:26:05 2026,031 [8100] DEBUG VT - Prepared sql query parameters : [HelpDesk]
+Mon Mar  2 09:26:05 2026,034 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_ticketstatus ORDER BY  sortorderid ASC
+Mon Mar  2 09:26:05 2026,037 [8100] DEBUG helpdesk - Entering HelpDesk() method ...
+Mon Mar  2 09:26:05 2026,037 [8100] DEBUG VT - Entering getColumnFields(HelpDesk) method ...
+Mon Mar  2 09:26:05 2026,037 [8100] DEBUG VT - in getColumnFields HelpDesk
+Mon Mar  2 09:26:05 2026,038 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:05 2026,038 [8100] DEBUG VT - Prepared sql query parameters : [13]
+Mon Mar  2 09:26:05 2026,048 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:05 2026,049 [8100] DEBUG helpdesk - Exiting HelpDesk method ...
+Mon Mar  2 09:26:05 2026,049 [8100] DEBUG VT - Entering getColumnFields(HelpDesk) method ...
+Mon Mar  2 09:26:05 2026,049 [8100] DEBUG VT - in getColumnFields HelpDesk
+Mon Mar  2 09:26:05 2026,050 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:05 2026,050 [8100] DEBUG VT - Prepared sql query being executed : create temporary table IF NOT EXISTS vt_tmp_u1082(id int(11) primary key) ignore (SELECT 1082 as id) UNION (SELECT vtiger_user2role.userid AS userid FROM vtiger_user2role INNER JOIN vtiger_users ON vtiger_users.id=vtiger_user2role.userid INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid WHERE vtiger_role.parentrole like 'H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%') UNION (SELECT groupid FROM vtiger_groups WHERE groupid IN (2))
+Mon Mar  2 09:26:05 2026,058 [8100] DEBUG VT - Prepared sql query being executed : SELECT COUNT(*) as count, CASE WHEN vtiger_troubletickets.status IS NULL OR vtiger_troubletickets.status = "" THEN "" ELSE vtiger_troubletickets.status END AS statusvalue 
+							FROM vtiger_troubletickets INNER JOIN vtiger_crmentity ON vtiger_troubletickets.ticketid = vtiger_crmentity.crmid AND vtiger_crmentity.deleted=0
+							 INNER JOIN vt_tmp_u1082 vt_tmp_u1082 ON vt_tmp_u1082.id = vtiger_crmentity.smownerid  AND  smownerid IN (1087,1088,1089,1090,1091,1092,1094,1095,1098,1204,1082)  INNER JOIN vtiger_ticketstatus ON vtiger_troubletickets.status = vtiger_ticketstatus.ticketstatus 
+							WHERE vtiger_troubletickets.status IN (?,?,?,?,?,?) 
+							GROUP BY statusvalue ORDER BY vtiger_ticketstatus.sortorderid
+Mon Mar  2 09:26:05 2026,059 [8100] DEBUG VT - Prepared sql query parameters : [Open,Closed after Re-commissioning,Engineer Assigned,In Progress,Closed,Closed : Recommissioning Is Pending]
+Mon Mar  2 09:26:05 2026,068 [8100] DEBUG VT - Prepared sql query being executed : SELECT cvid FROM vtiger_customview WHERE viewname = 'All' AND entitytype = ?
+Mon Mar  2 09:26:05 2026,069 [8100] DEBUG VT - Prepared sql query parameters : [HelpDesk]
+Mon Mar  2 09:26:05 2026,071 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_module_dashboard_widgets
+			INNER JOIN vtiger_links ON vtiger_links.linkid = vtiger_module_dashboard_widgets.linkid
+			WHERE linktype = ? AND vtiger_links.linkid = ? AND userid = ?
+Mon Mar  2 09:26:05 2026,071 [8100] DEBUG VT - Prepared sql query parameters : [DASHBOARDWIDGET,67,1082]
+Mon Mar  2 09:26:05 2026,079 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_def_org_share INNER JOIN vtiger_tab ON vtiger_tab.tabid = vtiger_def_org_share.tabid WHERE name=?
+Mon Mar  2 09:26:05 2026,079 [8100] DEBUG VT - Prepared sql query parameters : [HelpDesk]
+Mon Mar  2 09:26:05 2026,082 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_role WHERE roleid = ?
+Mon Mar  2 09:26:05 2026,083 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:26:05 2026,084 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_role WHERE parentrole LIKE ? ORDER BY depth
+Mon Mar  2 09:26:05 2026,084 [8100] DEBUG VT - Prepared sql query parameters : [H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%]
+Mon Mar  2 09:26:05 2026,086 [8100] DEBUG VT - Prepared sql query being executed : SELECT userid FROM vtiger_user2role WHERE roleid IN (?)
+Mon Mar  2 09:26:05 2026,086 [8100] DEBUG VT - Prepared sql query parameters : [H298]
+Mon Mar  2 09:26:05 2026,088 [8100] DEBUG VT - Prepared sql query being executed : SELECT id, first_name, last_name FROM vtiger_users WHERE status = ? AND id IN (?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:26:05 2026,089 [8100] DEBUG VT - Prepared sql query parameters : [ACTIVE,1087,1088,1089,1090,1091,1092,1094,1095,1098,1204]
+Mon Mar  2 09:26:06 2026,317 [8100] DEBUG VT - Entering get_user_array(,ACTIVE,,) method ...
+Mon Mar  2 09:26:06 2026,317 [8100] DEBUG VT - Sharing is Public. All vtiger_users should be listed
+Mon Mar  2 09:26:06 2026,317 [8100] DEBUG VT - Prepared sql query being executed : SELECT groupid, groupname from vtiger_groups order by groupname ASC
+Mon Mar  2 09:26:06 2026,324 [8100] INFO VT - PearDatabase ->ADODB fetchByAssoc return null
+Mon Mar  2 09:26:06 2026,325 [8100] DEBUG VT - Exiting get_user_array method ...
+Mon Mar  2 09:26:06 2026,455 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:26:06 2026,456 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:06 2026,456 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:06 2026,456 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:26:06 2026,460 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:06 2026,461 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:26:06 2026,469 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:06 2026,469 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:26:06 2026,470 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:06 2026,470 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:06 2026,470 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:06 2026,473 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:26:06 2026,483 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:06 2026,559 [8100] DEBUG VT - Entering isPermitted(Home,DetailView,) method ...
+Mon Mar  2 09:26:06 2026,560 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:06 2026,562 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:26:06 2026,563 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:26:06 2026,563 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:26:06 2026,564 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:26:06 2026,564 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:26:06 2026,564 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:26:06 2026,565 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:26:06 2026,565 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:06 2026,577 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault FROM vtiger_dashboard_tabs WHERE userid=? AND isdefault =?
+Mon Mar  2 09:26:06 2026,577 [8100] DEBUG VT - Prepared sql query parameters : [1082,1]
+Mon Mar  2 09:26:06 2026,578 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+)
+
+Mon Mar  2 09:26:06 2026,580 [8100] DEBUG VT - Prepared sql query being executed : SELECT id FROM vtiger_module_dashboard_widgets WHERE linkid = ? AND userid = ? AND dashboardtabid=?
+Mon Mar  2 09:26:06 2026,581 [8100] DEBUG VT - Prepared sql query parameters : [66,1082,273]
+Mon Mar  2 09:26:06 2026,587 [8100] DEBUG VT - Entering getDisplayDate(2026-03-02 09:26:06) method ...
+Mon Mar  2 09:26:06 2026,587 [8100] DEBUG VT - Exiting getDisplayDate method ...
+Mon Mar  2 09:26:06 2026,588 [8100] DEBUG VT - Entering getDisplayTime(2026-03-02 09:26:06) method ...
+Mon Mar  2 09:26:06 2026,588 [8100] DEBUG VT - Exiting getDisplayTime method ...
+Mon Mar  2 09:26:06 2026,588 [8100] DEBUG VT - Entering getDBInsertDateValue(02/03/2026 14:56:06) method ...
+Mon Mar  2 09:26:06 2026,588 [8100] DEBUG VT - Exiting getDBInsertDateValue method ...
+Mon Mar  2 09:26:06 2026,589 [8100] DEBUG VT - Entering getDBInsertTimeValue(02/03/2026 14:56:06) method ...
+Mon Mar  2 09:26:06 2026,589 [8100] DEBUG VT - Exiting getDBInsertTimeValue method ...
+Mon Mar  2 09:26:06 2026,591 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:26:06 2026,591 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:26:06 2026,591 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?,?)
+Mon Mar  2 09:26:06 2026,591 [8100] DEBUG VT - Prepared sql query parameters : [9,16]
+Mon Mar  2 09:26:06 2026,599 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:06 2026,599 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:26:06 2026,599 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:26:06 2026,600 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:06 2026,600 [8100] DEBUG VT - Prepared sql query being executed : create temporary table IF NOT EXISTS vt_tmp_u1082_t9_events(id int(11) primary key, shared int(1) default 0) ignore (SELECT 1082 as id) UNION (SELECT vtiger_user2role.userid AS userid FROM vtiger_user2role INNER JOIN vtiger_users ON vtiger_users.id=vtiger_user2role.userid INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid WHERE vtiger_role.parentrole like 'H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%') UNION (SELECT groupid FROM vtiger_groups WHERE groupid IN (2))
+Mon Mar  2 09:26:06 2026,607 [8100] DEBUG VT - Prepared sql query being executed : REPLACE INTO vt_tmp_u1082_t9_events (id) SELECT userid as id FROM vtiger_sharedcalendar WHERE sharedid = ?
+Mon Mar  2 09:26:06 2026,607 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:06 2026,609 [8100] DEBUG VT - Prepared sql query being executed : REPLACE INTO vt_tmp_u1082_t9_events (id) SELECT id FROM vtiger_users WHERE calendarsharedtype = ?
+Mon Mar  2 09:26:06 2026,609 [8100] DEBUG VT - Prepared sql query parameters : [public]
+Mon Mar  2 09:26:06 2026,612 [8100] DEBUG VT - Entering getTabname(9) method ...
+Mon Mar  2 09:26:06 2026,612 [8100] INFO VT - tab id is 9
+Mon Mar  2 09:26:06 2026,612 [8100] DEBUG VT - Prepared sql query being executed : select tablabel from vtiger_tab where tabid=?
+Mon Mar  2 09:26:06 2026,613 [8100] DEBUG VT - Prepared sql query parameters : [9]
+Mon Mar  2 09:26:06 2026,614 [8100] DEBUG VT - Exiting getTabname method ...
+Mon Mar  2 09:26:06 2026,614 [8100] DEBUG VT - Prepared sql query being executed : CREATE TEMPORARY TABLE IF NOT EXISTS vt_tmp_u1082_t9_task(id INT(11) PRIMARY KEY, shared int(1) DEFAULT 0) IGNORE (SELECT 1082 as id) UNION (SELECT vtiger_user2role.userid AS userid FROM vtiger_user2role INNER JOIN vtiger_users ON vtiger_users.id=vtiger_user2role.userid INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid WHERE vtiger_role.parentrole like 'H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%') UNION (SELECT groupid FROM vtiger_groups WHERE groupid IN (2))
+Mon Mar  2 09:26:06 2026,618 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:26:06 2026,618 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:26:06 2026,619 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:06 2026,619 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:26:06 2026,619 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:26:06 2026,620 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:06 2026,621 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_crmentity.crmid, vtiger_crmentity.smownerid, vtiger_crmentity.setype, vtiger_activity.* FROM vtiger_activity
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_activity.activityid
+					LEFT JOIN vtiger_groups ON vtiger_groups.groupid = vtiger_crmentity.smownerid LEFT JOIN vt_tmp_u1082_t9_events vt_tmp_u1082_t9_events ON (vt_tmp_u1082_t9_events.id = vtiger_crmentity.smownerid AND vtiger_activity.activitytype NOT IN ('Emails', 'Task'))  LEFT JOIN vt_tmp_u1082_t9_task vt_tmp_u1082_t9_task ON (vt_tmp_u1082_t9_task.id = vtiger_crmentity.smownerid AND vtiger_activity.activitytype = 'Task')  WHERE vtiger_crmentity.deleted=0
+					AND (vtiger_activity.activitytype NOT IN ('Emails'))
+					AND (vtiger_activity.status is NULL OR vtiger_activity.status NOT IN ('Completed', 'Deferred', 'Cancelled'))
+					AND (vtiger_activity.eventstatus is NULL OR vtiger_activity.eventstatus NOT IN ('Held', 'Cancelled')) AND  (vt_tmp_u1082_t9_events.shared IS NOT NULL OR vt_tmp_u1082_t9_task.shared IS NOT NULL)  AND CASE WHEN vtiger_activity.activitytype='Task' THEN due_date < '2026-03-02' ELSE CONCAT(due_date,' ',time_end) < '2026-03-02 09:26:06' END AND vtiger_crmentity.smownerid = ? ORDER BY date_start, time_start LIMIT ?, ?
+Mon Mar  2 09:26:06 2026,621 [8100] DEBUG VT - Prepared sql query parameters : [1082,0,11]
+Mon Mar  2 09:26:06 2026,625 [8100] DEBUG VT - Entering getAllUserGroups(1082) method...
+Mon Mar  2 09:26:06 2026,625 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_users2group where userid=?
+Mon Mar  2 09:26:06 2026,625 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:06 2026,627 [8100] DEBUG VT - Entering fetchUserRole(1082) method ...
+Mon Mar  2 09:26:06 2026,627 [8100] DEBUG VT - Prepared sql query being executed : select roleid from vtiger_user2role where userid=?
+Mon Mar  2 09:26:06 2026,627 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:06 2026,628 [8100] DEBUG VT - Exiting fetchUserRole method ...
+Mon Mar  2 09:26:06 2026,629 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_group2role where roleid=?
+Mon Mar  2 09:26:06 2026,629 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:26:06 2026,630 [8100] DEBUG VT - Entering getParentRole(H309) method ...
+Mon Mar  2 09:26:06 2026,630 [8100] DEBUG VT - Entering getRoleInformation(H309) method ...
+Mon Mar  2 09:26:06 2026,630 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_role where roleid=?
+Mon Mar  2 09:26:06 2026,630 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:26:06 2026,631 [8100] DEBUG VT - Exiting getRoleInformation method ...
+Mon Mar  2 09:26:06 2026,632 [8100] DEBUG VT - Exiting getParentRole method ...
+Mon Mar  2 09:26:06 2026,632 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_group2rs where roleandsubid in (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:26:06 2026,632 [8100] DEBUG VT - Prepared sql query parameters : [H1,H2,H76,H301,H77,H80,H88,H92,H170,H171,H295,H296,H297,H309]
+Mon Mar  2 09:26:06 2026,634 [8100] DEBUG VT - Entering getAllParentGroups(2) method...
+Mon Mar  2 09:26:06 2026,634 [8100] DEBUG VT - Prepared sql query being executed : select groupid from vtiger_group2grouprel where containsgroupid=?
+Mon Mar  2 09:26:06 2026,634 [8100] DEBUG VT - Prepared sql query parameters : [2]
+Mon Mar  2 09:26:06 2026,635 [8100] DEBUG VT - Exiting getAllParentGroups method...
+Mon Mar  2 09:26:06 2026,636 [8100] DEBUG VT - Exiting getAllUserGroups method...
+Mon Mar  2 09:26:06 2026,636 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_module_dashboard_widgets
+			INNER JOIN vtiger_links ON vtiger_links.linkid = vtiger_module_dashboard_widgets.linkid
+			WHERE linktype = ? AND vtiger_links.linkid = ? AND userid = ?
+Mon Mar  2 09:26:06 2026,636 [8100] DEBUG VT - Prepared sql query parameters : [DASHBOARDWIDGET,66,1082]
+Mon Mar  2 09:26:06 2026,641 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_users.first_name,vtiger_users.last_name, vtiger_users.id AS userid
+				FROM vtiger_sharedcalendar RIGHT JOIN vtiger_users ON vtiger_sharedcalendar.userid=vtiger_users.id AND vtiger_users.status= 'Active'
+				WHERE vtiger_sharedcalendar.sharedid=? OR (vtiger_users.status='Active' AND vtiger_users.calendarsharedtype='public' AND vtiger_users.id <> ?)
+Mon Mar  2 09:26:06 2026,641 [8100] DEBUG VT - Prepared sql query parameters : [1082,1082]
+Mon Mar  2 09:26:06 2026,656 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_def_org_share INNER JOIN vtiger_tab ON vtiger_tab.tabid = vtiger_def_org_share.tabid WHERE name=?
+Mon Mar  2 09:26:06 2026,656 [8100] DEBUG VT - Prepared sql query parameters : [Calendar]
+Mon Mar  2 09:26:06 2026,658 [8100] DEBUG VT - Entering get_user_array(,ACTIVE,,private) method ...
+Mon Mar  2 09:26:06 2026,658 [8100] DEBUG VT - Sharing is Public. All vtiger_users should be listed
+Mon Mar  2 09:26:06 2026,659 [8100] DEBUG VT - Sharing is Private. Only the current user should be listed
+Mon Mar  2 09:26:06 2026,659 [8100] DEBUG VT - Prepared sql query being executed : SELECT groupid, groupname from vtiger_groups WHERE groupid=? OR vtiger_groups.groupid in (?) union select vtiger_group2role.groupid as groupid,vtiger_groups.groupname as groupname from vtiger_group2role inner join vtiger_groups on vtiger_groups.groupid=vtiger_group2role.groupid inner join vtiger_role on vtiger_role.roleid=vtiger_group2role.roleid where vtiger_role.parentrole like ? union select vtiger_groups.groupid as groupid,vtiger_groups.groupname as groupname from vtiger_groups inner join vtiger_group2rs on vtiger_groups.groupid=vtiger_group2rs.groupid where vtiger_group2rs.roleandsubid in (?,?,?,?,?,?,?,?,?,?,?,?,?) union select sharedgroupid as groupid,vtiger_groups.groupname as groupname from vtiger_tmp_write_group_sharing_per inner join vtiger_groups on vtiger_groups.groupid=vtiger_tmp_write_group_sharing_per.sharedgroupid where vtiger_tmp_write_group_sharing_per.userid=? and vtiger_tmp_write_group_sharing_per.tabid=? order by groupname ASC
+Mon Mar  2 09:26:06 2026,659 [8100] DEBUG VT - Prepared sql query parameters : [1082,2,H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%,H1,H2,H76,H301,H77,H80,H88,H92,H170,H171,H295,H296,H297,1082,9]
+Mon Mar  2 09:26:06 2026,663 [8100] INFO VT - PearDatabase ->ADODB fetchByAssoc return null
+Mon Mar  2 09:26:06 2026,663 [8100] DEBUG VT - Exiting get_user_array method ...
+Mon Mar  2 09:26:21 2026,463 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:21 2026,497 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:26:21 2026,498 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:21 2026,498 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:21 2026,498 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:26:21 2026,502 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:21 2026,503 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:26:21 2026,512 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:21 2026,513 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:26:21 2026,513 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:21 2026,513 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:21 2026,514 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:21 2026,516 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:26:21 2026,528 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:21 2026,540 [8100] DEBUG VT -  session finger print (bfe576253ef5c5d3867f3ded7d75267f14f907d1c7a00dfc25830ea8b5a79f93) method ...
+Mon Mar  2 09:26:21 2026,541 [8100] DEBUG VT -  session finger print (0b83982282d6134cf94f400a2a138c3699292dfa27884b1bed82479e9dc8c9d9) method ...
+Mon Mar  2 09:26:21 2026,593 [8100] DEBUG VT - Entering isPermitted(Home,DetailView,) method ...
+Mon Mar  2 09:26:21 2026,594 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:21 2026,596 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:26:21 2026,597 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:26:21 2026,597 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:26:21 2026,598 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:26:21 2026,598 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:26:21 2026,598 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:26:21 2026,599 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:26:21 2026,600 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:21 2026,606 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype IN (?)  and tabid IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:26:21 2026,606 [8100] DEBUG VT - Prepared sql query parameters : [HEADERSCRIPT,1,3,4,6,8,9,10,13,14,15,18,22,23,25,40,41,42,46,50,51,52,64,65,66,67,69,70,71,72,73,74,75,76,77,78,81,83,84,85,86,87,88,0]
+Mon Mar  2 09:26:21 2026,642 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype IN (?)  and tabid IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:26:21 2026,642 [8100] DEBUG VT - Prepared sql query parameters : [HEADERCSS,1,3,4,6,8,9,10,13,14,15,18,22,23,25,40,41,42,46,50,51,52,64,65,66,67,69,70,71,72,73,74,75,76,77,78,81,83,84,85,86,87,88,0]
+Mon Mar  2 09:26:21 2026,649 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_currency_info
+Mon Mar  2 09:26:21 2026,651 [8100] DEBUG VT - Prepared sql query being executed : SELECT modulename,tablename,entityidfield,fieldname FROM vtiger_entityname
+Mon Mar  2 09:26:21 2026,661 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab WHERE presence IN (?,?)
+Mon Mar  2 09:26:21 2026,662 [8100] DEBUG VT - Prepared sql query parameters : [0,2]
+Mon Mar  2 09:26:21 2026,681 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:21 2026,734 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:21 2026,739 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:21 2026,767 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_organizationdetails WHERE organization_id=?
+Mon Mar  2 09:26:21 2026,767 [8100] DEBUG VT - Prepared sql query parameters : [1]
+Mon Mar  2 09:26:21 2026,770 [8100] DEBUG VT - Entering getDisplayDate(2026-3-2) method ...
+Mon Mar  2 09:26:21 2026,770 [8100] DEBUG VT - Exiting getDisplayDate method ...
+Mon Mar  2 09:26:21 2026,776 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_app2tab WHERE visible = ? ORDER BY appname,sequence
+Mon Mar  2 09:26:21 2026,777 [8100] DEBUG VT - Prepared sql query parameters : [1]
+Mon Mar  2 09:26:21 2026,868 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype IN (?)  and tabid IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:26:21 2026,868 [8100] DEBUG VT - Prepared sql query parameters : [HEADERLINK,1,3,4,6,8,9,10,13,14,15,18,22,23,25,40,41,42,46,50,51,52,64,65,66,67,69,70,71,72,73,74,75,76,77,78,81,83,84,85,86,87,88,0]
+Mon Mar  2 09:26:21 2026,872 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_actionmapping
+Mon Mar  2 09:26:21 2026,887 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE (tabid=? OR tabid=0) AND linktype IN (?,?)
+Mon Mar  2 09:26:21 2026,887 [8100] DEBUG VT - Prepared sql query parameters : [3,SIDEBARLINK,SIDEBARWIDGET]
+Mon Mar  2 09:26:21 2026,889 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_field WHERE tabid=? ORDER BY sequence
+Mon Mar  2 09:26:21 2026,890 [8100] DEBUG VT - Prepared sql query parameters : [3]
+Mon Mar  2 09:26:21 2026,894 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE userid=? ORDER BY sequence ASC 
+Mon Mar  2 09:26:21 2026,894 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:21 2026,895 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+    [appname] => 
+    [modulename] => 
+)
+
+Mon Mar  2 09:26:21 2026,895 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_dashboard_tabs WHERE id=? 
+Mon Mar  2 09:26:21 2026,896 [8100] DEBUG VT - Prepared sql query parameters : [273]
+Mon Mar  2 09:26:21 2026,897 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [isdefault] => 1
+    [sequence] => 1
+    [appname] => 
+    [modulename] => 
+    [userid] => 1082
+)
+
+Mon Mar  2 09:26:21 2026,897 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype = ? AND tabid IN (?) AND linkid NOT IN (SELECT linkid FROM vtiger_module_dashboard_widgets WHERE userid = ? and dashboardtabid=? ) UNION SELECT * FROM vtiger_links WHERE linklabel in (?,?)
+Mon Mar  2 09:26:21 2026,897 [8100] DEBUG VT - Prepared sql query parameters : [DASHBOARDWIDGET,3,1082,273,Mini List,Notebook]
+Mon Mar  2 09:26:21 2026,907 [8100] DEBUG VT - Prepared sql query being executed : select visible from vtiger_homestuff where userid=? and stufftype='Tag Cloud'
+Mon Mar  2 09:26:21 2026,907 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:21 2026,920 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_attachments.attachmentsid, vtiger_attachments.path, vtiger_attachments.name FROM vtiger_attachments
+                                  LEFT JOIN vtiger_salesmanattachmentsrel ON vtiger_salesmanattachmentsrel.attachmentsid = vtiger_attachments.attachmentsid
+                                  WHERE vtiger_salesmanattachmentsrel.smid=?
+Mon Mar  2 09:26:21 2026,920 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:21 2026,921 [8100] DEBUG VT - Prepared sql query being executed : SELECT rolename from vtiger_role WHERE roleid = ?
+Mon Mar  2 09:26:21 2026,921 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:26:21 2026,930 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_app2tab WHERE visible = ? ORDER BY appname,sequence
+Mon Mar  2 09:26:21 2026,931 [8100] DEBUG VT - Prepared sql query parameters : [1]
+Mon Mar  2 09:26:22 2026,033 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE userid=? ORDER BY sequence ASC 
+Mon Mar  2 09:26:22 2026,034 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:22 2026,035 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+    [appname] => 
+    [modulename] => 
+)
+
+Mon Mar  2 09:26:22 2026,036 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_links.*, vtiger_module_dashboard_widgets.userid, vtiger_module_dashboard_widgets.filterid, vtiger_module_dashboard_widgets.data, vtiger_module_dashboard_widgets.id as widgetid, vtiger_module_dashboard_widgets.position as position, vtiger_module_dashboard_widgets.size as size, vtiger_links.linkid as id FROM vtiger_links  INNER JOIN vtiger_module_dashboard_widgets ON vtiger_links.linkid=vtiger_module_dashboard_widgets.linkid WHERE vtiger_module_dashboard_widgets.userid = ? AND linktype = ? AND tabid = ? AND dashboardtabid = ?
+Mon Mar  2 09:26:22 2026,036 [8100] DEBUG VT - Prepared sql query parameters : [1082,DASHBOARDWIDGET,3,273]
+Mon Mar  2 09:26:22 2026,041 [8100] DEBUG VT - Prepared sql query being executed : SELECT reportid FROM vtiger_module_dashboard_widgets WHERE userid = ? AND linkid= ? AND reportid IS NOT NULL AND dashboardtabid = ?
+Mon Mar  2 09:26:22 2026,041 [8100] DEBUG VT - Prepared sql query parameters : [1082,0,273]
+Mon Mar  2 09:26:23 2026,316 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:23 2026,360 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_attachments.* FROM vtiger_attachments
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_attachments.attachmentsid
+					WHERE vtiger_attachments.attachmentsid=? LIMIT 1
+Mon Mar  2 09:26:23 2026,361 [8100] DEBUG VT - Prepared sql query parameters : [9799941]
+Mon Mar  2 09:26:24 2026,125 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:24 2026,262 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:26:24 2026,262 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:24 2026,262 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:24 2026,263 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:26:24 2026,267 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:24 2026,268 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:26:24 2026,276 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,276 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:26:24 2026,276 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:24 2026,276 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:24 2026,277 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,279 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:26:24 2026,290 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:24 2026,435 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:24 2026,484 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:26:24 2026,484 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:24 2026,485 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:24 2026,485 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:26:24 2026,489 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:24 2026,490 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:26:24 2026,498 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,498 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:26:24 2026,498 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:24 2026,498 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:24 2026,499 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,500 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:24 2026,501 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:26:24 2026,513 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:24 2026,535 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:26:24 2026,535 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:26:24 2026,535 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:26:24 2026,536 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:26:24 2026,537 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:26:24 2026,537 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:26:24 2026,537 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:26:24 2026,538 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:24 2026,548 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:26:24 2026,548 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"2","col":"2"},1082,57]
+Mon Mar  2 09:26:24 2026,552 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:26:24 2026,552 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"1","col":"3"},1082,66]
+Mon Mar  2 09:26:24 2026,555 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:26:24 2026,555 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"1","col":"1"},1082,67]
+Mon Mar  2 09:26:24 2026,559 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:26:24 2026,559 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"2","col":"1"},1082,68]
+Mon Mar  2 09:26:24 2026,564 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:26:24 2026,564 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:24 2026,564 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:24 2026,565 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:26:24 2026,569 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:24 2026,569 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:26:24 2026,571 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:26:24 2026,577 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,578 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:26:24 2026,578 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:24 2026,578 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:24 2026,578 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,579 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:26:24 2026,591 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:24 2026,631 [8100] DEBUG VT - Entering isPermitted(HelpDesk,DetailView,) method ...
+Mon Mar  2 09:26:24 2026,631 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:26:24 2026,631 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:26:24 2026,632 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:26:24 2026,632 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:26:24 2026,633 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:26:24 2026,633 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:26:24 2026,633 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:24 2026,635 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:26:24 2026,636 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:26:24 2026,636 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:26:24 2026,636 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:26:24 2026,637 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:26:24 2026,637 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:26:24 2026,637 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:26:24 2026,637 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:24 2026,647 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault FROM vtiger_dashboard_tabs WHERE userid=? AND isdefault =?
+Mon Mar  2 09:26:24 2026,647 [8100] DEBUG VT - Prepared sql query parameters : [1082,1]
+Mon Mar  2 09:26:24 2026,649 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+)
+
+Mon Mar  2 09:26:24 2026,651 [8100] DEBUG VT - Prepared sql query being executed : SELECT id FROM vtiger_module_dashboard_widgets WHERE linkid = ? AND userid = ? AND dashboardtabid=?
+Mon Mar  2 09:26:24 2026,651 [8100] DEBUG VT - Prepared sql query parameters : [67,1082,273]
+Mon Mar  2 09:26:24 2026,657 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_def_org_share INNER JOIN vtiger_tab ON vtiger_tab.tabid = vtiger_def_org_share.tabid WHERE name=?
+Mon Mar  2 09:26:24 2026,657 [8100] DEBUG VT - Prepared sql query parameters : [HelpDesk]
+Mon Mar  2 09:26:24 2026,659 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_ticketstatus ORDER BY  sortorderid ASC
+Mon Mar  2 09:26:24 2026,662 [8100] DEBUG helpdesk - Entering HelpDesk() method ...
+Mon Mar  2 09:26:24 2026,662 [8100] DEBUG VT - Entering getColumnFields(HelpDesk) method ...
+Mon Mar  2 09:26:24 2026,662 [8100] DEBUG VT - in getColumnFields HelpDesk
+Mon Mar  2 09:26:24 2026,662 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:24 2026,662 [8100] DEBUG VT - Prepared sql query parameters : [13]
+Mon Mar  2 09:26:24 2026,670 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,670 [8100] DEBUG helpdesk - Exiting HelpDesk method ...
+Mon Mar  2 09:26:24 2026,670 [8100] DEBUG VT - Entering getColumnFields(HelpDesk) method ...
+Mon Mar  2 09:26:24 2026,671 [8100] DEBUG VT - in getColumnFields HelpDesk
+Mon Mar  2 09:26:24 2026,671 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,672 [8100] DEBUG VT - Prepared sql query being executed : create temporary table IF NOT EXISTS vt_tmp_u1082(id int(11) primary key) ignore (SELECT 1082 as id) UNION (SELECT vtiger_user2role.userid AS userid FROM vtiger_user2role INNER JOIN vtiger_users ON vtiger_users.id=vtiger_user2role.userid INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid WHERE vtiger_role.parentrole like 'H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%') UNION (SELECT groupid FROM vtiger_groups WHERE groupid IN (2))
+Mon Mar  2 09:26:24 2026,677 [8100] DEBUG VT - Prepared sql query being executed : SELECT COUNT(*) as count, CASE WHEN vtiger_troubletickets.status IS NULL OR vtiger_troubletickets.status = "" THEN "" ELSE vtiger_troubletickets.status END AS statusvalue 
+							FROM vtiger_troubletickets INNER JOIN vtiger_crmentity ON vtiger_troubletickets.ticketid = vtiger_crmentity.crmid AND vtiger_crmentity.deleted=0
+							 INNER JOIN vt_tmp_u1082 vt_tmp_u1082 ON vt_tmp_u1082.id = vtiger_crmentity.smownerid  AND  smownerid IN (1087,1088,1089,1090,1091,1092,1094,1095,1098,1204,1082)  INNER JOIN vtiger_ticketstatus ON vtiger_troubletickets.status = vtiger_ticketstatus.ticketstatus 
+							WHERE vtiger_troubletickets.status IN (?,?,?,?,?,?) 
+							GROUP BY statusvalue ORDER BY vtiger_ticketstatus.sortorderid
+Mon Mar  2 09:26:24 2026,677 [8100] DEBUG VT - Prepared sql query parameters : [Open,Closed after Re-commissioning,Engineer Assigned,In Progress,Closed,Closed : Recommissioning Is Pending]
+Mon Mar  2 09:26:24 2026,684 [8100] DEBUG VT - Prepared sql query being executed : SELECT cvid FROM vtiger_customview WHERE viewname = 'All' AND entitytype = ?
+Mon Mar  2 09:26:24 2026,684 [8100] DEBUG VT - Prepared sql query parameters : [HelpDesk]
+Mon Mar  2 09:26:24 2026,686 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_module_dashboard_widgets
+			INNER JOIN vtiger_links ON vtiger_links.linkid = vtiger_module_dashboard_widgets.linkid
+			WHERE linktype = ? AND vtiger_links.linkid = ? AND userid = ?
+Mon Mar  2 09:26:24 2026,686 [8100] DEBUG VT - Prepared sql query parameters : [DASHBOARDWIDGET,67,1082]
+Mon Mar  2 09:26:24 2026,692 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_def_org_share INNER JOIN vtiger_tab ON vtiger_tab.tabid = vtiger_def_org_share.tabid WHERE name=?
+Mon Mar  2 09:26:24 2026,692 [8100] DEBUG VT - Prepared sql query parameters : [HelpDesk]
+Mon Mar  2 09:26:24 2026,695 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_role WHERE roleid = ?
+Mon Mar  2 09:26:24 2026,696 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:26:24 2026,697 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_role WHERE parentrole LIKE ? ORDER BY depth
+Mon Mar  2 09:26:24 2026,697 [8100] DEBUG VT - Prepared sql query parameters : [H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%]
+Mon Mar  2 09:26:24 2026,699 [8100] DEBUG VT - Prepared sql query being executed : SELECT userid FROM vtiger_user2role WHERE roleid IN (?)
+Mon Mar  2 09:26:24 2026,699 [8100] DEBUG VT - Prepared sql query parameters : [H298]
+Mon Mar  2 09:26:24 2026,701 [8100] DEBUG VT - Prepared sql query being executed : SELECT id, first_name, last_name FROM vtiger_users WHERE status = ? AND id IN (?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:26:24 2026,701 [8100] DEBUG VT - Prepared sql query parameters : [ACTIVE,1087,1088,1089,1090,1091,1092,1094,1095,1098,1204]
+Mon Mar  2 09:26:24 2026,715 [8100] DEBUG VT - Entering get_user_array(,ACTIVE,,) method ...
+Mon Mar  2 09:26:24 2026,715 [8100] DEBUG VT - Sharing is Public. All vtiger_users should be listed
+Mon Mar  2 09:26:24 2026,715 [8100] DEBUG VT - Prepared sql query being executed : SELECT groupid, groupname from vtiger_groups order by groupname ASC
+Mon Mar  2 09:26:24 2026,721 [8100] INFO VT - PearDatabase ->ADODB fetchByAssoc return null
+Mon Mar  2 09:26:24 2026,721 [8100] DEBUG VT - Exiting get_user_array method ...
+Mon Mar  2 09:26:24 2026,734 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:26:24 2026,734 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:24 2026,734 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:24 2026,734 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:26:24 2026,740 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:26:24 2026,740 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:26:24 2026,749 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,749 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:26:24 2026,749 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:26:24 2026,750 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:26:24 2026,750 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,751 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:26:24 2026,762 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:26:24 2026,791 [8100] DEBUG VT - Entering isPermitted(Home,DetailView,) method ...
+Mon Mar  2 09:26:24 2026,792 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:24 2026,794 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:26:24 2026,794 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:26:24 2026,795 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:26:24 2026,795 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:26:24 2026,795 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:26:24 2026,796 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:26:24 2026,796 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:26:24 2026,796 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:26:24 2026,817 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault FROM vtiger_dashboard_tabs WHERE userid=? AND isdefault =?
+Mon Mar  2 09:26:24 2026,817 [8100] DEBUG VT - Prepared sql query parameters : [1082,1]
+Mon Mar  2 09:26:24 2026,819 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+)
+
+Mon Mar  2 09:26:24 2026,822 [8100] DEBUG VT - Prepared sql query being executed : SELECT id FROM vtiger_module_dashboard_widgets WHERE linkid = ? AND userid = ? AND dashboardtabid=?
+Mon Mar  2 09:26:24 2026,823 [8100] DEBUG VT - Prepared sql query parameters : [66,1082,273]
+Mon Mar  2 09:26:24 2026,828 [8100] DEBUG VT - Entering getDisplayDate(2026-03-02 09:26:24) method ...
+Mon Mar  2 09:26:24 2026,829 [8100] DEBUG VT - Exiting getDisplayDate method ...
+Mon Mar  2 09:26:24 2026,829 [8100] DEBUG VT - Entering getDisplayTime(2026-03-02 09:26:24) method ...
+Mon Mar  2 09:26:24 2026,829 [8100] DEBUG VT - Exiting getDisplayTime method ...
+Mon Mar  2 09:26:24 2026,830 [8100] DEBUG VT - Entering getDBInsertDateValue(02/03/2026 14:56:24) method ...
+Mon Mar  2 09:26:24 2026,830 [8100] DEBUG VT - Exiting getDBInsertDateValue method ...
+Mon Mar  2 09:26:24 2026,830 [8100] DEBUG VT - Entering getDBInsertTimeValue(02/03/2026 14:56:24) method ...
+Mon Mar  2 09:26:24 2026,831 [8100] DEBUG VT - Exiting getDBInsertTimeValue method ...
+Mon Mar  2 09:26:24 2026,832 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:26:24 2026,832 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:26:24 2026,833 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?,?)
+Mon Mar  2 09:26:24 2026,833 [8100] DEBUG VT - Prepared sql query parameters : [9,16]
+Mon Mar  2 09:26:24 2026,846 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,846 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:26:24 2026,846 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:26:24 2026,846 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,847 [8100] DEBUG VT - Prepared sql query being executed : create temporary table IF NOT EXISTS vt_tmp_u1082_t9_events(id int(11) primary key, shared int(1) default 0) ignore (SELECT 1082 as id) UNION (SELECT vtiger_user2role.userid AS userid FROM vtiger_user2role INNER JOIN vtiger_users ON vtiger_users.id=vtiger_user2role.userid INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid WHERE vtiger_role.parentrole like 'H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%') UNION (SELECT groupid FROM vtiger_groups WHERE groupid IN (2))
+Mon Mar  2 09:26:24 2026,853 [8100] DEBUG VT - Prepared sql query being executed : REPLACE INTO vt_tmp_u1082_t9_events (id) SELECT userid as id FROM vtiger_sharedcalendar WHERE sharedid = ?
+Mon Mar  2 09:26:24 2026,854 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:24 2026,855 [8100] DEBUG VT - Prepared sql query being executed : REPLACE INTO vt_tmp_u1082_t9_events (id) SELECT id FROM vtiger_users WHERE calendarsharedtype = ?
+Mon Mar  2 09:26:24 2026,856 [8100] DEBUG VT - Prepared sql query parameters : [public]
+Mon Mar  2 09:26:24 2026,858 [8100] DEBUG VT - Entering getTabname(9) method ...
+Mon Mar  2 09:26:24 2026,858 [8100] INFO VT - tab id is 9
+Mon Mar  2 09:26:24 2026,859 [8100] DEBUG VT - Prepared sql query being executed : select tablabel from vtiger_tab where tabid=?
+Mon Mar  2 09:26:24 2026,859 [8100] DEBUG VT - Prepared sql query parameters : [9]
+Mon Mar  2 09:26:24 2026,860 [8100] DEBUG VT - Exiting getTabname method ...
+Mon Mar  2 09:26:24 2026,860 [8100] DEBUG VT - Prepared sql query being executed : CREATE TEMPORARY TABLE IF NOT EXISTS vt_tmp_u1082_t9_task(id INT(11) PRIMARY KEY, shared int(1) DEFAULT 0) IGNORE (SELECT 1082 as id) UNION (SELECT vtiger_user2role.userid AS userid FROM vtiger_user2role INNER JOIN vtiger_users ON vtiger_users.id=vtiger_user2role.userid INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid WHERE vtiger_role.parentrole like 'H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%') UNION (SELECT groupid FROM vtiger_groups WHERE groupid IN (2))
+Mon Mar  2 09:26:24 2026,864 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:26:24 2026,865 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:26:24 2026,865 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,865 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:26:24 2026,865 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:26:24 2026,866 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:26:24 2026,866 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_crmentity.crmid, vtiger_crmentity.smownerid, vtiger_crmentity.setype, vtiger_activity.* FROM vtiger_activity
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_activity.activityid
+					LEFT JOIN vtiger_groups ON vtiger_groups.groupid = vtiger_crmentity.smownerid LEFT JOIN vt_tmp_u1082_t9_events vt_tmp_u1082_t9_events ON (vt_tmp_u1082_t9_events.id = vtiger_crmentity.smownerid AND vtiger_activity.activitytype NOT IN ('Emails', 'Task'))  LEFT JOIN vt_tmp_u1082_t9_task vt_tmp_u1082_t9_task ON (vt_tmp_u1082_t9_task.id = vtiger_crmentity.smownerid AND vtiger_activity.activitytype = 'Task')  WHERE vtiger_crmentity.deleted=0
+					AND (vtiger_activity.activitytype NOT IN ('Emails'))
+					AND (vtiger_activity.status is NULL OR vtiger_activity.status NOT IN ('Completed', 'Deferred', 'Cancelled'))
+					AND (vtiger_activity.eventstatus is NULL OR vtiger_activity.eventstatus NOT IN ('Held', 'Cancelled')) AND  (vt_tmp_u1082_t9_events.shared IS NOT NULL OR vt_tmp_u1082_t9_task.shared IS NOT NULL)  AND CASE WHEN vtiger_activity.activitytype='Task' THEN due_date < '2026-03-02' ELSE CONCAT(due_date,' ',time_end) < '2026-03-02 09:26:24' END AND vtiger_crmentity.smownerid = ? ORDER BY date_start, time_start LIMIT ?, ?
+Mon Mar  2 09:26:24 2026,867 [8100] DEBUG VT - Prepared sql query parameters : [1082,0,11]
+Mon Mar  2 09:26:24 2026,871 [8100] DEBUG VT - Entering getAllUserGroups(1082) method...
+Mon Mar  2 09:26:24 2026,872 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_users2group where userid=?
+Mon Mar  2 09:26:24 2026,872 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:24 2026,874 [8100] DEBUG VT - Entering fetchUserRole(1082) method ...
+Mon Mar  2 09:26:24 2026,874 [8100] DEBUG VT - Prepared sql query being executed : select roleid from vtiger_user2role where userid=?
+Mon Mar  2 09:26:24 2026,874 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:26:24 2026,875 [8100] DEBUG VT - Exiting fetchUserRole method ...
+Mon Mar  2 09:26:24 2026,875 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_group2role where roleid=?
+Mon Mar  2 09:26:24 2026,876 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:26:24 2026,877 [8100] DEBUG VT - Entering getParentRole(H309) method ...
+Mon Mar  2 09:26:24 2026,877 [8100] DEBUG VT - Entering getRoleInformation(H309) method ...
+Mon Mar  2 09:26:24 2026,877 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_role where roleid=?
+Mon Mar  2 09:26:24 2026,877 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:26:24 2026,879 [8100] DEBUG VT - Exiting getRoleInformation method ...
+Mon Mar  2 09:26:24 2026,879 [8100] DEBUG VT - Exiting getParentRole method ...
+Mon Mar  2 09:26:24 2026,879 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_group2rs where roleandsubid in (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:26:24 2026,880 [8100] DEBUG VT - Prepared sql query parameters : [H1,H2,H76,H301,H77,H80,H88,H92,H170,H171,H295,H296,H297,H309]
+Mon Mar  2 09:26:24 2026,881 [8100] DEBUG VT - Entering getAllParentGroups(2) method...
+Mon Mar  2 09:26:24 2026,882 [8100] DEBUG VT - Prepared sql query being executed : select groupid from vtiger_group2grouprel where containsgroupid=?
+Mon Mar  2 09:26:24 2026,882 [8100] DEBUG VT - Prepared sql query parameters : [2]
+Mon Mar  2 09:26:24 2026,883 [8100] DEBUG VT - Exiting getAllParentGroups method...
+Mon Mar  2 09:26:24 2026,883 [8100] DEBUG VT - Exiting getAllUserGroups method...
+Mon Mar  2 09:26:24 2026,884 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_module_dashboard_widgets
+			INNER JOIN vtiger_links ON vtiger_links.linkid = vtiger_module_dashboard_widgets.linkid
+			WHERE linktype = ? AND vtiger_links.linkid = ? AND userid = ?
+Mon Mar  2 09:26:24 2026,884 [8100] DEBUG VT - Prepared sql query parameters : [DASHBOARDWIDGET,66,1082]
+Mon Mar  2 09:26:24 2026,889 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_users.first_name,vtiger_users.last_name, vtiger_users.id AS userid
+				FROM vtiger_sharedcalendar RIGHT JOIN vtiger_users ON vtiger_sharedcalendar.userid=vtiger_users.id AND vtiger_users.status= 'Active'
+				WHERE vtiger_sharedcalendar.sharedid=? OR (vtiger_users.status='Active' AND vtiger_users.calendarsharedtype='public' AND vtiger_users.id <> ?)
+Mon Mar  2 09:26:24 2026,889 [8100] DEBUG VT - Prepared sql query parameters : [1082,1082]
+Mon Mar  2 09:26:24 2026,902 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_def_org_share INNER JOIN vtiger_tab ON vtiger_tab.tabid = vtiger_def_org_share.tabid WHERE name=?
+Mon Mar  2 09:26:24 2026,902 [8100] DEBUG VT - Prepared sql query parameters : [Calendar]
+Mon Mar  2 09:26:24 2026,904 [8100] DEBUG VT - Entering get_user_array(,ACTIVE,,private) method ...
+Mon Mar  2 09:26:24 2026,905 [8100] DEBUG VT - Sharing is Public. All vtiger_users should be listed
+Mon Mar  2 09:26:24 2026,905 [8100] DEBUG VT - Sharing is Private. Only the current user should be listed
+Mon Mar  2 09:26:24 2026,906 [8100] DEBUG VT - Prepared sql query being executed : SELECT groupid, groupname from vtiger_groups WHERE groupid=? OR vtiger_groups.groupid in (?) union select vtiger_group2role.groupid as groupid,vtiger_groups.groupname as groupname from vtiger_group2role inner join vtiger_groups on vtiger_groups.groupid=vtiger_group2role.groupid inner join vtiger_role on vtiger_role.roleid=vtiger_group2role.roleid where vtiger_role.parentrole like ? union select vtiger_groups.groupid as groupid,vtiger_groups.groupname as groupname from vtiger_groups inner join vtiger_group2rs on vtiger_groups.groupid=vtiger_group2rs.groupid where vtiger_group2rs.roleandsubid in (?,?,?,?,?,?,?,?,?,?,?,?,?) union select sharedgroupid as groupid,vtiger_groups.groupname as groupname from vtiger_tmp_write_group_sharing_per inner join vtiger_groups on vtiger_groups.groupid=vtiger_tmp_write_group_sharing_per.sharedgroupid where vtiger_tmp_write_group_sharing_per.userid=? and vtiger_tmp_write_group_sharing_per.tabid=? order by groupname ASC
+Mon Mar  2 09:26:24 2026,906 [8100] DEBUG VT - Prepared sql query parameters : [1082,2,H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%,H1,H2,H76,H301,H77,H80,H88,H92,H170,H171,H295,H296,H297,1082,9]
+Mon Mar  2 09:26:24 2026,912 [8100] INFO VT - PearDatabase ->ADODB fetchByAssoc return null
+Mon Mar  2 09:26:24 2026,912 [8100] DEBUG VT - Exiting get_user_array method ...
+Mon Mar  2 09:27:26 2026,164 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:27:26 2026,208 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:27:26 2026,209 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:26 2026,209 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:26 2026,209 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:27:26 2026,215 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:27:26 2026,216 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:27:26 2026,227 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:26 2026,228 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:27:26 2026,228 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:26 2026,228 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:26 2026,229 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:26 2026,232 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:27:26 2026,247 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:27:26 2026,262 [8100] DEBUG VT -  session finger print (bfe576253ef5c5d3867f3ded7d75267f14f907d1c7a00dfc25830ea8b5a79f93) method ...
+Mon Mar  2 09:27:26 2026,263 [8100] DEBUG VT -  session finger print (0b83982282d6134cf94f400a2a138c3699292dfa27884b1bed82479e9dc8c9d9) method ...
+Mon Mar  2 09:27:26 2026,344 [8100] DEBUG VT - Entering isPermitted(Home,DetailView,) method ...
+Mon Mar  2 09:27:26 2026,345 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:27:26 2026,350 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:27:26 2026,351 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:27:26 2026,351 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:27:26 2026,355 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:27:26 2026,356 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:27:26 2026,357 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:27:26 2026,358 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:27:26 2026,358 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:27:26 2026,366 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype IN (?)  and tabid IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:27:26 2026,369 [8100] DEBUG VT - Prepared sql query parameters : [HEADERSCRIPT,1,3,4,6,8,9,10,13,14,15,18,22,23,25,40,41,42,46,50,51,52,64,65,66,67,69,70,71,72,73,74,75,76,77,78,81,83,84,85,86,87,88,0]
+Mon Mar  2 09:27:26 2026,413 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype IN (?)  and tabid IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:27:26 2026,413 [8100] DEBUG VT - Prepared sql query parameters : [HEADERCSS,1,3,4,6,8,9,10,13,14,15,18,22,23,25,40,41,42,46,50,51,52,64,65,66,67,69,70,71,72,73,74,75,76,77,78,81,83,84,85,86,87,88,0]
+Mon Mar  2 09:27:26 2026,421 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_currency_info
+Mon Mar  2 09:27:26 2026,424 [8100] DEBUG VT - Prepared sql query being executed : SELECT modulename,tablename,entityidfield,fieldname FROM vtiger_entityname
+Mon Mar  2 09:27:26 2026,439 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab WHERE presence IN (?,?)
+Mon Mar  2 09:27:26 2026,440 [8100] DEBUG VT - Prepared sql query parameters : [0,2]
+Mon Mar  2 09:27:26 2026,464 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:27:26 2026,537 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:27:26 2026,546 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:27:26 2026,583 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_organizationdetails WHERE organization_id=?
+Mon Mar  2 09:27:26 2026,583 [8100] DEBUG VT - Prepared sql query parameters : [1]
+Mon Mar  2 09:27:26 2026,588 [8100] DEBUG VT - Entering getDisplayDate(2026-3-2) method ...
+Mon Mar  2 09:27:26 2026,588 [8100] DEBUG VT - Exiting getDisplayDate method ...
+Mon Mar  2 09:27:26 2026,595 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_app2tab WHERE visible = ? ORDER BY appname,sequence
+Mon Mar  2 09:27:26 2026,595 [8100] DEBUG VT - Prepared sql query parameters : [1]
+Mon Mar  2 09:27:26 2026,730 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype IN (?)  and tabid IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:27:26 2026,731 [8100] DEBUG VT - Prepared sql query parameters : [HEADERLINK,1,3,4,6,8,9,10,13,14,15,18,22,23,25,40,41,42,46,50,51,52,64,65,66,67,69,70,71,72,73,74,75,76,77,78,81,83,84,85,86,87,88,0]
+Mon Mar  2 09:27:26 2026,736 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_actionmapping
+Mon Mar  2 09:27:26 2026,756 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE (tabid=? OR tabid=0) AND linktype IN (?,?)
+Mon Mar  2 09:27:26 2026,756 [8100] DEBUG VT - Prepared sql query parameters : [3,SIDEBARLINK,SIDEBARWIDGET]
+Mon Mar  2 09:27:26 2026,758 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_field WHERE tabid=? ORDER BY sequence
+Mon Mar  2 09:27:26 2026,759 [8100] DEBUG VT - Prepared sql query parameters : [3]
+Mon Mar  2 09:27:26 2026,763 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE userid=? ORDER BY sequence ASC 
+Mon Mar  2 09:27:26 2026,763 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:27:26 2026,765 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+    [appname] => 
+    [modulename] => 
+)
+
+Mon Mar  2 09:27:26 2026,766 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_dashboard_tabs WHERE id=? 
+Mon Mar  2 09:27:26 2026,766 [8100] DEBUG VT - Prepared sql query parameters : [273]
+Mon Mar  2 09:27:26 2026,768 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [isdefault] => 1
+    [sequence] => 1
+    [appname] => 
+    [modulename] => 
+    [userid] => 1082
+)
+
+Mon Mar  2 09:27:26 2026,768 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_links WHERE linktype = ? AND tabid IN (?) AND linkid NOT IN (SELECT linkid FROM vtiger_module_dashboard_widgets WHERE userid = ? and dashboardtabid=? ) UNION SELECT * FROM vtiger_links WHERE linklabel in (?,?)
+Mon Mar  2 09:27:26 2026,769 [8100] DEBUG VT - Prepared sql query parameters : [DASHBOARDWIDGET,3,1082,273,Mini List,Notebook]
+Mon Mar  2 09:27:26 2026,780 [8100] DEBUG VT - Prepared sql query being executed : select visible from vtiger_homestuff where userid=? and stufftype='Tag Cloud'
+Mon Mar  2 09:27:26 2026,781 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:27:26 2026,798 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_attachments.attachmentsid, vtiger_attachments.path, vtiger_attachments.name FROM vtiger_attachments
+                                  LEFT JOIN vtiger_salesmanattachmentsrel ON vtiger_salesmanattachmentsrel.attachmentsid = vtiger_attachments.attachmentsid
+                                  WHERE vtiger_salesmanattachmentsrel.smid=?
+Mon Mar  2 09:27:26 2026,798 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:27:26 2026,800 [8100] DEBUG VT - Prepared sql query being executed : SELECT rolename from vtiger_role WHERE roleid = ?
+Mon Mar  2 09:27:26 2026,800 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:27:26 2026,808 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_app2tab WHERE visible = ? ORDER BY appname,sequence
+Mon Mar  2 09:27:26 2026,808 [8100] DEBUG VT - Prepared sql query parameters : [1]
+Mon Mar  2 09:27:26 2026,919 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE userid=? ORDER BY sequence ASC 
+Mon Mar  2 09:27:26 2026,920 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:27:26 2026,921 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+    [appname] => 
+    [modulename] => 
+)
+
+Mon Mar  2 09:27:26 2026,922 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_links.*, vtiger_module_dashboard_widgets.userid, vtiger_module_dashboard_widgets.filterid, vtiger_module_dashboard_widgets.data, vtiger_module_dashboard_widgets.id as widgetid, vtiger_module_dashboard_widgets.position as position, vtiger_module_dashboard_widgets.size as size, vtiger_links.linkid as id FROM vtiger_links  INNER JOIN vtiger_module_dashboard_widgets ON vtiger_links.linkid=vtiger_module_dashboard_widgets.linkid WHERE vtiger_module_dashboard_widgets.userid = ? AND linktype = ? AND tabid = ? AND dashboardtabid = ?
+Mon Mar  2 09:27:26 2026,922 [8100] DEBUG VT - Prepared sql query parameters : [1082,DASHBOARDWIDGET,3,273]
+Mon Mar  2 09:27:26 2026,928 [8100] DEBUG VT - Prepared sql query being executed : SELECT reportid FROM vtiger_module_dashboard_widgets WHERE userid = ? AND linkid= ? AND reportid IS NOT NULL AND dashboardtabid = ?
+Mon Mar  2 09:27:26 2026,928 [8100] DEBUG VT - Prepared sql query parameters : [1082,0,273]
+Mon Mar  2 09:27:28 2026,133 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:27:28 2026,253 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_attachments.* FROM vtiger_attachments
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_attachments.attachmentsid
+					WHERE vtiger_attachments.attachmentsid=? LIMIT 1
+Mon Mar  2 09:27:28 2026,253 [8100] DEBUG VT - Prepared sql query parameters : [9799941]
+Mon Mar  2 09:27:29 2026,019 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:27:29 2026,053 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:27:29 2026,053 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:29 2026,053 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:29 2026,053 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:27:29 2026,059 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:27:29 2026,059 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:27:29 2026,081 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,081 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:27:29 2026,081 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:29 2026,082 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:29 2026,082 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,086 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:27:29 2026,102 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:27:29 2026,360 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:27:29 2026,398 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:27:29 2026,398 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:29 2026,398 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:29 2026,399 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:27:29 2026,405 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:27:29 2026,405 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:27:29 2026,415 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,415 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:27:29 2026,415 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:29 2026,416 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:29 2026,416 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,419 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:27:29 2026,430 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:27:29 2026,435 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:27:29 2026,491 [8100] INFO VT - PearDatabase ->ADODB disconnect
+Mon Mar  2 09:27:29 2026,532 [8100] DEBUG VT - Entering isPermitted(Home,DetailView,) method ...
+Mon Mar  2 09:27:29 2026,532 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:27:29 2026,541 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:27:29 2026,542 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:27:29 2026,542 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:27:29 2026,543 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:27:29 2026,543 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:27:29 2026,543 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:27:29 2026,544 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:27:29 2026,544 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:27:29 2026,556 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault FROM vtiger_dashboard_tabs WHERE userid=? AND isdefault =?
+Mon Mar  2 09:27:29 2026,556 [8100] DEBUG VT - Prepared sql query parameters : [1082,1]
+Mon Mar  2 09:27:29 2026,558 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+)
+
+Mon Mar  2 09:27:29 2026,560 [8100] DEBUG VT - Prepared sql query being executed : SELECT id FROM vtiger_module_dashboard_widgets WHERE linkid = ? AND userid = ? AND dashboardtabid=?
+Mon Mar  2 09:27:29 2026,561 [8100] DEBUG VT - Prepared sql query parameters : [66,1082,273]
+Mon Mar  2 09:27:29 2026,569 [8100] DEBUG VT - Entering getDisplayDate(2026-03-02 09:27:29) method ...
+Mon Mar  2 09:27:29 2026,569 [8100] DEBUG VT - Exiting getDisplayDate method ...
+Mon Mar  2 09:27:29 2026,569 [8100] DEBUG VT - Entering getDisplayTime(2026-03-02 09:27:29) method ...
+Mon Mar  2 09:27:29 2026,570 [8100] DEBUG VT - Exiting getDisplayTime method ...
+Mon Mar  2 09:27:29 2026,570 [8100] DEBUG VT - Entering getDBInsertDateValue(02/03/2026 14:57:29) method ...
+Mon Mar  2 09:27:29 2026,570 [8100] DEBUG VT - Exiting getDBInsertDateValue method ...
+Mon Mar  2 09:27:29 2026,570 [8100] DEBUG VT - Entering getDBInsertTimeValue(02/03/2026 14:57:29) method ...
+Mon Mar  2 09:27:29 2026,571 [8100] DEBUG VT - Exiting getDBInsertTimeValue method ...
+Mon Mar  2 09:27:29 2026,573 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:27:29 2026,573 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:27:29 2026,573 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?,?)
+Mon Mar  2 09:27:29 2026,574 [8100] DEBUG VT - Prepared sql query parameters : [9,16]
+Mon Mar  2 09:27:29 2026,583 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,583 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:27:29 2026,584 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:27:29 2026,584 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,585 [8100] DEBUG VT - Prepared sql query being executed : create temporary table IF NOT EXISTS vt_tmp_u1082_t9_events(id int(11) primary key, shared int(1) default 0) ignore (SELECT 1082 as id) UNION (SELECT vtiger_user2role.userid AS userid FROM vtiger_user2role INNER JOIN vtiger_users ON vtiger_users.id=vtiger_user2role.userid INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid WHERE vtiger_role.parentrole like 'H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%') UNION (SELECT groupid FROM vtiger_groups WHERE groupid IN (2))
+Mon Mar  2 09:27:29 2026,589 [8100] DEBUG VT - Prepared sql query being executed : REPLACE INTO vt_tmp_u1082_t9_events (id) SELECT userid as id FROM vtiger_sharedcalendar WHERE sharedid = ?
+Mon Mar  2 09:27:29 2026,589 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:27:29 2026,590 [8100] DEBUG VT - Prepared sql query being executed : REPLACE INTO vt_tmp_u1082_t9_events (id) SELECT id FROM vtiger_users WHERE calendarsharedtype = ?
+Mon Mar  2 09:27:29 2026,591 [8100] DEBUG VT - Prepared sql query parameters : [public]
+Mon Mar  2 09:27:29 2026,594 [8100] DEBUG VT - Entering getTabname(9) method ...
+Mon Mar  2 09:27:29 2026,594 [8100] INFO VT - tab id is 9
+Mon Mar  2 09:27:29 2026,594 [8100] DEBUG VT - Prepared sql query being executed : select tablabel from vtiger_tab where tabid=?
+Mon Mar  2 09:27:29 2026,595 [8100] DEBUG VT - Prepared sql query parameters : [9]
+Mon Mar  2 09:27:29 2026,596 [8100] DEBUG VT - Exiting getTabname method ...
+Mon Mar  2 09:27:29 2026,597 [8100] DEBUG VT - Prepared sql query being executed : CREATE TEMPORARY TABLE IF NOT EXISTS vt_tmp_u1082_t9_task(id INT(11) PRIMARY KEY, shared int(1) DEFAULT 0) IGNORE (SELECT 1082 as id) UNION (SELECT vtiger_user2role.userid AS userid FROM vtiger_user2role INNER JOIN vtiger_users ON vtiger_users.id=vtiger_user2role.userid INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid WHERE vtiger_role.parentrole like 'H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%') UNION (SELECT groupid FROM vtiger_groups WHERE groupid IN (2))
+Mon Mar  2 09:27:29 2026,602 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:27:29 2026,602 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:27:29 2026,603 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,603 [8100] DEBUG VT - Entering getColumnFields(Calendar) method ...
+Mon Mar  2 09:27:29 2026,603 [8100] DEBUG VT - in getColumnFields Calendar
+Mon Mar  2 09:27:29 2026,604 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,604 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_crmentity.crmid, vtiger_crmentity.smownerid, vtiger_crmentity.setype, vtiger_activity.* FROM vtiger_activity
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_activity.activityid
+					LEFT JOIN vtiger_groups ON vtiger_groups.groupid = vtiger_crmentity.smownerid LEFT JOIN vt_tmp_u1082_t9_events vt_tmp_u1082_t9_events ON (vt_tmp_u1082_t9_events.id = vtiger_crmentity.smownerid AND vtiger_activity.activitytype NOT IN ('Emails', 'Task'))  LEFT JOIN vt_tmp_u1082_t9_task vt_tmp_u1082_t9_task ON (vt_tmp_u1082_t9_task.id = vtiger_crmentity.smownerid AND vtiger_activity.activitytype = 'Task')  WHERE vtiger_crmentity.deleted=0
+					AND (vtiger_activity.activitytype NOT IN ('Emails'))
+					AND (vtiger_activity.status is NULL OR vtiger_activity.status NOT IN ('Completed', 'Deferred', 'Cancelled'))
+					AND (vtiger_activity.eventstatus is NULL OR vtiger_activity.eventstatus NOT IN ('Held', 'Cancelled')) AND  (vt_tmp_u1082_t9_events.shared IS NOT NULL OR vt_tmp_u1082_t9_task.shared IS NOT NULL)  AND CASE WHEN vtiger_activity.activitytype='Task' THEN due_date < '2026-03-02' ELSE CONCAT(due_date,' ',time_end) < '2026-03-02 09:27:29' END AND vtiger_crmentity.smownerid = ? ORDER BY date_start, time_start LIMIT ?, ?
+Mon Mar  2 09:27:29 2026,605 [8100] DEBUG VT - Prepared sql query parameters : [1082,0,11]
+Mon Mar  2 09:27:29 2026,610 [8100] DEBUG VT - Entering getAllUserGroups(1082) method...
+Mon Mar  2 09:27:29 2026,610 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_users2group where userid=?
+Mon Mar  2 09:27:29 2026,610 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:27:29 2026,612 [8100] DEBUG VT - Entering fetchUserRole(1082) method ...
+Mon Mar  2 09:27:29 2026,612 [8100] DEBUG VT - Prepared sql query being executed : select roleid from vtiger_user2role where userid=?
+Mon Mar  2 09:27:29 2026,612 [8100] DEBUG VT - Prepared sql query parameters : [1082]
+Mon Mar  2 09:27:29 2026,614 [8100] DEBUG VT - Exiting fetchUserRole method ...
+Mon Mar  2 09:27:29 2026,614 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_group2role where roleid=?
+Mon Mar  2 09:27:29 2026,614 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:27:29 2026,616 [8100] DEBUG VT - Entering getParentRole(H309) method ...
+Mon Mar  2 09:27:29 2026,616 [8100] DEBUG VT - Entering getRoleInformation(H309) method ...
+Mon Mar  2 09:27:29 2026,617 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_role where roleid=?
+Mon Mar  2 09:27:29 2026,617 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:27:29 2026,619 [8100] DEBUG VT - Exiting getRoleInformation method ...
+Mon Mar  2 09:27:29 2026,620 [8100] DEBUG VT - Exiting getParentRole method ...
+Mon Mar  2 09:27:29 2026,620 [8100] DEBUG VT - Prepared sql query being executed : select * from vtiger_group2rs where roleandsubid in (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:27:29 2026,620 [8100] DEBUG VT - Prepared sql query parameters : [H1,H2,H76,H301,H77,H80,H88,H92,H170,H171,H295,H296,H297,H309]
+Mon Mar  2 09:27:29 2026,622 [8100] DEBUG VT - Entering getAllParentGroups(2) method...
+Mon Mar  2 09:27:29 2026,623 [8100] DEBUG VT - Prepared sql query being executed : select groupid from vtiger_group2grouprel where containsgroupid=?
+Mon Mar  2 09:27:29 2026,623 [8100] DEBUG VT - Prepared sql query parameters : [2]
+Mon Mar  2 09:27:29 2026,624 [8100] DEBUG VT - Exiting getAllParentGroups method...
+Mon Mar  2 09:27:29 2026,624 [8100] DEBUG VT - Exiting getAllUserGroups method...
+Mon Mar  2 09:27:29 2026,625 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_module_dashboard_widgets
+			INNER JOIN vtiger_links ON vtiger_links.linkid = vtiger_module_dashboard_widgets.linkid
+			WHERE linktype = ? AND vtiger_links.linkid = ? AND userid = ?
+Mon Mar  2 09:27:29 2026,625 [8100] DEBUG VT - Prepared sql query parameters : [DASHBOARDWIDGET,66,1082]
+Mon Mar  2 09:27:29 2026,632 [8100] DEBUG VT - Prepared sql query being executed : SELECT vtiger_users.first_name,vtiger_users.last_name, vtiger_users.id AS userid
+				FROM vtiger_sharedcalendar RIGHT JOIN vtiger_users ON vtiger_sharedcalendar.userid=vtiger_users.id AND vtiger_users.status= 'Active'
+				WHERE vtiger_sharedcalendar.sharedid=? OR (vtiger_users.status='Active' AND vtiger_users.calendarsharedtype='public' AND vtiger_users.id <> ?)
+Mon Mar  2 09:27:29 2026,633 [8100] DEBUG VT - Prepared sql query parameters : [1082,1082]
+Mon Mar  2 09:27:29 2026,650 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_def_org_share INNER JOIN vtiger_tab ON vtiger_tab.tabid = vtiger_def_org_share.tabid WHERE name=?
+Mon Mar  2 09:27:29 2026,650 [8100] DEBUG VT - Prepared sql query parameters : [Calendar]
+Mon Mar  2 09:27:29 2026,652 [8100] DEBUG VT - Entering get_user_array(,ACTIVE,,private) method ...
+Mon Mar  2 09:27:29 2026,652 [8100] DEBUG VT - Sharing is Public. All vtiger_users should be listed
+Mon Mar  2 09:27:29 2026,653 [8100] DEBUG VT - Sharing is Private. Only the current user should be listed
+Mon Mar  2 09:27:29 2026,653 [8100] DEBUG VT - Prepared sql query being executed : SELECT groupid, groupname from vtiger_groups WHERE groupid=? OR vtiger_groups.groupid in (?) union select vtiger_group2role.groupid as groupid,vtiger_groups.groupname as groupname from vtiger_group2role inner join vtiger_groups on vtiger_groups.groupid=vtiger_group2role.groupid inner join vtiger_role on vtiger_role.roleid=vtiger_group2role.roleid where vtiger_role.parentrole like ? union select vtiger_groups.groupid as groupid,vtiger_groups.groupname as groupname from vtiger_groups inner join vtiger_group2rs on vtiger_groups.groupid=vtiger_group2rs.groupid where vtiger_group2rs.roleandsubid in (?,?,?,?,?,?,?,?,?,?,?,?,?) union select sharedgroupid as groupid,vtiger_groups.groupname as groupname from vtiger_tmp_write_group_sharing_per inner join vtiger_groups on vtiger_groups.groupid=vtiger_tmp_write_group_sharing_per.sharedgroupid where vtiger_tmp_write_group_sharing_per.userid=? and vtiger_tmp_write_group_sharing_per.tabid=? order by groupname ASC
+Mon Mar  2 09:27:29 2026,653 [8100] DEBUG VT - Prepared sql query parameters : [1082,2,H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%,H1,H2,H76,H301,H77,H80,H88,H92,H170,H171,H295,H296,H297,1082,9]
+Mon Mar  2 09:27:29 2026,657 [8100] INFO VT - PearDatabase ->ADODB fetchByAssoc return null
+Mon Mar  2 09:27:29 2026,658 [8100] DEBUG VT - Exiting get_user_array method ...
+Mon Mar  2 09:27:29 2026,690 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:27:29 2026,691 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:29 2026,691 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:29 2026,691 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:27:29 2026,697 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:27:29 2026,698 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:27:29 2026,709 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,709 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:27:29 2026,709 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:29 2026,710 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:29 2026,710 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,711 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:27:29 2026,725 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:27:29 2026,742 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:27:29 2026,742 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:27:29 2026,742 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:27:29 2026,743 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:27:29 2026,743 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:27:29 2026,743 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:27:29 2026,744 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:27:29 2026,744 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:27:29 2026,755 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:27:29 2026,756 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"2","col":"2"},1082,57]
+Mon Mar  2 09:27:29 2026,760 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:27:29 2026,760 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"1","col":"3"},1082,66]
+Mon Mar  2 09:27:29 2026,764 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:27:29 2026,765 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"1","col":"1"},1082,67]
+Mon Mar  2 09:27:29 2026,769 [8100] DEBUG VT - Prepared sql query being executed : UPDATE vtiger_module_dashboard_widgets SET position=? WHERE userid=? AND linkid = ?
+Mon Mar  2 09:27:29 2026,770 [8100] DEBUG VT - Prepared sql query parameters : [{"row":"2","col":"1"},1082,68]
+Mon Mar  2 09:27:29 2026,776 [8100] DEBUG user - Entering Users() method ...
+Mon Mar  2 09:27:29 2026,776 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:29 2026,776 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:29 2026,777 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, name, ownedby FROM vtiger_tab
+Mon Mar  2 09:27:29 2026,782 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:27:29 2026,782 [8100] DEBUG VT - Prepared sql query parameters : [29]
+Mon Mar  2 09:27:29 2026,795 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,795 [8100] DEBUG user - Exiting Users() method ...
+Mon Mar  2 09:27:29 2026,795 [8100] DEBUG VT - Entering getColumnFields(Users) method ...
+Mon Mar  2 09:27:29 2026,796 [8100] DEBUG VT - in getColumnFields Users
+Mon Mar  2 09:27:29 2026,796 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,797 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_tab
+Mon Mar  2 09:27:29 2026,812 [8100] DEBUG VT - Prepared sql query being executed : SELECT fieldname,modulename,tablename,entityidfield,entityidcolumn from vtiger_entityname
+Mon Mar  2 09:27:29 2026,849 [8100] DEBUG VT - Entering isPermitted(HelpDesk,DetailView,) method ...
+Mon Mar  2 09:27:29 2026,850 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:27:29 2026,851 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:27:29 2026,851 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:27:29 2026,852 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:27:29 2026,852 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:27:29 2026,852 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:27:29 2026,853 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:27:29 2026,856 [8100] DEBUG VT - Entering isPermitted(Dashboard,DetailView,) method ...
+Mon Mar  2 09:27:29 2026,856 [8100] DEBUG VT - Entering getActionid(DetailView) method ...
+Mon Mar  2 09:27:29 2026,856 [8100] INFO VT - get Actionid DetailView
+Mon Mar  2 09:27:29 2026,857 [8100] INFO VT - action id selected is 4
+Mon Mar  2 09:27:29 2026,857 [8100] DEBUG VT - Exiting getActionid method ...
+Mon Mar  2 09:27:29 2026,858 [8100] DEBUG VT - Entering getActionname(4) method ...
+Mon Mar  2 09:27:29 2026,858 [8100] DEBUG VT - Exiting getActionname method ...
+Mon Mar  2 09:27:29 2026,858 [8100] DEBUG VT - Exiting isPermitted method ...
+Mon Mar  2 09:27:29 2026,868 [8100] DEBUG VT - Prepared sql query being executed : SELECT id,tabname,sequence,isdefault FROM vtiger_dashboard_tabs WHERE userid=? AND isdefault =?
+Mon Mar  2 09:27:29 2026,869 [8100] DEBUG VT - Prepared sql query parameters : [1082,1]
+Mon Mar  2 09:27:29 2026,870 [8100] INFO VT - PearDatabse ->Array
+(
+    [id] => 273
+    [tabname] => My Dashboard
+    [sequence] => 1
+    [isdefault] => 1
+)
+
+Mon Mar  2 09:27:29 2026,873 [8100] DEBUG VT - Prepared sql query being executed : SELECT id FROM vtiger_module_dashboard_widgets WHERE linkid = ? AND userid = ? AND dashboardtabid=?
+Mon Mar  2 09:27:29 2026,873 [8100] DEBUG VT - Prepared sql query parameters : [67,1082,273]
+Mon Mar  2 09:27:29 2026,878 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_def_org_share INNER JOIN vtiger_tab ON vtiger_tab.tabid = vtiger_def_org_share.tabid WHERE name=?
+Mon Mar  2 09:27:29 2026,879 [8100] DEBUG VT - Prepared sql query parameters : [HelpDesk]
+Mon Mar  2 09:27:29 2026,881 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_ticketstatus ORDER BY  sortorderid ASC
+Mon Mar  2 09:27:29 2026,885 [8100] DEBUG helpdesk - Entering HelpDesk() method ...
+Mon Mar  2 09:27:29 2026,885 [8100] DEBUG VT - Entering getColumnFields(HelpDesk) method ...
+Mon Mar  2 09:27:29 2026,885 [8100] DEBUG VT - in getColumnFields HelpDesk
+Mon Mar  2 09:27:29 2026,886 [8100] DEBUG VT - Prepared sql query being executed : SELECT tabid, fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+		FROM vtiger_field WHERE tabid in (?)
+Mon Mar  2 09:27:29 2026,886 [8100] DEBUG VT - Prepared sql query parameters : [13]
+Mon Mar  2 09:27:29 2026,897 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,897 [8100] DEBUG helpdesk - Exiting HelpDesk method ...
+Mon Mar  2 09:27:29 2026,897 [8100] DEBUG VT - Entering getColumnFields(HelpDesk) method ...
+Mon Mar  2 09:27:29 2026,898 [8100] DEBUG VT - in getColumnFields HelpDesk
+Mon Mar  2 09:27:29 2026,898 [8100] DEBUG VT - Exiting getColumnFields method ...
+Mon Mar  2 09:27:29 2026,899 [8100] DEBUG VT - Prepared sql query being executed : create temporary table IF NOT EXISTS vt_tmp_u1082(id int(11) primary key) ignore (SELECT 1082 as id) UNION (SELECT vtiger_user2role.userid AS userid FROM vtiger_user2role INNER JOIN vtiger_users ON vtiger_users.id=vtiger_user2role.userid INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid WHERE vtiger_role.parentrole like 'H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%') UNION (SELECT groupid FROM vtiger_groups WHERE groupid IN (2))
+Mon Mar  2 09:27:29 2026,903 [8100] DEBUG VT - Prepared sql query being executed : SELECT COUNT(*) as count, CASE WHEN vtiger_troubletickets.status IS NULL OR vtiger_troubletickets.status = "" THEN "" ELSE vtiger_troubletickets.status END AS statusvalue 
+							FROM vtiger_troubletickets INNER JOIN vtiger_crmentity ON vtiger_troubletickets.ticketid = vtiger_crmentity.crmid AND vtiger_crmentity.deleted=0
+							 INNER JOIN vt_tmp_u1082 vt_tmp_u1082 ON vt_tmp_u1082.id = vtiger_crmentity.smownerid  AND  smownerid IN (1087,1088,1089,1090,1091,1092,1094,1095,1098,1204,1082)  INNER JOIN vtiger_ticketstatus ON vtiger_troubletickets.status = vtiger_ticketstatus.ticketstatus 
+							WHERE vtiger_troubletickets.status IN (?,?,?,?,?,?) 
+							GROUP BY statusvalue ORDER BY vtiger_ticketstatus.sortorderid
+Mon Mar  2 09:27:29 2026,904 [8100] DEBUG VT - Prepared sql query parameters : [Open,Closed after Re-commissioning,Engineer Assigned,In Progress,Closed,Closed : Recommissioning Is Pending]
+Mon Mar  2 09:27:29 2026,912 [8100] DEBUG VT - Prepared sql query being executed : SELECT cvid FROM vtiger_customview WHERE viewname = 'All' AND entitytype = ?
+Mon Mar  2 09:27:29 2026,912 [8100] DEBUG VT - Prepared sql query parameters : [HelpDesk]
+Mon Mar  2 09:27:29 2026,914 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_module_dashboard_widgets
+			INNER JOIN vtiger_links ON vtiger_links.linkid = vtiger_module_dashboard_widgets.linkid
+			WHERE linktype = ? AND vtiger_links.linkid = ? AND userid = ?
+Mon Mar  2 09:27:29 2026,915 [8100] DEBUG VT - Prepared sql query parameters : [DASHBOARDWIDGET,67,1082]
+Mon Mar  2 09:27:29 2026,921 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_def_org_share INNER JOIN vtiger_tab ON vtiger_tab.tabid = vtiger_def_org_share.tabid WHERE name=?
+Mon Mar  2 09:27:29 2026,922 [8100] DEBUG VT - Prepared sql query parameters : [HelpDesk]
+Mon Mar  2 09:27:29 2026,925 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_role WHERE roleid = ?
+Mon Mar  2 09:27:29 2026,926 [8100] DEBUG VT - Prepared sql query parameters : [H309]
+Mon Mar  2 09:27:29 2026,927 [8100] DEBUG VT - Prepared sql query being executed : SELECT * FROM vtiger_role WHERE parentrole LIKE ? ORDER BY depth
+Mon Mar  2 09:27:29 2026,927 [8100] DEBUG VT - Prepared sql query parameters : [H1::H2::H76::H301::H77::H80::H88::H92::H170::H171::H295::H296::H297::H309::%]
+Mon Mar  2 09:27:29 2026,930 [8100] DEBUG VT - Prepared sql query being executed : SELECT userid FROM vtiger_user2role WHERE roleid IN (?)
+Mon Mar  2 09:27:29 2026,930 [8100] DEBUG VT - Prepared sql query parameters : [H298]
+Mon Mar  2 09:27:29 2026,932 [8100] DEBUG VT - Prepared sql query being executed : SELECT id, first_name, last_name FROM vtiger_users WHERE status = ? AND id IN (?,?,?,?,?,?,?,?,?,?)
+Mon Mar  2 09:27:29 2026,933 [8100] DEBUG VT - Prepared sql query parameters : [ACTIVE,1087,1088,1089,1090,1091,1092,1094,1095,1098,1204]
+Mon Mar  2 09:27:29 2026,945 [8100] DEBUG VT - Entering get_user_array(,ACTIVE,,) method ...
+Mon Mar  2 09:27:29 2026,946 [8100] DEBUG VT - Sharing is Public. All vtiger_users should be listed
+Mon Mar  2 09:27:29 2026,946 [8100] DEBUG VT - Prepared sql query being executed : SELECT groupid, groupname from vtiger_groups order by groupname ASC
+Mon Mar  2 09:27:29 2026,954 [8100] INFO VT - PearDatabase ->ADODB fetchByAssoc return null
+Mon Mar  2 09:27:29 2026,955 [8100] DEBUG VT - Exiting get_user_array method ...

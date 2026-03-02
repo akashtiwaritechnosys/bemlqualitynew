@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2026-02-27 09:43:16
+<?php /* Smarty version Smarty-3.1.7, created on 2026-03-02 09:26:05
          compiled from "C:\wamp64\www\bemlqualitynew\includes\runtime/../../layouts/v7\modules\HelpDesk\dashboards\TicketsByStatus.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:444716869a167348ee252-29825298%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2d3503e5a41dbfdcecc419e3f142a747f9a897e7' => 
     array (
       0 => 'C:\\wamp64\\www\\bemlqualitynew\\includes\\runtime/../../layouts/v7\\modules\\HelpDesk\\dashboards\\TicketsByStatus.tpl',
-      1 => 1733391376,
+      1 => 1772443544,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_69a167349f39e',
   'variables' => 
   array (
     'MODULE_NAME' => 0,
@@ -26,8 +28,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ALL_ACTIVEGROUP_LIST' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_69a167349f39e',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_69a167349f39e')) {function content_69a167349f39e($_smarty_tpl) {?>
 <script type="text/javascript">
