@@ -1,3 +1,11 @@
+/**
+ * bootbox.js [master branch]
+ *
+ * http://bootboxjs.com/license.txt
+ */
+
+// @see https://github.com/makeusabrew/bootbox/issues/180
+// @see https://github.com/makeusabrew/bootbox/issues/186
 (function (root, factory) {
 
   "use strict";

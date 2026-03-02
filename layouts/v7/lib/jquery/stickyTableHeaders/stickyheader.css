@@ -1,5 +1,5 @@
 /* Component styles */
-@font-face {
+/* @font-face {
 	font-family: 'Blokk';
 	src: url('../fonts/blokk/BLOKKRegular.eot');
 	src: url('../fonts/blokk/BLOKKRegular.eot?#iefix') format('embedded-opentype'),
@@ -7,7 +7,7 @@
 		 url('../fonts/blokk/BLOKKRegular.svg#BLOKKRegular') format('svg');
 	font-weight: normal;
 	font-style: normal;
-}
+} */
 .component {
 	line-height: 1.5em;
 	margin: 0 auto;
@@ -17,7 +17,6 @@
 	overflow: hidden;
 }
 .component .filler {
-	font-family: "Blokk", Arial, sans-serif;
 	color: #d3d3d3;
 }
 table {

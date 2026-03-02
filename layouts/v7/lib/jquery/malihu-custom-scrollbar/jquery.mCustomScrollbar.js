@@ -1080,9 +1080,11 @@ and dependencies (minified).
 							content.removeClass("mCS_y_hidden");
 						}else{
 							scrollbar[0].css("display","none");
-							content.addClass("mCS_y_hidden");
+							//content.addClass("mCS_y_hidden");
+							content.addClass("scroll-hidden");
 						}
-						content.addClass("mCS_no_scrollbar_y");
+						// content.addClass("mCS_no_scrollbar_y");
+						content.addClass("scroll-y");
 					}
 				}
 				if(o.axis!=="y"){
@@ -2162,7 +2164,7 @@ and dependencies (minified).
 	*/
 	window[pluginNS]=true;
 	
-	$(window).on('load', function() {
+        $(document).on("load",function(){
 		$(defaultSelector)[pluginNS](); /* add scrollbars automatically on default selector */
 	});
 

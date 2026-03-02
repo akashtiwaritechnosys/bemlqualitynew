@@ -79,7 +79,7 @@ body .fc { /* extra precedence to overcome jqui */
 	font-size: 1em;
 	text-align: center;
 	overflow: hidden;
-	font-family: "Courier New", Courier, monospace;
+	
 
 	/* don't allow browser text-selection */
 	-webkit-touch-callout: none;
@@ -718,7 +718,7 @@ tr:first-child > td > .fc-day-grid-event {
 	bottom: -1px;
 	left: -1px;
 	/* darkening effect */
-	background: #000;
+	background: var(--black-color-2);
 	opacity: .25;
 }
 
@@ -1231,7 +1231,6 @@ be a descendant of the grid when it is being dragged.
 	overflow: hidden;
 	line-height: 8px;
 	font-size: 11px;
-	font-family: monospace;
 	text-align: center;
 	cursor: s-resize;
 }

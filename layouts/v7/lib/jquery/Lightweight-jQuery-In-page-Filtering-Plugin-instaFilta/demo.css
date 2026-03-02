@@ -21,7 +21,6 @@ body {
 }
 
 body, input, select, textarea { 
-    font-family: Roboto, sans-serif;
 }
 
 input, select, textarea { 
@@ -77,7 +76,6 @@ a:hover, a:active { color: #fcd271; }
 .site-title { 
     margin: 0; 
     color: #102e37;
-    font-family: 'Lily Script One'; 
     font-size: 3.5em;
     font-weight: normal;
     line-height: 1.1em;
@@ -152,7 +150,6 @@ a:hover, a:active { color: #fcd271; }
 .box-code {
     padding: 1em;
     clear: left;
-    font-family: monospace;
     line-height: 1.2em;
     color: #fcd271;
     background: #102e37;

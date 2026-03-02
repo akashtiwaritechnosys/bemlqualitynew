@@ -1,3 +1,17 @@
+// @preserve jQuery.floatThead 1.2.13 - http://mkoryak.github.io/floatThead/ - Copyright (c) 2012 - 2015 Misha Koryak
+// @license MIT
+
+/* @author Misha Koryak
+ * @projectDescription lock a table header in place while scrolling - without breaking styles or events bound to the header
+ *
+ * Dependencies:
+ * jquery 1.9.0 + [required] OR jquery 1.7.0 + jquery UI core
+ *
+ * http://mkoryak.github.io/floatThead/
+ *
+ * Tested on FF13+, Chrome 21+, IE8, IE9, IE10, IE11
+ *
+ */
 (function( $ ) {
   /**
    * provides a default config object. You can modify this after including this script if you want to change the init defaults
@@ -247,7 +261,7 @@
         existingColGroup = false;
       }
       var $fthRow = $('<fthtr style="display:table-row;border-spacing:0;height:0;border-collapse:collapse"/>'); //created unstyled elements (used for sizing the table because chrome can't read <col> width)
-      var $floatContainer = $('<div style="overflow: hidden;" aria-hidden="true" class="floatThead-floatContainer"></div>');
+      var $floatContainer = $('<div style="overflow: hidden;" aria-hidden="true" class="table-head-width floatThead-floatContainer"></div>');
       var floatTableHidden = false; //this happens when the table is hidden and we do magic when making it visible
       var $newHeader = $("<thead/>");
       var $sizerRow = $('<tr class="size-row"/>');

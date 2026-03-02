@@ -333,14 +333,13 @@
   outline-width: 0;
   margin: 0 ;
   padding: 1px 5px 0 5px;
-  font-family: inherit;
   line-height: 21px;
   font-size: inherit;
   box-shadow: 0 0 0 2px #5292F7 inset;
   resize: none;
   /*below are needed to overwrite stuff added by jQuery UI Bootstrap theme*/
   display: inline-block;
-  color: #000;
+  color: var(--black-color-2);
   border-radius: 0;
   background-color: #FFF;
   /*overwrite styles potentionally made by a framework*/
@@ -680,19 +679,19 @@ Cell borders
 }
 .htBordered.htTopBorderSolid{
   border-top-style: solid;
-  border-top-color: #000;
+  border-top-color: var(--black-color-2);
 }
 .htBordered.htRightBorderSolid{
   border-right-style: solid;
-  border-right-color: #000;
+  border-right-color: var(--black-color-2);
 }
 .htBordered.htBottomBorderSolid{
   border-bottom-style: solid;
-  border-bottom-color: #000;
+  border-bottom-color: var(--black-color-2);
 }
 .htBordered.htLeftBorderSolid{
   border-left-style: solid;
-  border-left-color: #000;
+  border-left-color: var(--black-color-2);
 }
 
 .htCommentTextArea{
@@ -701,7 +700,6 @@ Cell borders
   background-color: #FFFACD;
   border: 1px solid #999;
   box-shadow: 1px 1px 2px #bbb;
-  font-family: 'Arial';
 }
 
 
@@ -1243,7 +1241,6 @@ thead .htCollapseButton:after {
     background: #fff;
     border: 1px solid #ccc;
     border-bottom-color: #bbb;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /*

@@ -1,3 +1,10 @@
+// daterangepicker.js
+// version : 0.0.5
+// author : Chunlong Liu
+// last updated at: 2014-05-27
+// license : MIT
+// www.jszen.com
+
 (function (factory) {
 		if (typeof define === 'function' && define.amd) {
 			// AMD. Register as an anonymous module.
@@ -743,39 +750,29 @@
 
 		function calcPosition()
 		{
-			if (!opt.inline)
-			{
-				var offset = $(self).offset();
-		                if ($(opt.container).css("position") == "relative")
-		                {
-		                    var containerOffset = $(opt.container).offset();
-		                    box.css(
-		                    {
-		                        top: offset.top - containerOffset.top + $(self).outerHeight() + 4,
-		                        left: offset.left - containerOffset.left
-		                    });
-		                }
-		                else
-		                {
-		                    if (offset.left < 460) //left to right
-		                    {
-		                        box.css(
-		                        {
-		                            top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
-		                            left: offset.left
-		                        });
-		                    }
-		                    else
-		                    {
-		                        box.css(
-		                        {
-		                            top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
-		                            left: offset.left + $(self).width() - box.width() - 16
-		                        });
-		                    }
-		                }
-			}
-		}
+            if (!opt.inline) {
+        var offset = $(self).offset();
+        var inputWidth = $(self).outerWidth();
+        var boxWidth = box.outerWidth();
+        var windowWidth = $(window).width();
+        var scrollLeft = $(window).scrollLeft();
+ 
+        var top = offset.top + $(self).outerHeight() + parseInt($('body').css('border-top') || 0, 10);
+ 
+        var left = offset.left;
+ 
+        if (left + boxWidth - scrollLeft > windowWidth) {
+            left = windowWidth - boxWidth - 10 + scrollLeft;
+            if (left < 0) left = 0;
+        }
+ 
+        box.css({
+            top: top,
+            left: left
+        });
+        }
+ 
+        }
 
 		// Return the date picker wrapper element
 		function getDatePicker()
